@@ -12,7 +12,7 @@ import lombok.Data;
  */
 
 @Data 
-public class Salida {
+public class Salida extends Evento{
     private boolean asistenciaTransporte;
     private boolean asistenciaSalida;
     private boolean paradita;
