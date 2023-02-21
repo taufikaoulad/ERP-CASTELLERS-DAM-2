@@ -8,6 +8,8 @@ public class CastellersErpApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CastellersErpApplication.class, args);
+                
+                
 	}
 
 }
