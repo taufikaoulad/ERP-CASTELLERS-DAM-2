@@ -8,6 +8,6 @@ package cat.copernic.CastellersERP.model;
  *
  * @author bhugo
  */
-public class Salida {
+public class Salida extends Evento{
     
 }
