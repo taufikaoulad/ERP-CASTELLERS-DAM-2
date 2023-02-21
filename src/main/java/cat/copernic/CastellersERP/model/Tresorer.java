@@ -11,6 +11,6 @@ import lombok.Data;
  * @author pablogomez
  */
 @Data
-public class Tresorer {
+public class Tresorer extends Usuario{
     
 }

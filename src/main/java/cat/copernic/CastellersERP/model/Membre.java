@@ -12,6 +12,6 @@ import lombok.Data;
  */
 
 @Data
-public class Membre {
+public class Membre extends Usuario{
     
 }
