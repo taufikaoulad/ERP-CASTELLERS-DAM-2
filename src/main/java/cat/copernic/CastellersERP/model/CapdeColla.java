@@ -8,6 +8,6 @@ package cat.copernic.CastellersERP.model;
  *
  * @author pablogomez
  */
-public class CapdeColla {
+public class CapdeColla extends Usuario{
     
 }

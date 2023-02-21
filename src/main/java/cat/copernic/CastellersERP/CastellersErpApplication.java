@@ -10,6 +10,7 @@ public class CastellersErpApplication {
 		SpringApplication.run(CastellersErpApplication.class, args);
                 
                 
+                
 	}
 
 }

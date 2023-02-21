@@ -4,10 +4,17 @@
  */
 package cat.copernic.CastellersERP.model;
 
+import java.util.ArrayList;
+import lombok.Data;
+
 /**
  *
  * @author bhugo
  */
-public class Ensayo {
+@Data
+public class Ensayo extends Evento{
+    private String duracion;
+    private ArrayList<Usuario> listaAsistentesEnsayo;
+    
     
 }

@@ -4,13 +4,20 @@
  */
 package cat.copernic.CastellersERP.model;
 
+import java.util.ArrayList;
+import java.util.Date;
 import lombok.Data;
 
 /**
  *
- * @author pablogomez
+ * @author capy
  */
 @Data
-public class Tresorer extends Usuario{
+public class Evento {
+    private String tipoEvento;
+    private String nombreEvento;
+    private Date fechaEvento;
+    private String ubicacionEvento;
+    private ArrayList<Castillo> listaCastillosAsignadosEvento;
     
 }
