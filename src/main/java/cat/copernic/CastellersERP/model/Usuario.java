@@ -8,9 +8,17 @@ import lombok.Data;
 
 /**
  *
- * @author pablogomez
+ * @author Taufik
  */
+
 @Data
-public class Tresorer extends Usuario{
-    
+public class Usuario {
+    private String nombre;
+    private int edat;
+    private String mail;
+    private int telefono;
+    private float peso;
+    private float altura;
+    private int posicion;
+    private boolean activo;
 }

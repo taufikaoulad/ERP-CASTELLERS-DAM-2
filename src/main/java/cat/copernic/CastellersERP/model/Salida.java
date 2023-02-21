@@ -4,10 +4,16 @@
  */
 package cat.copernic.CastellersERP.model;
 
+import lombok.Data;
+
 /**
  *
- * @author bhugo
+ * @author Taufik
  */
+
+@Data 
 public class Salida {
-    
+    private boolean asistenciaTransporte;
+    private boolean asistenciaSalida;
+    private boolean paradita;
 }
