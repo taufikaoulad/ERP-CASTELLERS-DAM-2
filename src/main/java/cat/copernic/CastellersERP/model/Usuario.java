@@ -8,14 +8,17 @@ import lombok.Data;
 
 /**
  *
- * @author bhugo
+ * @author Taufik
  */
 
 @Data
-public class GestionEconomica {
-    
-    private String concepto;
-    private double precio;
-    private String tipo;
-    
+public class Usuario {
+    private String nombre;
+    private int edat;
+    private String mail;
+    private int telefono;
+    private float peso;
+    private float altura;
+    private int posicion;
+    private boolean activo;
 }

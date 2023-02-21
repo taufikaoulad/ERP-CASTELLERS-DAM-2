@@ -8,14 +8,10 @@ import lombok.Data;
 
 /**
  *
- * @author bhugo
+ * @author pablogomez
  */
 
 @Data
-public class GestionEconomica {
-    
-    private String concepto;
-    private double precio;
-    private String tipo;
+public class Membre extends Usuario{
     
 }

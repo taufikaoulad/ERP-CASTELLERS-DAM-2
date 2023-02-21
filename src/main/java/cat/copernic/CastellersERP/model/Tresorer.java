@@ -4,10 +4,13 @@
  */
 package cat.copernic.CastellersERP.model;
 
+import lombok.Data;
+
 /**
  *
- * @author bhugo
+ * @author pablogomez
  */
-public class Salida extends Evento{
+@Data
+public class Tresorer extends Usuario{
     
 }

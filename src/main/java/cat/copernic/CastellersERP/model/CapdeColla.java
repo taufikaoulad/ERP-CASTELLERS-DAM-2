@@ -4,18 +4,10 @@
  */
 package cat.copernic.CastellersERP.model;
 
-import lombok.Data;
-
 /**
  *
- * @author bhugo
+ * @author pablogomez
  */
-
-@Data
-public class GestionEconomica {
-    
-    private String concepto;
-    private double precio;
-    private String tipo;
+public class CapdeColla extends Usuario{
     
 }
