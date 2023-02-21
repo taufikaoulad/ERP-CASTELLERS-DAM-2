@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Listar Ensayos</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+
+        <div>
+
+            <table>
+                <tr>
+                    <th><a th:href="@{'/ListarEnsayos.html'}">Menu</a></th>
+                    <th><a th:href="@{'/ListarEnsayos.html'}">Ensayos</a></th>
+                    <th><a th:href="@{'/ListarEnsayos.html'}">Salidas</a></th>
+                    <th><a th:href="@{'/ListarEnsayos.html'}">Castillos</a></th>
+                    <th><a th:href="@{'/ListarEnsayos.html'}">Administración</a></th>
+                    <th><a th:href="@{'/ListarEnsayos.html'}">Ajustes</a></th>
+                </tr>
+            </table>
+
+            <h1>Listar Ensayos</h1>
+            <button>CREAR</button>
+
+            <table border="1">
+                <tr>
+                    <th>Nombre Ensayo</th>
+                    <th>Fecha</th>
+                    <th>Ubicación</th>
+                    <th>Duración</th>
+                    <th>Opciones</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th><button>Detalle</button><button>Consultar Castillos</button><button>Editar</button><button>Eliminar</button></th>
+                </tr>
+            </table>
+
+        </div>
+
+    </body>
+</html>
