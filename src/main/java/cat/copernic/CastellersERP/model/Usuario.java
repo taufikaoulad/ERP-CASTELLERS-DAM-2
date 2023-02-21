@@ -11,9 +11,14 @@ import lombok.Data;
  * @author Taufik
  */
 
-@Data 
-public class Salida {
-    private boolean asistenciaTransporte;
-    private boolean asistenciaSalida;
-    private boolean paradita;
+@Data
+public class Usuario {
+    private String nombre;
+    private int edat;
+    private String mail;
+    private int telefono;
+    private float peso;
+    private float altura;
+    private int posicion;
+    private boolean activo;
 }
