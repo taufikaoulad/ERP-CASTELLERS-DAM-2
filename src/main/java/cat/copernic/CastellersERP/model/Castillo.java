@@ -4,10 +4,13 @@
  */
 package cat.copernic.CastellersERP.model;
 
+import lombok.Data;
+
 /**
  *
  * @author bhugo
  */
+@Data
 public class Castillo {
     
 }
