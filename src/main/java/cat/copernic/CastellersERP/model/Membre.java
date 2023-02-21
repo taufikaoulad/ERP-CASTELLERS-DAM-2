@@ -8,12 +8,10 @@ import lombok.Data;
 
 /**
  *
- * @author Taufik
+ * @author pablogomez
  */
 
-@Data 
-public class Salida {
-    private boolean asistenciaTransporte;
-    private boolean asistenciaSalida;
-    private boolean paradita;
+@Data
+public class Membre extends Usuario{
+    
 }
