@@ -4,10 +4,21 @@
  */
 package cat.copernic.CastellersERP.model;
 
+import lombok.Data;
+
 /**
  *
  * @author bhugo
  */
+
+@Data
 public class Castillo {
-    
+    private String nombre;
+    private int pisos;
+    private int personesXPiso;
+    private int ncPiña;
+    private int ncTronc;
+    private boolean aixecat;
+    private boolean agulla;
+
 }
