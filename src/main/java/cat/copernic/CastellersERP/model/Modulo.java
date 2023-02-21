@@ -8,14 +8,12 @@ import lombok.Data;
 
 /**
  *
- * @author bhugo
+ * @author pablogomez
  */
-
 @Data
-public class GestionEconomica {
+public class Modulo {
     
-    private String concepto;
-    private double precio;
-    private String tipo;
+    private String nombre;
+    private boolean activo;
     
 }
