@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Salidas</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/menuPrincipal">Menu</a></li>
+        <li><a href="/listarEnsayos">Ensayo</a></li>
+        <li><a href="/paginalistarSalidas">Salidas</a></li>
+        <li><a href="/vistaCastillos">Castillos</a></li>
+        <li><a href="#">Administracion</a></li>
+        <li><a href="#"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
+      </ul>
+    </nav>
+      
+    <section>
+      <h1>SALIDAS</h1>
+    </section>
+    
+    <main>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Ubicación</th>
+            <th>Paradita</th>
+            <th>Castillo</th>
+            <th>Acciones</th>
+            <th>Inscribirse a salida</th>
+            <th>Inscribirse a transporte</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>nombre1</td>
+            <td>2023-06-10 11:40:00</td>
+            <td>Les Fonts</td>
+            <td>Si</td>
+            <td>
+                <a href="/paginadetalleCastilloSalida">
+                  <button>Detalle</button>
+                </a>
+            </td>                
+            <td>
+              <a href="/vistaCastillos">
+                <button>Consultar Castillo</button>
+              </a>
+              
+              <a href="/paginaassistenciaYTransporteSalida">
+                <button>Nºparticipantes</button>
+              </a>
+                
+              <a href="/paginamodificarSalida">
+                <button><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+              </a>
+                
+              <a href="#">
+                <button><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+              </a>             
+            </td>
+            <td><input type="checkbox" name="salida1"></td>
+            <td><input type="checkbox" name="transporte1"></td>
+          </tr>
+          <tr>
+            <td>nombre2</td>
+            <td>2023-05-22 11:40:00</td>
+            <td>Terrassa</td>
+            <td>No</td>
+            <td>
+                <a href="/paginadetalleCastilloSalida">
+                  <button>Detalle</button>
+                </a>
+            </td>                
+            <td>
+              <a href="/vistaCastillos">
+                <button>Consultar Castillo</button>
+              </a>
+              
+              <a href="/paginaassistenciaYTransporteSalida">
+                <button>Nºparticipantes</button>
+              </a>
+                
+              <a href="/paginamodificarSalida">
+                <button><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+              </a>
+                
+              <a href="#">
+                <button><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+              </a>             
+            </td>
+            <td><input type="checkbox" name="salida2"></td>
+            <td><input type="checkbox" name="transporte2"></td>
+          </tr>
+        </tbody>
+      </table>
+    </main><br>
+    
+    <div>
+        <a href="/paginaanadirSalida">
+            <button>Crear Salida</button>
+        </a>
+    </div>
+    
+  </body>
+</html>
