@@ -4,6 +4,7 @@
  */
 package cat.copernic.CastellersERP.gestionEconomica.controllers;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  * @author pablogomez
  */
+@Controller
 public class ControladorAnadirApunte {
     
     @GetMapping("/AnadirApunte")
