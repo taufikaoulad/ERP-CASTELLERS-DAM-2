@@ -14,7 +14,5 @@ import lombok.Data;
 @Data
 public class Ensayo extends Evento{
     private String duracion;
-    private ArrayList<Usuario> listaAsistentesEnsayo;
-    
-    
+    //private ArrayList<Usuario> listaAsistentesEnsayo;??
 }
