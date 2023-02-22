@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Salidas</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">Ensayo</a></li>
+        <li><a href="#">Salidas</a></li>
+        <li><a href="#">Castillos</a></li>
+        <li><a href="#">Administracion</a></li>
+        <li><a href="#"><img th:src="@{'/ajustes.png'}" width='26' height='26'/></a></li>
+      </ul>
+    </nav>
+      
+    <section>
+      <h1>SALIDAS</h1>
+    </section>
+    
+    <main>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Ubicación</th>
+            <th>Paradita</th>
+            <th>Castillo</th>
+            <th>Acciones</th>
+            <th>Inscribirse a salida</th>
+            <th>Inscribirse a transporte</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>nombre1</td>
+            <td>2023-05-22 11:40:00</td>
+            <td>Terrassa</td>
+            <td>Si</td>
+            <td>
+              <button>Detalle</button>
+            </td>
+            <td>
+              <button>Consultar Castillo</button>
+              <button>Nºparticipantes</button>
+              <button><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+              <button><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+            </td>
+            <td><input type="checkbox" name="salida1"></td>
+            <td><input type="checkbox" name="transporte1"></td>
+          </tr>
+          <tr>
+            <td>nombre2</td>
+            <td>2023-05-22 11:40:00</td>
+            <td>Terrassa</td>
+            <td>Si</td>
+            <td>
+              <button>Detalle</button>
+            </td>
+            <td>
+              <button>Consultar Castillo</button>
+              <button>Nºparticipantes</button>
+              <button><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+              <button><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+            </td>
+            <td><input type="checkbox" name="salida2"></td>
+            <td><input type="checkbox" name="transporte2"></td>
+          </tr>
+        </tbody>
+      </table>
+    </main><br>
+    
+    <div>
+      <button>Crear Salida</button>
+    </div>
+    
+  </body>
+</html>
