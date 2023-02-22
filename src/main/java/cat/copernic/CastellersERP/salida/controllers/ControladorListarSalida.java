@@ -6,8 +6,8 @@ package cat.copernic.CastellersERP.salida.controllers;
 
 /**
  *
- * @author bhugo
+ * @author Taufik
  */
-public class f {
+public class ControladorListarSalida {
     
 }
