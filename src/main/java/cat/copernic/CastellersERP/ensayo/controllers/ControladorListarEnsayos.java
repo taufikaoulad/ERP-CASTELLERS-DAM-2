@@ -4,10 +4,18 @@
  */
 package cat.copernic.CastellersERP.ensayo.controllers;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
 /**
  *
  * @author bhugo
  */
-public class c {
-    
+@Controller
+public class ControladorListarEnsayos {
+    @GetMapping("/listarEnsayos")
+    public String inicio(){
+        
+        return "ensayo/ListarEnsayos";
+    }
 }
