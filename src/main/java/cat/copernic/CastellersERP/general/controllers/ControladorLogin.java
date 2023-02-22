@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cat.copernic.CastellersERP.salida.controllers;
+package cat.copernic.CastellersERP.general.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @Controller
-public class ControladorAnadirSalida {
-    
-    //(localhost:8080/paginaanadirSalida)
-    @GetMapping("/paginaanadirSalida")
+public class ControladorLogin {
+    //(localhost:8080/paginaLogin)
+    @GetMapping("/paginaLogin")
     public String inici(){
-        return "salida/anadirSalida"; //Retorna la pàgina iniciDinamic
+        return "general/Login"; //Retorna la pàgina iniciDinamic
     }
 }

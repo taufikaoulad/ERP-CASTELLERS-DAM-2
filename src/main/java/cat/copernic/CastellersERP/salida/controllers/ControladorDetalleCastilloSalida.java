@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @Controller
-public class ControladorAnadirSalida {
-    
-    //(localhost:8080/paginaanadirSalida)
-    @GetMapping("/paginaanadirSalida")
+public class ControladorDetalleCastilloSalida {
+    //(localhost:8080/paginadetalleCastilloSalida)
+    @GetMapping("/paginadetalleCastilloSalida")
     public String inici(){
-        return "salida/anadirSalida"; //Retorna la pàgina iniciDinamic
+        return "salida/detalleCastilloSalida"; //Retorna la pàgina iniciDinamic
     }
 }
