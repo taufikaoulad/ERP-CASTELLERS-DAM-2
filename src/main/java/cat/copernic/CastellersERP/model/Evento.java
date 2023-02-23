@@ -14,10 +14,9 @@ import lombok.Data;
  */
 @Data
 public class Evento {
-    private String tipoEvento;
+
     private String nombreEvento;
     private Date fechaEvento;
     private String ubicacionEvento;
     private ArrayList<Castillo> listaCastillosAsignadosEvento;
-    
 }

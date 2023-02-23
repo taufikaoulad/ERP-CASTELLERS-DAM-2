@@ -17,11 +17,11 @@
                     <th>Ubicación</th>
                     <th>Duración</th>
                 </tr>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                <tr th:each="ensayo : ${ensayos}">
+                    <td th:text="${ensayo.nombreEvento}"></td>
+                    <td th:text="${ensayo.fechaEvento}"></td>
+                    <td th:text="${ensayo.ubicacionEvento}"></td>
+                    <td th:text="${ensayo.duracion}"></td>
                 </tr>
             </table>
             
@@ -30,8 +30,8 @@
                 <tr>
                     <th>Castillos Asignados</th>
                 </tr>
-                <tr>
-                    <th></th>
+                <tr th:each="castillo : ${castillosAsignados}">
+                    <td th:text="${castillo.nombre}"></td>
                 </tr>
             </table>
             

@@ -19,17 +19,17 @@
                     <th>Duración</th>
                     <th>Opciones</th>
                 </tr>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>
+                <tr th:each="ensayo : ${ensayos}">
+                    <td th:text="${ensayo.nombreEvento}"></td>
+                    <td th:text="${ensayo.fechaEvento}"></td>
+                    <td th:text="${ensayo.ubicacionEvento}"></td>
+                    <td th:text="${ensayo.duracion}"></td>
+                    <td>
                         <a href="/detalleEnsayo"><button>Detalle</button></a>
                         <a href="/vistaCastillos"><button>Consultar Castillos</button></a>
                         <a href="/modificarEnsayo"><button>Editar</button></a>
                         <a href="/confirmarEliminarEnsayo"><button>Eliminar</button></a>
-                    </th>
+                    </td>
                 </tr>
             </table>
 
