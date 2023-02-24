@@ -11,7 +11,7 @@ import lombok.Data;
  * @author Taufik
  */
 
-@Data 
+@Data
 public class Salida extends Evento{
     private boolean asistenciaTransporte;
     private boolean asistenciaSalida;
