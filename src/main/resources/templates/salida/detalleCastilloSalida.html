@@ -17,14 +17,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2x4</td>
-          </tr>
-          <tr>
-            <td>3x6</td>
-          </tr>
-          <tr>
-            <td>4x4</td>
+          <tr th:each="castillo : ${castillos}">
+            <td th:text="${castillo.nombre}"></td>
           </tr>
         </tbody>
       </table>

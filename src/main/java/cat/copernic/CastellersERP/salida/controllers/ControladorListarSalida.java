@@ -4,7 +4,13 @@
  */
 package cat.copernic.CastellersERP.salida.controllers;
 
+
+import cat.copernic.CastellersERP.model.Evento;
+import cat.copernic.CastellersERP.model.Salida;
+import java.util.ArrayList;
+import java.util.Date;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -17,7 +23,32 @@ public class ControladorListarSalida {
     
     //(localhost:8080/paginalistarSalidas)
     @GetMapping("/paginalistarSalidas")
-    public String inici(){
+    public String inici(Model model){
+        
+        Date date = new Date();
+        
+        var salida = new Salida();
+        salida.setNombreEvento("Nombre1");
+        salida.setFechaEvento(date);
+        salida.setUbicacionEvento("Terrassa");
+        salida.setParadita(true);
+        salida.setAsistenciaSalida(true);
+        salida.setAsistenciaTransporte(true);
+        
+        var salida1 = new Salida();
+        salida1.setNombreEvento("Nombre2");
+        salida1.setFechaEvento(date);
+        salida1.setUbicacionEvento("Les Fonts");
+        salida1.setParadita(true);
+        salida1.setAsistenciaSalida(true);
+        salida1.setAsistenciaTransporte(true);
+        
+        var salidas = new ArrayList<Salida>();
+        salidas.add(salida);
+        salidas.add(salida1);
+        
+         model.addAttribute("salidas", salidas);
+        
         return "salida/listarSalidas"; //Retorna la pàgina iniciDinamic
     }
 }

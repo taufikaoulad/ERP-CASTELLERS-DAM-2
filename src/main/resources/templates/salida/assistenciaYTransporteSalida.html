@@ -25,17 +25,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>manuel</td>
-            <td>23</td>
-            <td>75,32</td>
-            <td>1,82</td>
-          </tr>
-          <tr>
-            <td>manuel</td>
-            <td>23</td>
-            <td>75,32</td>
-            <td>1,82</td>
+          <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.edat}"></td>
+            <td th:text="${usuario.peso}"></td>
+            <td th:text="${usuario.altura}"></td>
           </tr>
         </tbody>
       </table><br>
@@ -57,17 +51,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>manuel</td>
-            <td>23</td>
-            <td>75,32</td>
-            <td>1,82</td>
-          </tr>
-          <tr>
-            <td>manuel</td>
-            <td>23</td>
-            <td>75,32</td>
-            <td>1,82</td>
+          <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.edat}"></td>
+            <td th:text="${usuario.peso}"></td>
+            <td th:text="${usuario.altura}"></td>
           </tr>
         </tbody>
       </table><br>
