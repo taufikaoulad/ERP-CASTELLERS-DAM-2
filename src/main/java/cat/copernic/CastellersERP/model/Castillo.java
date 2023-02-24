@@ -16,7 +16,7 @@ public class Castillo {
     private String nombre;
     private int pisos;
     private int personesXPiso;
-    private int ncPiña;
+    private int ncPinya;
     private int ncTronc;
     private boolean aixecat;
     private boolean agulla;

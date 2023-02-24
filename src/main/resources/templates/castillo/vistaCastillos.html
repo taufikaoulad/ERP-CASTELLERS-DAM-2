@@ -5,7 +5,7 @@
         <title>Vista Castillos</title>
     </head>
     <body>
-        <div>
+        <div th:if="${castillos!=null && !castillos.empty}">
             <h1>Castillo</h1>
             <table border="1">
                 <thead>
@@ -13,7 +13,7 @@
                         <th>Nombre</th>
                         <th>Pisos</th>
                         <th>Personas por piso</th>
-                        <th>NCPiña</th>
+                        <th>NCPinya</th>
                         <th>NCTronc</th>
                         <th>Aixecat</th>
                         <th>Agulla</th>
@@ -21,48 +21,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Castillo 1</td>
-                        <td>3</td>
-                        <td>10</td>
-                        <td>5</td>
-                        <td>2</td>
-                        <td>si</td>
-                        <td>no</td>
-                        <td>
-                            <div>
-                                <a href="/modificarCastillo">
-                                    <button>Editar</button>
-                                </a>
-                            </div>
-                            <button>Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Castillo 2</td>
-                        <td>5</td>
-                        <td>15</td>
-                        <td>10</td>
-                        <td>3</td>
-                        <td>no</td>
-                        <td>si</td>
-                        <td>
-                            <div>
-                                <a href="/modificarCastillo">
-                                    <button>Editar</button>
-                                </a>
-                            </div>
-                            <button>Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Castillo 3</td>
-                        <td>7</td>
-                        <td>20</td>
-                        <td>15</td>
-                        <td>5</td>
-                        <td>si</td>
-                        <td>si</td>
+                    <tr th:each="castillo : ${castillos}">
+                        <td th:text="${castillo.nombre}"></td>
+                        <td th:text="${castillo.pisos}"></td>
+                        <td th:text="${castillo.personesXPiso}"></td>
+                        <td th:text="${castillo.ncPinya}"></td>
+                        <td th:text="${castillo.ncTronc}"></td>
+                        <td th:text="${castillo.aixecat}"></td>
+                        <td th:text="${castillo.agulla}"></td>
+
                         <td>
                             <div>
                                 <a href="/modificarCastillo">
@@ -74,6 +41,12 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div th:if="${castillos==null || castillos.empty}"><!--Si l'ArrayList de gossos no està inicialitzat o no té contingut-->
+                <!-- Mostrem missatge-->
+                No hi ha gossos a la llista.
+            </div>
+
             <div>
                 <div>
                     <a href="/añadirCastillo">

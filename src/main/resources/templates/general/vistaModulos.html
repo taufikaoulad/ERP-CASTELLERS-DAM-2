@@ -5,7 +5,7 @@
         <title>Módulos</title>
     </head>
     <body>
-        <div>
+        <div th:if="${modulos!=null && !modulos.empty}">
             <h1>Módulos</h1>
             <table border="1">
                 <thead>
@@ -17,23 +17,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Modulo 1</td>
+                    <tr th:each="modulo : ${modulos}">
+                        <td th:text="${modulo.nombre}"></td>
                         <td>Administrador</td>
-                        <td>Si</td>
-                        <td>
-                            <div>
-                                <a href="/modificarModulo">
-                                    <button>Editar</button>
-                                </a>
-                            </div>
-                            <button>Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Modulo 2</td>
-                        <td>Usuario</td>
-                        <td>No</td>
+                        <td th:text="${modulo.activo}"></td>
                         <td>
                             <div>
                                 <a href="/modificarModulo">
@@ -45,6 +32,10 @@
                     </tr>
                 </tbody>
             </table>
+            <div th:if="${modulos==null || modulos.empty}"><!--Si l'ArrayList de gossos no està inicialitzat o no té contingut-->
+                <!-- Mostrem missatge-->
+                No hi ha gossos a la llista.
+            </div>
             <div>
                 <a href="/añadirModulo">
                     <button>Añadir módulo</button>
