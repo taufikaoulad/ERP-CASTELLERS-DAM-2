@@ -12,7 +12,7 @@ import lombok.Data;
  */
 
 @Data
-public class GestionEconomica {
+public class Apunte {
     
     private String concepto;
     private double precio;

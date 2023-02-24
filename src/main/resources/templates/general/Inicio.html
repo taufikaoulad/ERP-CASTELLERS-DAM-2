@@ -72,27 +72,34 @@
                 <span class="ensayo">Ensayo</span>
                 <span class="salida">Salida</span>
             </div>
-            <h2>Tabla de circulares</h2>
-            <table class="tabla" border="1">
-                <thead>
-                    <tr>
-                        <th>Título</th>
-                        <th>Mensaje</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Ejemplo de circular</td>
-                        <td>Este es un ejemplo de mensaje para una circular</td>
-                        <td>
-                            <button>Modificar</button>
-                            <button>Eliminar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
 
+            <h2>Tabla de circulares</h2>
+
+            <div th:if = "${circulares != null && !circulares.empty}">
+
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Mensaje</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each = "circular : ${circulares}">
+                            <td th:text = ${circular.titulo}></td>
+                            <td th:text = ${circular.mensaje}></td>
+                            <td>
+                                <button>Modificar</button>
+                                <button>Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if = "${circulares == null || circulares.empty}">
+                No hay apuntes en la lista
+            </div>
             <!-- Botón para agregar una circular -->
             <button class="btn">Agregar circular</button>
         </div>
