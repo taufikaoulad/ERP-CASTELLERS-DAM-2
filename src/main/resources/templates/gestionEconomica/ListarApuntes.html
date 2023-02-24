@@ -1,49 +1,39 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Listar Apuntes</title>
-  </head>
-  <body>
-    <h1>Listar Apuntes</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Concepto</th>
-          <th>Precio</th>
-          <th>Tipo</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Comida</td>
-          <td>$10.00</td>
-          <td>Gasto</td>
-          <td>
-            <a href="/ModificarApunte"><button>Modificar</button></a>
-            <button>Eliminar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Gasolina</td>
-          <td>$20.00</td>
-          <td>Gasto</td>
-          <td>
-            <a href="/ModificarApunte"><button>Modificar</button></a>
-            <button>Eliminar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Salario</td>
-          <td>$1000.00</td>
-          <td>Ingreso</td>
-          <td>
-            <a href="/ModificarApunte"><button>Modificar</button></a>
-            <button>Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <a href="/AnadirApunte"><button>Añadir Apunte</button></a>
-  </body>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Listar Apuntes</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Listar Apuntes</h1>
+
+        <div th:if = "${apuntes != null && !apuntes.empty}">
+
+            <table border = "1">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Precio</th>
+                        <th>Tipo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="apunte : ${apuntes}">
+                        <td th:text="${apunte.concepto}"></td>
+                        <td th:text="${apunte.precio}"></td>
+                        <td th:text="${apunte.tipo}"></td>
+                        <td>
+                            <a href="/ModificarApunte"><button>Modificar</button></a>
+                            <button>Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if = "${apuntes == null || apuntes.empty}">
+            No hay apuntes en la lista
+        </div>
+        <a href="/AnadirApunte"><button>Añadir Apunte</button></a>
+    </body>
 </html>
