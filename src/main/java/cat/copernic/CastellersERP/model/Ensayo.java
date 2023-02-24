@@ -12,7 +12,7 @@ import lombok.Data;
  * @author bhugo
  */
 @Data
-public class Ensayo extends Evento{
+public class Ensayo extends Evento {
+
     private String duracion;
-    //private ArrayList<Usuario> listaAsistentesEnsayo;??
 }
