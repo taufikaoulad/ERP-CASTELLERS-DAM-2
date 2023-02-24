@@ -2,24 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cat.copernic.CastellersERP.gestionEconomica.controllers;
+package cat.copernic.CastellersERP.general.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
- * @author pablogomez
+ * @author capy
  */
-
 @Controller
-public class ControladorAnadirApunte {
-    
-    @GetMapping("/AnadirApunte")
-    public String inicio(Model model){ 
+public class ControladorMenuOpciones {
+    @GetMapping("/menuPrincipalOpciones")
+    public String inicio(){
         
-        return "gestionEconomica/AnadirApunte"; 
+        return "general/MenuPrincipal";
     }
-    
 }
