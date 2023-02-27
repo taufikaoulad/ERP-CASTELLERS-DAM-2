@@ -4,6 +4,8 @@
  */
 package cat.copernic.CastellersERP.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import java.util.ArrayList;
 import lombok.Data;
 
@@ -12,7 +14,9 @@ import lombok.Data;
  * @author bhugo
  */
 @Data
+@Entity
 public class Ensayo extends Evento {
-
+    
+    @Column(name = "duracion")
     private String duracion;
 }
