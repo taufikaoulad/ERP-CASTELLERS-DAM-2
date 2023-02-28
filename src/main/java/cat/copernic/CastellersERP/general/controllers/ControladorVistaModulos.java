@@ -4,7 +4,12 @@
  */
 package cat.copernic.CastellersERP.general.controllers;
 
+import cat.copernic.CastellersERP.DAO.ModuloDAO;
+import cat.copernic.CastellersERP.model.Modulo;
+import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -13,9 +18,19 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class ControladorVistaModulos {
+    
+    @Autowired //Anotació que injecta tots els mètodes i possibles dependències de GosDAO al controlador
+    private ModuloDAO moduloDAO; //Atribut per poder utilitzar les funcions CRUD de la interfície GosDAO
+    
     @GetMapping("/vistaModulos")
-    public String inici(){ 
-        //log.info("Executant el controlador Spring MVC"); //Afegeix al log el missatge passat com a paràmetre.
+    public String inici(Model model){
+    
+        var modulos = new ArrayList<Modulo>();
+        moduloDAO.findAll().forEach(modulos::add);
+        
+        //Enviamos el ArrayList
+        model.addAttribute("modulos", modulos);
+        
         return "general/vistaModulos";
     }
 }

@@ -1,43 +1,57 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Módulos</title>
-  </head>
-  <body>
-    <div>
-    <h1>Módulos</h1>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Tipo de usuario</th>
-          <th>Activo</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Modulo 1</td>
-          <td>Administrador</td>
-          <td>Si</td>
-          <td>
-            <button>Editar</button>
-            <button>Eliminar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Modulo 2</td>
-          <td>Usuario</td>
-          <td>No</td>
-          <td>
-            <button>Editar</button>
-            <button>Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <button>Añadir módulo</button>
-    </div>
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Módulos</title>
+    </head>
+    <body>
+
+        <nav>
+            <ul>
+                <li><a href="/menuPrincipal">Menu</a></li>
+                <li><a href="/listarEnsayos">Ensayo</a></li>
+                <li><a href="/paginalistarSalidas">Salidas</a></li>
+                <li><a href="/vistaCastillos">Castillos</a></li>
+                <li><a href="/gestionEconomica">Administracion</a></li>
+                <li><a href="/crearUsuario"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
+            </ul>
+        </nav>
+
+        <div th:if="${modulos!=null && !modulos.empty}">
+            <h1>Módulos</h1>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo de usuario</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="modulo : ${modulos}">
+                        <td th:text="${modulo.nombre}"></td>
+                        <td>Administrador</td>
+                        <td>
+                            <div>
+                                <a href="/modificarModulo">
+                                    <button>Editar</button>
+                                </a>
+                            </div>
+                            <button>Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div th:if="${modulos==null || modulos.empty}"><!--Si l'ArrayList de gossos no està inicialitzat o no té contingut-->
+                <!-- Mostrem missatge-->
+                No hi ha moduls a la llista.
+            </div>
+            <div>
+                <a href="/añadirModulo">
+                    <button>Añadir módulo</button>
+                </a>
+            </div>
+        </div>
+    </body>
 </html>
