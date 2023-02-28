@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Assistentes y Transporte de la salida</title>
+  </head>
+  <body>
+    
+    <section>
+      <h2>Assistentes y Transporte de la salida</h2><br>
+    </section>
+      
+    <main>
+      <label>Castellers que assistiran a la salida</label>
+      <label>72</label><br><br>
+
+      
+
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Edat</th>
+            <th>Peso (kg)</th>
+            <th>Altura (m)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.edat}"></td>
+            <td th:text="${usuario.peso}"></td>
+            <td th:text="${usuario.altura}"></td>
+          </tr>
+        </tbody>
+      </table><br>
+
+      
+
+      <label>Castellers que harán uso del trasporte grupal</label>
+      <label>56</label><br><br>
+
+      
+
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Edat</th>
+            <th>Peso (kg)</th>
+            <th>Altura (m)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.edat}"></td>
+            <td th:text="${usuario.peso}"></td>
+            <td th:text="${usuario.altura}"></td>
+          </tr>
+        </tbody>
+      </table><br>
+
+    </main>
+    
+    <div>
+        <a href="/paginalistarSalidas">
+            <button>Volver</button>
+        </a>
+    </div>    
+    
+    
+  </body>
+</html>

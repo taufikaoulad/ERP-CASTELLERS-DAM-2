@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Detalle Ensayo</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+
+        <div>
+
+            <h1>Detalle Ensayo</h1>
+
+            <table border="1">
+                <tr>
+                    <th>Nombre Ensayo</th>
+                    <th>Fecha</th>
+                    <th>Ubicación</th>
+                    <th>Duración</th>
+                </tr>
+                <tr th:each="ensayo : ${ensayos}">
+                    <td th:text="${ensayo.nombreEvento}"></td>
+                    <td th:text="${ensayo.fechaEvento}"></td>
+                    <td th:text="${ensayo.ubicacionEvento}"></td>
+                    <td th:text="${ensayo.duracion}"></td>
+                </tr>
+            </table>
+            
+            <h3>Castillos Asignados</h3>
+            <table border="1">
+                <tr>
+                    <th>Castillos Asignados</th>
+                </tr>
+                <tr th:each="castillo : ${castillosAsignados}">
+                    <td th:text="${castillo.nombre}"></td>
+                </tr>
+            </table>
+            
+            <h3>Pasar Lista</h3>
+            <h4>Lista Asistentes</h4>
+            <table border="1">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Altura</th>
+                    <th>Peso</th>
+                    <th>Edat</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </table>
+            
+            <button>Actualizar Lista</button>
+            
+            <h4>Lista Usuarios</h4>
+            <table border="1">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Altura</th>
+                    <th>Peso</th>
+                    <th>Edat</th>
+                    <th>SI/NO</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </table>
+            
+             <a href="/listarEnsayos"><button>VOLVER</button></a>
+            
+        </div>
+
+    </body>
+</html>

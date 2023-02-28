@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Detalle Castillo</title>
+  </head>
+  <body>
+      
+    <section>
+      <h1>Detalle Castillo</h1>
+    </section>
+    
+    <main>
+      <table  border="1">
+        <thead>
+          <tr>
+            <th>Castillo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="castillo : ${castillos}">
+            <td th:text="${castillo.nombre}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </main><br>
+    
+    <div>
+        <a href="/paginalistarSalidas">
+            <button>Volver</button>
+        </a>
+    </div>
+    
+  </body>
+</html>
