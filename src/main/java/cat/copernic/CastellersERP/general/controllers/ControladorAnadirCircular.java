@@ -19,7 +19,7 @@ public class ControladorAnadirCircular {
     @GetMapping("/AnadirCircular")
     public String inicio(Model model){ 
         
-        return "general/ModificarCircular"; 
+        return "general/AnadirCircular"; 
     }
     
 }

@@ -34,11 +34,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>nombre1</td>
-            <td>2023-06-10 11:40:00</td>
-            <td>Les Fonts</td>
-            <td>Si</td>
+          <tr th:each="salida : ${salidas}">
+            <td th:text="${salida.nombreEvento}"></td>
+            <td th:text="${salida.fechaEvento}"></td>
+            <td th:text="${salida.ubicacionEvento}"></td>
+            <td th:text="${salida.paradita}"></td>
             <td>
                 <a href="/paginadetalleCastilloSalida">
                   <button>Detalle</button>
@@ -61,38 +61,8 @@
                 <button><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
               </a>             
             </td>
-            <td><input type="checkbox" name="salida1"></td>
-            <td><input type="checkbox" name="transporte1"></td>
-          </tr>
-          <tr>
-            <td>nombre2</td>
-            <td>2023-05-22 11:40:00</td>
-            <td>Terrassa</td>
-            <td>No</td>
-            <td>
-                <a href="/paginadetalleCastilloSalida">
-                  <button>Detalle</button>
-                </a>
-            </td>                
-            <td>
-              <a href="/vistaCastillos">
-                <button>Consultar Castillo</button>
-              </a>
-              
-              <a href="/paginaassistenciaYTransporteSalida">
-                <button>Nºparticipantes</button>
-              </a>
-                
-              <a href="/paginamodificarSalida">
-                <button><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
-              </a>
-                
-              <a href="/paginaconfirmarEliminacion">
-                <button><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
-              </a>             
-            </td>
-            <td><input type="checkbox" name="salida2"></td>
-            <td><input type="checkbox" name="transporte2"></td>
+            <td th:text="${salida.asistenciaSalida}"><input type="checkbox" name="salida1"></td>
+            <td th:text="${salida.asistenciaTransporte}"><input type="checkbox" name="transporte1"></td>
           </tr>
         </tbody>
       </table>

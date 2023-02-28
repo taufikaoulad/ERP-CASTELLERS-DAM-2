@@ -5,8 +5,6 @@
 package cat.copernic.CastellersERP.gestionEconomica.controllers;
 
 import cat.copernic.CastellersERP.DAO.ApunteDAO;
-import cat.copernic.CastellersERP.model.Apunte;
-import java.util.ArrayList;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
