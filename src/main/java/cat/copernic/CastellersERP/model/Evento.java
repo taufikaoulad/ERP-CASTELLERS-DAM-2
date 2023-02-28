@@ -5,29 +5,32 @@
 package cat.copernic.CastellersERP.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 /**
  *
  * @author capy
  */
 @Data
-@Inheritance
 @Entity
-@Table(name = "evento")
-public abstract class Evento {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "dtype", discriminatorType = DiscriminatorType.STRING)
+public abstract class Evento implements Serializable{
     @Id
     @GeneratedValue (strategy=GenerationType.IDENTITY)
-    @Column(name = "idevento")
-    private int idEvento;
+    private int idevento;
     
     @Column(name = "nombre")
     private String nombreEvento;
@@ -38,5 +41,5 @@ public abstract class Evento {
     @Column(name = "ubicacion")
     private String ubicacionEvento;
     
-    //private ArrayList<Castillo> listaCastillosAsignadosEvento;
+    //private List<Castillo> listaCastillosAsignadosEvento;
 }

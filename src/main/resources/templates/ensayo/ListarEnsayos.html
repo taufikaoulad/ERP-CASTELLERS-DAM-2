@@ -6,7 +6,7 @@
     </head>
     <body>
 
-        <div>
+        <div th:if="${ensayos!=null && !ensayos.empty}">
 
             <h1>Listar Ensayos</h1>
             <a href="/crearEnsayo"><button>CREAR</button></a>
@@ -32,6 +32,11 @@
                     </td>
                 </tr>
             </table>
+
+            <div th:if="${ensayos==null || ensayos.empty}">
+                <!-- Mostrem missatge-->
+                No hay Ensayos en la lista.
+            </div>
 
         </div>
 

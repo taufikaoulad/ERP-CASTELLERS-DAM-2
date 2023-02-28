@@ -7,6 +7,7 @@ package cat.copernic.CastellersERP.DAO;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import cat.copernic.CastellersERP.model.Ensayo;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  *
@@ -15,4 +16,5 @@ import cat.copernic.CastellersERP.model.Ensayo;
 
 //EnsayoDAO extenderá de EventoDAO, pasandole por parámetro la entidad ensayo que es a la que pertenece el EnsayoDAO.
 //A su vez, EventoDAO extenderá de CrudRepository.
+@EnableJpaRepositories
 public interface EnsayoDAO  extends EventoDAO<Ensayo>{}
