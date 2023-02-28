@@ -4,8 +4,11 @@
  */
 package cat.copernic.CastellersERP.salida.controllers;
 
+
+import cat.copernic.CastellersERP.DAO.UsuarioDAO;
 import cat.copernic.CastellersERP.model.Usuario;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +20,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ControladorAssisTranspoSalida {
+    
+    @Autowired //Anotació que injecta tots els mètodes i possibles dependències de SalidaDAO al controlador
+    private UsuarioDAO usuarioDAO; //Atribut per poder utilitzar les funcions CRUD de la interfície SalidaDAO
     //(localhost:8080/paginaassistenciaYTransporteSalida)
     @GetMapping("/paginaassistenciaYTransporteSalida")
     public String inici(Model model){
         
+        /*var usuarios = new ArrayList<Usuario>();
+        usuarioDAO.findAll().forEach(usuarios::add);*/
 
-        var usuario = new Usuario();
+        model.addAttribute("usuarios", usuarioDAO.findAll());
+
+
+        /*var usuario = new Usuario();
         usuario.setNombre("Nombre1");
         usuario.setEdat(24);
         usuario.setPeso(75.30f);
@@ -36,9 +47,9 @@ public class ControladorAssisTranspoSalida {
         
         var usuarios = new ArrayList<Usuario>();
         usuarios.add(usuario);
-        usuarios.add(usuario1);
+        usuarios.add(usuario1);*/
         
-        model.addAttribute("usuarios", usuarios);
+        
         
         return "salida/assistenciaYTransporteSalida"; //Retorna la pàgina iniciDinamic
     }

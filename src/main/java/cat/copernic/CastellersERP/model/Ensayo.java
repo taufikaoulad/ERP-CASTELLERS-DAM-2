@@ -4,6 +4,9 @@
  */
 package cat.copernic.CastellersERP.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import java.io.Serializable;
 import java.util.ArrayList;
 import lombok.Data;
 
@@ -12,7 +15,9 @@ import lombok.Data;
  * @author bhugo
  */
 @Data
-public class Ensayo extends Evento {
-
+@Entity
+public class Ensayo extends Evento implements Serializable{
+    
+    @Column(name = "duracion")
     private String duracion;
 }
