@@ -5,10 +5,13 @@
 package cat.copernic.CastellersERP.salida.controllers;
 
 
+import cat.copernic.CastellersERP.DAO.EventoDAO;
+import cat.copernic.CastellersERP.DAO.SalidaDAO;
 import cat.copernic.CastellersERP.model.Evento;
 import cat.copernic.CastellersERP.model.Salida;
 import java.util.ArrayList;
 import java.util.Date;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +24,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ControladorListarSalida {
     
+    @Autowired //Anotació que injecta tots els mètodes i possibles dependències de SalidaDAO al controlador
+    private SalidaDAO salidaDAO; //Atribut per poder utilitzar les funcions CRUD de la interfície SalidaDAO
     //(localhost:8080/paginalistarSalidas)
     @GetMapping("/paginalistarSalidas")
     public String inici(Model model){
         
-        Date date = new Date();
+        model.addAttribute("salidas", salidaDAO.findAll());
+
+        /*Date date = new Date();
         
         var salida = new Salida();
         salida.setNombreEvento("Nombre1");
@@ -47,7 +54,7 @@ public class ControladorListarSalida {
         salidas.add(salida);
         salidas.add(salida1);
         
-         model.addAttribute("salidas", salidas);
+        model.addAttribute("salidas", salidas);*/
         
         return "salida/listarSalidas"; //Retorna la pàgina iniciDinamic
     }

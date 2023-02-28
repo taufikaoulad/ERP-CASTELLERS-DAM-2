@@ -4,6 +4,10 @@
  */
 package cat.copernic.CastellersERP.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.io.Serializable;
 import lombok.Data;
 
 /**
@@ -12,8 +16,12 @@ import lombok.Data;
  */
 
 @Data
-public class Salida extends Evento{
+@Entity
+public class Salida extends Evento implements Serializable {
+    @Column(name = "asistenciatransporte")
     private boolean asistenciaTransporte;
+    @Column(name = "asistenciasalida")
     private boolean asistenciaSalida;
+    @Column(name = "paradita")
     private boolean paradita;
 }
