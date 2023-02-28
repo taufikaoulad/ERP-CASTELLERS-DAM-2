@@ -24,8 +24,8 @@
                     <tr th:each="castillo : ${castillos}">
                         <td th:text="${castillo.nombre}"></td>
                         <td th:text="${castillo.pisos}"></td>
-                        <td th:text="${castillo.personesXPiso}"></td>
-                        <td th:text="${castillo.ncPinya}"></td>
+                        <td th:text="${castillo.personasPisos}"></td>
+                        <td th:text="${castillo.ncPina}"></td>
                         <td th:text="${castillo.ncTronc}"></td>
                         <td th:text="${castillo.aixecat}"></td>
                         <td th:text="${castillo.agulla}"></td>
@@ -36,7 +36,11 @@
                                     <button>Editar</button>
                                 </a>
                             </div>
+                            <div>
+                                <a href="/vistaModulos">
                             <button>Eliminar</button>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -44,7 +48,7 @@
 
             <div th:if="${castillos==null || castillos.empty}"><!--Si l'ArrayList de gossos no està inicialitzat o no té contingut-->
                 <!-- Mostrem missatge-->
-                No hi ha gossos a la llista.
+                No hi ha castells a la llista.
             </div>
 
             <div>

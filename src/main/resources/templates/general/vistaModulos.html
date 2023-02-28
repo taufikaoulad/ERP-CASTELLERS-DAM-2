@@ -20,7 +20,6 @@
                     <tr th:each="modulo : ${modulos}">
                         <td th:text="${modulo.nombre}"></td>
                         <td>Administrador</td>
-                        <td th:text="${modulo.activo}"></td>
                         <td>
                             <div>
                                 <a href="/modificarModulo">
@@ -34,7 +33,7 @@
             </table>
             <div th:if="${modulos==null || modulos.empty}"><!--Si l'ArrayList de gossos no està inicialitzat o no té contingut-->
                 <!-- Mostrem missatge-->
-                No hi ha gossos a la llista.
+                No hi ha moduls a la llista.
             </div>
             <div>
                 <a href="/añadirModulo">
