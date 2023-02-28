@@ -1,73 +1,77 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Castillos</title>
-  </head>
-  <body>
-    <div>
-    <h1>Castillos</h1>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Pisos</th>
-          <th>Personas por piso</th>
-          <th>NCPiña</th>
-          <th>NCTronc</th>
-          <th>Aixecat</th>
-          <th>Agulla</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Castillo 1</td>
-          <td>3</td>
-          <td>10</td>
-          <td>5</td>
-          <td>2</td>
-          <td>si</td>
-          <td>no</td>
-          <td>
-            <button>Editar</button>
-            <button>Eliminar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Castillo 2</td>
-          <td>5</td>
-          <td>15</td>
-          <td>10</td>
-          <td>3</td>
-          <td>no</td>
-          <td>si</td>
-          <td>
-            <button>Editar</button>
-            <button>Eliminar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Castillo 3</td>
-          <td>7</td>
-          <td>20</td>
-          <td>15</td>
-          <td>5</td>
-          <td>si</td>
-          <td>si</td>
-          <td>
-            <button>Editar</button>
-            <button>Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div>
-      <h2>Agregar castillos</h2>
-      <button>Agregar castillo</button>
-      <button>Agregar castillo salida</button>
-      <button>Agregar castillo ensayo</button>
-    </div>
-    </div>
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Vista Castillos</title>
+    </head>
+    <body>
+
+        <nav>
+            <ul>
+                <li><a href="/menuPrincipal">Menu</a></li>
+                <li><a href="/listarEnsayos">Ensayo</a></li>
+                <li><a href="/paginalistarSalidas">Salidas</a></li>
+                <li><a href="/vistaCastillos">Castillos</a></li>
+                <li><a href="/gestionEconomica">Administracion</a></li>
+                <li><a href="/crearUsuario"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
+            </ul>
+        </nav>
+
+        <div th:if="${castillos!=null && !castillos.empty}">
+            <h1>Castillo</h1>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Pisos</th>
+                        <th>Personas por piso</th>
+                        <th>NCPinya</th>
+                        <th>NCTronc</th>
+                        <th>Aixecat</th>
+                        <th>Agulla</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="castillo : ${castillos}">
+                        <td th:text="${castillo.nombre}"></td>
+                        <td th:text="${castillo.pisos}"></td>
+                        <td th:text="${castillo.personasPisos}"></td>
+                        <td th:text="${castillo.ncPina}"></td>
+                        <td th:text="${castillo.ncTronc}"></td>
+                        <td th:text="${castillo.aixecat}"></td>
+                        <td th:text="${castillo.agulla}"></td>
+
+                        <td>
+                            <div>
+                                <a href="/modificarCastillo">
+                                    <button>Editar</button>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="/vistaModulos">
+                                    <button>Eliminar</button>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div th:if="${castillos==null || castillos.empty}"><!--Si l'ArrayList de gossos no està inicialitzat o no té contingut-->
+                <!-- Mostrem missatge-->
+                No hi ha castells a la llista.
+            </div>
+
+            <div>
+                <div>
+                    <a href="/añadirCastillo">
+                        <button>Añadir castillo</button>
+                    </a>
+                </div>
+                <button>Agregar castillo salida</button>
+                <button>Agregar castillo ensayo</button>
+            </div>
+        </div>
+    </body>
 </html>
