@@ -4,9 +4,13 @@
  */
 package cat.copernic.CastellersERP.general.controllers;
 
+import cat.copernic.CastellersERP.DAO.ApunteDAO;
+import cat.copernic.CastellersERP.DAO.CircularDAO;
 import cat.copernic.CastellersERP.model.Apunte;
 import cat.copernic.CastellersERP.model.Circular;
 import java.util.ArrayList;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,24 +22,16 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @Controller
+@Slf4j
 public class ControladorMenuPrincipal { 
+    
+    @Autowired
+    private CircularDAO circularDAO;
     
     @GetMapping("/menuPrincipal")
     public String inicio(Model model){ 
         
-        var circular = new Circular();
-        circular.setTitulo("Pagameent");
-        circular.setMensaje("Recordad que este viernes es el ultimo dia para realizar el pago de la mensualidad");
-        
-        var circular1 = new Circular();
-        circular1.setTitulo("Camisetas");
-        circular1.setMensaje("");
-        
-        var circulares = new ArrayList<Circular>();
-        circulares.add(circular);
-        circulares.add(circular1);
-        
-        model.addAttribute("circulares", circulares);
+        model.addAttribute("circulares", circularDAO.findAll());
         
         return "general/Inicio"; 
     }
