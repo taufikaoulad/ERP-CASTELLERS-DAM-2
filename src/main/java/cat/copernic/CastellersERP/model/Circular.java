@@ -4,6 +4,12 @@
  */
 package cat.copernic.CastellersERP.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.io.Serializable;
 import lombok.Data;
 
 /**
@@ -12,9 +18,17 @@ import lombok.Data;
  */
 
 @Data
-public class Circular {
+@Entity
+@Table(name = "circular")
+public class Circular implements Serializable { 
+    
+    //Identificació de la classe per poder deserialitzar de manera correcta
+    private static final long serialVersionUID = 1L;
+    
+    @Id //Indica al sistema que l'atribut idgos és la clau primària de la BBDD
+    @GeneratedValue(strategy=GenerationType.IDENTITY) //Indica al sistema com generem l'id, en el nostre cas autoincremental, per això fem servir IDENTITY
+    private int idcircular;
     
     private String titulo;
     private String mensaje;
-   
 }
