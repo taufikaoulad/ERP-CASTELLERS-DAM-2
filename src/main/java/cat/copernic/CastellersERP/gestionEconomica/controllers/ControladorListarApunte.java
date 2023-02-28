@@ -4,8 +4,9 @@
  */
 package cat.copernic.CastellersERP.gestionEconomica.controllers;
 
-import cat.copernic.CastellersERP.model.Apunte;
-import java.util.ArrayList;
+import cat.copernic.CastellersERP.DAO.ApunteDAO;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,27 +17,16 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @Controller
+@Slf4j
 public class ControladorListarApunte {
+    
+    @Autowired
+    private ApunteDAO apunteDAO;
     
     @GetMapping("/gestionEconomica")
     public String inicio(Model model){ 
         
-        var apunte = new Apunte();
-        apunte.setConcepto("Camisetas");
-        apunte.setPrecio(500);
-        apunte.setTipo("Gasto");
-        
-        var apunte1 = new Apunte();
-        apunte1.setConcepto("Mensualidad");
-        apunte1.setPrecio(1000);
-        apunte1.setTipo("Ingreso");
-        
-        var apuntes = new ArrayList<Apunte>();
-        apuntes.add(apunte);
-        apuntes.add(apunte1);
-        
-        model.addAttribute("apuntes",apuntes);
-        
+        model.addAttribute("apuntes", apunteDAO.findAll());
         
         return "gestionEconomica/ListarApuntes"; 
     }
