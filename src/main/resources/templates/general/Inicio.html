@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Menu</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/menuPrincipal">Menu</a></li>
+                <li><a href="/listarEnsayos">Ensayo</a></li>
+                <li><a href="/paginalistarSalidas">Salidas</a></li>
+                <li><a href="/vistaCastillos">Castillos</a></li>
+                <li><a href="/gestionEconomica">Administracion</a></li>
+                <li><a href="/crearUsuario"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
+            </ul>
+        </nav>
+        <div>
+            <h1>Menu</h1>
+            <h2>Calendario</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Lun</th>
+                        <th>Mar</th>
+                        <th>Mie</th>
+                        <th>Jue</th>
+                        <th>Vie</th>
+                        <th>Sab</th>
+                        <th>Dom</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td class="ensayo">20</td>
+                        <td class="ensayo">21</td>
+                        <td class="salida">22</td>
+                        <td>23</td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                        <td>29</td>
+                        <td>30</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <span class="ensayo">Ensayo</span>
+                <span class="salida">Salida</span>
+            </div>
+
+            <h2>Tabla de circulares</h2>
+
+            <div th:if = "${circulares != null && !circulares.empty}">
+
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Mensaje</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each = "circular : ${circulares}">
+                            <td th:text = ${circular.titulo}></td>
+                            <td th:text = ${circular.mensaje}></td>
+                            <td>
+                                <a href="/ModificarCircular"><button>Modificar</button></a>
+                                <button>Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if = "${circulares == null || circulares.empty}">
+                No hay apuntes en la lista
+            </div>
+            <!-- Botón para agregar una circular -->
+            <a href="/AnadirCircular"><button>Añadir Circular</button></a>
+        </div>
+    </body>
+</html>

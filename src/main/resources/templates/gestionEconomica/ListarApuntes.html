@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Listar Apuntes</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/menuPrincipal">Menu</a></li>
+                <li><a href="/listarEnsayos">Ensayo</a></li>
+                <li><a href="/paginalistarSalidas">Salidas</a></li>
+                <li><a href="/vistaCastillos">Castillos</a></li>
+                <li><a href="/gestionEconomica">Administracion</a></li>
+                <li><a href="/crearUsuario"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
+            </ul>
+        </nav>
+        <h1>Listar Apuntes</h1>
+
+        <div th:if = "${apuntes != null && !apuntes.empty}">
+
+            <table border = "1">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Precio</th>
+                        <th>Tipo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="apunte : ${apuntes}">
+                        <td th:text="${apunte.concepto}"></td>
+                        <td th:text="${apunte.precio}"></td>
+                        <td th:text="${apunte.tipo}"></td>
+                        <td>
+                            <a href="/ModificarApunte"><button>Modificar</button></a>
+                            <button>Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if = "${apuntes == null || apuntes.empty}">
+            No hay apuntes en la lista
+        </div>
+        <a href="/AnadirApunte"><button>Añadir Apunte</button></a>
+    </body>
+</html>
+
