@@ -7,25 +7,25 @@
     <body>
         <nav>
             <ul>
-                <li><a href="/menuPrincipal">Menu</a></li>
-                <li><a href="/listarEnsayos">Ensayo</a></li>
-                <li><a href="/paginalistarSalidas">Salidas</a></li>
-                <li><a href="/vistaCastillos">Castillos</a></li>
-                <li><a href="/gestionEconomica">Administracion</a></li>
+                <li><a href="/menuPrincipal" th:text = "${Menu}"></a></li>
+                <li><a href="/listarEnsayos" th:text = "${Ensayo}"></a></li>
+                <li><a href="/paginalistarSalidas" th:text = "${Salidas}"></a></li>
+                <li><a href="/vistaCastillos" th:text = "${Castillos}"></a></li>
+                <li><a href="/gestionEconomica" th:text = "${Administracion}"></a></li>
                 <li><a href="/crearUsuario"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
             </ul>
         </nav>
-        <h1>Listar Apuntes</h1>
+        <h1 th:text = "${titulo}"></h1>
 
         <div th:if = "${apuntes != null && !apuntes.empty}">
 
             <table border = "1">
                 <thead>
                     <tr>
-                        <th>Concepto</th>
-                        <th>Precio</th>
-                        <th>Tipo</th>
-                        <th>Acciones</th>
+                        <th th:text = "${Concepto}"></th>
+                        <th th:text = "${Precio}"></th>
+                        <th th:text = "${Tipo}"></th>
+                        <th th:text = "${Acciones}"></th>
                     </tr>
                 </thead>
                 <tbody>
