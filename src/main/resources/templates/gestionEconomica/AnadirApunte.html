@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Añadir Apunte</title>
-  </head>
-  <body>
-    <h1>Añadir Apunte</h1>
-    <form>
-      <div>
-        <label for="concepto">Concepto:</label>
-        <input type="text" id="concepto" name="concepto">
-      </div>
-      <div>
-        <label for="precio">Precio:</label>
-        <input type="text" id="precio" name="precio">
-      </div>
-      <div>
-        <label for="tipo">Tipo:</label>
-        <input type="text" id="tipo" name="tipo">
-      </div>
-      <button type="submit">Añadir Apunte</button>
-    </form>
-  </body>
+    <head>
+        <title>Añadir Apunte</title>
+    </head>
+    <body>
+        <h1 th:text = "${titulo}"></h1>
+        <form>
+            <div>
+                <label for="concepto" th:text = "${Concepto}"></label>
+                <input type="text" id="concepto" name="concepto">
+            </div>
+            <div>
+                <label for="precio" th:text = "${Precio}"></label>
+                <input type="text" id="precio" name="precio">
+            </div>
+            <div>
+                <label for="tipo" th:text = "${Tipo}"></label>
+                <input type="text" id="tipo" name="tipo">
+            </div>
+            <button type="submit">Añadir Apunte</button>
+        </form>
+    </body>
 </html>
