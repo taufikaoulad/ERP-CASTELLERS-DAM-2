@@ -19,6 +19,13 @@ public class ControladorModificarApunte {
     @GetMapping("/ModificarApunte")
     public String inicio(Model model){ 
         
+        model.addAttribute("titulo", "Modificar Apunte");
+        
+        model.addAttribute("Concepto", "Concepto: ");
+        model.addAttribute("Precio", "Precio: ");
+        model.addAttribute("Tipo", "Tipo: ");
+        
+        
         return "gestionEconomica/ModificarApunte"; 
     }
     

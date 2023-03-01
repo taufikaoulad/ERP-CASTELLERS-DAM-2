@@ -5,6 +5,7 @@
 package cat.copernic.CastellersERP.general.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -16,7 +17,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ControladorRecuperarContrasena {
     //(localhost:8080/paginarecuperarContrasena)
     @GetMapping("/paginarecuperarContrasena")
-    public String inici(){
+    public String inici(Model model){
+        
+        model.addAttribute("recuperarContrasena", "Recuperar Contraseña");
+        model.addAttribute("email", "Email");
+        model.addAttribute("enviar", "Enviar");
+        
         return "general/recuperarContrasena"; //Retorna la pàgina iniciDinamic
     }
 }

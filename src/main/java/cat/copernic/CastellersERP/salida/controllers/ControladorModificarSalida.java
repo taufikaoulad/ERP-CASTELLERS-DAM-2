@@ -5,6 +5,7 @@
 package cat.copernic.CastellersERP.salida.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -16,7 +17,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ControladorModificarSalida {
     //(localhost:8080/paginamodificarSalida)
     @GetMapping("/paginamodificarSalida")
-    public String inici(){
+    public String inici(Model model){
+        
+        model.addAttribute("ModificarSalida", "Modificar Salida");
+        model.addAttribute("Nombre", "Nombre");
+        model.addAttribute("Fecha", "Fecha");
+        model.addAttribute("Ubicacion", "Ubicación");
+        model.addAttribute("Paradita", "Paradita");
+        model.addAttribute("Cancelar", "Cancelar");
+        model.addAttribute("ConfirmarModificacion", "Confirmar Modificación");
+        
         return "salida/modificarSalida"; //Retorna la pàgina iniciDinamic
     }
 }

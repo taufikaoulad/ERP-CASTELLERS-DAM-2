@@ -28,6 +28,22 @@ public class ControladorListarApunte {
         
         model.addAttribute("apuntes", apunteDAO.findAll());
         
+        model.addAttribute("titulo", "Listar Apuntes");
+        
+        model.addAttribute("Menu", "Menu");
+        model.addAttribute("Ensayo", "Ensayo");
+        model.addAttribute("Salidas", "Salidas");
+        model.addAttribute("Castillos", "Castillos");
+        model.addAttribute("Administracion", "Administracion");
+        
+        model.addAttribute("Concepto", "Concepto");
+        model.addAttribute("Precio", "Precio");
+        model.addAttribute("Tipo", "Tipo");
+        model.addAttribute("Acciones", "Acciones");
+        
+        
+
+        
         return "gestionEconomica/ListarApuntes"; 
     }
     

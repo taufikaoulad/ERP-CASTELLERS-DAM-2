@@ -5,6 +5,7 @@
 package cat.copernic.CastellersERP.general.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -16,7 +17,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ControladorLogin {
     //(localhost:8080/paginaLogin)
     @GetMapping("/paginaLogin")
-    public String inici(){
+    public String inici(Model model){
+        
+        model.addAttribute("login", "Login");
+        model.addAttribute("email", "Email");
+        model.addAttribute("contrasena", "Contraseña");
+        model.addAttribute("olvidasteLaContrasena", "¿Olvidaste la contraseña?");
+        
         return "general/Login"; //Retorna la pàgina iniciDinamic
     }
 }

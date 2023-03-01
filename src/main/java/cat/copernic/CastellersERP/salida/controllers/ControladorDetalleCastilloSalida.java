@@ -36,6 +36,11 @@ public class ControladorDetalleCastilloSalida {
         castillos.add(castillo2);
         
         model.addAttribute("castillos", castillos);
+        
+        
+        model.addAttribute("DetalleCastillo", "Detalle Castillo");
+        model.addAttribute("Castillo", "Castillo");
+        model.addAttribute("Volver", "Volver");
                 
         return "salida/detalleCastilloSalida"; //Retorna la pàgina iniciDinamic
     }
