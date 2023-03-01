@@ -19,20 +19,20 @@
         </nav>
 
         <div th:if="${modulos!=null && !modulos.empty}">
-            <h1>Módulos</h1>
+            <h1 th:text = "${titulo}"></h1>
             <table border="1">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Tipo de usuario</th>
-                        <th>Activo</th>
-                        <th>Acciones</th>
+                        <th th:text = "${nombre}"></th>
+                        <th th:text = "${tipouser}"></th>
+                        <th th:text = "${activo}"></th>
+                        <th th:text = "${acciones}"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="modulo : ${modulos}">
                         <td th:text="${modulo.nombre}"></td>
-                        <td>Administrador</td>
+                        <td th:text = "${administrador}"></td>
                         <td>
                             <div>
                                 <a href="/modificarModulo">

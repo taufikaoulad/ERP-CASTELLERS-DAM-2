@@ -19,6 +19,13 @@ public class ControladorAnadirApunte {
     @GetMapping("/AnadirApunte")
     public String inicio(Model model){ 
         
+        model.addAttribute("titulo", "Añadir Apunte");
+        
+        model.addAttribute("Concepto", "Concepto: ");
+        model.addAttribute("Precio", "Precio: ");
+        model.addAttribute("Tipo", "Tipo: ");
+        
+        
         return "gestionEconomica/AnadirApunte"; 
     }
     

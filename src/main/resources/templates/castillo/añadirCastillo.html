@@ -4,30 +4,30 @@
     </head>
     <body>
         <div>
-            <h1>Añadir Castillos</h1>
+            <h1 th:text = "${titulo}"></h1>
             <main>
                 <div>
-                    <label for="pisos">Pisos:</label>
+                    <label th:text = "${pisos}"></label>
                     <input type="number" id="pisos" name="pisos" ><!-- required -->
                 </div>
                 <div>
-                    <label for="personasXPiso">Personas por piso:</label>
+                    <label th:text = "${personaspisos}"></label>
                     <input type="number" id="pisos" name="pisos" ><!-- required -->
                 </div>
                 <div>
-                    <label for="ncTronc">NCTronc:</label>
+                    <label th:text = "${ncpinya}"</label>
                     <input type="number" id="ncTronc" name="ncTronc" ><!-- required -->
                 </div>
                 <div>
-                    <label for="ncPiña">NCPiña:</label>
+                    <label th:text = "${nctronc}"></label>
                     <input type="number" id="ncPiña" name="ncPiña" ><!-- required -->
                 </div>
                 <div>
-                    <label for="aixecatSota">Aixecat per sota:</label>
+                    <label th:text = "${aixecat}"></label>
                     <input type="checkbox" id="aixecatSota" name="aixecatSota">
                 </div>
                 <div>
-                    <label for="agulla">Agulla:</label>
+                    <label th:text = "${agulla}"></label>
                     <input type="checkbox" id="agulla" name="agulla">
                 </div>
                 <div>

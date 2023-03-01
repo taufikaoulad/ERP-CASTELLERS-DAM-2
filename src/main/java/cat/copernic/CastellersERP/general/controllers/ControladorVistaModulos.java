@@ -30,6 +30,12 @@ public class ControladorVistaModulos {
         
         //Enviamos el ArrayList
         model.addAttribute("modulos", modulos);
+        model.addAttribute("titulo", "Módulos");
+        model.addAttribute("nombre", "Nombre");
+        model.addAttribute("tipouser", "Tipo de usuario");
+        model.addAttribute("activo", "Activo");
+        model.addAttribute("acciones", "Acciones");
+        model.addAttribute("administrador", "Administrador");
         
         return "general/vistaModulos";
     }
