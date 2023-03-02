@@ -16,5 +16,4 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 //EnsayoDAO extenderá de EventoDAO, pasandole por parámetro la entidad ensayo que es a la que pertenece el EnsayoDAO.
 //A su vez, EventoDAO extenderá de CrudRepository.
-@EnableJpaRepositories
 public interface EnsayoDAO  extends EventoDAO<Ensayo>{}

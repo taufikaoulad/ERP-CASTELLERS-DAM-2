@@ -25,22 +25,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class ControladorListarEnsayos {
     
+    //Instanciamos un objeto de tipo EnsayoDAO para utilizar los métodos que hereda del CrudRepository.
     @Autowired
     private EnsayoDAO ensayoDAO;
     
     @GetMapping("/listarEnsayos")
     public String inicio(Model model) {
         
-        //ArrayList de Ensayo creada.
-        //List<Ensayo> ensayos = new ArrayList();
+        //Creamos las variables necesarias para los titulos.
+        var nEnsayo = "Nombre Ensayo";
+        var fecha = "Fecha";
+        var ubicacion = "Ubicación";
+        var duracion = "Duración";
+        var opciones = "Opciones";
         
-        //Utilizamos el método findAll desde un objeto de tipo EnsayoDAO,
-        //luego en el bucle forEach añadimos a la lista cada objeto con el "add".
+        //Utilizamos el método findAll() desde un objeto de tipo EnsayoDAO.
+        //Almacenamos en una variable la lista que devuelve el mñetodo findAll().
         var ensayos = ensayoDAO.findAll();
         
-        //Asociamos el nombre del ArrayList puesto en el html, a la List de ensayos creada en el controller.
+        //Asociamos los elementos del controlador a los elementos del html, para poder mostrar sus valores.
         model.addAttribute("ensayos", ensayos);
+        model.addAttribute("nEnsayo", nEnsayo);
+        model.addAttribute("fecha", fecha);
+        model.addAttribute("ubicacion", ubicacion);
+        model.addAttribute("duracion", duracion);
+        model.addAttribute("opciones", opciones);
         
+        //De volvemos el html para referenciarlo y que lo muestre en la web.
         return "ensayo/ListarEnsayos";
     }
 }
