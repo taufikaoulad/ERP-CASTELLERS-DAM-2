@@ -9,7 +9,7 @@
       <h2 th:text="${AsistentesyTransportedelasalida}"></h2><br>
     </section>
       
-    <main>
+    <main th:if="${usuarios!=null && !usuarios.empty}">
       <label th:text="${AsistenciaASalida}"></label>
       <label th:text="${numeroDeAsistentes}"></label><br><br>
 
@@ -68,6 +68,10 @@
         </a>
     </div>    
     
+    <div th:if="${usuarios==null || usuarios.empty}">
+       <!-- Mostrem missatge-->
+       No hi ha usuarios a la llista.
+    </div>
     
   </body>
 </html>

@@ -13,7 +13,6 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Taufik
  */
-@EnableJpaRepositories
 public interface SalidaDAO extends EventoDAO<Salida>{
     
 }
