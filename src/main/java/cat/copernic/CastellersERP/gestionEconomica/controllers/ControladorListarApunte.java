@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class ControladorListarApunte {
     
+    /*
+    si una clase necesita una instancia de otro componente, simplemente se puede declarar un campo con la anotación 
+    "@Autowired" y Spring Boot se encargará de crear una instancia y asignarla al campo automáticamente.
+    */
     @Autowired
     private ApunteDAO apunteDAO;
     
