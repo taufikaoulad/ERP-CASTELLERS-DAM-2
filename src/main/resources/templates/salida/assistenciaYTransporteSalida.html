@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Assistentes y Transporte de la salida</title>
+    <title th:text="${AsistentesyTransportedelasalida}"></title>
   </head>
   <body>
     
     <section>
-      <h2>Assistentes y Transporte de la salida</h2><br>
+      <h2 th:text="${AsistentesyTransportedelasalida}"></h2><br>
     </section>
       
-    <main>
-      <label>Castellers que assistiran a la salida</label>
-      <label>72</label><br><br>
+    <main th:if="${usuarios!=null && !usuarios.empty}">
+      <label th:text="${AsistenciaASalida}"></label>
+      <label th:text="${numeroDeAsistentes}"></label><br><br>
 
       
 
       <table border="1">
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Edat</th>
-            <th>Peso (kg)</th>
-            <th>Altura (m)</th>
+            <th th:text="${Nombre}"></th>
+            <th th:text="${Edat}"></th>
+            <th th:text="${Peso}"></th>
+            <th th:text="${Altura}"></th>
           </tr>
         </thead>
         <tbody>
@@ -36,8 +36,8 @@
 
       
 
-      <label>Castellers que harán uso del trasporte grupal</label>
-      <label>56</label><br><br>
+      <label th:text="${AsistenciaATransporteGrupal}">Castellers que harán uso del trasporte grupal</label>
+      <label th:text="${numeroDeAsistentes2}">56</label><br><br>
 
       
 
@@ -68,6 +68,10 @@
         </a>
     </div>    
     
+    <div th:if="${usuarios==null || usuarios.empty}">
+       <!-- Mostrem missatge-->
+       No hi ha usuarios a la llista.
+    </div>
     
   </body>
 </html>

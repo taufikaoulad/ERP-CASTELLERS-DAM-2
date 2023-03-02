@@ -32,23 +32,17 @@ public class ControladorAssisTranspoSalida {
 
         model.addAttribute("usuarios", usuarioDAO.findAll());
 
-
-        /*var usuario = new Usuario();
-        usuario.setNombre("Nombre1");
-        usuario.setEdat(24);
-        usuario.setPeso(75.30f);
-        usuario.setAltura(1.82f);
+        model.addAttribute("AsistentesyTransportedelasalida", "Asistentes y Transporte de la salida");
+        model.addAttribute("AsistenciaASalida", "Asistentes y Transporte de la salida");
+        model.addAttribute("numeroDeAsistentes", "72");
+        model.addAttribute("numeroDeAsistentes2", "52");
+        model.addAttribute("Nombre", "Nombre");
+        model.addAttribute("Edat", "Edat");
+        model.addAttribute("Peso", "Peso (kg)");
+        model.addAttribute("Altura", "Altura (m)");
         
-        var usuario1 = new Usuario();
-        usuario1.setNombre("Nombre2");
-        usuario1.setEdat(30);
-        usuario1.setPeso(80.27f);
-        usuario1.setAltura(1.79f);
-        
-        var usuarios = new ArrayList<Usuario>();
-        usuarios.add(usuario);
-        usuarios.add(usuario1);*/
-        
+        model.addAttribute("AsistenciaATransporteGrupal", "Castellers que harán uso del trasporte grupal");
+        model.addAttribute("Volver", "Volver");
         
         
         return "salida/assistenciaYTransporteSalida"; //Retorna la pàgina iniciDinamic

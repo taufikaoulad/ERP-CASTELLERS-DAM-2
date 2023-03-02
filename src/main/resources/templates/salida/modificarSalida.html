@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Modificar Salida</title>
+    <title th:text="${ModificarSalida}"></title>
   </head>
   <body>
       
     <section>
-      <h1>Modificar Salida</h1> 
+      <h1 th:text="${ModificarSalida}"></h1> 
     </section> 
 
     <main>
-      <label for="campo1">Nombre</label>
-      <label for="campo2">Fecha</label>
-      <label for="campo3">Ubicación</label>
-      <label for="campo4">Paradita</label><br><br>
+      <label for="campo1" th:text="${Nombre}"></label>
+      <label for="campo2" th:text="${Fecha}"></label>
+      <label for="campo3" th:text="${Ubicacion}"></label>
+      <label for="campo4" th:text="${Paradita}"></label><br><br>
   
       <input type="text" id="campo1" size="2">
       <input type="text" id="campo2" size="2">
@@ -23,11 +23,11 @@
     
     <div>
         <a href="/paginalistarSalidas">
-            <button>Cancelar</button>
+            <button th:text="${Cancelar}"></button>
         </a>
       
         <a href="/paginalistarSalidas">
-            <button>Modificar Salida</button>
+            <button th:text="${ConfirmarModificacion}"></button>
         </a>
     </div>    
     

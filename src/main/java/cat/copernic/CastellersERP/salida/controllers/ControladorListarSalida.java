@@ -31,30 +31,28 @@ public class ControladorListarSalida {
     public String inici(Model model){
         
         model.addAttribute("salidas", salidaDAO.findAll());
+        
+        
+        model.addAttribute("Menu", "Menu");
+        model.addAttribute("Ensayo", "Ensayo");
+        model.addAttribute("Salidas", "Salidas");
+        model.addAttribute("Castillos", "Castillos");
+        model.addAttribute("Administracion", "Administracion");
 
-        /*Date date = new Date();
+        model.addAttribute("SALIDAS", "SALIDAS");
+        model.addAttribute("Nombre", "Nombre");
+        model.addAttribute("Fecha", "Fecha");
+        model.addAttribute("Ubicacion", "Ubicación");
+        model.addAttribute("Paradita", "Paradita");
+        model.addAttribute("Castillo", "Castillo");
+        model.addAttribute("Acciones", "Acciones");
+        model.addAttribute("Inscribirseasalida", "Inscribirse a salida");
+        model.addAttribute("Inscribirseatransporte", "Inscribirse a transporte");
+        model.addAttribute("Detalle", "Detalle");
+        model.addAttribute("ConsultarCastillo", "Consultar Castillo");
+        model.addAttribute("Nparticipantes", "Nºparticipantes");
+        model.addAttribute("CrearSalida", "Crear Salida");
         
-        var salida = new Salida();
-        salida.setNombreEvento("Nombre1");
-        salida.setFechaEvento(date);
-        salida.setUbicacionEvento("Terrassa");
-        salida.setParadita(true);
-        salida.setAsistenciaSalida(true);
-        salida.setAsistenciaTransporte(true);
-        
-        var salida1 = new Salida();
-        salida1.setNombreEvento("Nombre2");
-        salida1.setFechaEvento(date);
-        salida1.setUbicacionEvento("Les Fonts");
-        salida1.setParadita(true);
-        salida1.setAsistenciaSalida(true);
-        salida1.setAsistenciaTransporte(true);
-        
-        var salidas = new ArrayList<Salida>();
-        salidas.add(salida);
-        salidas.add(salida1);
-        
-        model.addAttribute("salidas", salidas);*/
         
         return "salida/listarSalidas"; //Retorna la pàgina iniciDinamic
     }
