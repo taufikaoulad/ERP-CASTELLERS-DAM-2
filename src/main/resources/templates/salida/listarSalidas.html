@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Salidas</title>
+    <title th:text="${Salidas}"></title>
   </head>
   <body>
     <nav>
       <ul>
-        <li><a href="/menuPrincipal">Menu</a></li>
-        <li><a href="/listarEnsayos">Ensayo</a></li>
-        <li><a href="/paginalistarSalidas">Salidas</a></li>
-        <li><a href="/vistaCastillos">Castillos</a></li>
-        <li><a href="/gestionEconomica">Administracion</a></li>
+        <li><a href="/menuPrincipal" th:text="${Menu}"></a></li>
+        <li><a href="/listarEnsayos" th:text="${Ensayo}"></a></li>
+        <li><a href="/paginalistarSalidas" th:text="${Salidas}"></a></li>
+        <li><a href="/vistaCastillos" th:text="${Castillos}"></a></li>
+        <li><a href="/gestionEconomica" th:text="${Administracion}"></a></li>
         <li><a href="/crearUsuario"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
       </ul>
     </nav>
       
     <section>
-      <h1>SALIDAS</h1>
+      <h1 th:text="${SALIDAS}"></h1>
     </section>
     
-    <main>
+    <main th:if="${salidas!=null && !salidas.empty}">
       <table border="1">
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Fecha</th>
-            <th>Ubicación</th>
-            <th>Paradita</th>
-            <th>Castillo</th>
-            <th>Acciones</th>
-            <th>Inscribirse a salida</th>
-            <th>Inscribirse a transporte</th>
+            <th th:text="${Nombre}"></th>
+            <th th:text="${Fecha}"></th>
+            <th th:text="${Ubicacion}"></th>
+            <th th:text="${Paradita}"></th>
+            <th th:text="${Castillo}"></th>
+            <th th:text="${Acciones}"></th>
+            <th th:text="${Inscribirseasalida}"></th>
+            <th th:text="${Inscribirseatransporte}"></th>
           </tr>
         </thead>
         <tbody>
@@ -41,16 +41,16 @@
             <td th:text="${salida.paradita}"></td>
             <td>
                 <a href="/paginadetalleCastilloSalida">
-                  <button>Detalle</button>
+                  <button th:text="${Detalle}"></button>
                 </a>
             </td>                
             <td>
               <a href="/vistaCastillos">
-                <button>Consultar Castillo</button>
+                <button th:text="${ConsultarCastillo}"></button>
               </a>
               
               <a href="/paginaassistenciaYTransporteSalida">
-                <button>Nºparticipantes</button>
+                <button th:text="${Nparticipantes}"></button>
               </a>
                 
               <a href="/paginamodificarSalida">
@@ -70,8 +70,13 @@
     
     <div>
         <a href="/paginaanadirSalida">
-            <button>Crear Salida</button>
+            <button th:text="${CrearSalida}"></button>
         </a>
+    </div>
+    
+    <div th:if="${salidas==null || salidas.empty}">
+        <!-- Mostrem missatge-->
+        No hi ha salidas a la llista.
     </div>
     
   </body>

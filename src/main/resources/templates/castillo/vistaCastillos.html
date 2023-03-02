@@ -13,23 +13,24 @@
                 <li><a href="/paginalistarSalidas">Salidas</a></li>
                 <li><a href="/vistaCastillos">Castillos</a></li>
                 <li><a href="/gestionEconomica">Administracion</a></li>
+                <li><a href="/vistaModulos">Modulos</a></li>
                 <li><a href="/crearUsuario"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
             </ul>
         </nav>
 
         <div th:if="${castillos!=null && !castillos.empty}">
-            <h1>Castillo</h1>
+            <h1 th:text = "${titulo}"></h1>
             <table border="1">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Pisos</th>
-                        <th>Personas por piso</th>
-                        <th>NCPinya</th>
-                        <th>NCTronc</th>
-                        <th>Aixecat</th>
-                        <th>Agulla</th>
-                        <th>Acciones</th>
+                        <th th:text = "${nombre}"></th>
+                        <th th:text = "${pisos}"></th>
+                        <th th:text = "${perosnaspisos}"></th>
+                        <th th:text = "${ncpinya}"></th>
+                        <th th:text = "${nctronc}"></th>
+                        <th th:text = "${aixecat}"></th>
+                        <th th:text = "${agulla}"></th>
+                        <th th:text = "${acciones}"></th>
                     </tr>
                 </thead>
                 <tbody>

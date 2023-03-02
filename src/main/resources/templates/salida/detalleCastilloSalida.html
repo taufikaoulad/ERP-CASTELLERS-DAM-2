@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Detalle Castillo</title>
+    <title th:text="${DetalleCastillo}"></title>
   </head>
   <body>
       
     <section>
-      <h1>Detalle Castillo</h1>
+      <h1 th:text="${DetalleCastillo}"></h1>
     </section>
     
-    <main>
+    <main th:if="${castillos!=null && !castillos.empty}">
       <table  border="1">
         <thead>
           <tr>
-            <th>Castillo</th>
+            <th th:text="${Castillo}"></th>
           </tr>
         </thead>
         <tbody>
@@ -26,8 +26,13 @@
     
     <div>
         <a href="/paginalistarSalidas">
-            <button>Volver</button>
+            <button th:text="${Volver}"></button>
         </a>
+    </div>
+    
+    <div th:if="${castillos==null || castillos.empty}">
+       <!-- Mostrem missatge-->
+       No hi ha castillos a la llista.
     </div>
     
   </body>
