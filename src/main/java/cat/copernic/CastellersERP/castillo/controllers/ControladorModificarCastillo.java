@@ -5,6 +5,7 @@
 package cat.copernic.CastellersERP.castillo.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -14,8 +15,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ControladorModificarCastillo {
     @GetMapping("/modificarCastillo")
-    public String inici(){ 
+   public String inici(Model model){ 
         //log.info("Executant el controlador Spring MVC"); //Afegeix al log el missatge passat com a paràmetre.
+        model.addAttribute("titulo", "Formulario castillo");
+        model.addAttribute("pisos", "Pisos: ");
+        model.addAttribute("personaspisos", "Personas por piso: ");
+        model.addAttribute("ncpinya", "NCPinya: ");
+        model.addAttribute("nctronc", "NCTronc: ");
+        model.addAttribute("aixecat", "Aixecat per sota: ");
+        model.addAttribute("agulla", "Agulla: ");
+        
         return "castillo/modificarCastillo";
     }
 }

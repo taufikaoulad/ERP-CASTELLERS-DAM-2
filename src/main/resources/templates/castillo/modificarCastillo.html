@@ -3,32 +3,31 @@
         <title>Modificar Castillos</title>
     </head>
     <body>
-        <div>
-            <h1>Modificar Castillo</h1>
+        <h1 th:text = "${titulo}"></h1>
             <main>
                 <div>
-                    <label >Pisos:</label>
-                    <input type="number" id="pisos"><!-- required -->
+                    <label th:text = "${pisos}"></label>
+                    <input type="number" id="pisos" name="pisos" ><!-- required -->
                 </div>
                 <div>
-                    <label >Personas por piso:</label>
-                    <input type="number" id="pisos"><!-- required -->
+                    <label th:text = "${personaspisos}"></label>
+                    <input type="number" id="pisos" name="pisos" ><!-- required -->
                 </div>
                 <div>
-                    <label>NCTronc:</label>
-                    <input type="number" id="ncTronc"><!-- required -->
+                    <label th:text = "${ncpinya}"</label>
+                    <input type="number" id="ncTronc" name="ncTronc" ><!-- required -->
                 </div>
                 <div>
-                    <label >NCPiña:</label>
-                    <input type="number" id="ncPiña"><!-- required -->
+                    <label th:text = "${nctronc}"></label>
+                    <input type="number" id="ncPiña" name="ncPiña" ><!-- required -->
                 </div>
                 <div>
-                    <label >Aixecat per sota:</label>
-                    <input type="checkbox" id="aixecatSota">
+                    <label th:text = "${aixecat}"></label>
+                    <input type="checkbox" id="aixecatSota" name="aixecatSota">
                 </div>
                 <div>
-                    <label >Agulla:</label>
-                    <input type="checkbox" id="agulla">
+                    <label th:text = "${agulla}"></label>
+                    <input type="checkbox" id="agulla" name="agulla">
                 </div>
                 <div>
                     <a href="/vistaCastillos">

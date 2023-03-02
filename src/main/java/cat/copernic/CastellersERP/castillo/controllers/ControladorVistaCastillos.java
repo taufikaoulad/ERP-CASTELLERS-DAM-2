@@ -31,6 +31,15 @@ public class ControladorVistaCastillos {
 
         //Enviamos el ArrayList
         model.addAttribute("castillos", castillos);
+        model.addAttribute("titulo", "Listar Castillos");
+        model.addAttribute("nombre", "Nombre");
+        model.addAttribute("pisos", "Pisos");
+        model.addAttribute("personaspisos", "Personas por piso");
+        model.addAttribute("ncpinya", "NCPinya");
+        model.addAttribute("nctronc", "NCTronc");
+        model.addAttribute("aixecat", "Aixecat");
+        model.addAttribute("aigulla", "Agulla");
+        model.addAttribute("acciones", "Acciones");
 
         return "castillo/vistaCastillos";
     }
