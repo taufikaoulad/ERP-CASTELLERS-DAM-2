@@ -19,7 +19,7 @@
       <h1 th:text="${SALIDAS}"></h1>
     </section>
     
-    <main>
+    <main th:if="${salidas!=null && !salidas.empty}">
       <table border="1">
         <thead>
           <tr>
@@ -72,6 +72,11 @@
         <a href="/paginaanadirSalida">
             <button th:text="${CrearSalida}"></button>
         </a>
+    </div>
+    
+    <div th:if="${salidas==null || salidas.empty}">
+        <!-- Mostrem missatge-->
+        No hi ha salidas a la llista.
     </div>
     
   </body>

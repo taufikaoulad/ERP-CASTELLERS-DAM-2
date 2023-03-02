@@ -9,7 +9,7 @@
       <h1 th:text="${DetalleCastillo}"></h1>
     </section>
     
-    <main>
+    <main th:if="${castillos!=null && !castillos.empty}">
       <table  border="1">
         <thead>
           <tr>
@@ -28,6 +28,11 @@
         <a href="/paginalistarSalidas">
             <button th:text="${Volver}"></button>
         </a>
+    </div>
+    
+    <div th:if="${castillos==null || castillos.empty}">
+       <!-- Mostrem missatge-->
+       No hi ha castillos a la llista.
     </div>
     
   </body>
