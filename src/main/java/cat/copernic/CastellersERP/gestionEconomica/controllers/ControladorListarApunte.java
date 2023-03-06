@@ -4,12 +4,13 @@
  */
 package cat.copernic.CastellersERP.gestionEconomica.controllers;
 
-import cat.copernic.CastellersERP.DAO.ApunteDAO;
-import lombok.extern.slf4j.Slf4j;
+import cat.copernic.CastellersERP.gestionEconomica.serveis.ApunteService;
+import cat.copernic.CastellersERP.model.Apunte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @Controller
-@Slf4j
 public class ControladorListarApunte {
     
     /*
@@ -25,30 +25,52 @@ public class ControladorListarApunte {
     "@Autowired" y Spring Boot se encargará de crear una instancia y asignarla al campo automáticamente.
     */
     @Autowired
-    private ApunteDAO apunteDAO;
+    private ApunteService apunteService;
     
     @GetMapping("/gestionEconomica")
     public String inicio(Model model){ 
         
-        model.addAttribute("apuntes", apunteDAO.findAll());
-        
-        model.addAttribute("titulo", "Listar Apuntes");
-        
-        model.addAttribute("Menu", "Menu");
-        model.addAttribute("Ensayo", "Ensayo");
-        model.addAttribute("Salidas", "Salidas");
-        model.addAttribute("Castillos", "Castillos");
-        model.addAttribute("Administracion", "Administracion");
-        
-        model.addAttribute("Concepto", "Concepto");
-        model.addAttribute("Precio", "Precio");
-        model.addAttribute("Tipo", "Tipo");
-        model.addAttribute("Acciones", "Acciones");
-        
-        
-
+        model.addAttribute("apuntes", apunteService.listarApuntes());
         
         return "gestionEconomica/ListarApuntes"; 
     }
+    
+    @GetMapping("/formularioApunte")
+    public String crearFormularioApunte(Apunte apunte){ 
+        
+        return "gestionEconomica/AnadirApunte"; 
+    }
+    
+    @PostMapping("/guardarApunte")
+    public String guardarApunte(Apunte apunte) {
+        
+        apunteService.afegirApuntes(apunte);
+        
+        return "redirect:/gestionEconomica";
+    }
+    
+    @GetMapping("/editar/{idapuntecontable}")
+    public String editar(Apunte apunte, Model model) {
+
+        /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
+         *el mètode cercarGos de la capa de servei.*/
+        model.addAttribute("apunte", apunteService.cercarApunte(apunte));
+
+        return "gestionEconomica/AnadirApunte"; //Retorna la pàgina amb el formulari de les dades del gos
+    }
+    
+    @GetMapping("/eliminar/{idapuntecontable}") 
+    public String eliminar(Apunte apunte) {
+
+        /*Eliminem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
+         *el mètode eliminarGos de la capa de servei.*/
+        apunteService.eliminarApunte(apunte);
+        
+        return "redirect:/gestionEconomica"; //Retornem a la pàgina inicial dels gossos mitjançant redirect
+    }
+    
+    
+    
+    
     
 }
