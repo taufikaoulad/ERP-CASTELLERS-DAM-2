@@ -16,18 +16,24 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author bhugo
  */
 @Controller
-public class ControladorCrearUsuario {
+public class ControladorListarUsuario {
     
-    //@Autowired //Anotació que injecta tots els mètodes i possibles dependències de SalidaDAO al controlador
-    //private UsuarioService usuarioService;
-    //(localhost:8080/paginacrearUsuario)
+    @Autowired //Anotació que injecta tots els mètodes i possibles dependències de SalidaDAO al controlador
+    private UsuarioService usuarioService;
+    //(localhost:8080/paginalistarUsuarios)
     
-    @GetMapping("/paginacrearUsuario")
+    @GetMapping("/paginalistarUsuarios")
     public String inici(Model model){ 
         
-        model.addAttribute("Cancelar", "Cancelar");
-        model.addAttribute("AnadirUsuario", "Añadir Usuario");
-        return "general/crearUsuario";
+        model.addAttribute("usuarios", usuarioService.llistarUsuarios());
+        
+        model.addAttribute("Menu", "Menu");
+        model.addAttribute("Ensayo", "Ensayo");
+        model.addAttribute("Salidas", "Salidas");
+        model.addAttribute("Castillos", "Castillos");
+        model.addAttribute("Administracion", "Administracion");
+        
+        return "general/listarUsuarios";
     }
     
     /*@GetMapping("/crearUsuario")

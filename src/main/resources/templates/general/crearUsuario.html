@@ -6,34 +6,42 @@
   </head>
   <body>
     <div>
-    <h1>Crear usuario</h1>
-    <form>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email"><br>
+        <h1>Crear usuario</h1>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email"><br><br>
 
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre"><br>
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre"><br><br>
 
-      <label for="contrasena">Contraseña:</label>
-      <input type="password" id="contrasena" name="contrasena"><br>
+          <label for="contrasena">Contraseña:</label>
+          <input type="password" id="contrasena" name="contrasena"><br><br>
 
-      <label for="confirmar-contrasena">Confirmar contraseña:</label>
-      <input type="password" id="confirmar-contrasena" name="confirmar-contrasena"><br>
+          <label for="confirmar-contrasena">Confirmar contraseña:</label>
+          <input type="password" id="confirmar-contrasena" name="confirmar-contrasena"><br><br>
 
-      <label for="altura">Altura (cm):</label>
-      <input type="number" id="altura" name="altura"><br>
+          <label for="altura">Altura (cm):</label>
+          <input type="text" id="altura" name="altura"><br><br>
 
-      <label for="peso">Peso (kg):</label>
-      <input type="number" id="peso" name="peso"><br>
+          <label for="peso">Peso (kg):</label>
+          <input type="text" id="peso" name="peso"><br><br>
 
-      <label for="telefono">Teléfono:</label>
-      <input type="tel" id="telefono" name="telefono"><br>
+          <label for="telefono">Teléfono:</label>
+          <input type="tel" id="telefono" name="telefono"><br><br>
 
-      <label for="edad">Edad:</label>
-      <input type="number" id="edad" name="edad"><br>
+          <label for="edad">Edad:</label>
+          <input type="date" id="edad" name="edad"><br><br>
 
-      <input type="submit" value="Crear">
-    </form>
+          <input type="submit" value="Crear">
+          
+          <div>
+            <a href="/paginalistarSalidas">
+                <button th:text="${Cancelar}"></button>
+            </a>
+
+            <a href="/paginalistarSalidas">
+                <button th:text="${AnadirUsuario}"></button>
+            </a>
+          </div>
     </div>
   </body>
 </html>

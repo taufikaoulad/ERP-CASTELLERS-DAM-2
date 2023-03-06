@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Usuarios</title>
+    </head>
+    <body>
+        <nav>
+            <ul>
+              <li><a href="/menuPrincipal" th:text="${Menu}"></a></li>
+              <li><a href="/listarEnsayos" th:text="${Ensayo}"></a></li>
+              <li><a href="/paginalistarSalidas" th:text="${Salidas}"></a></li>
+              <li><a href="/vistaCastillos" th:text="${Castillos}"></a></li>
+              <li><a href="/gestionEconomica" th:text="${Administracion}"></a></li>
+              <li><a href="/paginalistarUsuarios"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
+            </ul>
+        </nav>
+        
+        <section>
+            <h1 >USUARIOS</h1>
+        </section>
+        
+        <main th:if="${usuarios!=null && !usuarios.empty}">
+            <table border="1">
+              <thead>
+                <tr>
+                  <th >Email</th>
+                  <th >Nombre</th>
+                  <th >Altura</th>
+                  <th >Peso</th>
+                  <th >Telefono</th>
+                  <th >Edat</th>
+                  <th >Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="usuario : ${usuarios}">
+
+                  <td th:text="${usuario.mail}"></td>
+                  <td th:text="${usuario.nombre}"></td>
+                  <td th:text="${usuario.altura}"></td>
+                  <td th:text="${usuario.peso}"></td>
+                  <td th:text="${usuario.telefono}"></td>
+                  <td th:text="${usuario.edat}"></td>
+
+                  <td>
+                      <a href="/ModificarUsuario">
+                        <button >modificar</button>
+                      </a>
+                  </td>   
+                </tr>
+              </tbody>
+            </table>
+        </main><br>
+        
+        <div th:if="${usuarios==null || usuarios.empty}">
+            <!-- Mostrem missatge-->
+            No hi ha usuaris a la llista.
+        </div>
+
+        <div>
+            <a href="/paginaanadirSalida">
+                <button >CrearUsuario</button>
+            </a>
+        </div>
+    
+    </body>
+</html>
