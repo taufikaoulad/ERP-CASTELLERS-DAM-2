@@ -32,7 +32,7 @@ public class ControladorVistaCastillos {
         return "castillo/vistaCastillos";
     }
     
-    @GetMapping("/modificarCastillo") //URL a la pàgina amb el formulari de les dades del gos
+    @GetMapping("/formularioCastillo") //URL a la pàgina amb el formulari de les dades del gos
     public String crearFormularioCastillo(Castillo castillo) {
 
         return "castillo/modificarCastillo"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
@@ -46,7 +46,7 @@ public class ControladorVistaCastillos {
         return "redirect:/castillos"; //Retornem a la pàgina inicial dels gossos mitjançant redirect
     }
     
-    @GetMapping("/editar/{idcastillo}")
+    @GetMapping("/editar/{idCastillo}")
     public String editar(Castillo castillo, Model model) {
 
         /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
@@ -56,7 +56,7 @@ public class ControladorVistaCastillos {
         return "castillo/modificarCastillo"; //Retorna la pàgina amb el formulari de les dades del gos
     }
     
-    @GetMapping("/eliminar/{idcastillo}") 
+    @GetMapping("/eliminar/{idCastillo}") 
     public String eliminar(Castillo castillo) {
 
         /*Eliminem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 

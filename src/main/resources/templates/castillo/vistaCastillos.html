@@ -23,18 +23,20 @@
             <table border="1">
                 <thead>
                     <tr>
-                        <th th:text = "${nombre}"></th>
-                        <th th:text = "${pisos}"></th>
-                        <th th:text = "${perosnaspisos}"></th>
-                        <th th:text = "${ncpinya}"></th>
-                        <th th:text = "${nctronc}"></th>
-                        <th th:text = "${aixecat}"></th>
-                        <th th:text = "${agulla}"></th>
-                        <th th:text = "${acciones}"></th>
+                        <th th:text = "id"></th>
+                        <th th:text = "nombre"></th>
+                        <th th:text = "pisos"></th>
+                        <th th:text = "perosnaspisos"></th>
+                        <th th:text = "ncpinya"></th>
+                        <th th:text = "nctronc"></th>
+                        <th th:text = "aixecat"></th>
+                        <th th:text = "agulla"></th>
+                        <th th:text = "acciones"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="castillo : ${castillos}">
+                        <td th:text="${castillo.idCastillo}"></td>
                         <td th:text="${castillo.nombre}"></td>
                         <td th:text="${castillo.pisos}"></td>
                         <td th:text="${castillo.personasPisos}"></td>
