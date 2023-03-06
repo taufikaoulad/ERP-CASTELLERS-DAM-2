@@ -45,14 +45,12 @@
 
                         <td>
                             <div>
-                                <a href="/modificarCastillo">
-                                    <button>Editar</button>
-                                </a>
+                                <a th:href="@{/editar/}+${castillo.idCastillo}" th:text="Editar"/>
                             </div>
+                        </td>
+                        <td>
                             <div>
-                                <a href="/vistaModulos">
-                                    <button>Eliminar</button>
-                                </a>
+                                <a th:href="@{/eliminar/}+${castillo.idCastillo}" th:text="Eliminar"/>
                             </div>
                         </td>
                     </tr>
@@ -65,11 +63,7 @@
             </div>
 
             <div>
-                <div>
-                    <a href="/añadirCastillo">
-                        <button>Añadir castillo</button>
-                    </a>
-                </div>
+                <div><a th:href="@{/formulariGos}" th:text="añadir"/></div>
                 <button>Agregar castillo salida</button>
                 <button>Agregar castillo ensayo</button>
             </div>

@@ -3,38 +3,39 @@
         <title>Modificar Castillos</title>
     </head>
     <body>
-        <h1 th:text = "${titulo}"></h1>
-            <main>
-                <div>
-                    <label th:text = "${pisos}"></label>
-                    <input type="number" id="pisos" name="pisos" ><!-- required -->
-                </div>
-                <div>
-                    <label th:text = "${personaspisos}"></label>
-                    <input type="number" id="pisos" name="pisos" ><!-- required -->
-                </div>
-                <div>
-                    <label th:text = "${ncpinya}"</label>
-                    <input type="number" id="ncTronc" name="ncTronc" ><!-- required -->
-                </div>
-                <div>
-                    <label th:text = "${nctronc}"></label>
-                    <input type="number" id="ncPiña" name="ncPiña" ><!-- required -->
-                </div>
-                <div>
-                    <label th:text = "${aixecat}"></label>
-                    <input type="checkbox" id="aixecatSota" name="aixecatSota">
-                </div>
-                <div>
-                    <label th:text = "${agulla}"></label>
-                    <input type="checkbox" id="agulla" name="agulla">
-                </div>
-                <div>
-                    <a href="/vistaCastillos">
-                        <button>Modificar castillo</button>
-                    </a>
-                </div>
-            </main>
-        </div>
-    </body>
+        <h1>Formulario Castillo</h1>
+        
+        <a th:href="@{/castillos}">Inicio</a>
+        
+        <p>    
+        <form th:action="@{/guardarCastillo}" method="post" th:object="${castillo}">
+            <p>
+                <label>pisos</label>
+                <input type="number" name="pisos" th:field="*{pisos}"><!-- required -->
+            </p>
+            <p>
+                <label>personas x piso</label>
+                <input type="number" name="personaspisos" th:field="*{personasPisos}"><!-- required -->
+            </p>
+            <p>
+                <label>NC pinya</label>
+                <input type="number" name="nctronc" th:field="*{ncTronc}"><!-- required -->
+            </p>
+            <p>
+                <label>NC tronc</label>
+                <input type="number" name="ncpinya" th:field="*{ncPinya}"><!-- required -->
+            </p>
+            <p>
+                <label>Aixecat per sota</label>
+                <input type="checkbox" name="aixecat"th:field="*{aixecat}">
+            </p>
+            <p>
+                <label>Amb agulla</label>
+                <input type="checkbox" name="agulla" th:field="*{agulla}">
+            </p>
+
+            <input type="sumbit" name="confirmar" value="Confirmar datos"/>
+        </form>
+    </p>
+</body>
 </html>
