@@ -38,24 +38,22 @@ public class UsuarioService implements UsuarioServiceInterface{
     /*Afegir el gos passat per paràmetre a la taula gos de la BBDD veterinari*/
     @Override
     @Transactional
-    public void afegirGos(Usuario usuario) {
+    public void afegirUsuario(Usuario usuario) {
         this.usuarioDAO.save(usuario);
     }
 
      /*Eliminar el gos passat per paràmetre de la taula gos de la BBDD veterinari*/
     @Override
     @Transactional 
-    public void eliminarGos(Usuario usuario) {
+    public void eliminarUsuario(Usuario usuario) {
        this.usuarioDAO.delete(usuario);
     }
 
     /*Cercar el gos passat per paràmetre en la taula gos de la BBDD veterinari*/
     @Override
     @Transactional(readOnly=true)
-    public Usuario cercarGos(Usuario usuario) {
-        return this.usuarioDAO.findById(usuario.getIdusaurio()).orElse(null);
+    public Usuario cercarUsuario(Usuario usuario) {
+        return this.usuarioDAO.findById(usuario.getIdusuario()).orElse(null);
     }
-    
-    
-
+   
 }

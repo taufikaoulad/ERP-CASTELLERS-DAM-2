@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -36,11 +37,38 @@ public class ControladorListarUsuario {
         return "general/listarUsuarios";
     }
     
-    /*@GetMapping("/crearUsuario")
-    public String crearFormulariGos(Usuario usuario) {
+    @GetMapping("/formularioUsuario")
+    public String crearFormulariUsuario(Usuario usuario) {
         
-        return "crearUsuario"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
-    }*/
+        return "general/crearUsuario"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
+    }
     
+    @PostMapping("/guardarUsuario") //action=guardarGos
+    public String guardarUsuario(Usuario usuario) {
+
+        usuarioService.afegirUsuario(usuario); //Afegim el usuario passat per paràmetre a la base de dades
+
+        return "redirect:/paginalistarUsuarios"; //Retornem a la pàgina inicial dels Usuaris mitjançant redirect
+    }
+    
+    @GetMapping("/editarUsuario/{idusuario}")
+    public String editar(Usuario usuario, Model model) {
+
+        /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
+         *el mètode cercarGos de la capa de servei.*/
+        model.addAttribute("usuario", usuarioService.cercarUsuario(usuario));
+
+        return "general/crearUsuario"; //Retorna la pàgina amb el formulari de les dades del gos
+    }
+    
+     @GetMapping("/eliminarUsuario/{idusuario}") 
+    public String eliminar(Usuario usuario) {
+
+        /*Eliminem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
+         *el mètode eliminarGos de la capa de servei.*/
+        usuarioService.eliminarUsuario(usuario);
+        
+        return "redirect:/paginalistarUsuarios"; //Retornem a la pàgina inicial dels gossos mitjançant redirect
+    }
     
 }

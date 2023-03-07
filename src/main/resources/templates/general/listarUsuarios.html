@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-    <html>
+<html>
     <head>
         <meta charset="UTF-8">
         <title>Usuarios</title>
@@ -30,6 +30,7 @@
                   <th >Peso</th>
                   <th >Telefono</th>
                   <th >Edat</th>
+                  <th >Posicion</th>
                   <th >Acciones</th>
                 </tr>
               </thead>
@@ -42,10 +43,14 @@
                   <td th:text="${usuario.peso}"></td>
                   <td th:text="${usuario.telefono}"></td>
                   <td th:text="${usuario.edat}"></td>
+                  <td th:text="${usuario.posicion}"></td>
 
                   <td>
-                      <a href="/ModificarUsuario">
+                      <a th:href="@{/editarUsuario/}+${usuario.idusuario}">
                         <button >modificar</button>
+                      </a>
+                      <a th:href="@{/eliminarUsuario/}+${usuario.idusuario}">
+                        <button >Eliminar</button>
                       </a>
                   </td>   
                 </tr>
@@ -54,12 +59,11 @@
         </main><br>
         
         <div th:if="${usuarios==null || usuarios.empty}">
-            <!-- Mostrem missatge-->
-            No hi ha usuaris a la llista.
-        </div>
+            No hay usuarios en la lista. 
+        </div><br/>
 
         <div>
-            <a href="/paginaanadirSalida">
+            <a th:href ="@{/formularioUsuario}">
                 <button >CrearUsuario</button>
             </a>
         </div>
