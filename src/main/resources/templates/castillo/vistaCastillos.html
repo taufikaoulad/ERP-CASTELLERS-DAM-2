@@ -14,7 +14,7 @@
                 <li><a href="/vistaCastillos" th:text = "Castillos"></a></li>
                 <li><a href="/vistaModulos" th:text = "Modulos"></a></li>
                 <li><a href="/gestionEconomica" th:text = "Administracion"></a></li>
-                <li><a href="/crearUsuario"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
+                <li><a href="/paginalistarUsuarios"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
             </ul>
         </nav>
 
@@ -55,6 +55,12 @@
                                 <a th:href="@{/eliminarCastillo/}+${castillo.idCastillo}" th:text="Eliminar"/>
                             </div>
                         </td>
+                        <td>
+                            <button>Agregar castillo salida</button>
+                        </td>
+                        <td>
+                            <button>Agregar castillo ensayo</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -65,9 +71,7 @@
             </div>
 
             <div>
-                <div><a th:href="@{/formulariGos}" th:text="añadir"/></div>
-                <button>Agregar castillo salida</button>
-                <button>Agregar castillo ensayo</button>
+                <div><a th:href="@{/formularioCastillo}" th:text="añadir"/></div>
             </div>
         </div>
     </body>

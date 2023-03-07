@@ -6,6 +6,16 @@
                 var pisos = document.getElementById("pisos").value;
                 var personasPisos = document.getElementById("personasPisos").value;
                 var nombre = pisos + " x " + personasPisos;
+                
+                var aixecat = document.getElementById("aixecat").checked;
+                var agulla = document.getElementById("agulla").checked;
+                if (agulla){
+                    nombre +=  ", amb agulla";
+                }
+                if (aixecat){
+                    nombre += ", aixecat per sota";
+                }
+                
                 document.getElementById("nombre").value = nombre;
             }
         </script>
@@ -34,15 +44,15 @@
                 </p>
                 <p>
                     <label>Aixecat per sota</label>
-                    <input type="checkbox" name="aixecatSota" th:field="*{aixecat}"/>
+                    <input type="checkbox" id="aixecat" name="aixecatSota" th:field="*{aixecat}" onchange="actualizarNombre()"/>
                 </p>
                 <p>
                     <label>Agulla</label>
-                    <input type="checkbox" name="agulla" th:field="*{agulla}"/>
+                    <input type="checkbox" id="agulla" name="agulla" th:field="*{agulla}" onchange="actualizarNombre()"/>
                 </p>
                 <p>
                     <label>Nombre</label>
-                    <input type="text" id="nombre" name="nombre" th:field="*{nombre}" readonly/>
+                    <input type="text" id="nombre" name="nombre" th:field="*{nombre}" onchange="actualizarNombre()" readonly/>
                 </p>
                 
                 <input type="submit" name="enviar" values="Enviar Dades"/>
