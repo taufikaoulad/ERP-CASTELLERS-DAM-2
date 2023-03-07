@@ -6,11 +6,13 @@ package cat.copernic.CastellersERP.castillo.controllers;
 
 import cat.copernic.CastellersERP.DAO.CastilloDAO;
 import cat.copernic.CastellersERP.model.Castillo;
+import cat.copernic.CastellersERP.castillo.serveis.CastilloService;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -19,28 +21,46 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ControladorVistaCastillos {
 
-    @Autowired //Anotació que injecta tots els mètodes i possibles dependències de GosDAO al controlador
-    private CastilloDAO castilloDAO; //Atribut per poder utilitzar les funcions CRUD de la interfície GosDAO
+    @Autowired    
+    private CastilloService castilloService;
 
     @GetMapping("/vistaCastillos")
     public String inici(Model model) {
-        
-        var castillos = new ArrayList<Castillo>();
-        
-        castilloDAO.findAll().forEach(castillos::add);
 
-        //Enviamos el ArrayList
-        model.addAttribute("castillos", castillos);
-        model.addAttribute("titulo", "Listar Castillos");
-        model.addAttribute("nombre", "Nombre");
-        model.addAttribute("pisos", "Pisos");
-        model.addAttribute("personaspisos", "Personas por piso");
-        model.addAttribute("ncpinya", "NCPinya");
-        model.addAttribute("nctronc", "NCTronc");
-        model.addAttribute("aixecat", "Aixecat");
-        model.addAttribute("aigulla", "Agulla");
-        model.addAttribute("acciones", "Acciones");
-
+        model.addAttribute("castillos", castilloService.listarCastillos());
+        
         return "castillo/vistaCastillos";
     }
+    
+    @GetMapping("/formularioCastillo")
+    public String crearFormularioCastillo(Castillo castillo) {
+
+        return "castillo/modificarCastillo";
+    }
+    
+    @PostMapping("/guardarCastillo")
+    public String guardarCastillo(Castillo castillo) {
+
+        castilloService.agregarCastillo(castillo);
+
+        return "redirect:/vistaCastillos";
+    }
+    
+    @GetMapping("/editarCastillo/{idCastillo}")
+    public String editar(Castillo castillo, Model model) {
+
+        model.addAttribute("castillo", castilloService.buscarCastillo(castillo));
+
+        return "castillo/modificarCastillo";
+    }
+    
+    @GetMapping("/eliminarCastillo/{idCastillo}") 
+    public String eliminar(Castillo castillo) {
+
+        castilloService.eliminarCastillo(castillo);
+        
+        return "redirect:/vistaCastillos";
+    }
+    
+    
 }
