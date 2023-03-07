@@ -5,7 +5,7 @@
             function actualizarNombre() {
                 var pisos = document.getElementById("pisos").value;
                 var personasPisos = document.getElementById("personasPisos").value;
-                var nombre = pisos + " - " + personasPisos;
+                var nombre = pisos + " x " + personasPisos;
                 document.getElementById("nombre").value = nombre;
             }
         </script>
@@ -42,7 +42,7 @@
                 </p>
                 <p>
                     <label>Nombre</label>
-                    <input type="text" id="nombre" name="nombre" readonly/>
+                    <input type="text" id="nombre" name="nombre" th:field="*{nombre}" readonly/>
                 </p>
                 
                 <input type="submit" name="enviar" values="Enviar Dades"/>

@@ -39,7 +39,7 @@ public class ControladorVistaCastillos {
     }
     
     @PostMapping("/guardarCastillo")
-    public String guardarGos(Castillo castillo) {
+    public String guardarCastillo(Castillo castillo) {
 
         castilloService.agregarCastillo(castillo);
 
