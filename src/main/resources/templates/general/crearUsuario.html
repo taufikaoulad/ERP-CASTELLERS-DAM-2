@@ -1,39 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Crear usuario</title>
-  </head>
-  <body>
-    <div>
-    <h1>Crear usuario</h1>
-    <form>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email"><br>
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear usuario</title>
+    </head>
+    <body>
+        <div>
+            <h1>Crear usuario</h1>
+            
+            <p>
+                <form th:action="@{/guardarUsuario}" method="post" th:object="${usuario}">
+                    <input type="hidden" name="idusuario" th:field="*{idusuario}"/>
+            
+                    <p>
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" th:field="*{mail}"><br><br>
+                    </p>
 
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre"><br>
+                    <p>
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" th:field="*{nombre}"><br><br>
+                    </p>
 
-      <label for="contrasena">Contraseña:</label>
-      <input type="password" id="contrasena" name="contrasena"><br>
+                    <p>
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" name="contrasena"><br><br>
+                    </p>
 
-      <label for="confirmar-contrasena">Confirmar contraseña:</label>
-      <input type="password" id="confirmar-contrasena" name="confirmar-contrasena"><br>
+                    <p>
+                        <label for="confirmar-contrasena">Confirmar contraseña:</label>
+                        <input type="password" name="confirmar-contrasena"><br><br>
+                    </p>
 
-      <label for="altura">Altura (cm):</label>
-      <input type="number" id="altura" name="altura"><br>
+                    <p>
+                        <label for="altura">Altura (cm):</label>
+                        <input type="text" name="altura" th:field="*{altura}"><br><br>
+                    </p>
 
-      <label for="peso">Peso (kg):</label>
-      <input type="number" id="peso" name="peso"><br>
+                    <p>
+                        <label for="peso">Peso (kg):</label>
+                        <input type="text" name="peso" th:field="*{peso}"><br><br>
+                    </p>
 
-      <label for="telefono">Teléfono:</label>
-      <input type="tel" id="telefono" name="telefono"><br>
+                    <p>
+                        <label for="telefono">Teléfono:</label>
+                        <input type="tel" name="telefono"><br><br>
+                    </p>
 
-      <label for="edad">Edad:</label>
-      <input type="number" id="edad" name="edad"><br>
+                    <p>
+                        <label for="edad">Edad: (AAAA-MM-DD)</label>
+                        <input type="text" name="edat"><br><br>
+                    </p>
+                    
+                    <p>
+                        <label for="posicion">Posicion:</label>
+                        <input type="text" name="posicion" th:field="*{posicion}"><br><br>
+                    </p>
+                    
+                    <p>
+                        <label for="tipousuario_idtipousuario">Id tipo de usuario [1 - Casteller][2 - CapDeColla][3 - Tresorer]:</label>
+                        <input type="text" name="tipousuario_idtipousuario" th:field="*{tipousuario_idtipousuario}"><br><br>
+                    </p>
 
-      <input type="submit" value="Crear">
-    </form>
-    </div>
-  </body>
+                    <input type="submit" name="enviar" value="Enviar Dades"/> 
+                </form>
+            </p>
+
+            <div>
+                <a th:href = "@{/paginalistarUsuarios}">
+                    <button>Volver</button>
+                </a>
+            </div>
+        </div>
+    </body>
 </html>
