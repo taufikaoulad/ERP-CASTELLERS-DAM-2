@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Añadir Apunte</title>
+        <title>Formulario Apunte</title>
+        <meta charset="UTF-8"/>
     </head>
     <body>
-        <h1 th:text = "${titulo}"></h1>
-        <form>
-            <div>
-                <label for="concepto" th:text = "${Concepto}"></label>
-                <input type="text" id="concepto" name="concepto">
-            </div>
-            <div>
-                <label for="precio" th:text = "${Precio}"></label>
-                <input type="text" id="precio" name="precio">
-            </div>
-            <div>
-                <label for="tipo" th:text = "${Tipo}"></label>
-                <input type="text" id="tipo" name="tipo">
-            </div>
-            <button type="submit">Añadir Apunte</button>
+        <h1>Formulario Apunte</h1>
+        
+        <a th:href = "@{/gestionEconomica}" th:text = "Inicio"></a>
+
+        <p>
+
+        <form th:action = "@{/guardarApunte}" method="post" th:object = "${apunte}">
+
+            <input type="hidden" name="idapuntecontable" th:field="*{idapuntecontable}"/>
+
+            <p>
+                <label for="concepto">Concepto: </label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
+                <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut nom de l'objecte
+                    gos assignat a th:objecte-->
+                <input type="text" name="concepto" th:field="*{concepto}"/>
+            </p>
+
+            <p>
+                <label for="precio">Precio: </label> <!--Etiqueta per l'edat del gos-->            
+                <input type="text" name="precio" th:field="*{precio}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+            </p>
+
+            <p>
+                <label for="tipo">Tipo: </label> <!--Etiqueta pel sexe del gos-->            
+                <input type="text" name="tipo" th:field="*{tipo}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+            </p>
+
+            <input type="submit" name="enviar" values="Enviar Dades"/>
         </form>
-    </body>
+    </p>
+</body>
 </html>

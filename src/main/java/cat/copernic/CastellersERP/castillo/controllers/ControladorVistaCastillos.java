@@ -21,49 +21,45 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ControladorVistaCastillos {
 
-    @Autowired //Anotació que injecta tots els mètodes i possibles dependències de GosService al controlador    
+    @Autowired    
     private CastilloService castilloService;
 
     @GetMapping("/vistaCastillos")
     public String inici(Model model) {
-        //listarCastillos() devuelve el listado de objetos castillo guardados en la tabla de castillos de la BBDD 
+
         model.addAttribute("castillos", castilloService.listarCastillos());
         
         return "castillo/vistaCastillos";
     }
     
-    @GetMapping("/formularioCastillo") //URL a la pàgina amb el formulari de les dades del gos
+    @GetMapping("/formularioCastillo")
     public String crearFormularioCastillo(Castillo castillo) {
 
-        return "castillo/modificarCastillo"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
+        return "castillo/modificarCastillo";
     }
     
-    @PostMapping("/guardarCastillo") //action=guardarGos
+    @PostMapping("/guardarCastillo")
     public String guardarGos(Castillo castillo) {
 
-        castilloService.agregarCastillo(castillo); //Afegim el gos passat per paràmetre a la base de dades
+        castilloService.agregarCastillo(castillo);
 
-        return "redirect:/castillos"; //Retornem a la pàgina inicial dels gossos mitjançant redirect
+        return "redirect:/vistaCastillos";
     }
     
-    @GetMapping("/editar/{idCastillo}")
+    @GetMapping("/editarCastillo/{idCastillo}")
     public String editar(Castillo castillo, Model model) {
 
-        /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
-         *el mètode cercarGos de la capa de servei.*/
         model.addAttribute("castillo", castilloService.buscarCastillo(castillo));
 
-        return "castillo/modificarCastillo"; //Retorna la pàgina amb el formulari de les dades del gos
+        return "castillo/modificarCastillo";
     }
     
-    @GetMapping("/eliminar/{idCastillo}") 
+    @GetMapping("/eliminarCastillo/{idCastillo}") 
     public String eliminar(Castillo castillo) {
 
-        /*Eliminem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
-         *el mètode eliminarGos de la capa de servei.*/
         castilloService.eliminarCastillo(castillo);
         
-        return "redirect:/castillos"; //Retornem a la pàgina inicial dels gossos mitjançant redirect
+        return "redirect:/vistaCastillos";
     }
     
     

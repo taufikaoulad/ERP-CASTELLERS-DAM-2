@@ -1,41 +1,52 @@
 <html>
     <head>
         <title>Modificar Castillos</title>
+        <script>
+            function actualizarNombre() {
+                var pisos = document.getElementById("pisos").value;
+                var personasPisos = document.getElementById("personasPisos").value;
+                var nombre = pisos + " - " + personasPisos;
+                document.getElementById("nombre").value = nombre;
+            }
+        </script>
     </head>
     <body>
-        <h1>Formulario Castillo</h1>
-        
-        <a th:href="@{/castillos}">Inicio</a>
-        
-        <p>    
-        <form th:action="@{/guardarCastillo}" method="post" th:object="${castillo}">
-            <p>
-                <label>pisos</label>
-                <input type="number" name="pisos" th:field="*{pisos}"><!-- required -->
-            </p>
-            <p>
-                <label>personas x piso</label>
-                <input type="number" name="personasPisos" th:field="*{personasPisos}"><!-- required -->
-            </p>
-            <p>
-                <label>NC pinya</label>
-                <input type="number" name="ncTronc" th:field="*{ncTronc}"><!-- required -->
-            </p>
-            <p>
-                <label>NC tronc</label>
-                <input type="number" name="ncPina" th:field="*{ncPina}"><!-- required -->
-            </p>
-            <p>
-                <label>Aixecat per sota</label>
-                <input type="checkbox" name="aixecat"th:field="*{aixecat}">
-            </p>
-            <p>
-                <label>Amb agulla</label>
-                <input type="checkbox" name="agulla" th:field="*{agulla}">
-            </p>
+        <h1>Formulario Apunte</h1>
+           
+        <p>
+        <form th:action = "@{/guardarCastillo}" method="post" th:object = "${castillo}">
 
-            <input type="sumbit" name="confirmar" value="Confirmar datos"/>
+                <p>
+                    <label>pisos</label>
+                    <input type="number" id="pisos" name="pisos" th:field="*{pisos}" onchange="actualizarNombre()"/><!-- required -->
+                </p>
+                <p>
+                    <label>personas por pisos</label>
+                    <input type="number" id="personasPisos" name="personasPisos" th:field="*{personasPisos}" onchange="actualizarNombre()"/><!-- required -->
+                </p>
+                <p>
+                    <label>NC pina</label>
+                    <input type="number" name="ncTronc" th:field="*{ncPina}"/><!-- required -->
+                </p>
+                <p>
+                    <label>NC Tronc</label>
+                    <input type="number" name="ncPiña" th:field="*{ncTronc}"/><!-- required -->
+                </p>
+                <p>
+                    <label>Aixecat per sota</label>
+                    <input type="checkbox" name="aixecatSota" th:field="*{aixecat}"/>
+                </p>
+                <p>
+                    <label>Agulla</label>
+                    <input type="checkbox" name="agulla" th:field="*{agulla}"/>
+                </p>
+                <p>
+                    <label>Nombre</label>
+                    <input type="text" id="nombre" name="nombre" readonly/>
+                </p>
+                
+                <input type="submit" name="enviar" values="Enviar Dades"/>
         </form>
     </p>
-</body>
+    </body>
 </html>
