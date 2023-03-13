@@ -35,8 +35,8 @@
                         <td th:text="${apunte.precio}"></td>
                         <td th:text="${apunte.tipo}"></td>
                         <td>
-                            <a th:href="@{/editar/}+${apunte.idapuntecontable}" th:text = "Editar"></a>
-                            <a th:href="@{/eliminar/}+${apunte.idapuntecontable}" th:text = "Eliminar"></a>
+                            <a th:href="@{/editarApunte/}+${apunte.idapuntecontable}" th:text = "Editar"></a>
+                            <a th:href="@{/eliminarApunte/}+${apunte.idapuntecontable}" th:text = "Eliminar"></a>
                         </td>
                     </tr>
                 </tbody>
