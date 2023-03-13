@@ -4,16 +4,13 @@
  */
 package cat.copernic.CastellersERP.general.controllers;
 
-import cat.copernic.CastellersERP.DAO.ApunteDAO;
-import cat.copernic.CastellersERP.DAO.CircularDAO;
-import cat.copernic.CastellersERP.model.Apunte;
+import cat.copernic.CastellersERP.general.serveis.CircularService;
 import cat.copernic.CastellersERP.model.Circular;
-import java.util.ArrayList;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 /**
@@ -22,18 +19,50 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @Controller
-@Slf4j
 public class ControladorMenuPrincipal { 
     
     @Autowired
-    private CircularDAO circularDAO;
+    private CircularService circularService;
     
     @GetMapping("/menuPrincipal")
     public String inicio(Model model){ 
         
-        model.addAttribute("circulares", circularDAO.findAll());
+        model.addAttribute("circulares", circularService.listarCirculars());
         
         return "general/Inicio"; 
     }
     
+    @GetMapping("/formularioCircular")
+    public String crearFormularioApunte(Circular circular){ 
+        
+        return "general/AnadirCircular"; 
+    }
+    
+    @PostMapping("/guardarCircular")
+    public String guardarApunte(Circular circular) {
+        
+        circularService.afegirCirculars(circular);
+        
+        return "redirect:/menuPrincipal";
+    }
+    
+    @GetMapping("/editarCircular/{idcircular}")
+    public String editar(Circular circular, Model model) {
+
+        /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
+         *el mètode cercarGos de la capa de servei.*/
+        model.addAttribute("circular", circularService.cercarCirculars(circular));
+
+        return "general/AnadirCircular"; //Retorna la pàgina amb el formulari de les dades del gos
+    }
+    
+    @GetMapping("/eliminarCircular/{idcircular}") 
+    public String eliminar(Circular circular) {
+
+        /*Eliminem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
+         *el mètode eliminarGos de la capa de servei.*/
+        circularService.eliminarCirculars(circular);
+        
+        return "redirect:/menuPrincipal"; //Retornem a la pàgina inicial dels gossos mitjançant redirect
+    }
 }
