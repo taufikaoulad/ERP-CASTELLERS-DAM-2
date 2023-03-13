@@ -11,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import lombok.Data;
 
 /**
@@ -29,8 +29,8 @@ public class Usuario implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //AutoIncrement
-    @Column(name = "idusaurio", nullable = false, unique = true)
-    private int idusaurio;
+    @Column(name = "idusuario", nullable = false, unique = true)
+    private int idusuario;
     @Column(name = "nombre", nullable = false)
     private String nombre;
     @Column(name = "edat", nullable = false)
