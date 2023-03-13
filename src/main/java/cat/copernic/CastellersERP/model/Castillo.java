@@ -4,12 +4,19 @@
  */
 package cat.copernic.CastellersERP.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -39,5 +46,8 @@ public class Castillo {
     private boolean aixecat;
     @Column(name="agulla")
     private boolean agulla;
-
+    
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "castillo_idcastillo")
+    private List<EventoCastillo> castillos = new ArrayList();
 }

@@ -4,6 +4,7 @@
  */
 package cat.copernic.CastellersERP.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
@@ -13,9 +14,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 
@@ -27,19 +32,22 @@ import lombok.Data;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype", discriminatorType = DiscriminatorType.STRING)
-public abstract class Evento implements Serializable{
+public abstract class Evento implements Serializable {
+
     @Id
-    @GeneratedValue (strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idevento;
-    
+
     @Column(name = "nombre")
     private String nombreEvento;
-    
+
     @Column(name = "fecha")
     private Date fechaEvento;
-    
+
     @Column(name = "ubicacion")
     private String ubicacionEvento;
     
-    //private List<Castillo> listaCastillosAsignadosEvento;
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "evento_idevento")
+    private List<EventoCastillo> eventos = new ArrayList();
 }

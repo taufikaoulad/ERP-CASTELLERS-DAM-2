@@ -13,11 +13,11 @@ import java.util.List;
  */
 public interface EnsayoServiceInterface {
     
-    public List<Ensayo> listarEnsayos(); //Mètode que implementarem per llistar gossos
+    public List<Ensayo> listarEnsayos();
     
-    public void añadirEnsayo(Ensayo ensayo); //Mètode que implementarem per afegir un gos
+    public void añadirEnsayo(Ensayo ensayo);
     
-    public void eliminarEnsayo(Ensayo ensayo); //Mètode que implementarem per eliminar un gos
+    public void eliminarEnsayo(Ensayo ensayo);
     
-    public Ensayo buscarEnsayo(Ensayo ensayo); //Mètode que implementarem per cercar un gos
+    public Ensayo buscarEnsayo(Ensayo ensayo);
 }

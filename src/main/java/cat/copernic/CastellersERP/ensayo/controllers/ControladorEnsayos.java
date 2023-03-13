@@ -7,8 +7,10 @@ package cat.copernic.CastellersERP.ensayo.controllers;
 import cat.copernic.CastellersERP.DAO.EnsayoDAO;
 import cat.copernic.CastellersERP.DAO.EventoDAO;
 import cat.copernic.CastellersERP.ensayo.services.EnsayoService;
+import cat.copernic.CastellersERP.general.serveis.UsuarioService;
 import cat.copernic.CastellersERP.model.Castillo;
 import cat.copernic.CastellersERP.model.Ensayo;
+import cat.copernic.CastellersERP.model.Usuario;
 import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +33,9 @@ public class ControladorEnsayos {
     //Instanciamos un objeto de tipo EnsayoDAO para utilizar los métodos que hereda del CrudRepository.
     @Autowired
     private EnsayoService ensayoService;
+    
+    @Autowired
+    private UsuarioService usuarioService;
     
     @GetMapping("/ensayos")
     public String inicio(Model model) {
@@ -77,22 +82,25 @@ public class ControladorEnsayos {
         
         model.addAttribute("ensayo", ensayoService.buscarEnsayo(ensayo));
         
-        model.addAttribute("usuarios", ensayoService.listarEnsayos());
+        model.addAttribute("usuarios", usuarioService.llistarUsuarios());
         
-        /*
-        //Realizamos el mismo proceso con variables de tipo Castillo
-        var castillo1 = new Castillo();
-        castillo1.setNombre("castillo1");
-        var castillo2 = new Castillo();
-        castillo2.setNombre("castillo2");
-        var castillo3 = new Castillo();
-        castillo3.setNombre("castillo3");
         
-        ArrayList<Castillo> castillosAsignados = new ArrayList();
-        castillosAsignados.add(castillo1);
-        castillosAsignados.add(castillo2);
-        castillosAsignados.add(castillo3);
-        */
+        
         return "ensayo/DetalleEnsayo";
     }
+    /*
+    public static  ArrayList<Usuario> asignarUsuarios(ArrayList<Usuario> usuarios){
+        
+        ArrayList<Usuario> usuariosAsignados = new ArrayList();
+        
+        //FALTA AÑADIR BOOLEAN EN LA BASE DE DATOS
+        for(Usuario usuario : usuarios){
+            if(usuario.g){
+                
+            }
+        }
+        
+        return usuariosAsignados;
+    } 
+    */
 }

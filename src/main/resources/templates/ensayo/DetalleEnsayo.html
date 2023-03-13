@@ -70,7 +70,7 @@
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th></th>
+                    <th><input type="checkbox" name="remove" th:value="${usuario.idusuarioeventocastillo}" /></th>
                 </tr>
             </table>
             
@@ -80,21 +80,20 @@
             <table border="1">
                 <tr>
                     <th>Nombre</th>
-                    <th>Altura</th>
-                    <th>Peso</th>
-                    <th>Edat</th>
+                    <th>Mail</th>
+                    <th>Telefono</th>
                     <th>SI/NO</th>
                 </tr>
                 <tr th:each="usuario : ${usuarios}">
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th th:text="${usuario.nombre}"></th>
+                    <th th:text="${usuario.mail}"></th>
+                    <th th:text="${usuario.telefono}"></th>
+                    <td><input type="checkbox" name="add" th:value="${usuario.idevento}" /></td>
+
                 </tr>
             </table>
             
-             <a href="/listarEnsayos"><button>VOLVER</button></a>
+             <a href="/ensayos"><button>VOLVER</button></a>
             
         </div>
 

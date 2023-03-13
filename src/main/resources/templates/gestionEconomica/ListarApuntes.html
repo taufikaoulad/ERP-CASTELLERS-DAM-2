@@ -7,35 +7,36 @@
     <body>
         <nav>
             <ul>
-                <li><a href="/menuPrincipal" th:text = "${Menu}"></a></li>
-                <li><a href="/listarEnsayos" th:text = "${Ensayo}"></a></li>
-                <li><a href="/paginalistarSalidas" th:text = "${Salidas}"></a></li>
-                <li><a href="/vistaCastillos" th:text = "${Castillos}"></a></li>
-                <li><a href="/gestionEconomica" th:text = "${Administracion}"></a></li>
+                <li><a href="/menuPrincipal" th:text = "Menu"></a></li>
+                <li><a href="/listarEnsayos" th:text = "Ensayo"></a></li>
+                <li><a href="/paginalistarSalidas" th:text = "Salida"></a></li>
+                <li><a href="/vistaCastillos" th:text = "Castillos"></a></li>
+                <li><a href="/gestionEconomica" th:text = "Administracion"></a></li>
                 <li><a href="/crearUsuario"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
             </ul>
         </nav>
-        <h1 th:text = "${titulo}"></h1>
+        <h1> Listar Apuntes</h1>
 
         <div th:if = "${apuntes != null && !apuntes.empty}">
 
             <table border = "1">
                 <thead>
                     <tr>
-                        <th th:text = "${Concepto}"></th>
-                        <th th:text = "${Precio}"></th>
-                        <th th:text = "${Tipo}"></th>
-                        <th th:text = "${Acciones}"></th>
+                        <th th:text = "Concepto"></th>
+                        <th th:text = "Precio"></th>
+                        <th th:text = "Tipo"></th>
+                        <th th:text = "Acciones"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="apunte : ${apuntes}">
+                        <td th:text="${apunte.idapuntecontable}"></td>
                         <td th:text="${apunte.concepto}"></td>
                         <td th:text="${apunte.precio}"></td>
                         <td th:text="${apunte.tipo}"></td>
                         <td>
-                            <a href="/ModificarApunte"><button>Modificar</button></a>
-                            <button>Eliminar</button>
+                            <a th:href="@{/editar/}+${apunte.idapuntecontable}" th:text = "Editar"></a>
+                            <a th:href="@{/eliminar/}+${apunte.idapuntecontable}" th:text = "Eliminar"></a>
                         </td>
                     </tr>
                 </tbody>
@@ -44,7 +45,8 @@
         <div th:if = "${apuntes == null || apuntes.empty}">
             No hay apuntes en la lista
         </div>
-        <a href="/AnadirApunte"><button>Añadir Apunte</button></a>
+        <br/>
+        <div><a th:href ="@{/formularioApunte}" th:text = "Añadir"></a></div>
     </body>
 </html>
 
