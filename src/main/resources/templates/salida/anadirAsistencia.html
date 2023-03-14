@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title th:text="${CrearSalida}"></title>
+    <script>
+        var myBooleanValueSalida = false; // Valor booleano por defecto
+        document.getElementById("booleanAsistenciaSalida").addEventListener("change", function() {
+            myBooleanValueSalida = this.checked;
+        });
+    </script>
+    
+    <script>
+        var myBooleanValueTransporte = false; // Valor booleano por defecto
+        document.getElementById("AsistenciaTransporte").addEventListener("change", function() {
+            myBooleanValueTransporte = this.checked;
+        });
+    </script>
+  </head>
+  <body>
+      
+    <section>
+        <h1 th:text="${CrearSalida}"></h1>  
+    </section>
+    
+    <main>
+        
+        <p>
+            <form th:action="@{/guardarSalida}" method="post" th:object="${salida}">
+                
+                <input type="hidden" name="idevento" th:field="*{idevento}"/>
+
+                <input type="hidden" name="nombreEvento" th:field="*{nombreEvento}"/>
+                
+                <input type="hidden" name="fechaEvento" th:field="*{fechaEvento}"/>
+                    
+                <input type="hidden" name="ubicacionEvento" th:field="*{ubicacionEvento}"/>
+                
+                <input type="hidden" name="paradita" th:field="*{paradita}">
+
+                    <p>
+                        <label for="asistenciaSalida">Inscribirse a la Salida :</label><br><br>
+                        <input type="checkbox" id="booleanAsistenciaSalida" name="asistenciaSalida" th:field="*{asistenciaSalida}"><br><br>
+                    </p>
+                    
+                    <p>
+                        <label for="asistenciaTransporte">Inscribirse al transporte de la Salida :</label><br><br>
+                        <input type="checkbox" id="AsistenciaTransporte" name="asistenciaTransporte" th:field="*{asistenciaTransporte}"><br><br>
+                    </p>
+                
+                <input type="submit" name="enviar" value="Enviar Dades"/> 
+            </form>
+        </p>
+     
+    </main>
+      
+    <div>
+        <a th:href = "@{/paginalistarSalidas}">
+            <button>Volver</button>
+        </a>
+    </div>
+    
+  </body>
+</html>

@@ -2,6 +2,12 @@
 <html>
   <head>
     <title th:text="${CrearSalida}"></title>
+    <script>
+        var myBooleanValue = false; // Valor booleano por defecto
+        document.getElementById("booleanParadita").addEventListener("change", function() {
+            myBooleanValue = this.checked;
+        });
+    </script>
   </head>
   <body>
       
@@ -10,24 +16,44 @@
     </section>
     
     <main>
-        <label for="campo1" th:text="${Nombre}"></label>
-        <label for="campo2" th:text="${Fecha}"></label>
-        <label for="campo3" th:text="${Ubicacion}"></label>
-        <label for="campo4" th:text="${Paradita}"></label><br><br>
-
-        <input type="text" id="campo1" size="2" >
-        <input type="text" id="campo2" size="2">
-        <input type="text" id="campo3" size="2">
-        <input type="text" id="campo4" size="2"><br><br>
+        
+        <p>
+            <form th:action="@{/guardarSalida}" method="post" th:object="${salida}">
+                <input type="hidden" name="idevento" th:field="*{idevento}"/>
+                
+                    <p>
+                        <label for="nombreEvento">Nombre :</label><br><br>
+                        <input type="text" name="nombreEvento" th:field="*{nombreEvento}" ><br><br>
+                    </p>
+                    
+                    <p>
+                        <label for="fechaEvento">Fecha [AAAA-MM-DD] :</label><br><br>
+                        <input type="text" name="fechaEvento" th:field="*{fechaEvento}"><br><br>
+                    </p>
+                    
+                    <p>
+                        <label for="ubicacionEvento">Ubicación :</label><br><br>
+                        <input type="text" name="ubicacionEvento" th:field="*{ubicacionEvento}"><br><br>
+                    </p>
+                    
+                    <p>
+                        <label for="paradita">Paradita :</label><br><br>
+                        <input type="checkbox" id="booleanParadita" name="paradita" th:field="*{paradita}"><br><br>
+                    </p>
+                    
+                    <input type="hidden" name="asistenciaSalida" th:field="*{asistenciaSalida}">
+                    
+                    <input type="hidden" name="asistenciaTransporte" th:field="*{asistenciaTransporte}">
+                    
+                <input type="submit" name="enviar" value="Enviar Dades"/> 
+            </form>
+        </p>
+     
     </main>
-    
-    <div>
-        <a href="/paginalistarSalidas">
-            <button th:text="${Cancelar}"></button>
-        </a>
       
-        <a href="/paginalistarSalidas">
-            <button th:text="${AnadirSalida}"></button>
+    <div>
+        <a th:href = "@{/paginalistarSalidas}">
+            <button>Volver</button>
         </a>
     </div>
     

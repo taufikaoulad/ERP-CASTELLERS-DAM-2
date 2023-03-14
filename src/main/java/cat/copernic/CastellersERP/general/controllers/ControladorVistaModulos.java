@@ -60,7 +60,7 @@ public class ControladorVistaModulos {
         return "general/modificarModulo";
     }
     
-    @GetMapping("/eliminarCastillo/{idmtu}") 
+    @GetMapping("/eliminarModulo/{idmtu}") 
     public String eliminar(ModuloTipoUsuario modulotipousuario) {
 
         modulotipousuarioService.eliminarModuloTipoUsuario(modulotipousuario);
