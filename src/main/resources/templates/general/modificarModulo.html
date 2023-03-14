@@ -5,26 +5,22 @@
     </head>
     <body>
         <div>
-            <h1 th:text = "${titulo}"></h1>
-            <main>
-                <div>
-                    <label th:text = "${nombre}"></label>
-                    <input type="number" id="nombre" name="nombre" ><!-- required -->
-                </div>
-                <div>
-                    <label th:text = "${tipouser}"></label>
-                    <input type="number" id="tipoUsuaio" name="tipoUsuaio" ><!-- required -->
-                </div>
-                <div>
-                    <label th:text = "${activo}"></label>
-                    <input type="checkbox" id="activo" name="activo">
-                </div>
-                <div>
-                    <a href="/vistaModulos">
-                        <button type="submit">Modificar modulo</button>
-                    </a>
-                </div>
-            </main>
+            <h1>Formulario Modulo</h1>
+            <a th:href = "@{/vistaModulos}" th:text = "Inicio"></a>
+            <p>
+            <form th:action = "@{/guardarModulo}" method="post" th:object = "${modulotipousuario}">
+
+            <input type="hidden" name="idmtu" th:field="*{idmtu}"/>
+            <input type="hidden" name="modulo" th:field="*{modulo.idModulo}"/>
+            <input type="hidden" name="modulo" th:field="*{rol.idtipousuario}"/>
+                <p>
+                    <label>Activo</label>
+                    <input type="checkbox" name="activo" th:field="*{activo}">
+                </p>
+                
+                <input type="submit" name="enviar" values="Enviar Dades"/>
+            </form>
+            </p>
         </div>
     </body>
 </html>

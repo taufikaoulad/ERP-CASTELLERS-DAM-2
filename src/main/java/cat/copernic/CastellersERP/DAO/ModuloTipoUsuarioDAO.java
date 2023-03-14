@@ -11,6 +11,6 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author bhugo
  */
-public interface ModuloTipoUsuarioDAO extends CrudRepository<ModuloTipoUsuario,Integer>{
-    
+public interface ModuloTipoUsuarioDAO extends CrudRepository<ModuloTipoUsuario,Integer>{ 
+
 }

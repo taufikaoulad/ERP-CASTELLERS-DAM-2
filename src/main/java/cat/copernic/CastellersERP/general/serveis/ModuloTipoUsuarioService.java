@@ -25,26 +25,25 @@ public class ModuloTipoUsuarioService implements ModuloTipoUsuarioServiceInterfa
     
     @Override
     @Transactional(readOnly=true)
-    public List<ModuloTipoUsuario> llistarTipoUsuarios() {
+    public List<ModuloTipoUsuario> llistarModuloTipoUsuarios() {
         return (List<ModuloTipoUsuario>) modulotipousuarioDAO.findAll();
     }
 
     @Override
     @Transactional
-    public void afegirTipoUsuario(ModuloTipoUsuario modulotipousuario) {
-         this.modulotipousuarioDAO.save(modulotipousuario);
+    public void afegirModuloTipoUsuario(ModuloTipoUsuario modulotipousuario) {
+        this.modulotipousuarioDAO.save(modulotipousuario);
     }
 
     @Override
     @Transactional
-    public void eliminarTipoUsuario(ModuloTipoUsuario modulotipousuario) {
+    public void eliminarModuloTipoUsuario(ModuloTipoUsuario modulotipousuario) {
         this.modulotipousuarioDAO.delete(modulotipousuario);
     }
 
     @Override
     @Transactional(readOnly=true)
-    public ModuloTipoUsuario cercarTipoUsuario(ModuloTipoUsuario modulotipousuario) {
+    public ModuloTipoUsuario cercarModuloTipoUsuario(ModuloTipoUsuario modulotipousuario) {
         return this.modulotipousuarioDAO.findById(modulotipousuario.getIdmtu()).orElse(null);
-    }
-    
+    }    
 }
