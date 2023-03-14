@@ -6,9 +6,11 @@ package cat.copernic.CastellersERP.gestionEconomica.controllers;
 
 import cat.copernic.CastellersERP.gestionEconomica.serveis.ApunteService;
 import cat.copernic.CastellersERP.model.Apunte;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -42,7 +44,11 @@ public class ControladorListarApunte {
     }
     
     @PostMapping("/guardarApunte")
-    public String guardarApunte(Apunte apunte) {
+    public String guardarApunte(@Valid Apunte apunte, Errors errors) {
+        
+        if (errors.hasErrors()) {
+            return "gestionEconomica/AnadirApunte";
+        }
         
         apunteService.afegirApuntes(apunte);
         

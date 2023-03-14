@@ -6,9 +6,11 @@ package cat.copernic.CastellersERP.general.controllers;
 
 import cat.copernic.CastellersERP.general.serveis.CircularService;
 import cat.copernic.CastellersERP.model.Circular;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -39,8 +41,11 @@ public class ControladorMenuPrincipal {
     }
     
     @PostMapping("/guardarCircular")
-    public String guardarApunte(Circular circular) {
+    public String guardarApunte(@Valid Circular circular, Errors errors) {
         
+        if (errors.hasErrors()) {
+            return "general/AnadirCircular";
+        }
         circularService.afegirCirculars(circular);
         
         return "redirect:/menuPrincipal";
