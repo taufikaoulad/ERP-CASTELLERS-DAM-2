@@ -19,40 +19,37 @@
         </nav>
 
         <div th:if="${modulos!=null && !modulos.empty}">
-            <h1 th:text = "${titulo}"></h1>
-            <table border="1">
+            <table border="1" th:each="modulo : ${modulos}">
                 <thead>
                     <tr>
-                        <th th:text = "${nombre}"></th>
-                        <th th:text = "${tipouser}"></th>
-                        <th th:text = "${activo}"></th>
-                        <th th:text = "${acciones}"></th>
+                        <th th:text="${modulo.nombre}" colspan="3"></th>
+                    </tr>
+                    <tr>
+                        <th th:text = "usuario"></th>
+                        <th th:text = "activo"></th>
+                        <th th:text = "acciones"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="modulo : ${modulos}">
-                        <td th:text="${modulo.nombre}"></td>
-                        <td th:text = "${administrador}"></td>
+                    <tr th:each="modulotipousuario : ${modulo.modulosTiposUsuario}">
+                        <td th:text="${modulotipousuario.rol.nombretipousuario}"></td>
+                        <td th:text="${modulotipousuario.activo}"></td>
                         <td>
                             <div>
                                 <a href="/modificarModulo">
-                                    <button>Editar</button>
+                                    <a th:href="@{/editarModulo/}+${modulotipousuario.idmtu}" th:text="Editar"/>
                                 </a>
                             </div>
-                            <button>Eliminar</button>
+                            <!-- a th:href="@{/eliminarModulo/}+${modulotipousuario.idmtu}" th:text="Eliminar"/-->
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <div th:if="${modulos==null || modulos.empty}"><!--Si l'ArrayList de gossos no està inicialitzat o no té contingut-->
-                <!-- Mostrem missatge-->
-                No hi ha moduls a la llista.
-            </div>
             <div>
-                <a href="/añadirModulo">
+                <!-- a href="/modificarModulo">
                     <button>Añadir módulo</button>
-                </a>
+                </a-->
             </div>
         </div>
-    </body>
+    </body> 
 </html>
