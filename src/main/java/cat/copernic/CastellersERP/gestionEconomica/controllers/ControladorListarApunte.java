@@ -49,7 +49,7 @@ public class ControladorListarApunte {
         return "redirect:/gestionEconomica";
     }
     
-    @GetMapping("/editar/{idapuntecontable}")
+    @GetMapping("/editarApunte/{idapuntecontable}")
     public String editar(Apunte apunte, Model model) {
 
         /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
@@ -59,7 +59,7 @@ public class ControladorListarApunte {
         return "gestionEconomica/AnadirApunte"; //Retorna la pàgina amb el formulari de les dades del gos
     }
     
-    @GetMapping("/eliminar/{idapuntecontable}") 
+    @GetMapping("/eliminarApunte/{idapuntecontable}") 
     public String eliminar(Apunte apunte) {
 
         /*Eliminem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
@@ -67,10 +67,5 @@ public class ControladorListarApunte {
         apunteService.eliminarApunte(apunte);
         
         return "redirect:/gestionEconomica"; //Retornem a la pàgina inicial dels gossos mitjançant redirect
-    }
-    
-    
-    
-    
-    
+    }  
 }

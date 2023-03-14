@@ -7,11 +7,11 @@
     <body>
         <nav>
             <ul>
-                <li><a href="/menuPrincipal">Menu</a></li>
-                <li><a href="/listarEnsayos">Ensayo</a></li>
-                <li><a href="/paginalistarSalidas">Salidas</a></li>
-                <li><a href="/vistaCastillos">Castillos</a></li>
-                <li><a href="/gestionEconomica">Administracion</a></li>
+                <li><a href="/menuPrincipal" th:text = "Menu"></a></li>
+                <li><a href="/listarEnsayos" th:text = "Ensayo"></a></li>
+                <li><a href="/paginalistarSalidas" th:text = "Salida"></a></li>
+                <li><a href="/vistaCastillos" th:text = "Castillos"></a></li>
+                <li><a href="/gestionEconomica" th:text = "Administracion"></a></li>
                 <li><a href="/crearUsuario"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
             </ul>
         </nav>
@@ -90,9 +90,9 @@
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>Título</th>
-                            <th>Mensaje</th>
-                            <th>Acciones</th>
+                            <th th:text = "Título"></th>
+                            <th th:text = "Mensaje"></th>
+                            <th th:text = "Acciones"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,8 +100,8 @@
                             <td th:text = ${circular.titulo}></td>
                             <td th:text = ${circular.mensaje}></td>
                             <td>
-                                <a href="/ModificarCircular"><button>Modificar</button></a>
-                                <button>Eliminar</button>
+                                <a th:href = "@{/editarCircular/}+${circular.idcircular}" th:text = "Modificar"></a>
+                                <a th:href="@{/eliminarCircular/}+${circular.idcircular}" th:text = "Eliminar"></a>
                             </td>
                         </tr>
                     </tbody>
@@ -110,8 +110,7 @@
             <div th:if = "${circulares == null || circulares.empty}">
                 No hay apuntes en la lista
             </div>
-            <!-- Botón para agregar una circular -->
-            <a href="/AnadirCircular"><button>Añadir Circular</button></a>
+            <div><a th:href ="@{/formularioCircular}" th:text = "Añadir"></a></div>
         </div>
     </body>
 </html>
