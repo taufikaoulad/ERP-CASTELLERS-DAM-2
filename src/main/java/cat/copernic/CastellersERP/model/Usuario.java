@@ -10,6 +10,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Date;
 import lombok.Data;
@@ -29,25 +39,41 @@ public class Usuario implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //AutoIncrement
-    @Column(name = "idusuario", nullable = false, unique = true)
     private int idusuario;
-    @Column(name = "nombre", nullable = false)
+
+    @NotEmpty
+    @Size(min = 3)
     private String nombre;
-    @Column(name = "edat", nullable = false)
+ 
+    @NotNull
+    @Past
     private Date edat;
-    @Column(name = "mail", nullable = false)
+
+    @NotEmpty
+    @Email
     private String mail;
-    @Column(name = "telefono", nullable = false)
+
+    @NotEmpty
+    @Pattern(regexp = "\\d{9}")
     private String telefono;
-    @Column(name = "peso", nullable = false)
+
+    @DecimalMin(value = "20")
     private float peso;
-    @Column(name = "altura", nullable = false)
+
+    @DecimalMin(value = "0.75")
     private float altura;
-    @Column(name = "activo", nullable = false)
+
+    @NotNull
     private boolean activo;
-    @Column(name = "pocisio", nullable = false)
-    private String posicion;
-    @Column(name = "tipousuario_idtipousuario", nullable = false)
+    
+    @NotEmpty
+    @Size(min = 1)
+    private String posicio;
+    
+    
+    @NotNull
+    @Min(value = 1)
+    @Max(value = 3)
     private int tipousuario_idtipousuario;
 }
 

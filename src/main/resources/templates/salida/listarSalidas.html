@@ -33,7 +33,7 @@
                         <th th:text="${Acciones}"></th>
                         <th th:text="${Inscribirseasalida}"></th>
                         <th th:text="${Inscribirseatransporte}"></th>
-                        <th>Inscribirse/Asistencia Salida</th>
+                        <th>Inscribirse Asistencia/Transporte Salida</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,7 +75,7 @@
                         <td> 
                             <!-- <input type="checkbox" th:checked="${salida.idevento}"/> --> 
                             <a th:href="@{/editarAsistencia/}+${salida.idevento}">
-                                <button>+ Asistencia salida</button>
+                                <button>Inscribirse</button>
                             </a>
                         </td>
                         
