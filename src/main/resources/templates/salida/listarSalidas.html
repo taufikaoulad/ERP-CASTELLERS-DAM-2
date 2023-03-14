@@ -1,83 +1,100 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title th:text="${Salidas}"></title>
-  </head>
-  <body>
-    <nav>
-      <ul>
-        <li><a href="/menuPrincipal" th:text="${Menu}"></a></li>
-        <li><a href="/listarEnsayos" th:text="${Ensayo}"></a></li>
-        <li><a href="/paginalistarSalidas" th:text="${Salidas}"></a></li>
-        <li><a href="/vistaCastillos" th:text="${Castillos}"></a></li>
-        <li><a href="/gestionEconomica" th:text="${Administracion}"></a></li>
-        <li><a href="/paginalistarUsuarios"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
-      </ul>
-    </nav>
-      
-    <section>
-      <h1 th:text="${SALIDAS}"></h1>
-    </section>
-    
-    <main th:if="${salidas!=null && !salidas.empty}">
-      <table border="1">
-        <thead>
-          <tr>
-            <th th:text="${Nombre}"></th>
-            <th th:text="${Fecha}"></th>
-            <th th:text="${Ubicacion}"></th>
-            <th th:text="${Paradita}"></th>
-            <th th:text="${Castillo}"></th>
-            <th th:text="${Acciones}"></th>
-            <th th:text="${Inscribirseasalida}"></th>
-            <th th:text="${Inscribirseatransporte}"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="salida : ${salidas}">
-            <td th:text="${salida.nombreEvento}"></td>
-            <td th:text="${salida.fechaEvento}"></td>
-            <td th:text="${salida.ubicacionEvento}"></td>
-            <td th:text="${salida.paradita}"></td>
-            <td>
-                <a href="/paginadetalleCastilloSalida">
-                  <button th:text="${Detalle}"></button>
-                </a>
-            </td>                
-            <td>
-              <a href="/vistaCastillos">
-                <button th:text="${ConsultarCastillo}"></button>
-              </a>
-              
-              <a href="/paginaassistenciaYTransporteSalida">
-                <button th:text="${Nparticipantes}"></button>
-              </a>
-                
-              <a href="/paginamodificarSalida">
-                <button><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
-              </a>
-                
-              <a href="/paginaconfirmarEliminacion">
-                <button><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
-              </a>             
-            </td>
-            <td th:text="${salida.asistenciaSalida}"><input type="checkbox" name="salida1"></td>
-            <td th:text="${salida.asistenciaTransporte}"><input type="checkbox" name="transporte1"></td>
-          </tr>
-        </tbody>
-      </table>
-    </main><br>
-    
-    <div>
-        <a href="/paginaanadirSalida">
-            <button th:text="${CrearSalida}"></button>
-        </a>
-    </div>
-    
-    <div th:if="${salidas==null || salidas.empty}">
-        <!-- Mostrem missatge-->
-        No hi ha salidas a la llista.
-    </div>
-    
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${Salidas}"></title>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/menuPrincipal" th:text="${Menu}"></a></li>
+                <li><a href="/listarEnsayos" th:text="${Ensayo}"></a></li>
+                <li><a href="/paginalistarSalidas" th:text="${Salidas}"></a></li>
+                <li><a href="/vistaCastillos" th:text="${Castillos}"></a></li>
+                <li><a href="/gestionEconomica" th:text="${Administracion}"></a></li>
+                <li><a href="/paginalistarUsuarios"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
+            </ul>
+        </nav>
+
+        <section>
+            <h1 th:text="${SALIDAS}"></h1>
+        </section>
+
+        <main th:if="${salidas!=null && !salidas.empty}">
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th th:text="${Nombre}"></th>
+                        <th th:text="${Fecha}"></th>
+                        <th th:text="${Ubicacion}"></th>
+                        <th th:text="${Paradita}"></th>
+                        <th th:text="${Castillo}"></th>
+                        <th th:text="${Acciones}"></th>
+                        <th th:text="${Inscribirseasalida}"></th>
+                        <th th:text="${Inscribirseatransporte}"></th>
+                        <th>Inscribirse/Asistencia Salida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="salida : ${salidas}">
+                        <td th:text="${salida.nombreEvento}"></td>
+                        <td th:text="${salida.fechaEvento}"></td>
+                        <td th:text="${salida.ubicacionEvento}"></td>
+                        <td> <input type="checkbox" th:checked="${salida.paradita}" disabled="disabled"/> </td>
+                        <td>
+                            <a href="/paginadetalleCastilloSalida">
+                                <button th:text="${Detalle}"></button>
+                            </a>
+                        </td>                
+                        <td>
+                            <a href="/vistaCastillos">
+                                <button th:text="${ConsultarCastillo}"></button>
+                            </a>
+
+                            <a href="/paginaassistenciaYTransporteSalida">
+                                <button th:text="${Nparticipantes}"></button>
+                            </a>
+
+                            <a th:href="@{/editarSalida/}+${salida.idevento}">
+                                <button ><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+                            </a>
+                            <a th:href="@{/eliminarSalida/}+${salida.idevento}">
+                                <button ><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+                            </a>
+                        </td>
+                        <td> 
+                          <input type="checkbox" th:checked="${salida.asistenciaSalida}" disabled="disabled"/>
+                        </td>
+                        <td>
+                            <input type="checkbox" th:checked="${salida.asistenciaTransporte}" disabled="disabled"/>
+                        </td>
+                        
+                        
+                        
+                        <td> 
+                            <!-- <input type="checkbox" th:checked="${salida.idevento}"/> --> 
+                            <a th:href="@{/editarAsistencia/}+${salida.idevento}">
+                                <button>+ Asistencia salida</button>
+                            </a>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+
+        </main><br>
+        <!-- <input type="checkbox" th:checked="${salida.asistenciaSalida}"/> <input type="checkbox" th:checked="${salida.asistenciaTransporte}" />-->
+        <div>
+            <a href="/formularioSalida">
+                <button th:text="${CrearSalida}"></button>
+            </a>
+        </div>
+
+        <div th:if="${salidas==null || salidas.empty}">
+            <!-- Mostrem missatge-->
+            No hi ha salidas a la llista.
+        </div>
+
+    </body>
 </html>
