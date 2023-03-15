@@ -15,51 +15,56 @@
                     <p>
                         <label for="email">Email:</label>
                         <input type="email" name="email" th:field="*{mail}"><br><br>
+                        <span th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"/>
                     </p>
+                    
+                    <p>
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" name="contrasena" th:field="*{contrasena}"><br><br>
+                        <span th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"/>
+                    </p>
+
 
                     <p>
                         <label for="nombre">Nombre:</label>
                         <input type="text" name="nombre" th:field="*{nombre}"><br><br>
+                        <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"/>
                     </p>
 
                     <p>
-                        <label for="contrasena">Contraseña:</label>
-                        <input type="password" name="contrasena"><br><br>
-                    </p>
-
-                    <p>
-                        <label for="confirmar-contrasena">Confirmar contraseña:</label>
-                        <input type="password" name="confirmar-contrasena"><br><br>
-                    </p>
-
-                    <p>
-                        <label for="altura">Altura (cm):</label>
+                        <label for="altura">Altura (m):</label>
                         <input type="text" name="altura" th:field="*{altura}"><br><br>
+                        <span th:if="${#fields.hasErrors('altura')}" th:errors="*{altura}"/>
                     </p>
 
                     <p>
                         <label for="peso">Peso (kg):</label>
                         <input type="text" name="peso" th:field="*{peso}"><br><br>
+                        <span th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}"/>
                     </p>
 
                     <p>
                         <label for="telefono">Teléfono:</label>
-                        <input type="tel" name="telefono"><br><br>
+                        <input type="tel" name="telefono" th:field="*{telefono}"><br><br>
+                        <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"/>
                     </p>
 
                     <p>
                         <label for="edad">Edad: (AAAA-MM-DD)</label>
-                        <input type="text" name="edat"><br><br>
+                        <input type="date" name="edat" th:field="*{edat}"><br><br>
+                        <span th:if="${#fields.hasErrors('edat')}" th:errors="*{edat}"/>
                     </p>
                     
                     <p>
-                        <label for="posicion">Posicion:</label>
-                        <input type="text" name="posicion" th:field="*{posicion}"><br><br>
+                        <label for="posicio">Posicion:</label>
+                        <input type="text" name="posicio" th:field="*{posicio}"><br><br>
+                        <span th:if="${#fields.hasErrors('posicio')}" th:errors="*{posicio}"/>
                     </p>
                     
                     <p>
-                        <label for="tipousuario_idtipousuario">Id tipo de usuario [1 - Casteller][2 - CapDeColla][3 - Tresorer]:</label>
+                        <label for="tipousuario_idtipousuario">Id tipo de usuario [1 = Casteller][2 = CapDeColla][3 = Tresorer]:</label>
                         <input type="text" name="tipousuario_idtipousuario" th:field="*{tipousuario_idtipousuario}"><br><br>
+                        <span th:if="${#fields.hasErrors('tipousuario_idtipousuario')}" th:errors="*{tipousuario_idtipousuario}"/>
                     </p>
 
                     <input type="submit" name="enviar" value="Enviar Dades"/> 
