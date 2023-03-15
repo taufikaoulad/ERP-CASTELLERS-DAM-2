@@ -5,16 +5,9 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <nav>
-            <ul>
-                <li><a href="/menuPrincipal" th:text = "Menu"></a></li>
-                <li><a href="/listarEnsayos" th:text = "Ensayo"></a></li>
-                <li><a href="/paginalistarSalidas" th:text = "Salida"></a></li>
-                <li><a href="/vistaCastillos" th:text = "Castillos"></a></li>
-                <li><a href="/gestionEconomica" th:text = "Administracion"></a></li>
-                <li><a href="/crearUsuario"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
-            </ul>
-        </nav>
+       
+        <header th:replace="~{layout/plantilla :: menu}" />
+        
         <h1> Listar Apuntes</h1>
 
         <div th:if = "${apuntes != null && !apuntes.empty}">
