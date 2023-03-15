@@ -4,49 +4,40 @@
  */
 package cat.copernic.CastellersERP.gestionEconomica;
 
-import cat.copernic.CastellersERP.DAO.UsuarioDAO;
-import cat.copernic.CastellersERP.model.TipoUsuario;
-import cat.copernic.CastellersERP.model.Usuario;
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 /**
  *
  * @author pablogomez
  */
 
-@Service
-public class ConfiguracionAutentificacion implements UserDetailsService{
+@Configuration
+@EnableWebSecurity
+public class ConfiguracionAutentificacion {
 
     @Autowired
-    private UsuarioDAO usuarioDAO;
+    private UserDetailsService userDetailsService;
     
-    @Override
-    @Transactional(readOnly=true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        
-        Usuario usuario = usuarioDAO.findByUsername(username);
-        
-        if (usuario == null) {
-            throw new UsernameNotFoundException(username);
-        }
-        
-        var rols = new ArrayList<GrantedAuthority>();
-        
-        for(TipoUsuario tipousuario: usuario.getTipoUsuario()){
-            rols.add(new SimpleGrantedAuthority(tipousuario.getNombretipousuario()));
-        }
-        
-        return new User(usuario.getNombre(), usuario.getC, rols);
+    
+    @Autowired
+    public void autenticacio(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
     
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        
+        return http.authorizeHttpRequests((requests) -> 
+                requests.requestMatchers(""))
+        
+    }
     
 }
