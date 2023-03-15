@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Añadir Circular</title>
+        <meta charset="UTF-8"/>
     </head>
     <body>
         <h1>Añadir</h1>
@@ -16,10 +17,14 @@
             <p>
                 <label for="titulo">Titulo:</label>
                 <input type="text" id="titulo" th:field = "*{titulo}">
+                
+                <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"/>
             </p>
-            <<p>
+            <p>
                 <label for="mensaje">Mensaje</label>
                 <input type="text" id="mensaje" th:field = "*{mensaje}">
+                
+                <span th:if="${#fields.hasErrors('mensaje')}" th:errors="*{mensaje}"/>
 
             </p>
             <input type="submit" name="enviar" values="Enviar Dades"/>

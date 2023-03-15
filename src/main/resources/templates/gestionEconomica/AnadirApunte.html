@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+<html html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Formulario Apunte</title>
         <meta charset="UTF-8"/>
@@ -20,16 +19,22 @@
                 <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut nom de l'objecte
                     gos assignat a th:objecte-->
                 <input type="text" name="concepto" th:field="*{concepto}"/>
+                
+                <span th:if="${#fields.hasErrors('concepto')}" th:errors="*{concepto}"/>
             </p>
 
             <p>
                 <label for="precio">Precio: </label> <!--Etiqueta per l'edat del gos-->            
                 <input type="text" name="precio" th:field="*{precio}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                
+                <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"/>
             </p>
 
             <p>
                 <label for="tipo">Tipo: </label> <!--Etiqueta pel sexe del gos-->            
                 <input type="text" name="tipo" th:field="*{tipo}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                
+                <span th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"/>
             </p>
 
             <input type="submit" name="enviar" values="Enviar Dades"/>
