@@ -17,21 +17,18 @@
                         <input type="email" name="email" th:field="*{mail}"><br><br>
                         <span th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"/>
                     </p>
+                    
+                    <p>
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" name="contrasena" th:field="*{contrasena}"><br><br>
+                        <span th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"/>
+                    </p>
+
 
                     <p>
                         <label for="nombre">Nombre:</label>
                         <input type="text" name="nombre" th:field="*{nombre}"><br><br>
                         <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"/>
-                    </p>
-
-                    <p>
-                        <label for="contrasena">Contraseña:</label>
-                        <input type="password" name="contrasena"><br><br>
-                    </p>
-
-                    <p>
-                        <label for="confirmar-contrasena">Confirmar contraseña:</label>
-                        <input type="password" name="confirmar-contrasena"><br><br>
                     </p>
 
                     <p>

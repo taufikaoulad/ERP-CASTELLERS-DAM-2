@@ -52,6 +52,9 @@ public class Usuario implements Serializable {
     @NotEmpty
     @Email
     private String mail;
+    
+    @NotEmpty
+    private String contrasena;
 
     @NotEmpty
     @Pattern(regexp = "\\d{9}")
@@ -63,7 +66,7 @@ public class Usuario implements Serializable {
     @DecimalMin(value = "0.75")
     private float altura;
 
-    @NotNull
+    @NotNull //No se ha crado un campo para este boolean
     private boolean activo;
     
     @NotEmpty
