@@ -1,40 +1,63 @@
 <html>
     <head>
         <title>Modificar Castillos</title>
+        <script>
+            function actualizarNombre() {
+                var pisos = document.getElementById("pisos").value;
+                var personasPisos = document.getElementById("personasPisos").value;
+                var nombre = pisos + " x " + personasPisos;
+                
+                var aixecat = document.getElementById("aixecat").checked;
+                var agulla = document.getElementById("agulla").checked;
+                if (agulla){
+                    nombre +=  ", amb agulla";
+                }
+                if (aixecat){
+                    nombre += ", aixecat per sota";
+                }
+                
+                document.getElementById("nombre").value = nombre;
+            }
+        </script>
     </head>
     <body>
-        <h1 th:text = "${titulo}"></h1>
-            <main>
-                <div>
-                    <label th:text = "${pisos}"></label>
-                    <input type="number" id="pisos" name="pisos" ><!-- required -->
-                </div>
-                <div>
-                    <label th:text = "${personaspisos}"></label>
-                    <input type="number" id="pisos" name="pisos" ><!-- required -->
-                </div>
-                <div>
-                    <label th:text = "${ncpinya}"</label>
-                    <input type="number" id="ncTronc" name="ncTronc" ><!-- required -->
-                </div>
-                <div>
-                    <label th:text = "${nctronc}"></label>
-                    <input type="number" id="ncPiña" name="ncPiña" ><!-- required -->
-                </div>
-                <div>
-                    <label th:text = "${aixecat}"></label>
-                    <input type="checkbox" id="aixecatSota" name="aixecatSota">
-                </div>
-                <div>
-                    <label th:text = "${agulla}"></label>
-                    <input type="checkbox" id="agulla" name="agulla">
-                </div>
-                <div>
-                    <a href="/vistaCastillos">
-                        <button>Modificar castillo</button>
-                    </a>
-                </div>
-            </main>
-        </div>
+        <h1>Formulario Apunte</h1>
+        <a th:href = "@{/vistaCastillos}" th:text = "Inicio"></a>
+        <p>
+        <form th:action = "@{/guardarCastillo}" method="post" th:object = "${castillo}">
+
+            <input type="hidden" name="idCastillo" th:field="*{idCastillo}"/>
+                <p>
+                    <label>pisos</label>
+                    <input type="number" id="pisos" name="pisos" th:field="*{pisos}" onchange="actualizarNombre()"/><!-- required -->
+                </p>
+                <p>
+                    <label>personas por pisos</label>
+                    <input type="number" id="personasPisos" name="personasPisos" th:field="*{personasPisos}" onchange="actualizarNombre()"/><!-- required -->
+                </p>
+                <p>
+                    <label>NC pina</label>
+                    <input type="number" name="ncTronc" th:field="*{ncPina}"/><!-- required -->
+                </p>
+                <p>
+                    <label>NC Tronc</label>
+                    <input type="number" name="ncPiña" th:field="*{ncTronc}"/><!-- required -->
+                </p>
+                <p>
+                    <label>Aixecat per sota</label>
+                    <input type="checkbox" id="aixecat" name="aixecatSota" th:field="*{aixecat}" onchange="actualizarNombre()"/>
+                </p>
+                <p>
+                    <label>Agulla</label>
+                    <input type="checkbox" id="agulla" name="agulla" th:field="*{agulla}" onchange="actualizarNombre()"/>
+                </p>
+                <p>
+                    <label>Nombre</label>
+                    <input type="text" id="nombre" name="nombre" th:field="*{nombre}" onchange="actualizarNombre()" readonly/>
+                </p>
+                
+                <input type="submit" name="enviar" values="Enviar Dades"/>
+        </form>
+    </p>
     </body>
 </html>

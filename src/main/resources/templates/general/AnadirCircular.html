@@ -1,20 +1,35 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Añadir Circular</title>
-  </head>
-  <body>
-    <h1>Añadir</h1>
-    <form>
-      <div>
-        <label for="concepto">Titulo:</label>
-        <input type="text" id="titulo" name="titulo">
-      </div>
-      <div>
-        <label for="precio">Mensaje</label>
-        <input type="text" id="mensaje" name="mensaje">
-      </div>
-      <button type="submit">Añadir circular</button>
-    </form>
-  </body>
+<html html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Añadir Circular</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <h1>Añadir</h1>
+
+        <a th:href = "@{/gestionEconomica}" th:text = "Inicio"></a>
+
+        <p>
+        <form th:action = "@{/guardarCircular}" method="post" th:object = "${circular}">
+
+            <input type="hidden" name="idcircular" th:field="*{idcircular}"/>
+
+            <p>
+                <label for="titulo">Titulo:</label>
+                <input type="text" id="titulo" th:field = "*{titulo}">
+                
+                <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"/>
+            </p>
+            <p>
+                <label for="mensaje">Mensaje</label>
+                <input type="text" id="mensaje" th:field = "*{mensaje}">
+                
+                <span th:if="${#fields.hasErrors('mensaje')}" th:errors="*{mensaje}"/>
+
+            </p>
+            <input type="submit" name="enviar" values="Enviar Dades"/>
+        </form>
+    </p>
+</body>
 </html>
+

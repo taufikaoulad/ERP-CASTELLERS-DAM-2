@@ -9,6 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import lombok.Data;
 
@@ -43,7 +45,13 @@ public class Apunte implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//Indica al sistema com generem l'id, en el nostre cas autoincremental, per això fem servir IDENTITY
     private int idapuntecontable;
     
+    @NotEmpty
     private String concepto;
-    private double precio;
+    
+    
+    @DecimalMin("0")
+    private float precio;
+    
+    @NotEmpty
     private String tipo;
 }

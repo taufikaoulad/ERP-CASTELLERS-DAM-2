@@ -4,13 +4,13 @@
  */
 package cat.copernic.CastellersERP.DAO;
 
-import cat.copernic.CastellersERP.model.Castillo;
-import org.springframework.data.jpa.repository.JpaRepository;
+import cat.copernic.CastellersERP.model.TipoUsuario;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author bhugo
  */
-public interface CastilloDAO extends JpaRepository<Castillo,Integer>{
+public interface TipoUsuarioDAO extends CrudRepository<TipoUsuario,Integer>{
     
 }
