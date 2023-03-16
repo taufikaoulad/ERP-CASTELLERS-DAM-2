@@ -70,19 +70,16 @@ public class Usuario implements Serializable {
     @Size(min = 1)
     private String posicio;
     
-    
-    @NotNull
-    @Min(value = 1)
-    @Max(value = 3)
-    private int tipousuario_idtipousuario;
-    
-    @OneToMany
-    @JoinColumn(name = "idusuario")
-    private List<TipoUsuario> TipoUsuario;
+    @ManyToOne
+    @JoinColumn(name = "tipousuario_idtipousuario")
+    private TipoUsuario tipousuario_idtipousuario;
     
     @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "usuariosAsignados")
     private List<Evento> eventos = new ArrayList<>();
     
-    
-    
+    /*@NotNull
+    @Min(value = 1)
+    @Max(value = 3)*/
 }
+
+    
