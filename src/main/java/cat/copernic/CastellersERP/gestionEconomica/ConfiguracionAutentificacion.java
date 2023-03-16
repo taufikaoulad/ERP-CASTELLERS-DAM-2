@@ -42,7 +42,7 @@ public class ConfiguracionAutentificacion {
         .formLogin((form) -> form
         .loginPage("/login")
         .permitAll()
-        ).build();
+        ).build();
         
     }
     
