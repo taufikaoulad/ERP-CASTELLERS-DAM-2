@@ -4,17 +4,8 @@
  */
 package cat.copernic.CastellersERP.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -52,15 +43,14 @@ public class Usuario implements Serializable {
     private float altura;
     @Column(name = "activo", nullable = false)
     private boolean activo;
-    @Column(name = "pocisio", nullable = false)
+    @Column(name = "posicio", nullable = false)
     private String posicion;
     @Column(name = "tipousuario_idtipousuario", nullable = false)
     private int tipousuario_idtipousuario;
     
     
-    @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "usuario_idusuario")
-    private List<EventoCastillo> usuarioEventosCastillos = new ArrayList();
+    @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "usuariosAsignados")
+    private List<Evento> eventos = new ArrayList<>();
     
     
     
