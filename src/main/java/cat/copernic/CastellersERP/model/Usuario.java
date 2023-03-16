@@ -82,10 +82,6 @@ public class Usuario implements Serializable {
     @Max(value = 3)
     private int tipousuario_idtipousuario;
     
-    
-    
-    
-    
     @OneToMany
     @JoinColumn(name ="idusuario")
     private List<TipoUsuario> tipoUsuario;
