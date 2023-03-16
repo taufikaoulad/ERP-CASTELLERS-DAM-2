@@ -31,7 +31,7 @@ public class ControladorListarApunte {
     @Autowired
     private ApunteService apunteService;
     
-    @GetMapping("/")
+    @GetMapping("/gestionEconomica")
     public String inicio(Model model/*, @AuthenticationPrincipal User username*/){ 
         
         model.addAttribute("apuntes", apunteService.listarApuntes());
