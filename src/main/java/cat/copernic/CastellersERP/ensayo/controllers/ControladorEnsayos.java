@@ -80,35 +80,86 @@ public class ControladorEnsayos {
 
     @GetMapping("/detalleEnsayo/{idevento}")
     public String detalleEnsayo(Model model, Ensayo ensayo) {
+        
+        //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
+        ensayo = ensayoService.buscarEnsayo(ensayo);
 
-        model.addAttribute("ensayo", ensayoService.buscarEnsayo(ensayo));
+        model.addAttribute("ensayo", ensayo);
 
-        model.addAttribute("usuarios", usuarioService.llistarUsuarios());
+        List<Usuario> usuarios = usuarioService.llistarUsuarios();
 
-        model.addAttribute("usuarioAsignados", ensayo.getUsuariosAsignados());
-        return "ensayo/DetalleEnsayo";
-    }
+        List<Usuario> usuariosAsignados = ensayo.getUsuariosAsignados();
 
-    //MIRAR MÉTODO
-    @PostMapping("/seleccionarUsuarios/{idevento}")
-    public String seleccionarUsuarios(@RequestParam(value = "seleccionados", required = false)List<Integer> seleccionados, Ensayo ensayo/*, Model model*/) {
-        List<Usuario> asistentes = new ArrayList<Usuario>();
-
-        for (Integer seleccionado : seleccionados) {
-            Usuario usuario = UsuarioDAO.findById(seleccionado).orElse(null);
-
-            if (usuario != null) {
+        for (int i = 0; i < usuarios.size(); i++) {
+            Usuario usuario = usuarios.get(i);
+            
+            for (int j = 0; j < usuariosAsignados.size(); j++) {
+                Usuario usuarioAsignado = usuariosAsignados.get(j);
                 
-                asistentes.add(usuario);
+                if (usuario.equals(usuarioAsignado)) {
+                    usuarios.remove(usuario);
+                    i--; // Disminuir el índice ya que el tamaño de la lista ha disminuido
+                    break; // Salir del bucle interior si se encuentra una coincidencia
+                }
             }
         }
 
-        ensayo.setUsuariosAsignados(asistentes);
-        /*
-        model.addAttribute("ensayo", ensayoService.buscarEnsayo(ensayo));
-        model.addAttribute("usuarios", usuarioService.llistarUsuarios());
-        model.addAttribute("usuarioAsignados", ensayo.getUsuariosAsignados());
-*/
-        return "redirect:/detalleEnsayo/{idevento}";
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("usuariosAsignados", usuariosAsignados);
+
+        return "ensayo/DetalleEnsayo";
     }
+
+    @PostMapping("/anadir-usuarios")
+    public String anadirUsuarios(@RequestParam List<Integer> usuariosId, Ensayo ensayo, Model model) {
+        
+        //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
+        ensayo = ensayoService.buscarEnsayo(ensayo);
+
+        List<Usuario> asignarUsuarios = usuarioService.llistarUsuarios();
+
+        for (Integer usuarioId : usuariosId) {
+
+            for (Usuario asignarUsuario : asignarUsuarios) {
+
+                if (usuarioId.equals(asignarUsuario.getIdusuario())) {
+                    ensayo.getUsuariosAsignados().add(asignarUsuario);
+                }
+            }
+        }
+
+        ensayoService.añadirEnsayo(ensayo);
+
+        return detalleEnsayo(model, ensayo);
+    }
+
+    @PostMapping("/eliminar-asistentes")
+    public String eliminarAsistentes(@RequestParam List<Integer> usuariosId, Ensayo ensayo, Model model) {
+        
+        //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
+        ensayo = ensayoService.buscarEnsayo(ensayo);
+
+        List<Usuario> usuariosAsignados = ensayo.getUsuariosAsignados();
+        
+        for (int i = 0; i < usuariosId.size(); i++) {
+            Integer usuarioId = usuariosId.get(i);
+            
+            for (int j = 0; j < usuariosAsignados.size(); j++) {
+                Usuario eliminarUsuario = usuariosAsignados.get(j);
+                
+                if (usuarioId.equals(eliminarUsuario.getIdusuario())) {
+                    usuariosAsignados.remove(j);
+                    j--; // Disminuir el índice ya que el tamaño de la lista ha disminuido
+                    break; // Salir del bucle interior si se encuentra una coincidencia
+                }
+            }
+        }
+        
+        ensayo.setUsuariosAsignados(usuariosAsignados); // Actualizar la lista de usuarios asignados en el ensayo
+
+        ensayoService.añadirEnsayo(ensayo);
+
+        return detalleEnsayo(model, ensayo);
+    }
+
 }
