@@ -32,13 +32,13 @@ public class UsuarioService implements UsuarioServiceInterface, UserDetailsServi
 
     /*Atribut que defineix un UsuarioDAO. Mitjançant aquest atribut el control ja no 
      *accedirà directament a la capa de dades, si no que accedirà mitjançant la capa de servei.
-    */
+     */
     @Autowired
     private UsuarioDAO usuarioDAO;
-    
+
     /*LListar gossos de la taula gos de la BBDD veterinari*/
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public List<Usuario> llistarUsuarios() {
         return (List<Usuario>) usuarioDAO.findAll();
     }
@@ -50,16 +50,16 @@ public class UsuarioService implements UsuarioServiceInterface, UserDetailsServi
         this.usuarioDAO.save(usuario);
     }
 
-     /*Eliminar el gos passat per paràmetre de la taula gos de la BBDD veterinari*/
+    /*Eliminar el gos passat per paràmetre de la taula gos de la BBDD veterinari*/
     @Override
-    @Transactional 
+    @Transactional
     public void eliminarUsuario(Usuario usuario) {
-       this.usuarioDAO.delete(usuario);
+        this.usuarioDAO.delete(usuario);
     }
 
     /*Cercar el gos passat per paràmetre en la taula gos de la BBDD veterinari*/
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public Usuario cercarUsuario(Usuario usuario) {
         return this.usuarioDAO.findById(usuario.getIdusuario()).orElse(null);
     }
