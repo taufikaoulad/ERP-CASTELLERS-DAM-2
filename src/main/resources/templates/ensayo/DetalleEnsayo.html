@@ -10,71 +10,123 @@
 
             <h1>Detalle Ensayo</h1>
 
-            <table border="1">
-                <tr>
-                    <th>Nombre Ensayo</th>
-                    <th>Fecha</th>
-                    <th>Ubicación</th>
-                    <th>Duración</th>
-                </tr>
-                <tr th:each="ensayo : ${ensayos}">
-                    <td th:text="${ensayo.nombreEvento}"></td>
-                    <td th:text="${ensayo.fechaEvento}"></td>
-                    <td th:text="${ensayo.ubicacionEvento}"></td>
-                    <td th:text="${ensayo.duracion}"></td>
-                </tr>
-            </table>
-            
-            <h3>Castillos Asignados</h3>
-            <table border="1">
-                <tr>
-                    <th>Castillos Asignados</th>
-                </tr>
-                <tr th:each="castillo : ${castillosAsignados}">
-                    <td th:text="${castillo.nombre}"></td>
-                </tr>
-            </table>
-            
-            <h3>Pasar Lista</h3>
-            <h4>Lista Asistentes</h4>
-            <table border="1">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Altura</th>
-                    <th>Peso</th>
-                    <th>Edat</th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </table>
-            
-            <button>Actualizar Lista</button>
-            
-            <h4>Lista Usuarios</h4>
-            <table border="1">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Altura</th>
-                    <th>Peso</th>
-                    <th>Edat</th>
-                    <th>SI/NO</th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </table>
-            
-             <a href="/listarEnsayos"><button>VOLVER</button></a>
-            
-        </div>
+            <p>
+            <form th:object="${ensayo}">
 
-    </body>
+                <!--Thymeleaf indica que una varaible fa refèrencia a un atribut d'una classe de l'aplicació, utilitzant
+                    l'element precedint el nom th:field. El valor que li assignarem a aquest element serà el nom de
+                    l'atribut de la classe al que fa referència, per exemple, *{idgos}, fa refèrencia a l'atribut idgos de 
+                    la classe gos. Fixeu-vos que a diferència de les variables, quan es tracta d'un atribut, les claus de
+                    l'atribut van precedides de *, en lloc de $.-->
+
+                <!-- Camp ocult on guardem el valor de l'atribut idgos de la classe gos per enviar-lo juntament amb les altres dades.-->                 
+                <input type="hidden" name="idevento" th:field="*{idevento}"/>
+
+                <p>
+                    <label for="nombreEvento">Nombre:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
+                    <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut nom de l'objecte
+                        gos assignat a th:objecte-->
+                    <input type="text" name="nombreEvento" th:field="*{nombreEvento}"/>
+
+                </p>
+
+                <p>
+                    <label for="fechaEvento">Fecha:</label> <!--Etiqueta per l'edat del gos-->            
+                    <input type="text" name="fechaEvento" th:field="*{fechaEvento}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                </p>
+
+                <p>
+                    <label for="ubicacionEvento">Ubicacion</label> <!--Etiqueta pel sexe del gos-->            
+                    <input type="text" name="ubicacionEvento" th:field="*{ubicacionEvento}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                </p>
+
+                <p>
+                    <label for="duracion">Duracion:</label> <!--Etiqueta pel sexe del gos-->            
+                    <input type="text" name="duracion" th:field="*{duracion}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                </p>    
+            </form>
+        </p>
+
+        <h3>Castillos Asignados</h3>
+
+        <table border="1">
+            <tr>
+                <th>Castillos Asignados</th>
+            </tr>
+            <tr th:each="castillo : ${castillosAsignados}">
+                <td th:text="${castillo.nombre}"></td>
+            </tr>
+        </table>
+
+        <h3>Pasar Lista</h3>
+        <h4>Lista Asistentes</h4>
+        <form method="post">
+            <div th:if="${usuarioAsignados!=null && !usuarioAsignados.empty}">
+
+                <table border="1">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Mail</th>
+                        <th>Telefono</th>
+                        <th>SI/NO</th>
+                    </tr>
+                    <tr th:each="usuario : ${usuarioAsignados}">
+                        <th th:text="${usuario.nombre}"></th>
+                        <th th:text="${usuario.mail}"></th>
+                        <th th:text="${usuario.telefono}"></th>
+                        <th><input type="checkbox" name="remove" th:value="${usuario.idevento}" /></th>
+                    </tr>
+                </table>
+
+            </div>
+            <div th:if="${usuarioAsignados==null && usuarioAsignados.empty}">
+
+                <p>No hay usuarios asignados!</p>
+
+            </div>
+
+
+            <button type="button" th:onclick="@{/seleccionarUsuarios}">AÑADIR</button>
+            <button>Actualizar Lista</button>
+        </form>
+
+        <form method="post" th:action="@{/seleccionarUsuarios}">
+            <h4>Lista Usuarios</h4>
+
+            <div th:if="${usuarios!=null && !usuarios.empty}">
+
+                <table border="1">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Mail</th>
+                        <th>Telefono</th>
+                        <th>SI/NO</th>
+                    </tr>
+                    <tr th:each="usuario : ${usuarios}">
+                        <th th:text="${usuario.nombre}"></th>
+                        <th th:text="${usuario.mail}"></th>
+                        <th th:text="${usuario.telefono}"></th>
+                        <td>
+                            <input type="checkbox" th:value="${usuario.idusuario}"
+                                   th:name="seleccionados">
+                        </td>
+
+                    </tr>
+                </table>
+
+            </div>
+            <div th:if="${usuarios==null && usuarios.empty}">
+
+                <p>No existen usuarios registrados!</p>
+
+            </div>
+            <input type="submit" value="Submit">
+            <!--<input type="hidden" th:field="*{usuarioAsignados}" th:value="${usuarioAsignados}"/>-->
+        </form>
+
+        <a href="/ensayos"><button>VOLVER</button></a>
+
+    </div>
+
+</body>
 </html>

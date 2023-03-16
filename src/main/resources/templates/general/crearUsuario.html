@@ -63,8 +63,8 @@
                     
                     <p>
                         <label for="tipousuario_idtipousuario">Id tipo de usuario [1 = Casteller][2 = CapDeColla][3 = Tresorer]:</label>
-                        <input type="text" name="tipousuario_idtipousuario" th:field="*{tipousuario_idtipousuario}"><br><br>
-                        <span th:if="${#fields.hasErrors('tipousuario_idtipousuario')}" th:errors="*{tipousuario_idtipousuario}"/>
+                        <input type="text" name="tipousuario_idtipousuario" th:field="*{tipousuario_idtipousuario.idtipousuario}"><br><br>
+                        <span th:if="${#fields.hasErrors('tipousuario_idtipousuario.idtipousuario')}" th:errors="*{tipousuario_idtipousuario}"/>
                     </p>
 
                     <input type="submit" name="enviar" value="Enviar Dades"/> 

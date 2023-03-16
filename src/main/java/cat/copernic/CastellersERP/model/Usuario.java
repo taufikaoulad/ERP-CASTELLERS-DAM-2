@@ -4,17 +4,10 @@
  */
 package cat.copernic.CastellersERP.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -24,6 +17,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 
@@ -76,14 +70,16 @@ public class Usuario implements Serializable {
     @Size(min = 1)
     private String posicio;
     
+    @ManyToOne
+    @JoinColumn(name = "tipousuario_idtipousuario")
+    private TipoUsuario tipousuario_idtipousuario;
     
-    @NotNull
+    @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "usuariosAsignados")
+    private List<Evento> eventos = new ArrayList<>();
+    
+    /*@NotNull
     @Min(value = 1)
-    @Max(value = 3)
-    private int tipousuario_idtipousuario;
-    
-    @OneToMany
-    @JoinColumn(name ="idusuario")
-    private List<TipoUsuario> tipoUsuario;
+    @Max(value = 3)*/
 }
 
+    

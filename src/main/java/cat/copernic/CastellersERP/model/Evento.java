@@ -4,18 +4,11 @@
  */
 package cat.copernic.CastellersERP.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.DiscriminatorType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 
@@ -27,19 +20,34 @@ import lombok.Data;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype", discriminatorType = DiscriminatorType.STRING)
-public abstract class Evento implements Serializable{
+public abstract class Evento implements Serializable {
+
     @Id
-    @GeneratedValue (strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idevento;
-    
+
     @Column(name = "nombre")
     private String nombreEvento;
-    
+
     @Column(name = "fecha")
     private Date fechaEvento;
-    
+
     @Column(name = "ubicacion")
     private String ubicacionEvento;
     
-    //private List<Castillo> listaCastillosAsignadosEvento;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+        name = "usuarioevento",
+        joinColumns = @JoinColumn(name = "evento_idevento"),
+        inverseJoinColumns = @JoinColumn(name = "usuario_idusuario")
+    )
+    private List<Usuario> usuariosAsignados = new ArrayList();
+    
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+        name = "eventocastillo",
+        joinColumns = @JoinColumn(name = "evento_idevento"),
+        inverseJoinColumns = @JoinColumn(name = "castillo_idcastillo")
+    )
+    private List<Castillo> castillosAsignados = new ArrayList();
 }

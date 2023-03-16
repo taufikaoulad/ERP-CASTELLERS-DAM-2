@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Crear Ensayo</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+
+        <div>
+            <h1>Crear Ensayo</h1>
+            <p>
+            <form th:action="@{/guardarEnsayo}" method="post" th:object="${ensayo}">
+
+                <!--Thymeleaf indica que una varaible fa refèrencia a un atribut d'una classe de l'aplicació, utilitzant
+                    l'element precedint el nom th:field. El valor que li assignarem a aquest element serà el nom de
+                    l'atribut de la classe al que fa referència, per exemple, *{idgos}, fa refèrencia a l'atribut idgos de 
+                    la classe gos. Fixeu-vos que a diferència de les variables, quan es tracta d'un atribut, les claus de
+                    l'atribut van precedides de *, en lloc de $.-->
+
+                <!-- Camp ocult on guardem el valor de l'atribut idgos de la classe gos per enviar-lo juntament amb les altres dades.-->                 
+                <input type="hidden" name="idevento" th:field="*{idevento}"/>
+
+                <p>
+                    <label for="nombreEvento">Nombre:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
+                    <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut nom de l'objecte
+                        gos assignat a th:objecte-->
+                    <input type="text" name="nombreEvento" th:field="*{nombreEvento}"/>
+
+                </p>
+
+                <p>
+                    <label for="fechaEvento">Fecha:</label> <!--Etiqueta per l'edat del gos-->            
+                    <input type="text" name="fechaEvento" th:field="*{fechaEvento}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                </p>
+
+                <p>
+                    <label for="ubicacionEvento">Ubicacion</label> <!--Etiqueta pel sexe del gos-->            
+                    <input type="text" name="ubicacionEvento" th:field="*{ubicacionEvento}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                </p>
+
+                <p>
+                    <label for="duracion">Duracion:</label> <!--Etiqueta pel sexe del gos-->            
+                    <input type="text" name="duracion" th:field="*{duracion}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                </p>
+
+                <!-- Botó per enviar les dades-->
+                <input type="submit" name="enviar" value="Enviar Datos"/>        
+            </form>
+            </p>
+        </div>
+
+    </body>
+</html>
