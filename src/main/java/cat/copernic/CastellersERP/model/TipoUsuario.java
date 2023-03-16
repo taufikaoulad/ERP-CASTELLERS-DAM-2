@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +25,17 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "tipousuario")
-public class TipoUsuario implements Serializable{
-   @Id //Indica al sistema que l'atribut idgos és la clau primària de la BBDD
-   @GeneratedValue(strategy=GenerationType.IDENTITY) //Indica al sistema com generem l'id, en el nostre cas autoincremental, per això fem servir IDENTITY
-   int idtipousuario;
-   
-   String nombretipousuario;
-   
-   @OneToMany(mappedBy = "rol")
-   private List<ModuloTipoUsuario> tipoUsuarios = new ArrayList<>();
+public class TipoUsuario implements Serializable {
+
+    @Id //Indica al sistema que l'atribut idgos és la clau primària de la BBDD
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Indica al sistema com generem l'id, en el nostre cas autoincremental, per això fem servir IDENTITY
+    private int idtipousuario;
+
+    @NotEmpty
+    private String nombretipousuario;
+
+    
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "tipousuario_idtipousuario")
+    private List<Usuario> usuarios = new ArrayList<>();
+
 }

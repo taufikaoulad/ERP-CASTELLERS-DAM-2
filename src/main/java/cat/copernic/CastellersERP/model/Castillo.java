@@ -4,13 +4,11 @@
  */
 package cat.copernic.CastellersERP.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -40,5 +38,7 @@ public class Castillo implements Serializable{
     private boolean aixecat;
     @Column(name="agulla")
     private boolean agulla;
-
+    
+    @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "castillosAsignados")
+    private List<Evento> eventos = new ArrayList<>();
 }

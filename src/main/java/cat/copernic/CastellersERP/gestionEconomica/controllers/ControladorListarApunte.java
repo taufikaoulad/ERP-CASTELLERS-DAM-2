@@ -6,9 +6,13 @@ package cat.copernic.CastellersERP.gestionEconomica.controllers;
 
 import cat.copernic.CastellersERP.gestionEconomica.serveis.ApunteService;
 import cat.copernic.CastellersERP.model.Apunte;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.core.annotation.AuthenticationPrincipal;
+//import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -27,8 +31,8 @@ public class ControladorListarApunte {
     @Autowired
     private ApunteService apunteService;
     
-    @GetMapping("/gestionEconomica")
-    public String inicio(Model model){ 
+    @GetMapping("/")
+    public String inicio(Model model/*, @AuthenticationPrincipal User username*/){ 
         
         model.addAttribute("apuntes", apunteService.listarApuntes());
         
@@ -42,7 +46,11 @@ public class ControladorListarApunte {
     }
     
     @PostMapping("/guardarApunte")
-    public String guardarApunte(Apunte apunte) {
+    public String guardarApunte(@Valid Apunte apunte, Errors errors) {
+        
+        if (errors.hasErrors()) {
+            return "gestionEconomica/AnadirApunte";
+        }
         
         apunteService.afegirApuntes(apunte);
         

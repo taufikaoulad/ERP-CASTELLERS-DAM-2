@@ -31,6 +31,7 @@
                   <th >Telefono</th>
                   <th >Edat</th>
                   <th >Posicion</th>
+                  <th >Tipo De Usuario</th>
                   <th >Acciones</th>
                 </tr>
               </thead>
@@ -45,6 +46,7 @@
                   <td th:text="${usuario.telefono}"></td>
                   <td th:text="${usuario.edat}"></td>
                   <td th:text="${usuario.posicio}"></td>
+                  <td th:text="${usuario.tipousuario_idtipousuario.nombretipousuario}"></td>
 
                   <td>
                       <a th:href="@{/editarUsuario/}+${usuario.idusuario}">
