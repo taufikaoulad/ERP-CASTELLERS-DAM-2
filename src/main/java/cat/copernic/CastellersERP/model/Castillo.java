@@ -4,12 +4,9 @@
  */
 package cat.copernic.CastellersERP.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import lombok.Data;
 
@@ -26,16 +23,27 @@ public class Castillo implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY) //Indica al sistema com generem l'id, en el nostre cas autoincremental, per això fem servir IDENTITY
     @Column(name="idcastillo")
     private int idCastillo; 
+    
+    @NotEmpty
     @Column(name="nombre")
     private String nombre;
+    
+    @Min(value = 0)
     @Column(name="pisos")
     private int pisos;
+    
+    @Min(value = 0)
     @Column(name="personaspisos")
     private int personasPisos;
+    
+    @Min(value = 0)
     @Column(name="ncpina")
     private int ncPina;
+    
+    @Min(value = 0)
     @Column(name="nctronc")
     private int ncTronc;
+    
     @Column(name="aixecat")
     private boolean aixecat;
     @Column(name="agulla")

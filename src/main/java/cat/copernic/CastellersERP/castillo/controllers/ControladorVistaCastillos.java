@@ -4,13 +4,15 @@
  */
 package cat.copernic.CastellersERP.castillo.controllers;
 
-import cat.copernic.CastellersERP.DAO.CastilloDAO;
 import cat.copernic.CastellersERP.model.Castillo;
 import cat.copernic.CastellersERP.castillo.serveis.CastilloService;
-import java.util.ArrayList;
+import cat.copernic.CastellersERP.model.Salida;
+import cat.copernic.CastellersERP.salida.serveis.SalidaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -23,6 +25,9 @@ public class ControladorVistaCastillos {
 
     @Autowired    
     private CastilloService castilloService;
+    
+    @Autowired    
+    private SalidaService salidaService;
 
     @GetMapping("/vistaCastillos")
     public String inici(Model model) {
@@ -39,13 +44,17 @@ public class ControladorVistaCastillos {
     }
     
     @PostMapping("/guardarCastillo")
-    public String guardarCastillo(Castillo castillo) {
+    public String guardarCastillo(@Valid Castillo castillo, Errors errors) {
 
+        if(errors.hasErrors()){ //Si s'han produït errors...
+             return "castillo/modificarCastillo"; //Mostrem la pàgina del formulari
+        }
+        
         castilloService.agregarCastillo(castillo);
 
         return "redirect:/vistaCastillos";
     }
-    
+      
     @GetMapping("/editarCastillo/{idCastillo}")
     public String editar(Castillo castillo, Model model) {
 

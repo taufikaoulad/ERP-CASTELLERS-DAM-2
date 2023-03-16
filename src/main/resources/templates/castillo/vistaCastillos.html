@@ -31,7 +31,7 @@
                         <th th:text = "nctronc"></th>
                         <th th:text = "aixecat"></th>
                         <th th:text = "agulla"></th>
-                        <th th:text = "acciones"></th>
+                        <th th:text = "acciones" colspan="100"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,12 +55,12 @@
                                 <a th:href="@{/eliminarCastillo/}+${castillo.idCastillo}" th:text="Eliminar"/>
                             </div>
                         </td>
-                        <td>
+                        <td th:if="${salida!=null}">
                             <!-- <input type="button" disabled="disabled">Agregar castillo salida</input> -->
-                            <button disabled="disabled">Agregar castillo salida</button>
+                            <button>Agregar castillo salida</button>
                         </td>
-                        <td>
-                            <button disabled="disabled">Agregar castillo ensayo</button>
+                        <td th:if="${ensayo!=null}">
+                            <button>Agregar castillo ensayo</button>
                         </td>
                     </tr>
                 </tbody>
