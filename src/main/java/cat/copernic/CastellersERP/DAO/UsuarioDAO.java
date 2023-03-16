@@ -13,8 +13,8 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Taufik
  */
-public interface UsuarioDAO extends JpaRepository<Usuario, Integer>{
+public interface UsuarioDAO extends CrudRepository<Usuario, Integer>{
     
-    Usuario findByUsername(String username);
+    Usuario findByNombre(String nombre);
     
 }

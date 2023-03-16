@@ -34,6 +34,4 @@ public class TipoUsuario implements Serializable{
    @NotEmpty
    private String nombretipousuario;
    
-   @OneToMany(mappedBy = "rol")
-   private List<ModuloTipoUsuario> tipoUsuarios = new ArrayList<>();
 }

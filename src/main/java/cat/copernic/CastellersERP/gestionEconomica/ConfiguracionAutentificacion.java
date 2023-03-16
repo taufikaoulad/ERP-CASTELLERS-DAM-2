@@ -36,7 +36,13 @@ public class ConfiguracionAutentificacion {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         
         return http.authorizeHttpRequests((requests) -> 
-                requests.requestMatchers(""))
+                requests.requestMatchers("gestionEconomica/ListarApuntes/**", "/enviar/**", "/eliminar" , "guardarApunte/**").hasAuthority("Tresorer")
+                .anyRequest().authenticated()
+        )
+        .formLogin((form) -> form
+        .loginPage("/login")
+        .permitAll()
+        ).build();
         
     }
     
