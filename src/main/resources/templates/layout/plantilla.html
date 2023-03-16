@@ -1,18 +1,33 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <title>Plantilla</title>
+    
+    
+    <head th:fragment="head"> <!--fragment per afegir els links als documents html de la nostra aplicació-->
+        <title>CastellersERP</title>
         <meta charset="UTF-8"/>
+
+        <!--Enllaç als estils de Bootstrap-->
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <!--Enllaç als estils de Font Awesome-->
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+        <!--Llibreries jquery, popper i Java Script de Bootstrap pels elements dinàmics que podem utilitzar amb Bootstrap-->
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
+
     <body>
-        <!-- Definim la capçalera que reutilitzarem en les altress pàgines que s'identificarà
-             com un fragment de nom "capcalera". El contingut és el de la variable plantilla.capcalera.titol
-             definida en el fitxer messages.properties. Aquest contingut el visualitzem
-             mitjançant la notació th:text="#{plantilla.capcalera.titol} que trobem dins
-             l'etiqueta de l'element
-        -->
-        <header th:fragment="capcalera">
-            <h1 th:text="#{plantilla.capcalera.titol}"/>
+        <header th:fragment = "menu">
+            <nav>
+                <ul>
+                    <li><a href="/menuPrincipal" th:text="${Menu}"></a></li>
+                    <li><a href="/listarEnsayos" th:text="${Ensayo}"></a></li>
+                    <li><a href="/paginalistarSalidas" th:text="${Salidas}"></a></li>
+                    <li><a href="/vistaCastillos" th:text="${Castillos}"></a></li>
+                    <li><a href="/gestionEconomica" th:text="${Administracion}"></a></li>
+                    <li><a href="/paginalistarUsuarios"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
+                </ul>
+            </nav>
         </header>
 
         <!-- Definim el peu que reutilitzarem en les altres pàgines que s'identificarà

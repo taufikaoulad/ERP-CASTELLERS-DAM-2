@@ -32,7 +32,7 @@ public class ControladorListarApunte {
     private ApunteService apunteService;
     
     @GetMapping("/")
-    public String inicio(Model model, @AuthenticationPrincipal User username){ 
+    public String inicio(Model model/*, @AuthenticationPrincipal User username*/){ 
         
         model.addAttribute("apuntes", apunteService.listarApuntes());
         
