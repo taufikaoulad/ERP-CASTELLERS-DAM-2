@@ -57,7 +57,6 @@ public class ControladorListarSalida {
         model.addAttribute("Nparticipantes", "Nºparticipantes");
         model.addAttribute("CrearSalida", "Crear Salida");
         
-        
         return "salida/listarSalidas"; //Retorna la pàgina iniciDinamic
     }
     
@@ -93,6 +92,16 @@ public class ControladorListarSalida {
         model.addAttribute("salida", salidaService.cercarSalida(salida));
 
         return "salida/anadirAsistencia"; //Retorna la pàgina amb el formulari de les dades del gos
+    }
+    
+    @GetMapping("/pasarIDaCastillo/{idevento}")
+    public String pasarIDaCastillo(Salida salida, Model model) {
+
+        /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
+         *el mètode cercarGos de la capa de servei.*/
+        model.addAttribute("salida", salidaService.cercarSalida(salida));
+
+        return "castillo/vistaCastillos"; //Retorna la pàgina amb el formulari de les dades del gos
     }
     
     @GetMapping("/eliminarSalida/{idevento}") 

@@ -8,6 +8,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -48,5 +50,7 @@ public class Castillo implements Serializable{
     private boolean aixecat;
     @Column(name="agulla")
     private boolean agulla;
-
+    
+    @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "castillosAsignados")
+    private List<Evento> eventos = new ArrayList<>();
 }

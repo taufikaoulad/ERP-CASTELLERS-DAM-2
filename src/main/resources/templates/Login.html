@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+
+        <h1>Login</h1>
+
+        <div>
+            <img th:src="@{'/LogoERPCastellers.png'}" width='150' height='150'/><br>
+
+        </div>
+
+        <form method ="POST" th:action = "@{/login}">
+            <p>
+                <label for="nombre">Usuario:</label>
+                <input type="text" name ="nombre" id="nombre"/>
+            </p>
+
+            <p>
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" name = "contrasena" id="contrasena"><br>
+            </p>
+
+            <input type="submit" id="login">
+
+        </form>
+        
+        <!--<a href="/menuPrincipal">
+            <button th:text="${login}">Login</button>
+        </a>-->
+    </body>
+</html>
