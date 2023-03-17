@@ -52,10 +52,10 @@
         </dependency>
         
         <!--Dependència Spring Security -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+        </dependency>-->
         
         <!--Dependència per validation jakarta-->       
         <dependency>
