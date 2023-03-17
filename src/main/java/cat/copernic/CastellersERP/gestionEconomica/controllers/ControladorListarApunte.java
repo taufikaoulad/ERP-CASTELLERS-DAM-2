@@ -8,6 +8,7 @@ import cat.copernic.CastellersERP.gestionEconomica.serveis.ApunteService;
 import cat.copernic.CastellersERP.model.Apunte;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 //import org.springframework.security.core.annotation.AuthenticationPrincipal;
 //import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class ControladorListarApunte {
     @Autowired
     private ApunteService apunteService;
     
-    @GetMapping("/")
+    @GetMapping("/gestionEconomica")
     public String inicio(Model model/*, @AuthenticationPrincipal User username*/){ 
         
         model.addAttribute("apuntes", apunteService.listarApuntes());
