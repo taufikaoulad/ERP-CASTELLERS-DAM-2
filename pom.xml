@@ -52,10 +52,10 @@
         </dependency>
         
         <!--Dependència Spring Security -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>-->
+        </dependency>
         
         <!--Dependència per validation jakarta-->       
         <dependency>
@@ -84,16 +84,6 @@
             <artifactId>webjars-locator</artifactId>
             <version>0.46</version>
         </dependency>
-  
-        
-        <!--Dependència de seguretat per Thymeleaf
-        <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
-            <version>3.1.0.RELEASE</version>
-        </dependency>
-                
-                        -->
         
         <dependency>
             <groupId>org.springframework.boot</groupId>
