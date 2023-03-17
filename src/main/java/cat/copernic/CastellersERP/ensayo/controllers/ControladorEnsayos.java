@@ -7,6 +7,7 @@ package cat.copernic.CastellersERP.ensayo.controllers;
 import cat.copernic.CastellersERP.DAO.UsuarioDAO;
 import cat.copernic.CastellersERP.ensayo.services.EnsayoService;
 import cat.copernic.CastellersERP.general.serveis.UsuarioService;
+import cat.copernic.CastellersERP.model.Castillo;
 import cat.copernic.CastellersERP.model.Ensayo;
 import cat.copernic.CastellersERP.model.Usuario;
 import lombok.extern.slf4j.Slf4j;
@@ -80,7 +81,7 @@ public class ControladorEnsayos {
 
     @GetMapping("/detalleEnsayo/{idevento}")
     public String detalleEnsayo(Model model, Ensayo ensayo) {
-        
+
         //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
         ensayo = ensayoService.buscarEnsayo(ensayo);
 
@@ -90,12 +91,14 @@ public class ControladorEnsayos {
 
         List<Usuario> usuariosAsignados = ensayo.getUsuariosAsignados();
 
+        List<Castillo> castillosAsignados = ensayo.getCastillosAsignados();
+
         for (int i = 0; i < usuarios.size(); i++) {
             Usuario usuario = usuarios.get(i);
-            
+
             for (int j = 0; j < usuariosAsignados.size(); j++) {
                 Usuario usuarioAsignado = usuariosAsignados.get(j);
-                
+
                 if (usuario.equals(usuarioAsignado)) {
                     usuarios.remove(usuario);
                     i--; // Disminuir el índice ya que el tamaño de la lista ha disminuido
@@ -106,13 +109,22 @@ public class ControladorEnsayos {
 
         model.addAttribute("usuarios", usuarios);
         model.addAttribute("usuariosAsignados", usuariosAsignados);
+        model.addAttribute("castillosAsignados", castillosAsignados);
 
         return "ensayo/DetalleEnsayo";
+    }
+    
+    @GetMapping("/consultar-castillos-ensayo/{idevento}")
+    public String consultarCastillosEnsayo(Ensayo ensayo, Model model) {
+
+        //model.addAttribute("ensayo", ensayoService.buscarEnsayo(ensayo));
+
+        return "castillo/vistaCastillos";
     }
 
     @PostMapping("/anadir-usuarios")
     public String anadirUsuarios(@RequestParam List<Integer> usuariosId, Ensayo ensayo, Model model) {
-        
+
         //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
         ensayo = ensayoService.buscarEnsayo(ensayo);
 
@@ -135,18 +147,18 @@ public class ControladorEnsayos {
 
     @PostMapping("/eliminar-asistentes")
     public String eliminarAsistentes(@RequestParam List<Integer> usuariosId, Ensayo ensayo, Model model) {
-        
+
         //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
         ensayo = ensayoService.buscarEnsayo(ensayo);
 
         List<Usuario> usuariosAsignados = ensayo.getUsuariosAsignados();
-        
+
         for (int i = 0; i < usuariosId.size(); i++) {
             Integer usuarioId = usuariosId.get(i);
-            
+
             for (int j = 0; j < usuariosAsignados.size(); j++) {
                 Usuario eliminarUsuario = usuariosAsignados.get(j);
-                
+
                 if (usuarioId.equals(eliminarUsuario.getIdusuario())) {
                     usuariosAsignados.remove(j);
                     j--; // Disminuir el índice ya que el tamaño de la lista ha disminuido
@@ -154,8 +166,32 @@ public class ControladorEnsayos {
                 }
             }
         }
-        
+
         ensayo.setUsuariosAsignados(usuariosAsignados); // Actualizar la lista de usuarios asignados en el ensayo
+
+        ensayoService.añadirEnsayo(ensayo);
+
+        return detalleEnsayo(model, ensayo);
+    }
+
+    @PostMapping("/eliminar-castillos-asignados")
+    public String eliminarCastillosAsignados(@RequestParam List<Integer> castillosId, Ensayo ensayo, Model model) {
+        //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
+        ensayo = ensayoService.buscarEnsayo(ensayo);
+
+        List<Castillo> castillosAsignados = ensayo.getCastillosAsignados();
+
+        for (int i = 0; i < castillosId.size(); i++) {
+            Integer castilloId = castillosId.get(i);
+            
+            for (int j = 0; j < castillosAsignados.size(); j++) {
+                Castillo castilloAsignado = castillosAsignados.get(j);
+                
+                if (castilloId.equals(castilloAsignado.getIdCastillo())) {
+                    ensayo.getCastillosAsignados().remove(castilloAsignado);
+                }
+            }
+        }
 
         ensayoService.añadirEnsayo(ensayo);
 

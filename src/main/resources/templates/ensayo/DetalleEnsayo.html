@@ -46,26 +46,37 @@
                 </p>    
             </form>
         </p>
-
-        <h3>Castillos Asignados</h3>
-
-        <table border="1">
-            <tr>
-                <th>Castillos Asignados</th>
-            </tr>
-            <tr th:each="castillo : ${castillosAsignados}">
-                <td th:text="${castillo.nombre}"></td>
-            </tr>
-        </table>
-        <br>
-        <h3>PASAR LISTA</h3>
-        
-        <h4>LISTA ASISTENTES</h4>
-        
-        <form th:action="@{/eliminar-asistentes}" method="POST" th:object="${ensayo}">
+        <form th:action="@{/eliminar-castillos-asignados}" method="POST" th:object="${ensayo}">
             
             <input type="hidden" name="idevento" th:field="*{idevento}"/>
             
+            <h3>Castillos Asignados</h3>
+
+            <table border="1">
+                <tr>
+                    <th>Castillos Asignados</th>
+                    <th>SI/NO</th>
+                </tr>
+                <tr th:each="castillo : ${castillosAsignados}">
+                    <td th:text="${castillo.nombre}"></td>
+                    <td>
+                        <input type="checkbox" th:value="${castillo.idCastillo}" th:name="castillosId" />
+                    </td>
+                </tr>
+            </table>
+            
+        </form>
+        
+        <br>
+        
+        <h3>PASAR LISTA</h3>
+
+        <h4>LISTA ASISTENTES</h4>
+
+        <form th:action="@{/eliminar-asistentes}" method="POST" th:object="${ensayo}">
+
+            <input type="hidden" name="idevento" th:field="*{idevento}"/>
+
             <div th:if="${usuariosAsignados!=null && !usuariosAsignados.empty}">
 
                 <table border="1">
@@ -86,19 +97,19 @@
                 </table>
 
             </div>
-            
+
             <div th:if="${usuariosAsignados==null || usuariosAsignados.empty}">
 
                 <p>No hay usuarios asignados!</p>
 
             </div>
-            
+
             <input type="submit" value="Submit">
-            
+
         </form>
 
         <form th:action="@{/anadir-usuarios}" method="POST" th:object="${ensayo}">
-            
+
             <input type="hidden" name="idevento" th:field="*{idevento}"/>
 
             <h4>LISTA USUARIOS</h4>
@@ -123,15 +134,15 @@
                 </table>
 
             </div>
-            
+
             <div th:if="${usuarios==null && usuarios.empty}">
 
                 <p>No existen usuarios registrados!</p>
 
             </div>
-            
+
             <input type="submit" value="Submit">
-            
+
         </form>
 
         <a href="/ensayos"><button>VOLVER</button></a>

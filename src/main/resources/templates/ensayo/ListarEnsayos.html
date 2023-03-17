@@ -40,7 +40,7 @@
                     <td th:text="${ensayo.duracion}"></td>
                     <td>
                         <a th:href="@{/detalleEnsayo/}+${ensayo.idevento}" th:text="Detalle"></a>
-                        <a th:href="@{/vistaCastillos/}+${ensayo.idevento}" th:text="Castillos"></a>
+                        <a th:href="@{/consultar-castillos-ensayo/}+${ensayo.idevento}" th:text="Castillos"></a>
                         <a th:href="@{/editarEnsayo/}+${ensayo.idevento}" th:text="Editar"></a>
                         <a th:href="@{/eliminarEnsayo/}+${ensayo.idevento}" th:text="Eliminar"></a>
                     </td>
