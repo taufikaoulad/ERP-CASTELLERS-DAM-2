@@ -5,16 +5,8 @@
         <title>Usuarios</title>
     </head>
     <body>
-        <nav>
-            <ul>
-              <li><a href="/menuPrincipal" th:text="${Menu}"></a></li>
-              <li><a href="/listarEnsayos" th:text="${Ensayo}"></a></li>
-              <li><a href="/paginalistarSalidas" th:text="${Salidas}"></a></li>
-              <li><a href="/vistaCastillos" th:text="${Castillos}"></a></li>
-              <li><a href="/gestionEconomica" th:text="${Administracion}"></a></li>
-              <li><a href="/paginalistarUsuarios"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
-            </ul>
-        </nav>
+        
+        <header th:replace="~{layout/plantilla :: menu}" />
         
         <section>
             <h1>USUARIOS</h1>
@@ -31,6 +23,7 @@
                   <th >Telefono</th>
                   <th >Edat</th>
                   <th >Posicion</th>
+                  <th >Tipo De Usuario</th>
                   <th >Acciones</th>
                 </tr>
               </thead>
@@ -45,6 +38,7 @@
                   <td th:text="${usuario.telefono}"></td>
                   <td th:text="${usuario.edat}"></td>
                   <td th:text="${usuario.posicio}"></td>
+                  <td th:text="${usuario.tipousuario_idtipousuario.nombretipousuario}"></td>
 
                   <td>
                       <a th:href="@{/editarUsuario/}+${usuario.idusuario}">

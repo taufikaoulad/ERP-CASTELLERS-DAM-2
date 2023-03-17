@@ -9,8 +9,8 @@ import cat.copernic.CastellersERP.model.TipoUsuario;
 import cat.copernic.CastellersERP.model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;/*
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.beans.factory.annotation.Autowired;
+/*import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -63,8 +63,8 @@ public class UsuarioService implements UsuarioServiceInterface/*, UserDetailsSer
     public Usuario cercarUsuario(Usuario usuario) {
         return this.usuarioDAO.findById(usuario.getIdusuario()).orElse(null);
     }
-    /*
-    @Override
+    
+    /*@Override
     @Transactional(readOnly=true)
     public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
         
@@ -81,7 +81,7 @@ public class UsuarioService implements UsuarioServiceInterface/*, UserDetailsSer
         }
         
         return new User(usuario.getNombre(), usuario.getContrasena(), rols);
-    }
-    */
+    }*/
+    
    
 }
