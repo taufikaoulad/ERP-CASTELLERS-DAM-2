@@ -128,7 +128,7 @@
                         <th th:text="${usuario.mail}"></th>
                         <th th:text="${usuario.telefono}"></th>
                         <td>
-                            <input type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosId"> 
+                            <input type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosId" th:field="*{checkbox}" th:id="checkbox"> 
                         </td>
                     </tr>
                 </table>
@@ -141,7 +141,7 @@
 
             </div>
 
-            <input type="submit" value="Añadir Asistente/s" th:disabled="${#lists.isEmpty(usuarios)}">
+            <input type="submit" value="Añadir Asistente/s" th:disabled="${#lists.isEmpty(usuarios)} || ${!checkbox}">
 
         </form>
 
