@@ -8,14 +8,12 @@ import cat.copernic.CastellersERP.general.serveis.UsuarioService;
 import cat.copernic.CastellersERP.model.Usuario;
 import cat.copernic.CastellersERP.utils.EncriptadorContrasenya;
 import jakarta.validation.Valid;
-import org.aspectj.weaver.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import static org.thymeleaf.spring6.util.FieldUtils.errors;
 
 /**
  *
