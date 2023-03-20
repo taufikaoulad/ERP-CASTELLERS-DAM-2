@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  *
@@ -117,13 +118,13 @@ public class ControladorEnsayos {
     @GetMapping("/consultar-castillos-ensayo/{idevento}")
     public String consultarCastillosEnsayo(Ensayo ensayo, Model model) {
 
-        //model.addAttribute("ensayo", ensayoService.buscarEnsayo(ensayo));
+        model.addAttribute("ensayo", ensayoService.buscarEnsayo(ensayo));
 
         return "castillo/vistaCastillos";
     }
 
     @PostMapping("/anadir-usuarios")
-    public String anadirUsuarios(@RequestParam List<Integer> usuariosId, Ensayo ensayo, Model model) {
+    public RedirectView anadirUsuarios(@RequestParam List<Integer> usuariosId, Ensayo ensayo, Model model) {
 
         //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
         ensayo = ensayoService.buscarEnsayo(ensayo);
@@ -142,11 +143,12 @@ public class ControladorEnsayos {
 
         ensayoService.añadirEnsayo(ensayo);
 
-        return detalleEnsayo(model, ensayo);
+        //return detalleEnsayo(model, ensayo);
+        return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
     }
 
     @PostMapping("/eliminar-asistentes")
-    public String eliminarAsistentes(@RequestParam List<Integer> usuariosId, Ensayo ensayo, Model model) {
+    public RedirectView eliminarAsistentes(@RequestParam List<Integer> usuariosId, Ensayo ensayo, Model model) {
 
         //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
         ensayo = ensayoService.buscarEnsayo(ensayo);
@@ -171,11 +173,12 @@ public class ControladorEnsayos {
 
         ensayoService.añadirEnsayo(ensayo);
 
-        return detalleEnsayo(model, ensayo);
+        //return detalleEnsayo(model, ensayo);
+        return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
     }
 
     @PostMapping("/eliminar-castillos-asignados")
-    public String eliminarCastillosAsignados(@RequestParam List<Integer> castillosId, Ensayo ensayo, Model model) {
+    public RedirectView eliminarCastillosAsignados(@RequestParam List<Integer> castillosId, Ensayo ensayo, Model model) {
         //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
         ensayo = ensayoService.buscarEnsayo(ensayo);
 
@@ -195,7 +198,8 @@ public class ControladorEnsayos {
 
         ensayoService.añadirEnsayo(ensayo);
 
-        return detalleEnsayo(model, ensayo);
+        //return detalleEnsayo(model, ensayo);
+        return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
     }
 
 }
