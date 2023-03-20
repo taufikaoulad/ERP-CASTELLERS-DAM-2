@@ -9,11 +9,14 @@ import cat.copernic.CastellersERP.DAO.EventoDAO;
 import cat.copernic.CastellersERP.DAO.SalidaDAO;
 import cat.copernic.CastellersERP.DAO.UsuarioDAO;
 import cat.copernic.CastellersERP.general.serveis.UsuarioService;
+import cat.copernic.CastellersERP.model.Ensayo;
 import cat.copernic.CastellersERP.model.Evento;
 import cat.copernic.CastellersERP.model.Salida;
+import cat.copernic.CastellersERP.model.Usuario;
 import cat.copernic.CastellersERP.salida.serveis.SalidaService;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  *
@@ -44,27 +48,6 @@ public class ControladorSalidas {
     public String inici(Model model){
         
         model.addAttribute("salidas", salidaService.llistarSalidas());
-        
-        
-        model.addAttribute("Menu", "Menu");
-        model.addAttribute("Ensayo", "Ensayo");
-        model.addAttribute("Salidas", "Salidas");
-        model.addAttribute("Castillos", "Castillos");
-        model.addAttribute("Administracion", "Administracion");
-
-        model.addAttribute("SALIDAS", "SALIDAS");
-        model.addAttribute("Nombre", "Nombre");
-        model.addAttribute("Fecha", "Fecha");
-        model.addAttribute("Ubicacion", "Ubicación");
-        model.addAttribute("Paradita", "Paradita");
-        model.addAttribute("Castillo", "Castillo");
-        model.addAttribute("Acciones", "Acciones");
-        model.addAttribute("Inscribirseasalida", "Inscribirse a salida");
-        model.addAttribute("Inscribirseatransporte", "Inscribirse a transporte");
-        model.addAttribute("Detalle", "Detalle");
-        model.addAttribute("ConsultarCastillo", "Consultar Castillo");
-        model.addAttribute("Nparticipantes", "Nºparticipantes");
-        model.addAttribute("CrearSalida", "Crear Salida");
         
         return "salida/listarSalidas"; //Retorna la pàgina iniciDinamic
     }
@@ -93,15 +76,96 @@ public class ControladorSalidas {
         return "salida/anadirSalida"; //Retorna la pàgina amb el formulari de les dades del gos
     }
     
+    @GetMapping("/eliminarSalida/{idevento}") 
+    public String eliminar(Salida salida) {
+
+        /*Eliminem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
+         *el mètode eliminarGos de la capa de servei.*/
+        salidaService.eliminarSalida(salida);
+        
+        return "redirect:/paginalistarSalidas"; //Retornem a la pàgina inicial dels gossos mitjançant redirect
+    }
+    
     @GetMapping("/editarAsistencia/{idevento}")
     public String editarAsistencia(Salida salida, Model model) {
 
-        /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
-         *el mètode cercarGos de la capa de servei.*/
-        model.addAttribute("salida", salidaService.cercarSalida(salida));
+        salida = salidaService.cercarSalida(salida);
+        
+        model.addAttribute("ensayo", salida);
+        
+        List<Usuario> usuarios = usuarioService.llistarUsuarios();
 
+        List<Usuario> usuariosAsignados = salida.getUsuariosAsignados();
+
+        for (int i = 0; i < usuarios.size(); ++i) {
+            Usuario usuario = usuarios.get(i);for (int j = 0; j < usuariosAsignados.size(); j++) {
+                Usuario usuarioAsignado = usuariosAsignados.get(j);
+
+                if (usuario.equals(usuarioAsignado)) {
+                    usuarios.remove(usuario);
+                    i--; // Disminuir el índice ya que el tamaño de la lista ha disminuido
+                    break; // Salir del bucle interior si se encuentra una coincidencia
+                }
+            }
+        }
+        
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("usuariosAsignados", usuariosAsignados);
+        
         return "salida/anadirAsistencia"; //Retorna la pàgina amb el formulari de les dades del gos
     }
+    
+    @PostMapping("anadirUsarioSalida")
+    public RedirectView anadirUsarioSalida(@RequestParam List<Integer> usuariosId, Salida salida, Model model){
+        salida = salidaService.cercarSalida(salida);
+        
+        List<Usuario> asignarUsuarios = usuarioService.llistarUsuarios();
+
+        for (Integer usuarioId : usuariosId) {
+
+            for (Usuario asignarUsuario : asignarUsuarios) {
+
+                if (usuarioId.equals(asignarUsuario.getIdusuario())) {
+                    salida.getUsuariosAsignados().add(asignarUsuario);
+                }
+            }
+        }
+        
+        salidaService.afegirSalida(salida);
+        
+        return new RedirectView("/editarAsistencia/" + salida.getIdevento());
+    }
+    
+    @PostMapping("/eliminarAsistentes")
+    public RedirectView eliminarAsistentes(@RequestParam List<Integer> usuariosId, Salida salida, Model model) {
+
+        //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
+        salida = salidaService.cercarSalida(salida);
+
+        List<Usuario> usuariosAsignados = salida.getUsuariosAsignados();
+
+        for (int i = 0; i < usuariosId.size(); i++) {
+            Integer usuarioId = usuariosId.get(i);
+
+            for (int j = 0; j < usuariosAsignados.size(); j++) {
+                Usuario eliminarUsuario = usuariosAsignados.get(j);
+
+                if (usuarioId.equals(eliminarUsuario.getIdusuario())) {
+                    usuariosAsignados.remove(j);
+                    j--; // Disminuir el índice ya que el tamaño de la lista ha disminuido
+                    break; // Salir del bucle interior si se encuentra una coincidencia
+                }
+            }
+        }
+
+        salida.setUsuariosAsignados(usuariosAsignados); // Actualizar la lista de usuarios asignados en el ensayo
+
+        salidaService.afegirSalida(salida);
+
+        //return detalleEnsayo(model, ensayo);
+        return new RedirectView("/editarAsistencia/" + salida.getIdevento());
+    }
+    
     
     @GetMapping("/pasarIDaCastillo/{idevento}")
     public String pasarIDaCastillo(Salida salida, Model model) {
@@ -113,13 +177,14 @@ public class ControladorSalidas {
         return "castillo/vistaCastillos"; //Retorna la pàgina amb el formulari de les dades del gos
     }
     
-    @GetMapping("/eliminarSalida/{idevento}") 
-    public String eliminar(Salida salida) {
+    @GetMapping("/inscribirseSalidaITransporte/{idevento}")
+    public String inscribirseSalidaITransporte(Salida salida, Model model) {
 
-        /*Eliminem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
-         *el mètode eliminarGos de la capa de servei.*/
-        salidaService.eliminarSalida(salida);
-        
-        return "redirect:/paginalistarSalidas"; //Retornem a la pàgina inicial dels gossos mitjançant redirect
+        /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
+         *el mètode cercarGos de la capa de servei.*/
+        model.addAttribute("salida", salidaService.cercarSalida(salida));
+
+        return "salida/inscribirseSalidaTransporte"; //Retorna la pàgina amb el formulari de les dades del gos
     }
+
 }
