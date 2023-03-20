@@ -9,7 +9,7 @@
         <nav>
             <ul>
               <li><a href="/menuPrincipal" th:text = "Menu"></a></li>
-                <li><a href="/listarEnsayos" th:text = "Ensayo"></a></li>
+                <li><a href="/ensayos" th:text = "Ensayo"></a></li>
                 <li><a href="/paginalistarSalidas" th:text = "Salida"></a></li>
                 <li><a href="/vistaCastillos" th:text = "Castillos"></a></li>
                 <li><a href="/vistaModulos" th:text = "Modulos"></a></li>
@@ -17,9 +17,7 @@
                 <li><a href="/paginalistarUsuarios"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
             </ul>
         </nav>
-
-        <div th:if="${castillos!=null && !castillos.empty}">
-            <h1 th:text = "${titulo}"></h1>
+         
             <table border="1">
                 <thead>
                     <tr>
@@ -56,24 +54,20 @@
                             </div>
                         </td>
                         <td th:if="${salida!=null}">
-                            <!-- <input type="button" disabled="disabled">Agregar castillo salida</input> -->
-                            <button>Agregar castillo salida</button>
+                            <div>
+                            <a th:href="@{/pasarCastilloASalida}" th:text="AgregarCastilloSalida"/>
+                            </div>
                         </td>
                         <td th:if="${ensayo!=null}">
-                            <button>Agregar castillo ensayo</button>
+                            <div>
+                            <a th:href="@{/pasarCastilloAEnsayo}" th:text="AgregarCastilloEnsayo"/>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
-
-            <div th:if="${castillos==null || castillos.empty}"><!--Si l'ArrayList de gossos no està inicialitzat o no té contingut-->
-                <!-- Mostrem missatge-->
-                No hi ha castells a la llista.
-            </div>
-
             <div>
-                <div><a th:href="@{/formularioCastillo}" th:text="añadir"/></div>
+                <a th:href="@{/formularioCastillo}" th:text="añadir"/>
             </div>
-        </div>
     </body>
 </html>

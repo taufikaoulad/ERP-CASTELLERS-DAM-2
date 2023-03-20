@@ -37,7 +37,7 @@ public abstract class Evento implements Serializable {
     
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
-        name = "usuarioevento",
+        name = "usuarioeventocastillo",
         joinColumns = @JoinColumn(name = "evento_idevento"),
         inverseJoinColumns = @JoinColumn(name = "usuario_idusuario")
     )

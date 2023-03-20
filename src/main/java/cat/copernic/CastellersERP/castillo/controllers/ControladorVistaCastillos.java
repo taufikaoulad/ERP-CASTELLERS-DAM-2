@@ -6,6 +6,8 @@ package cat.copernic.CastellersERP.castillo.controllers;
 
 import cat.copernic.CastellersERP.model.Castillo;
 import cat.copernic.CastellersERP.castillo.serveis.CastilloService;
+import cat.copernic.CastellersERP.ensayo.services.EnsayoService;
+import cat.copernic.CastellersERP.model.Ensayo;
 import cat.copernic.CastellersERP.model.Salida;
 import cat.copernic.CastellersERP.salida.serveis.SalidaService;
 import jakarta.validation.Valid;
@@ -28,6 +30,9 @@ public class ControladorVistaCastillos {
     
     @Autowired    
     private SalidaService salidaService;
+    
+    @Autowired
+    private EnsayoService ensayoService;
 
     @GetMapping("/vistaCastillos")
     public String inici(Model model) {
@@ -71,5 +76,24 @@ public class ControladorVistaCastillos {
         return "redirect:/vistaCastillos";
     }
     
+    @GetMapping("/pasarCastilloASalida")
+    public String pasarCastilloASalida(Salida salida, Model model, Castillo castillo) {
+        
+        salida.getCastillosAsignados().add(castillo);
+        
+        model.addAttribute("salidas", salidaService.llistarSalidas());
+
+        return "salida/listarSalidas"; //Retorna la pàgina amb el formulari de les dades del gos
+    }
+    
+    @GetMapping("/pasarCastilloAEnsayo")
+    public String pasarCastilloAEnsayo(Ensayo ensayo, Model model, Castillo castillo) {
+        
+        ensayo.getCastillosAsignados().add(castillo);
+        
+        model.addAttribute("Evento", ensayoService.listarEnsayos());
+
+        return "ensayo/ListarEnsayos"; //Retorna la pàgina amb el formulari de les dades del gos
+    }
     
 }
