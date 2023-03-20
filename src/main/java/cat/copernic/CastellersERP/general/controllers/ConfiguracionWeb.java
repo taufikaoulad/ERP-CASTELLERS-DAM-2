@@ -5,9 +5,6 @@
 package cat.copernic.CastellersERP.general.controllers;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -17,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 
 @Configuration
-public class ControladorLogin implements WebMvcConfigurer {
+public class ConfiguracionWeb implements WebMvcConfigurer {
     
     @Override
     public void addViewControllers(ViewControllerRegistry registre) {

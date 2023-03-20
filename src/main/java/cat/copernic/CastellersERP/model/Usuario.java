@@ -40,7 +40,7 @@ public class Usuario implements Serializable {
 
     @NotEmpty
     @Size(min = 3)
-    private String nombre;
+    private String username;
  
     @NotNull
     @Past
