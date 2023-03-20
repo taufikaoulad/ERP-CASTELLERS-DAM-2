@@ -7,6 +7,8 @@ package cat.copernic.CastellersERP.salida.controllers;
 
 import cat.copernic.CastellersERP.DAO.EventoDAO;
 import cat.copernic.CastellersERP.DAO.SalidaDAO;
+import cat.copernic.CastellersERP.DAO.UsuarioDAO;
+import cat.copernic.CastellersERP.general.serveis.UsuarioService;
 import cat.copernic.CastellersERP.model.Evento;
 import cat.copernic.CastellersERP.model.Salida;
 import cat.copernic.CastellersERP.salida.serveis.SalidaService;
@@ -26,10 +28,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 
 @Controller
-public class ControladorListarSalida {
+public class ControladorSalidas {
     
     @Autowired //Anotació que injecta tots els mètodes i possibles dependències de SalidaDAO al controlador
     private SalidaService salidaService; //Atribut per poder utilitzar les funcions CRUD de la interfície SalidaDAO
+    
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private UsuarioDAO UsuarioDAO;
+    
     //(localhost:8080/paginalistarSalidas)
     @GetMapping("/paginalistarSalidas")
     public String inici(Model model){
