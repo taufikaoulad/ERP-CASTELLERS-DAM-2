@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title th:text="${Salidas}"></title>
+    <head th:replace = "~{layout/plantilla :: head}">
     </head>
     <body>
         
         <header th:replace="~{layout/plantilla :: menu}" />
         
         <section>
-            <h1 th:text="${SALIDAS}"></h1>
+            <h1>SALIDAS</h1>
         </section>
 
         <main th:if="${salidas!=null && !salidas.empty}">
@@ -17,14 +15,14 @@
             <table border="1">
                 <thead>
                     <tr>
-                        <th th:text="${Nombre}"></th>
-                        <th th:text="${Fecha}"></th>
-                        <th th:text="${Ubicacion}"></th>
-                        <th th:text="${Paradita}"></th>
-                        <th th:text="${Castillo}"></th>
-                        <th th:text="${Acciones}"></th>
-                        <th th:text="${Inscribirseasalida}"></th>
-                        <th th:text="${Inscribirseatransporte}"></th>
+                        <th th:text="Nombre"></th>
+                        <th th:text="Fecha"></th>
+                        <th th:text="Ubicacion"></th>
+                        <th th:text="Paradita"></th>
+                        <th th:text="Castillo"></th>
+                        <th th:text="Acciones"></th>
+                        <th th:text="Inscribirseasalida"></th>
+                        <th th:text="Inscribirseatransporte"></th>
                         <th>Inscribirse Asistencia/Transporte Salida</th>
                     </tr>
                 </thead>
@@ -41,11 +39,11 @@
                         </td>                
                         <td>
                             <a th:href="@{/pasarIDaCastillo/}+${salida.idevento}">
-                                <button th:text="${ConsultarCastillo}"></button>
+                                <button th:text="ConsultarCastillo"></button>
                             </a>
 
                             <a href="/paginaassistenciaYTransporteSalida">
-                                <button th:text="${Nparticipantes}"></button>
+                                <button th:text="Nºparticipantes"></button>
                             </a>
 
                             <a th:href="@{/editarSalida/}+${salida.idevento}">
@@ -79,7 +77,7 @@
         <!-- <input type="checkbox" th:checked="${salida.asistenciaSalida}"/> <input type="checkbox" th:checked="${salida.asistenciaTransporte}" />-->
         <div>
             <a href="/formularioSalida">
-                <button th:text="${CrearSalida}"></button>
+                <button th:text="CrearSalida"></button>
             </a>
         </div>
 
