@@ -35,16 +35,14 @@ public abstract class Evento implements Serializable {
     @Column(name = "ubicacion")
     private String ubicacionEvento;
     
-    /*
+    
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
-        name = "usuarioeventocastillo",
+        name = "usuarioevento",
         joinColumns = @JoinColumn(name = "evento_idevento"),
         inverseJoinColumns = @JoinColumn(name = "usuario_idusuario")
     )
-    */
-
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "usuario_idusuario")
+    //@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "usuario_idusuario")
     private List<Usuario> usuariosAsignados = new ArrayList();
     
     
