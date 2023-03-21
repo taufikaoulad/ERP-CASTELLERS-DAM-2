@@ -7,6 +7,7 @@ package cat.copernic.CastellersERP.castillo.controllers;
 import cat.copernic.CastellersERP.model.Castillo;
 import cat.copernic.CastellersERP.castillo.serveis.CastilloService;
 import cat.copernic.CastellersERP.ensayo.services.EnsayoService;
+import cat.copernic.CastellersERP.general.serveis.UsuarioService;
 import cat.copernic.CastellersERP.model.Ensayo;
 import cat.copernic.CastellersERP.model.Salida;
 import cat.copernic.CastellersERP.salida.serveis.SalidaService;
@@ -17,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  *
@@ -33,6 +36,9 @@ public class ControladorVistaCastillos {
     
     @Autowired
     private EnsayoService ensayoService;
+    
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping("/vistaCastillos")
     public String inici(Model model) {
@@ -77,7 +83,10 @@ public class ControladorVistaCastillos {
     }
     
     @GetMapping("/pasarCastilloASalida")
-    public String pasarCastilloASalida(Salida salida, Model model, Castillo castillo) {
+    public String pasarCastilloASalida(Model model, @RequestParam("idEnsayo") int idEnsayo, @RequestParam("idCastilloToSalida") int idCastillo ) {
+        
+        Salida salida = salidaService;
+        Castillo castillo = castilloService.buscarCastilloPorId(idCastillo);
         
         salida.getCastillosAsignados().add(castillo);
         
@@ -86,14 +95,21 @@ public class ControladorVistaCastillos {
         return "salida/listarSalidas"; //Retorna la pàgina amb el formulari de les dades del gos
     }
     
-    @GetMapping("/pasarCastilloAEnsayo")
-    public String pasarCastilloAEnsayo(Ensayo ensayo, Model model, Castillo castillo) {
+    
+    @PostMapping("/pasarCastilloAEnsayo")
+    public String pasarCastilloAEnsayo(Model model, @RequestParam("idEnsayo") int idEnsayo, @RequestParam("idCastilloToEnsayo") int idCastillo) {
+        
+        Ensayo ensayo = ensayoService.buscarEnsayoPorId(idEnsayo);
+        Castillo castillo = castilloService.buscarCastilloPorId(idCastillo);
         
         ensayo.getCastillosAsignados().add(castillo);
         
+        ensayoService.añadirEnsayo(ensayo);
+        
+        
         model.addAttribute("Evento", ensayoService.listarEnsayos());
 
-        return "ensayo/ListarEnsayos"; //Retorna la pàgina amb el formulari de les dades del gos
+        return "ensayo/ListarEnsayos";
     }
     
 }

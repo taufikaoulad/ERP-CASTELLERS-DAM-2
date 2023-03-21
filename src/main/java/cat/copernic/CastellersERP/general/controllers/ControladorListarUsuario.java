@@ -51,12 +51,12 @@ public class ControladorListarUsuario {
     @PostMapping("/guardarUsuario") //action=guardarGos
     public String guardarUsuario(@Valid Usuario usuario, Errors errors) {
         
-        String password = usuario.getContrasena();
-        String  a = EncriptadorContrasenya.encriptarContrasenya(password);
-        
         if(errors.hasErrors()){ //Si s'han produït errors...
              return "general/crearUsuario"; //Mostrem la pàgina del formulari
         }
+        
+        String password = usuario.getContrasena();
+        String  a = EncriptadorContrasenya.encriptarContrasenya(password);
         
         usuario.setContrasena(a);
         usuarioService.afegirUsuario(usuario); //Afegim el usuario passat per paràmetre a la base de dades

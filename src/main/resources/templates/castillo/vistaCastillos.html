@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -54,14 +55,18 @@
                             </div>
                         </td>
                         <td th:if="${salida!=null}">
-                            <div>
-                            <a th:href="@{/pasarCastilloASalida}" th:text="AgregarCastilloSalida"/>
-                            </div>
+                            <form th:action="@{/pasarCastilloASalida}" method="post">
+                                <input type="hidden" name="idSalida" th:value="${salida.idevento}">
+                                <input type="hidden" name="idCastilloToSalida" th:value="${castillo.idCastillo}">
+                                <button type="submit" name="submit">Agregar Castillo a Salida</button>
+                            </form>
                         </td>
                         <td th:if="${ensayo!=null}">
-                            <div>
-                            <a th:href="@{/pasarCastilloAEnsayo}" th:text="AgregarCastilloEnsayo"/>
-                            </div>
+                            <form th:action="@{/pasarCastilloAEnsayo}" method="post">
+                                <input type="hidden" name="idEnsayo" th:value="${ensayo.idevento}">
+                                <input type="hidden" name="idCastilloToEnsayo" th:value="${castillo.idCastillo}">
+                                <button type="submit" name="submit">Agregar Castillo al Ensayo</button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>

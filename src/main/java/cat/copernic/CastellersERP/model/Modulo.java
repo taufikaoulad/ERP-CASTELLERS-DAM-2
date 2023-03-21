@@ -38,4 +38,7 @@ public class Modulo implements Serializable{
     @OneToMany(mappedBy = "modulo")
     private List<ModuloTipoUsuario> modulosTiposUsuario = new ArrayList<>();
     
+    @OneToMany(mappedBy = "rol")
+    private List<ModuloTipoUsuario> tiposUsuarios = new ArrayList<>();
+    
 }
