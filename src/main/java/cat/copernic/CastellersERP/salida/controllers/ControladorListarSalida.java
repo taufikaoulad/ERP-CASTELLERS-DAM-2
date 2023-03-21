@@ -5,22 +5,16 @@
 package cat.copernic.CastellersERP.salida.controllers;
 
 
-import cat.copernic.CastellersERP.DAO.EventoDAO;
-import cat.copernic.CastellersERP.DAO.SalidaDAO;
-import cat.copernic.CastellersERP.DAO.UsuarioDAO;
-import cat.copernic.CastellersERP.general.serveis.UsuarioService;
-import cat.copernic.CastellersERP.model.Evento;
+import cat.copernic.CastellersERP.castillo.serveis.CastilloService;
+import cat.copernic.CastellersERP.model.Castillo;
 import cat.copernic.CastellersERP.model.Salida;
 import cat.copernic.CastellersERP.salida.serveis.SalidaService;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -28,17 +22,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 
 @Controller
-public class ControladorSalidas {
+public class ControladorListarSalida {
     
     @Autowired //Anotació que injecta tots els mètodes i possibles dependències de SalidaDAO al controlador
     private SalidaService salidaService; //Atribut per poder utilitzar les funcions CRUD de la interfície SalidaDAO
     
     @Autowired
-    private UsuarioService usuarioService;
-
-    @Autowired
-    private UsuarioDAO UsuarioDAO;
-    
+    private CastilloService castilloService;
     //(localhost:8080/paginalistarSalidas)
     @GetMapping("/paginalistarSalidas")
     public String inici(Model model){
@@ -67,6 +57,21 @@ public class ControladorSalidas {
         model.addAttribute("CrearSalida", "Crear Salida");
         
         return "salida/listarSalidas"; //Retorna la pàgina iniciDinamic
+    }
+    
+    @GetMapping("/detalleSalida/{idevento}")
+    public String detalleSalida(Model model, Salida salida) {
+
+        //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
+        salida = salidaService.cercarSalida(salida);
+
+        model.addAttribute("salida", salida);
+
+        List<Castillo> castillosAsignados = salida.getCastillosAsignados();
+
+        model.addAttribute("castillosAsignados", castillosAsignados);
+
+        return "salida/detalleCastilloSalida";
     }
     
     @GetMapping("/formularioSalida")
@@ -109,6 +114,7 @@ public class ControladorSalidas {
         /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
          *el mètode cercarGos de la capa de servei.*/
         model.addAttribute("salida", salidaService.cercarSalida(salida));
+        model.addAttribute("castillos", castilloService.listarCastillos());
 
         return "castillo/vistaCastillos"; //Retorna la pàgina amb el formulari de les dades del gos
     }

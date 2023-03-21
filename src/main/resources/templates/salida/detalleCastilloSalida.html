@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title th:text="${DetalleCastillo}"></title>
-  </head>
-  <body>
-      
-    <section>
-      <h1 th:text="${DetalleCastillo}"></h1>
-    </section>
-    
-    <main th:if="${castillos!=null && !castillos.empty}">
-      <table  border="1">
-        <thead>
-          <tr>
-            <th th:text="${Castillo}"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="castillo : ${castillos}">
-            <td th:text="${castillo.nombre}"></td>
-          </tr>
-        </tbody>
-      </table>
-    </main><br>
-    
-    <div>
-        <a href="/paginalistarSalidas">
-            <button th:text="${Volver}"></button>
-        </a>
-    </div>
-    
-    <div th:if="${castillos==null || castillos.empty}">
-       <!-- Mostrem missatge-->
-       No hi ha castillos a la llista.
-    </div>
-    
-  </body>
+    <head>
+        <title th:text="DetalleCastillo"></title>
+    </head>
+    <body>
+
+        <section>
+            <h1 th:text="DetalleCastillo"></h1>
+        </section>
+
+        <main th:if="${castillosAsignados!=null && !castillosAsignados.empty}">
+            <table border="1">
+                <tr>
+                    <th>Castillos Asignados</th>
+                    <th>SI/NO</th>
+                </tr>
+                <tr th:each="castillo : ${castillosAsignados}">
+                    <td th:text="${castillo.nombre}"></td>
+                    <td>
+                        <input type="checkbox" th:value="${castillo.idCastillo}" th:name="castillosId" />
+                    </td>
+                </tr>
+            </table>
+        </main><br>
+
+        <div>
+            <a href="/paginalistarSalidas">
+                <button th:text="Volver"></button>
+            </a>
+        </div>
+
+        <div th:if="${castillosAsignados==null || castillosAsignados.empty}">
+            <!-- Mostrem missatge-->
+            No hi ha castillos a la llista.
+        </div>
+
+    </body>
 </html>
