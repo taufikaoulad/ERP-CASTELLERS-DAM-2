@@ -31,13 +31,16 @@ public class UsuarioEvento implements Serializable{
     
     @Column(name = "asistenciatransporte")
     private Boolean asistenciaTransporte;
-    
+    /*
     @ManyToOne
     @JoinColumn(name = "evento_idevento")
     private Evento evento;
     
     @ManyToOne
     @JoinColumn(name = "usuario_idusuario")
-    private Usuario usuario;
+    private Usuario usuario_idusuario;
+         */   
+    
+    
     
 }
