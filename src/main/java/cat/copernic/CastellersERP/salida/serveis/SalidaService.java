@@ -50,5 +50,10 @@ public class SalidaService implements SalidaServiceInterface{
     public Salida cercarSalida(Salida salida) {
        return this.salidaDAO.findById(salida.getIdevento()).orElse(null);
     }
+
+    @Override
+    public Salida cercarSalidaPorId(int idevento) {
+        return this.salidaDAO.findById(idevento).orElse(null);
+    }
  
 }

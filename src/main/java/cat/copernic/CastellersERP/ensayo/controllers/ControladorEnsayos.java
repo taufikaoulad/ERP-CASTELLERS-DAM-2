@@ -5,13 +5,13 @@
 package cat.copernic.CastellersERP.ensayo.controllers;
 
 import cat.copernic.CastellersERP.DAO.UsuarioDAO;
+import cat.copernic.CastellersERP.castillo.serveis.CastilloService;
 import cat.copernic.CastellersERP.ensayo.services.EnsayoService;
 import cat.copernic.CastellersERP.general.serveis.UsuarioService;
 import cat.copernic.CastellersERP.model.Castillo;
 import cat.copernic.CastellersERP.model.Ensayo;
 import cat.copernic.CastellersERP.model.Usuario;
 import lombok.extern.slf4j.Slf4j;
-import java.util.ArrayList;
 import java.lang.String;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +39,9 @@ public class ControladorEnsayos {
 
     @Autowired
     private UsuarioDAO UsuarioDAO;
+    
+    @Autowired
+    private CastilloService csastilloService;
 
     @GetMapping("/ensayos")
     public String inicio(Model model) {
@@ -119,7 +122,8 @@ public class ControladorEnsayos {
     public String consultarCastillosEnsayo(Ensayo ensayo, Model model) {
 
         model.addAttribute("ensayo", ensayoService.buscarEnsayo(ensayo));
-
+        model.addAttribute("castillos", csastilloService.listarCastillos());
+        
         return "castillo/vistaCastillos";
     }
 

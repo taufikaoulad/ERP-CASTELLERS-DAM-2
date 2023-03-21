@@ -33,8 +33,8 @@
                         <td th:text="${salida.ubicacionEvento}"></td>
                         <td> <input type="checkbox" th:checked="${salida.paradita}" disabled="disabled"/> </td>
                         <td>
-                            <a href="/paginadetalleCastilloSalida">
-                                <button th:text="${Detalle}"></button>
+                            <a th:href="@{/detalleSalida/}+${salida.idevento}">
+                                <button th:text="Detalle"></button>
                             </a>
                         </td>                
                         <td>
@@ -43,7 +43,7 @@
                             </a>
 
                             <a href="/paginaassistenciaYTransporteSalida">
-                                <button th:text="Nºparticipantes"></button>
+                                <button th:text="Nparticipantes"></button>
                             </a>
 
                             <a th:href="@{/editarSalida/}+${salida.idevento}">
