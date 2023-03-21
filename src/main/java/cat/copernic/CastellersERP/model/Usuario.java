@@ -20,6 +20,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
+import org.hibernate.annotations.Check;
 
 /**
  *
@@ -52,6 +53,9 @@ public class Usuario implements Serializable {
     
     @NotEmpty
     private String contrasena;
+    
+    @Transient
+    private Boolean check;
 
     @NotEmpty
     @Pattern(regexp = "\\d{9}")

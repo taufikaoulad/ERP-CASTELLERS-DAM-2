@@ -34,6 +34,11 @@
                     <label for="fechaEvento">Fecha:</label> <!--Etiqueta per l'edat del gos-->            
                     <input type="text" name="fechaEvento" th:field="*{fechaEvento}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
                 </p>
+                
+                <p>
+                    <label for="horario">Horario:</label> <!--Etiqueta per l'edat del gos-->            
+                    <input type="text" name="horario" th:field="*{horario}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                </p>
 
                 <p>
                     <label for="ubicacionEvento">Ubicacion</label> <!--Etiqueta pel sexe del gos-->            
@@ -64,6 +69,8 @@
                     </td>
                 </tr>
             </table>
+            
+            <input type="submit" value="Quitar Castillos Asignados" th:disabled="${#lists.isEmpty(castillosAsignados)}">
 
         </form>
 
@@ -91,7 +98,7 @@
                         <th th:text="${usuario.mail}"></th>
                         <th th:text="${usuario.telefono}"></th>
                         <td>
-                            <input type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosId" />
+                            <input type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosAsignadosId" />
                         </td>
                     </tr>
                 </table>
