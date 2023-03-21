@@ -35,13 +35,17 @@ public abstract class Evento implements Serializable {
     @Column(name = "ubicacion")
     private String ubicacionEvento;
     
+    
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
         name = "usuarioevento",
         joinColumns = @JoinColumn(name = "evento_idevento"),
         inverseJoinColumns = @JoinColumn(name = "usuario_idusuario")
     )
+    //@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "usuario_idusuario")
     private List<Usuario> usuariosAsignados = new ArrayList();
+    
+    
     
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -50,4 +54,7 @@ public abstract class Evento implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "castillo_idcastillo")
     )
     private List<Castillo> castillosAsignados = new ArrayList();
+    
+    
+   
 }
