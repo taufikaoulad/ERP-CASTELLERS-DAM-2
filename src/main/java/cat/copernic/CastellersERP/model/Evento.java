@@ -44,10 +44,8 @@ public abstract class Evento implements Serializable {
     )
     */
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "usuario_idusuario")
-    private List<Usuario> usuariosAsignados = new ArrayList();
-    
-    
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "evento")
+    private List<UsuarioEvento> usuariosAsignados = new ArrayList();
     
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

@@ -13,6 +13,7 @@ import cat.copernic.CastellersERP.model.Ensayo;
 import cat.copernic.CastellersERP.model.Evento;
 import cat.copernic.CastellersERP.model.Salida;
 import cat.copernic.CastellersERP.model.Usuario;
+import cat.copernic.CastellersERP.model.UsuarioEvento;
 import cat.copernic.CastellersERP.salida.serveis.SalidaService;
 import java.util.ArrayList;
 import java.util.Date;
@@ -95,11 +96,11 @@ public class ControladorSalidas {
         
         List<Usuario> usuarios = usuarioService.llistarUsuarios();
 
-        List<Usuario> usuariosAsignados = salida.getUsuariosAsignados();
+        List<UsuarioEvento> usuariosAsignados = salida.getUsuariosAsignados();
 
         for (int i = 0; i < usuarios.size(); ++i) {
             Usuario usuario = usuarios.get(i);for (int j = 0; j < usuariosAsignados.size(); j++) {
-                Usuario usuarioAsignado = usuariosAsignados.get(j);
+                UsuarioEvento usuarioAsignado = usuariosAsignados.get(j);
 
                 if (usuario.equals(usuarioAsignado)) {
                     usuarios.remove(usuario);
@@ -142,15 +143,15 @@ public class ControladorSalidas {
         //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
         salida = salidaService.cercarSalida(salida);
 
-        List<Usuario> usuariosAsignados = salida.getUsuariosAsignados();
+        List<UsuarioEvento> usuariosAsignados = salida.getUsuariosAsignados();
 
         for (int i = 0; i < usuariosId.size(); i++) {
             Integer usuarioId = usuariosId.get(i);
 
             for (int j = 0; j < usuariosAsignados.size(); j++) {
-                Usuario eliminarUsuario = usuariosAsignados.get(j);
+                UsuarioEvento eliminarUsuario = usuariosAsignados.get(j);
 
-                if (usuarioId.equals(eliminarUsuario.getIdusuario())) {
+                if (usuarioId.equals(eliminarUsuario.getIdusuarioevento())) {
                     usuariosAsignados.remove(j);
                     j--; // Disminuir el índice ya que el tamaño de la lista ha disminuido
                     break; // Salir del bucle interior si se encuentra una coincidencia

@@ -76,8 +76,8 @@ public class Usuario implements Serializable {
     
     //@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "usuariosAsignados")
     //@JoinColumn(name = "usuario_idusuario")
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "evento_idevento")
-    private List<Evento> eventos = new ArrayList<>();
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "usuario")
+    private List<UsuarioEvento> usuarioEvento = new ArrayList<>();
 }
 
     
