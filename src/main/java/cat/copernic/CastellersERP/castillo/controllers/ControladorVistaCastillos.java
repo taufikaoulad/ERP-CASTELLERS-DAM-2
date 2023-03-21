@@ -82,13 +82,15 @@ public class ControladorVistaCastillos {
         return "redirect:/vistaCastillos";
     }
     
-    @GetMapping("/pasarCastilloASalida")
-    public String pasarCastilloASalida(Model model, @RequestParam("idEnsayo") int idEnsayo, @RequestParam("idCastilloToSalida") int idCastillo ) {
+    @PostMapping("/pasarCastilloASalida")
+    public String pasarCastilloASalida(Model model, @RequestParam("idSalida") int idEnsayo, @RequestParam("idCastilloToSalida") int idCastillo ) {
         
-        Salida salida = salidaService;
+        Salida salida = salidaService.cercarSalidaPorId(idEnsayo);
         Castillo castillo = castilloService.buscarCastilloPorId(idCastillo);
         
         salida.getCastillosAsignados().add(castillo);
+        
+        salidaService.afegirSalida(salida);
         
         model.addAttribute("salidas", salidaService.llistarSalidas());
 

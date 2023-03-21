@@ -6,8 +6,10 @@ package cat.copernic.CastellersERP.salida.controllers;
 
 
 import cat.copernic.CastellersERP.castillo.serveis.CastilloService;
+import cat.copernic.CastellersERP.model.Castillo;
 import cat.copernic.CastellersERP.model.Salida;
 import cat.copernic.CastellersERP.salida.serveis.SalidaService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,6 +57,21 @@ public class ControladorListarSalida {
         model.addAttribute("CrearSalida", "Crear Salida");
         
         return "salida/listarSalidas"; //Retorna la pàgina iniciDinamic
+    }
+    
+    @GetMapping("/detalleSalida/{idevento}")
+    public String detalleSalida(Model model, Salida salida) {
+
+        //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
+        salida = salidaService.cercarSalida(salida);
+
+        model.addAttribute("salida", salida);
+
+        List<Castillo> castillosAsignados = salida.getCastillosAsignados();
+
+        model.addAttribute("castillosAsignados", castillosAsignados);
+
+        return "salida/detalleCastilloSalida";
     }
     
     @GetMapping("/formularioSalida")
