@@ -69,7 +69,7 @@ public class ControladorEnsayos {
     public String editarEnsayo(Ensayo ensayo, Model model) {
 
         model.addAttribute("ensayo", ensayoService.buscarEnsayo(ensayo));
- 
+
         return "ensayo/FormularioEnsayo";
     }
 
@@ -117,7 +117,7 @@ public class ControladorEnsayos {
 
         return "ensayo/DetalleEnsayo";
     }
-    
+
     @GetMapping("/consultar-castillos-ensayo/{idevento}")
     public String consultarCastillosEnsayo(Ensayo ensayo, Model model) {
 
@@ -128,57 +128,67 @@ public class ControladorEnsayos {
     }
 
     @PostMapping("/anadir-usuarios")
-    public RedirectView anadirUsuarios(@RequestParam List<Integer> usuariosId, Ensayo ensayo, Model model) {
+    public RedirectView anadirUsuarios(@RequestParam(required = false) List<Integer> usuariosId, Ensayo ensayo, Model model) {
 
         //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
         ensayo = ensayoService.buscarEnsayo(ensayo);
 
-        List<Usuario> asignarUsuarios = usuarioService.llistarUsuarios();
+        if (usuariosId == null) {
+            return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
+        } else {
 
-        for (Integer usuarioId : usuariosId) {
+            List<Usuario> asignarUsuarios = usuarioService.llistarUsuarios();
 
-            for (Usuario asignarUsuario : asignarUsuarios) {
+            for (Integer usuarioId : usuariosId) {
 
-                if (usuarioId.equals(asignarUsuario.getIdusuario())) {
-                    ensayo.getUsuariosAsignados().add(asignarUsuario);
+                for (Usuario asignarUsuario : asignarUsuarios) {
+
+                    if (usuarioId.equals(asignarUsuario.getIdusuario())) {
+                        ensayo.getUsuariosAsignados().add(asignarUsuario);
+                    }
                 }
             }
+
+            ensayoService.añadirEnsayo(ensayo);
+
+            //return detalleEnsayo(model, ensayo);
+            return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
         }
-
-        ensayoService.añadirEnsayo(ensayo);
-
-        //return detalleEnsayo(model, ensayo);
-        return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
     }
 
     @PostMapping("/eliminar-asistentes")
-    public RedirectView eliminarAsistentes(@RequestParam List<Integer> usuariosId, Ensayo ensayo, Model model) {
+    public RedirectView eliminarAsistentes(@RequestParam(required = false) List<Integer> usuariosAsignadosId, Ensayo ensayo, Model model) {
 
         //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
         ensayo = ensayoService.buscarEnsayo(ensayo);
 
-        List<Usuario> usuariosAsignados = ensayo.getUsuariosAsignados();
+        if (usuariosAsignadosId == null) {
+            return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
+        } else {
 
-        for (int i = 0; i < usuariosId.size(); i++) {
-            Integer usuarioId = usuariosId.get(i);
+            List<Usuario> usuariosAsignados = ensayo.getUsuariosAsignados();
 
-            for (int j = 0; j < usuariosAsignados.size(); j++) {
-                Usuario eliminarUsuario = usuariosAsignados.get(j);
+            for (int i = 0; i < usuariosAsignadosId.size(); i++) {
+                Integer usuarioId = usuariosAsignadosId.get(i);
 
-                if (usuarioId.equals(eliminarUsuario.getIdusuario())) {
-                    usuariosAsignados.remove(j);
-                    j--; // Disminuir el índice ya que el tamaño de la lista ha disminuido
-                    break; // Salir del bucle interior si se encuentra una coincidencia
+                for (int j = 0; j < usuariosAsignados.size(); j++) {
+                    Usuario eliminarUsuario = usuariosAsignados.get(j);
+
+                    if (usuarioId.equals(eliminarUsuario.getIdusuario())) {
+                        usuariosAsignados.remove(j);
+                        j--; // Disminuir el índice ya que el tamaño de la lista ha disminuido
+                        break; // Salir del bucle interior si se encuentra una coincidencia
+                    }
                 }
             }
+
+            ensayo.setUsuariosAsignados(usuariosAsignados); // Actualizar la lista de usuarios asignados en el ensayo
+
+            ensayoService.añadirEnsayo(ensayo);
+
+            //return detalleEnsayo(model, ensayo);
+            return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
         }
-
-        ensayo.setUsuariosAsignados(usuariosAsignados); // Actualizar la lista de usuarios asignados en el ensayo
-
-        ensayoService.añadirEnsayo(ensayo);
-
-        //return detalleEnsayo(model, ensayo);
-        return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
     }
 
     @PostMapping("/eliminar-castillos-asignados")
@@ -190,10 +200,10 @@ public class ControladorEnsayos {
 
         for (int i = 0; i < castillosId.size(); i++) {
             Integer castilloId = castillosId.get(i);
-            
+
             for (int j = 0; j < castillosAsignados.size(); j++) {
                 Castillo castilloAsignado = castillosAsignados.get(j);
-                
+
                 if (castilloId.equals(castilloAsignado.getIdCastillo())) {
                     ensayo.getCastillosAsignados().remove(castilloAsignado);
                 }
