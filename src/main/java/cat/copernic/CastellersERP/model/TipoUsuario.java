@@ -36,5 +36,8 @@ public class TipoUsuario implements Serializable {
     
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "tipousuario_idtipousuario")
     private List<Usuario> usuarios = new ArrayList<>();
-
+    
+    @OneToMany(mappedBy = "rol")
+    private List<ModuloTipoUsuario> tiposUsuariosModulos = new ArrayList<>();
+    
 }

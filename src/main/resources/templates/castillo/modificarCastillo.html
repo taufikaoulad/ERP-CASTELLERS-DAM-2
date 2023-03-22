@@ -30,18 +30,22 @@
                 <p>
                     <label>pisos</label>
                     <input type="number" id="pisos" name="pisos" th:field="*{pisos}" onchange="actualizarNombre()"/><!-- required -->
+                    <span th:if="${#fields.hasErrors('pisos')}" th:errors="*{pisos}"/>
                 </p>
                 <p>
                     <label>personas por pisos</label>
                     <input type="number" id="personasPisos" name="personasPisos" th:field="*{personasPisos}" onchange="actualizarNombre()"/><!-- required -->
+                    <span th:if="${#fields.hasErrors('personasPisos')}" th:errors="*{personasPisos}"/>
                 </p>
                 <p>
                     <label>NC pina</label>
                     <input type="number" name="ncTronc" th:field="*{ncPina}"/><!-- required -->
+                    <span th:if="${#fields.hasErrors('ncPina')}" th:errors="*{ncPina}"/>
                 </p>
                 <p>
                     <label>NC Tronc</label>
                     <input type="number" name="ncPiña" th:field="*{ncTronc}"/><!-- required -->
+                    <span th:if="${#fields.hasErrors('ncTronc')}" th:errors="*{ncTronc}"/>
                 </p>
                 <p>
                     <label>Aixecat per sota</label>
@@ -54,6 +58,7 @@
                 <p>
                     <label>Nombre</label>
                     <input type="text" id="nombre" name="nombre" th:field="*{nombre}" onchange="actualizarNombre()" readonly/>
+                    <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"/>
                 </p>
                 
                 <input type="submit" name="enviar" values="Enviar Dades"/>

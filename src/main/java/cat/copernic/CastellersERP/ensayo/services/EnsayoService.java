@@ -52,5 +52,10 @@ public class EnsayoService implements EnsayoServiceInterface{
         
         return this.ensayoDAO.findById(ensayo.getIdevento()).orElse(null);
     }
+
+    @Override
+    public Ensayo buscarEnsayoPorId(int idevento) {
+        return this.ensayoDAO.findById(idevento).orElse(null);
+    }
     
 }
