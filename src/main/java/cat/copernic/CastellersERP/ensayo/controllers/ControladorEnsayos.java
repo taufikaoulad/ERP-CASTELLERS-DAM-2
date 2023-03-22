@@ -69,7 +69,7 @@ public class ControladorEnsayos {
     public String editarEnsayo(Ensayo ensayo, Model model) {
 
         model.addAttribute("ensayo", ensayoService.buscarEnsayo(ensayo));
-
+ 
         return "ensayo/FormularioEnsayo";
     }
 
