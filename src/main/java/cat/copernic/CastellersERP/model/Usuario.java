@@ -8,8 +8,6 @@ package cat.copernic.CastellersERP.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -51,7 +49,7 @@ public class Usuario implements Serializable {
     private String mail;
     
     @NotEmpty
-    private String contrasena;
+    private String password;
 
     @NotEmpty
     @Pattern(regexp = "\\d{9}")
