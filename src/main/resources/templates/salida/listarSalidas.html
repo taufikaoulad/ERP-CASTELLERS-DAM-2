@@ -22,7 +22,7 @@
                         <th th:text="Castillo"></th>
                         <th th:text="Acciones"></th>
                         <!--<th th:text="Inscribirseasalida"></th>-->
-                        <th>Inscribirse A Salida/Transporte</th>
+                        <th>Inscribirse A Salida</th>
                         <th>Pasar lista Salida</th>
                     </tr>
                 </thead>
@@ -61,7 +61,7 @@
                         </td>-->
                         <td> 
                             <a th:href="@{/inscribirseSalidaITransporte/}+${salida.idevento}">
-                                <button>Inscribirse a Salida/Transporte</button>
+                                <button th:onclick="this.disabled=true;">Inscribirse a Salida</button>
                             </a>
                         </td>
                         

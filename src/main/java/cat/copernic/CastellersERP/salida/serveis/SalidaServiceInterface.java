@@ -23,4 +23,6 @@ public interface SalidaServiceInterface {
     public void eliminarSalida(Salida salida); //Mètode que implementarem per eliminar un salida
     
     public Salida cercarSalida(Salida salida); //Mètode que implementarem per cercar un salida
+    
+    public Salida carcarSalidaPorId(int idevento);
 }

@@ -12,10 +12,12 @@ import cat.copernic.CastellersERP.general.serveis.UsuarioService;
 import cat.copernic.CastellersERP.model.Ensayo;
 import cat.copernic.CastellersERP.model.Evento;
 import cat.copernic.CastellersERP.model.Salida;
+import cat.copernic.CastellersERP.model.TipoUsuario;
 import cat.copernic.CastellersERP.model.Usuario;
+import cat.copernic.CastellersERP.model.UsuarioEvento;
 import cat.copernic.CastellersERP.salida.serveis.SalidaService;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -178,13 +182,43 @@ public class ControladorSalidas {
     }
     
     @GetMapping("/inscribirseSalidaITransporte/{idevento}")
-    public String inscribirseSalidaITransporte(Salida salida, Model model) {
+    public String inscribirseSalidaITransporte(Model model, Salida salida) {
 
-        /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
-         *el mètode cercarGos de la capa de servei.*/
-        model.addAttribute("salida", salidaService.cercarSalida(salida));
+        //Salida salida = salidaService.carcarSalidaPorId(idSalida);
+        salida = salidaService.cercarSalida(salida);
+        
+        // Obtener el usuario autenticado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //Usuario usuario = usuarioService.buscarUsuarioPorMail(auth.getName());
+        
+        Usuario usuario = new Usuario();
+        
+        boolean inscrito = salida.getUsuariosAsignados().contains(usuario);
+        
+        Date date = new Date(2023-12-12);
+        TipoUsuario tipoUsuario = new TipoUsuario(); // create a new instance of TipoUsuario
+        tipoUsuario.setIdtipousuario(1);
+        
+        usuario.setNombre("Taufik4");
+        usuario.setEdat(date);
+        usuario.setMail("taufik4@gmail.com");
+        usuario.setContrasena("mFDsJGU");
+        usuario.setTelefono("894599999");
+        usuario.setPeso(82.23f);
+        usuario.setAltura(1.85f);
+        usuario.setActivo(true);
+        usuario.setPosicio("tierra");
+        usuario.setTipousuario_idtipousuario(tipoUsuario);
+        
+        if (!inscrito) {
+            salida.getUsuariosAsignados().add(usuario);
+            salidaService.afegirSalida(salida);
+            inscrito = true; // Asignar valor true al booleano
+        }
+        
+        model.addAttribute("inscrito", inscrito); // Añadir el booleano al modelo
 
-        return "salida/inscribirseSalidaTransporte"; //Retorna la pàgina amb el formulari de les dades del gos
+        return "redirect:/paginalistarSalidas";
     }
 
 }
