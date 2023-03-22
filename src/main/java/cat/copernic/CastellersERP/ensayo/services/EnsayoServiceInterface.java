@@ -20,4 +20,6 @@ public interface EnsayoServiceInterface {
     public void eliminarEnsayo(Ensayo ensayo);
     
     public Ensayo buscarEnsayo(Ensayo ensayo);
+    
+    public Ensayo buscarEnsayoPorId(int idevento);
 }
