@@ -20,6 +20,5 @@ import lombok.Data;
 public class Ensayo extends Evento implements Serializable{
     
     @Column(name = "duracion")
-    @NotNull
     private String duracion;
 }

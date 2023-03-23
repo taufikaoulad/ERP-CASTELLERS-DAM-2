@@ -28,8 +28,14 @@
                     
                     <p>
                         <label for="fechaEvento">Fecha [AAAA-MM-DD] :</label><br><br>
-                        <input type="text" name="fechaEvento" th:field="*{fechaEvento}"><br><br>
+                        <input type="date" name="fechaEvento" th:field="*{fechaEvento}"><br><br>
                     </p>
+                    
+                    <p>
+                        <label for="horario">Horario :</label> <!--Etiqueta per l'edat del gos-->            
+                        <input type="text" name="horario" th:field="*{horario}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                    </p>
+
                     
                     <p>
                         <label for="ubicacionEvento">Ubicación :</label><br><br>
@@ -41,11 +47,12 @@
                         <input type="checkbox" id="booleanParadita" name="paradita" th:field="*{paradita}"><br><br>
                     </p>
                     
-                    <input type="hidden" name="asistenciaSalida" th:field="*{asistenciaSalida}">
+                    <!--<input type="hidden" name="asistenciaSalida" th:field="*{asistenciaSalida}">
                     
-                    <input type="hidden" name="asistenciaTransporte" th:field="*{asistenciaTransporte}">
+                    <input type="hidden" name="asistenciaTransporte" th:field="*{asistenciaTransporte}">-->
                     
                 <input type="submit" name="enviar" value="Enviar Dades"/> 
+                
             </form>
         </p>
      

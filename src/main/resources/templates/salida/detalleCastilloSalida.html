@@ -13,13 +13,9 @@
             <table border="1">
                 <tr>
                     <th>Castillos Asignados</th>
-                    <th>SI/NO</th>
                 </tr>
                 <tr th:each="castillo : ${castillosAsignados}">
                     <td th:text="${castillo.nombre}"></td>
-                    <td>
-                        <input type="checkbox" th:value="${castillo.idCastillo}" th:name="castillosId" />
-                    </td>
                 </tr>
             </table>
         </main><br>

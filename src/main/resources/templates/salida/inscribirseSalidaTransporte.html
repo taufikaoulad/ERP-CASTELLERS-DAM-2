@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title th:text="${CrearSalida}"></title>
+
+    </head>
+    <body>
+
+        <section>
+            <h1 >Inscribirse Salida</h1>  
+        </section>
+
+        <main>
+            <p>
+                <form th:action="@{/inscribirseSalidaITransporte}" method="get">
+                     
+                    <input type="hidden" name="idevento" th:field="*{salida.idevento}"/>
+                    <!--<label for="asistenciaTransporte">¿Asistirá al transporte?</label>
+                    <input type="checkbox" id="asistenciaTransporte" th:field="*{asistenciaTransporte}">-->
+
+                    <input type="submit" name="enviar" value="Enviar Dades"/> 
+                </form>
+            </p>
+        </main>
+        
+        <div>
+            <a th:href = "@{/paginalistarSalidas}">
+                <button>Volver</button>
+            </a>
+        </div>
+    </body>
+</html>

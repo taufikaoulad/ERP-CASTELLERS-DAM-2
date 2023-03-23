@@ -59,7 +59,7 @@ public class ControladorEnsayos {
     public String guardarEnsayo(@Valid Ensayo ensayo, Errors errors) {
         
         if (errors.hasErrors()) {
-            return "redirect:/ensayos";
+            return "ensayo/FormularioEnsayo";
         }
 
         ensayoService.añadirEnsayo(ensayo); //Afegim el gos passat per paràmetre a la base de dades

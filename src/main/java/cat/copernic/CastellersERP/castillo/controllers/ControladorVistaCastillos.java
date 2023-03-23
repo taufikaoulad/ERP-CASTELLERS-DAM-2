@@ -88,9 +88,11 @@ public class ControladorVistaCastillos {
         Salida salida = salidaService.cercarSalidaPorId(idEnsayo);
         Castillo castillo = castilloService.buscarCastilloPorId(idCastillo);
         
-        salida.getCastillosAsignados().add(castillo);
-        
-        salidaService.afegirSalida(salida);
+        if (!salida.getCastillosAsignados().contains(castillo)) {
+            salida.getCastillosAsignados().add(castillo);
+            salidaService.afegirSalida(salida);
+        }
+
         
         model.addAttribute("salidas", salidaService.llistarSalidas());
 
@@ -104,10 +106,11 @@ public class ControladorVistaCastillos {
         Ensayo ensayo = ensayoService.buscarEnsayoPorId(idEnsayo);
         Castillo castillo = castilloService.buscarCastilloPorId(idCastillo);
         
-        ensayo.getCastillosAsignados().add(castillo);
+        if (!ensayo.getCastillosAsignados().contains(castillo)) {
+            ensayo.getCastillosAsignados().add(castillo);
         
-        ensayoService.añadirEnsayo(ensayo);
-        
+            ensayoService.añadirEnsayo(ensayo);
+        }
         
         model.addAttribute("Evento", ensayoService.listarEnsayos());
 
