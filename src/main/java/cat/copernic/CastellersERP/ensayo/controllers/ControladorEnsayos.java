@@ -4,19 +4,20 @@
  */
 package cat.copernic.CastellersERP.ensayo.controllers;
 
-import cat.copernic.CastellersERP.DAO.UsuarioDAO;
 import cat.copernic.CastellersERP.castillo.serveis.CastilloService;
 import cat.copernic.CastellersERP.ensayo.services.EnsayoService;
 import cat.copernic.CastellersERP.general.serveis.UsuarioService;
 import cat.copernic.CastellersERP.model.Castillo;
 import cat.copernic.CastellersERP.model.Ensayo;
 import cat.copernic.CastellersERP.model.Usuario;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import java.lang.String;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,9 +39,6 @@ public class ControladorEnsayos {
     private UsuarioService usuarioService;
 
     @Autowired
-    private UsuarioDAO UsuarioDAO;
-    
-    @Autowired
     private CastilloService csastilloService;
 
     @GetMapping("/ensayos")
@@ -58,7 +56,11 @@ public class ControladorEnsayos {
     }
 
     @PostMapping("/guardarEnsayo") //action=guardarGos
-    public String guardarEnsayo(Ensayo ensayo) {
+    public String guardarEnsayo(@Valid Ensayo ensayo, Errors errors) {
+        
+        if (errors.hasErrors()) {
+            return "ensayo/FormularioEnsayo";
+        }
 
         ensayoService.añadirEnsayo(ensayo); //Afegim el gos passat per paràmetre a la base de dades
 
@@ -123,7 +125,7 @@ public class ControladorEnsayos {
 
         model.addAttribute("ensayo", ensayoService.buscarEnsayo(ensayo));
         model.addAttribute("castillos", csastilloService.listarCastillos());
-        
+
         return "castillo/vistaCastillos";
     }
 
@@ -151,7 +153,6 @@ public class ControladorEnsayos {
 
             ensayoService.añadirEnsayo(ensayo);
 
-            //return detalleEnsayo(model, ensayo);
             return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
         }
     }
@@ -192,28 +193,32 @@ public class ControladorEnsayos {
     }
 
     @PostMapping("/eliminar-castillos-asignados")
-    public RedirectView eliminarCastillosAsignados(@RequestParam List<Integer> castillosId, Ensayo ensayo, Model model) {
+    public RedirectView eliminarCastillosAsignados(@RequestParam(required = false) List<Integer> castillosId, Ensayo ensayo, Model model) {
         //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
         ensayo = ensayoService.buscarEnsayo(ensayo);
 
-        List<Castillo> castillosAsignados = ensayo.getCastillosAsignados();
+        if (castillosId == null) {
+            return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
+        } else {
 
-        for (int i = 0; i < castillosId.size(); i++) {
-            Integer castilloId = castillosId.get(i);
+            List<Castillo> castillosAsignados = ensayo.getCastillosAsignados();
 
-            for (int j = 0; j < castillosAsignados.size(); j++) {
-                Castillo castilloAsignado = castillosAsignados.get(j);
+            for (int i = 0; i < castillosId.size(); i++) {
+                Integer castilloId = castillosId.get(i);
 
-                if (castilloId.equals(castilloAsignado.getIdCastillo())) {
-                    ensayo.getCastillosAsignados().remove(castilloAsignado);
+                for (int j = 0; j < castillosAsignados.size(); j++) {
+                    Castillo castilloAsignado = castillosAsignados.get(j);
+
+                    if (castilloId.equals(castilloAsignado.getIdCastillo())) {
+                        ensayo.getCastillosAsignados().remove(castilloAsignado);
+                    }
                 }
             }
+
+            ensayoService.añadirEnsayo(ensayo);
+
+            return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
         }
-
-        ensayoService.añadirEnsayo(ensayo);
-
-        //return detalleEnsayo(model, ensayo);
-        return new RedirectView("/detalleEnsayo/" + ensayo.getIdevento());
     }
 
 }
