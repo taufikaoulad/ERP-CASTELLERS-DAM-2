@@ -3,44 +3,48 @@
     <head th:replace = "~{layout/plantilla :: head}">
     </head>
     <body>
-       
-        <header th:replace="~{layout/plantilla :: menu}" />
-        
-        <h1> Listar Apuntes</h1>
 
-        <div th:if = "${apuntes != null && !apuntes.empty}">
+        <div th:replace="~{layout/plantilla :: menu}" />
+        <div class="container">
 
-            <table border = "1">
-                <thead>
-                    <tr>
-                        <th th:text = "Concepto"></th>
-                        <th th:text = "Precio"></th>
-                        <th th:text = "Tipo"></th>
-                        <th th:text = "Acciones"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="apunte : ${apuntes}">
-                        <td th:text="${apunte.concepto}"></td>
-                        <td th:text="${apunte.precio}"></td>
-                        <td th:text="${apunte.tipo}"></td>
-                        <td>
-                            <a th:href="@{/editarApunte/}+${apunte.idapuntecontable}" th:text = "Editar"></a>
-                            <a th:href="@{/eliminarApunte/}+${apunte.idapuntecontable}" th:text = "Eliminar"></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <h1> Listar Apuntes</h1>
+
+            <div th:if = "${apuntes != null && !apuntes.empty}">
+
+                <table class="table">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th th:text = "Concepto"></th>
+                            <th th:text = "Precio"></th>
+                            <th th:text = "Tipo"></th>
+                            <th th:text = "Acciones"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="apunte : ${apuntes}">
+                            <td th:text="${apunte.concepto}"></td>
+                            <td th:text="${apunte.precio}"></td>
+                            <td th:text="${apunte.tipo}"></td>
+                            <td>
+                                <a th:href="@{/editarApunte/}+${apunte.idapuntecontable}" th:text = "Editar"></a>
+                                <a th:href="@{/eliminarApunte/}+${apunte.idapuntecontable}" th:text = "Eliminar"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--<div>
+                <p th:text="${Dinero}"></p>
+            </div>-->
+
+            <div th:if = "${apuntes == null || apuntes.empty}">
+                No hay apuntes en la lista
+            </div>
+            <br/>
+            <div><a th:href ="@{/formularioApunte}" th:text = "Añadir"></a></div>
         </div>
-        
-        <!--<div>
-            <p th:text="${Dinero}"></p>
-        </div>-->
-        <div th:if = "${apuntes == null || apuntes.empty}">
-            No hay apuntes en la lista
-        </div>
-        <br/>
-        <div><a th:href ="@{/formularioApunte}" th:text = "Añadir"></a></div>
     </body>
 </html>
 
