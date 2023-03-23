@@ -29,6 +29,7 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Fecha</th>
+                    <th>Horario</th>
                     <th>Ubicación</th>
                     <th>Duración</th>
                     <th>Opciones</th>
@@ -36,6 +37,7 @@
                 <tr th:each="ensayo : ${Evento}">
                     <td th:text="${ensayo.nombreEvento}"></td>
                     <td th:text="${ensayo.fechaEvento}"></td>
+                    <td th:text="${ensayo.horario}"></td>
                     <td th:text="${ensayo.ubicacionEvento}"></td>
                     <td th:text="${ensayo.duracion}"></td>
                     <td>
