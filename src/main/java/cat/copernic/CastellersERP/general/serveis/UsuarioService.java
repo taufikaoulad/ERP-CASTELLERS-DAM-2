@@ -9,8 +9,17 @@ import cat.copernic.CastellersERP.DAO.UsuarioDAO;
 import cat.copernic.CastellersERP.model.TipoUsuario;
 import cat.copernic.CastellersERP.model.Usuario;
 import java.util.ArrayList;
+import org.springframework.security.core.GrantedAuthority;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 /*Anotació que permet al sistema que reconegui aquesta classe com una classe de servei
  *i que permet injectar aquesta classe en el controlador
 */
-@Service 
+@Service
 public class UsuarioService implements UsuarioServiceInterface {
 
     /*Atribut que defineix un UsuarioDAO. Mitjançant aquest atribut el control ja no 
@@ -58,4 +67,32 @@ public class UsuarioService implements UsuarioServiceInterface {
     public Usuario cercarUsuario(Usuario usuario) {
         return this.usuarioDAO.findById(usuario.getIdusuario()).orElse(null);
     }
+    
+    @Override
+    public Usuario buscarUsuarioPorMail(String email) {
+       return this.usuarioDAO.findByUsername(email);
+    }
+    
+    /*@Override
+    @Transactional(readOnly=true)
+    public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
+        
+        Usuario usuario = usuarioDAO.findByNombre(nombre);
+        
+        if (usuario == null) {
+            throw new UsernameNotFoundException(nombre);
+        }
+        
+        var rols = new ArrayList<GrantedAuthority>();
+        
+        for(TipoUsuario tipousuario: usuario.getTipoUsuario()){
+            rols.add(new SimpleGrantedAuthority(tipousuario.getNombretipousuario()));
+        }
+        
+        return new User(usuario.getNombre(), usuario.getContrasena(), rols);
+    }*/
+
+    
+    
+   
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head th:replace = "~{layout/plantilla :: head}">
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: menu}" />
+        
+        <section>
+            <h1>Inscribirse al Transporte de la Salida</h1>
+        </section>
+        
+        <main>
+            <p>
+                <form th:action="@{/inscribirseTransporte}" method="post" th:object="${}">
+
+                    <p>
+                        <label for="asistenciaTransporte">Inscribirse A Transporte :</label><br><br>
+                        <input type="checkbox" name="asistenciaTransporte" th:field="*{asistenciaTransporte}"><br><br>
+                    </p>
+                    
+                <input type="submit" name="enviar" value="Enviar Dades"/> 
+
+                </form>
+             </p>
+        </main>
+        
+        <div>
+            <a th:href = "@{/paginalistarSalidas}">
+                <button>Volver</button>
+            </a>
+        </div>
+        
+    </body>
+</html>

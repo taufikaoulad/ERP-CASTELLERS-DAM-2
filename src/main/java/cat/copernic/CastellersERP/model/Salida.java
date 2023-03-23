@@ -23,11 +23,5 @@ public class Salida extends Evento implements Serializable {
     //Identificació de la classe per poder deserialitzar de manera correcta
     private static final long serialVersionUID = 1L;
     
-    @Column(name = "asistenciatransporte")
-    private boolean asistenciaTransporte;
-  
-    @Column(name = "asistenciasalida")
-    private boolean asistenciaSalida;
-    
     private boolean paradita;
 }
