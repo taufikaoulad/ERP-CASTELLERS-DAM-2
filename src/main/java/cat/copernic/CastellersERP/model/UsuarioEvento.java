@@ -41,6 +41,14 @@ public class UsuarioEvento implements Serializable{
     private Usuario usuario_idusuario;
          */   
     
+    @ManyToOne
+    @JoinColumn(name = "evento_idevento")
+    private Evento evento;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_idusuario")
+    private Usuario usuario;
+    
     
     
 }
