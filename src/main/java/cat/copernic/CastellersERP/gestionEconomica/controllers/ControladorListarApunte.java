@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ControladorListarApunte {
     
+    double dinero = 0;
     /*
     si una clase necesita una instancia de otro componente, simplemente se puede declarar un campo con la anotación 
     "@Autowired" y Spring Boot se encargará de crear una instancia y asignarla al campo automáticamente.
@@ -35,6 +36,8 @@ public class ControladorListarApunte {
     public String inicio(Model model, @AuthenticationPrincipal User username){ 
         
         model.addAttribute("apuntes", apunteService.listarApuntes());
+        
+        model.addAttribute("Dinero", dinero);
         
         return "gestionEconomica/ListarApuntes"; 
     }
@@ -51,8 +54,13 @@ public class ControladorListarApunte {
         if (errors.hasErrors()) {
             return "gestionEconomica/AnadirApunte";
         }
-        
         apunteService.afegirApuntes(apunte);
+        
+//        if (apunte.getTipo().equals("Ingreso")) {
+//            dinero += apunte.getPrecio();
+//        } else if (apunte.getTipo().equals("Gasto")) {
+//            dinero -= apunte.getPrecio();
+//        }
         
         return "redirect:/gestionEconomica";
     }

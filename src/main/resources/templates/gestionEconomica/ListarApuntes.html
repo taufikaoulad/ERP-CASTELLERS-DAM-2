@@ -21,7 +21,6 @@
                 </thead>
                 <tbody>
                     <tr th:each="apunte : ${apuntes}">
-                        <td th:text="${apunte.idapuntecontable}"></td>
                         <td th:text="${apunte.concepto}"></td>
                         <td th:text="${apunte.precio}"></td>
                         <td th:text="${apunte.tipo}"></td>
@@ -33,6 +32,10 @@
                 </tbody>
             </table>
         </div>
+        
+        <!--<div>
+            <p th:text="${Dinero}"></p>
+        </div>-->
         <div th:if = "${apuntes == null || apuntes.empty}">
             No hay apuntes en la lista
         </div>
