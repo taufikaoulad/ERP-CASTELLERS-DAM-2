@@ -6,8 +6,10 @@ package cat.copernic.CastellersERP.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
@@ -30,7 +32,11 @@ public abstract class Evento implements Serializable {
     private String nombreEvento;
 
     @Column(name = "fecha")
+    @Future
     private Date fechaEvento;
+    
+    @Column(name = "horario")
+    private Time horario;
 
     @Column(name = "ubicacion")
     private String ubicacionEvento;

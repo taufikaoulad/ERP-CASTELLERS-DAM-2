@@ -4,18 +4,19 @@
  */
 package cat.copernic.CastellersERP.general.serveis;
 
+import cat.copernic.CastellersERP.DAO.TipoUsuarioDAO;
 import cat.copernic.CastellersERP.DAO.UsuarioDAO;
 import cat.copernic.CastellersERP.model.TipoUsuario;
 import cat.copernic.CastellersERP.model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-/*import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,15 +28,15 @@ import org.springframework.transaction.annotation.Transactional;
 /*Anotació que permet al sistema que reconegui aquesta classe com una classe de servei
  *i que permet injectar aquesta classe en el controlador
 */
-@Service ("userDetailsService")
-public class UsuarioService implements UsuarioServiceInterface/*, UserDetailsService*/{
+@Service 
+public class UsuarioService implements UsuarioServiceInterface {
 
     /*Atribut que defineix un UsuarioDAO. Mitjançant aquest atribut el control ja no 
      *accedirà directament a la capa de dades, si no que accedirà mitjançant la capa de servei.
      */
     @Autowired
     private UsuarioDAO usuarioDAO;
-
+    
     /*LListar gossos de la taula gos de la BBDD veterinari*/
     @Override
     @Transactional(readOnly = true)
@@ -63,25 +64,4 @@ public class UsuarioService implements UsuarioServiceInterface/*, UserDetailsSer
     public Usuario cercarUsuario(Usuario usuario) {
         return this.usuarioDAO.findById(usuario.getIdusuario()).orElse(null);
     }
-    
-    /*@Override
-    @Transactional(readOnly=true)
-    public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
-        
-        Usuario usuario = usuarioDAO.findByNombre(nombre);
-        
-        if (usuario == null) {
-            throw new UsernameNotFoundException(nombre);
-        }
-        
-        var rols = new ArrayList<GrantedAuthority>();
-        
-        for(TipoUsuario tipousuario: usuario.getTipoUsuario()){
-            rols.add(new SimpleGrantedAuthority(tipousuario.getNombretipousuario()));
-        }
-        
-        return new User(usuario.getNombre(), usuario.getContrasena(), rols);
-    }*/
-    
-   
 }
