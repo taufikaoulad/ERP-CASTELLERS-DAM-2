@@ -21,4 +21,6 @@ public interface CastilloServiceInterface {
     
     public Castillo buscarCastillo(Castillo castillo);
     
+    public Castillo buscarCastilloPorId(int idCastillo);
+    
 }

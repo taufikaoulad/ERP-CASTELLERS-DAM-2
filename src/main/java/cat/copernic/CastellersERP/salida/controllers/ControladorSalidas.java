@@ -8,7 +8,10 @@ package cat.copernic.CastellersERP.salida.controllers;
 import cat.copernic.CastellersERP.DAO.EventoDAO;
 import cat.copernic.CastellersERP.DAO.SalidaDAO;
 import cat.copernic.CastellersERP.DAO.UsuarioDAO;
+import cat.copernic.CastellersERP.castillo.serveis.CastilloService;
+import cat.copernic.CastellersERP.general.serveis.UsuarioEventoService;
 import cat.copernic.CastellersERP.general.serveis.UsuarioService;
+import cat.copernic.CastellersERP.model.Castillo;
 import cat.copernic.CastellersERP.model.Ensayo;
 import cat.copernic.CastellersERP.model.Evento;
 import cat.copernic.CastellersERP.model.Salida;
@@ -41,11 +44,16 @@ public class ControladorSalidas {
     @Autowired //Anotació que injecta tots els mètodes i possibles dependències de SalidaDAO al controlador
     private SalidaService salidaService; //Atribut per poder utilitzar les funcions CRUD de la interfície SalidaDAO
     
+    @Autowired 
+    private CastilloService castilloService; 
+    
     @Autowired
     private UsuarioService usuarioService;
 
     @Autowired
     private UsuarioDAO UsuarioDAO;
+    
+    
     
     //(localhost:8080/paginalistarSalidas)
     @GetMapping("/paginalistarSalidas")
@@ -177,7 +185,7 @@ public class ControladorSalidas {
         /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
          *el mètode cercarGos de la capa de servei.*/
         model.addAttribute("salida", salidaService.cercarSalida(salida));
-
+        model.addAttribute("castillos", castilloService.listarCastillos());
         return "castillo/vistaCastillos"; //Retorna la pàgina amb el formulari de les dades del gos
     }
     
@@ -189,26 +197,26 @@ public class ControladorSalidas {
         
         // Obtener el usuario autenticado
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //Usuario usuario = usuarioService.buscarUsuarioPorMail(auth.getName());
+        Usuario usuario = usuarioService.buscarUsuarioPorMail(auth.getName());
         
-        Usuario usuario = new Usuario();
+        //Usuario usuario = new Usuario();
         
         boolean inscrito = salida.getUsuariosAsignados().contains(usuario);
         
-        Date date = new Date(2023-12-12);
+        /*Date date = new Date(2023-12-12);
         TipoUsuario tipoUsuario = new TipoUsuario(); // create a new instance of TipoUsuario
         tipoUsuario.setIdtipousuario(1);
         
-        usuario.setNombre("Taufik4");
+        usuario.setUsername("Taufik4"); 
         usuario.setEdat(date);
         usuario.setMail("taufik4@gmail.com");
-        usuario.setContrasena("mFDsJGU");
+        usuario.setPassword("mFDsJGU"); 
         usuario.setTelefono("894599999");
         usuario.setPeso(82.23f);
         usuario.setAltura(1.85f);
         usuario.setActivo(true);
         usuario.setPosicio("tierra");
-        usuario.setTipousuario_idtipousuario(tipoUsuario);
+        usuario.setTipousuario_idtipousuario(tipoUsuario);*/
         
         if (!inscrito) {
             salida.getUsuariosAsignados().add(usuario);
@@ -219,6 +227,61 @@ public class ControladorSalidas {
         model.addAttribute("inscrito", inscrito); // Añadir el booleano al modelo
 
         return "redirect:/paginalistarSalidas";
+    }
+    
+    /*@GetMapping("/inscribirseTransporte/{idevento}")
+    public String inscribirseTransporte(Model model, Salida salida) {
+
+        //Salida salida = salidaService.carcarSalidaPorId(idSalida);
+        salida = salidaService.cercarSalida(salida);
+        // Obtener el usuario autenticado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario = usuarioService.buscarUsuarioPorMail(auth.getName());
+        
+        UsuarioEvento usuarioEvento = UsuarioEventoService.buscarUsuarioEventoPorUsuarioYEvento(usuario, salida);
+        //Usuario usuario = new Usuario();
+        
+        boolean inscrito = salida.getUsuariosAsignados().contains(usuario);
+        
+        if (!inscrito) {
+            
+        }
+        
+        model.addAttribute("inscrito", inscrito); // Añadir el booleano al modelo
+
+        return "redirect:/paginalistarSalidas";
+    }*/
+    
+    /*@PostMapping("/inscribirseTransporte/{idevento}")
+    public String inscribirseTransporte(Model model, Salida salida, @RequestParam boolean asistenciaTransporte) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario = usuarioService.buscarUsuarioPorMail(auth.getName());
+        salida = salidaService.cercarSalida(salida);
+
+        UsuarioEvento usuarioEvento = new UsuarioEvento();
+        usuarioEvento.setAsistenciaTransporte(asistenciaTransporte);
+        usuarioEvento.setEvento(salida);
+        usuarioEvento.setUsuario(usuario);
+
+        usuarioEventoService.guardarUsuarioEvento(usuarioEvento);
+
+        return "redirect:/paginalistarSalidas";
+    }*/
+    
+    
+    @GetMapping("/detalleSalida/{idevento}")
+    public String detalleSalida(Model model, Salida salida) {
+
+        //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
+        salida = salidaService.cercarSalida(salida);
+
+        model.addAttribute("salida", salida);
+
+        List<Castillo> castillosAsignados = salida.getCastillosAsignados();
+
+        model.addAttribute("castillosAsignados", castillosAsignados);
+
+        return "salida/detalleCastilloSalida";
     }
 
 }

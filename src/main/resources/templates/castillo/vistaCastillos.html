@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -9,7 +10,7 @@
         <nav>
             <ul>
               <li><a href="/menuPrincipal" th:text = "Menu"></a></li>
-                <li><a href="/listarEnsayos" th:text = "Ensayo"></a></li>
+                <li><a href="/ensayos" th:text = "Ensayo"></a></li>
                 <li><a href="/paginalistarSalidas" th:text = "Salida"></a></li>
                 <li><a href="/vistaCastillos" th:text = "Castillos"></a></li>
                 <li><a href="/vistaModulos" th:text = "Modulos"></a></li>
@@ -17,9 +18,7 @@
                 <li><a href="/paginalistarUsuarios"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
             </ul>
         </nav>
-
-        <div th:if="${castillos!=null && !castillos.empty}">
-            <h1 th:text = "${titulo}"></h1>
+         
             <table border="1">
                 <thead>
                     <tr>
@@ -31,7 +30,7 @@
                         <th th:text = "nctronc"></th>
                         <th th:text = "aixecat"></th>
                         <th th:text = "agulla"></th>
-                        <th th:text = "acciones"></th>
+                        <th th:text = "acciones" colspan="100"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,25 +54,25 @@
                                 <a th:href="@{/eliminarCastillo/}+${castillo.idCastillo}" th:text="Eliminar"/>
                             </div>
                         </td>
-                        <td>
-                            <!-- <input type="button" disabled="disabled">Agregar castillo salida</input> -->
-                            <button disabled="disabled">Agregar castillo salida</button>
+                        <td th:if="${salida!=null}">
+                            <form th:action="@{/pasarCastilloASalida}" method="post">
+                                <input type="hidden" name="idSalida" th:value="${salida.idevento}">
+                                <input type="hidden" name="idCastilloToSalida" th:value="${castillo.idCastillo}">
+                                <button type="submit" name="submit">Agregar Castillo a Salida</button>
+                            </form>
                         </td>
-                        <td>
-                            <button disabled="disabled">Agregar castillo ensayo</button>
+                        <td th:if="${ensayo!=null}">
+                            <form th:action="@{/pasarCastilloAEnsayo}" method="post">
+                                <input type="hidden" name="idEnsayo" th:value="${ensayo.idevento}">
+                                <input type="hidden" name="idCastilloToEnsayo" th:value="${castillo.idCastillo}">
+                                <button type="submit" name="submit">Agregar Castillo al Ensayo</button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
             </table>
-
-            <div th:if="${castillos==null || castillos.empty}"><!--Si l'ArrayList de gossos no està inicialitzat o no té contingut-->
-                <!-- Mostrem missatge-->
-                No hi ha castells a la llista.
-            </div>
-
             <div>
-                <div><a th:href="@{/formularioCastillo}" th:text="añadir"/></div>
+                <a th:href="@{/formularioCastillo}" th:text="añadir"/>
             </div>
-        </div>
     </body>
 </html>

@@ -24,5 +24,5 @@ public interface SalidaServiceInterface {
     
     public Salida cercarSalida(Salida salida); //Mètode que implementarem per cercar un salida
     
-    public Salida carcarSalidaPorId(int idevento);
+    public Salida cercarSalidaPorId(int idevento); //Mètode que implementarem per cercar un salida
 }

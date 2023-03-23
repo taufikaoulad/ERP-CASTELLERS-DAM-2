@@ -8,8 +8,6 @@ package cat.copernic.CastellersERP.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -20,6 +18,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
+import org.hibernate.annotations.Check;
 
 /**
  *
@@ -40,7 +39,7 @@ public class Usuario implements Serializable {
 
     @NotEmpty
     @Size(min = 3)
-    private String nombre;
+    private String username;
  
     @NotNull
     @Past
@@ -51,7 +50,7 @@ public class Usuario implements Serializable {
     private String mail;
     
     @NotEmpty
-    private String contrasena;
+    private String password;
 
     @NotEmpty
     @Pattern(regexp = "\\d{9}")

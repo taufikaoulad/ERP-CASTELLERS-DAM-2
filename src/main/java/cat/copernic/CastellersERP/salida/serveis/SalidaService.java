@@ -52,7 +52,7 @@ public class SalidaService implements SalidaServiceInterface{
     }
 
     @Override
-    public Salida carcarSalidaPorId(int idevento) {
+    public Salida cercarSalidaPorId(int idevento) {
         return this.salidaDAO.findById(idevento).orElse(null);
     }
  

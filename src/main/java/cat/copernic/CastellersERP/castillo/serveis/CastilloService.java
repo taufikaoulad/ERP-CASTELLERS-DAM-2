@@ -45,4 +45,9 @@ public class CastilloService implements CastilloServiceInterface{
     public Castillo buscarCastillo(Castillo castillo) {
         return this.castillo.findById(castillo.getIdCastillo()).orElse(null);
     }
+
+    @Override
+    public Castillo buscarCastilloPorId(int idCastillo) {
+        return this.castillo.findById(idCastillo).orElse(null);
+    }
 }

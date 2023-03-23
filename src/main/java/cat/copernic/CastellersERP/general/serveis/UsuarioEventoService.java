@@ -6,6 +6,7 @@ package cat.copernic.CastellersERP.general.serveis;
 
 import cat.copernic.CastellersERP.DAO.UsuarioDAO;
 import cat.copernic.CastellersERP.DAO.UsuarioEventoDAO;
+import cat.copernic.CastellersERP.model.Evento;
 import cat.copernic.CastellersERP.model.Usuario;
 import cat.copernic.CastellersERP.model.UsuarioEvento;
 import java.util.List;
@@ -45,6 +46,10 @@ public class UsuarioEventoService implements UsuarioEventoServiceInterface{
        return this.usuarioeventoDAO.findById(usuarioevento.getIdusuarioevento()).orElse(null);
     }
 
-   
-    
+    /*@Override
+    @Transactional(readOnly = true)
+    public UsuarioEvento buscarUsuarioEventoPorUsuarioYEvento(Usuario usuario, Evento evento) {
+       return this.usuarioeventoDAO.findByUsuarioAndEvento(usuario, evento);
+    }*/
+ 
 }
