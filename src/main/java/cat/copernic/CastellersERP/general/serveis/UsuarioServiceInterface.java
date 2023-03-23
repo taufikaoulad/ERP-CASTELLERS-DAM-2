@@ -19,4 +19,6 @@ public interface UsuarioServiceInterface {
     public void eliminarUsuario(Usuario usuario); //Mètode que implementarem per eliminar un usuario
     
     public Usuario cercarUsuario(Usuario usuario); //Mètode que implementarem per cercar un usuario
+    
+    public Usuario buscarUsuarioPorMail(String email);
 }
