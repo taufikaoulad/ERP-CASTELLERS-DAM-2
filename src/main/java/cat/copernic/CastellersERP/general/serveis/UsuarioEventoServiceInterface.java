@@ -24,4 +24,6 @@ public interface UsuarioEventoServiceInterface {
     public UsuarioEvento cercarUsuarioEvento(UsuarioEvento usuarioevento); //Mètode que implementarem per cercar un usuario
     
     //public UsuarioEvento buscarUsuarioEventoPorUsuarioYEvento(Usuario usuario, Evento evento);
+
+    public Integer obtenerIdUsuarioEvento(int idUsuario, int idEvento);
 }

@@ -49,6 +49,9 @@ public class ControladorSalidas {
     
     @Autowired
     private UsuarioService usuarioService;
+    
+    @Autowired
+    private UsuarioEventoService usuarioEventoService;
 
     @Autowired
     private UsuarioDAO UsuarioDAO;
@@ -229,6 +232,48 @@ public class ControladorSalidas {
         return "redirect:/paginalistarSalidas";
     }
     
+    @GetMapping("/inscribirseTransporte/{idevento}")
+    public String inscribirseTransporte(Model model, Salida salida, UsuarioEvento usuarioEvento) {
+
+        //Salida salida = salidaService.carcarSalidaPorId(idSalida);
+        salida = salidaService.cercarSalida(salida);
+        //Obtenemos el id del evento
+        int salidaId = salida.getIdevento();
+        
+        // Obtener el usuario autenticado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario = usuarioService.buscarUsuarioPorMail(auth.getName());
+        //Obtenemos el id del usuario
+        int usuarioId = usuario.getIdusuario();
+        
+        boolean inscrito = false;
+        
+        // Comprobar si el usuario ya está inscrito en el evento
+        for (Usuario u : salida.getUsuariosAsignados()) {
+            if (u.getIdusuario() == usuario.getIdusuario()) {
+                inscrito = true;
+                break;
+            }
+        }
+        
+        
+        
+        if (inscrito) {
+            int idusuarioEvento = usuarioEventoService.obtenerIdUsuarioEvento(usuarioId, salidaId);
+            usuarioEvento.setIdusuarioevento(idusuarioEvento);
+            // Marcar la asistencia al transporte como true
+            usuarioEvento.setAsistenciaTransporte(true);
+            
+            // Guardar el objeto UsuarioEvento
+            usuarioEventoService.afegirUsuarioEvento(usuarioEvento); 
+            inscrito = true;
+        }
+
+        model.addAttribute("inscrito", inscrito);
+
+        return "redirect:/paginalistarSalidas";
+    }
+    
     /*@GetMapping("/inscribirseTransporte/{idevento}")
     public String inscribirseTransporte(Model model, Salida salida) {
 
@@ -263,7 +308,7 @@ public class ControladorSalidas {
         usuarioEvento.setEvento(salida);
         usuarioEvento.setUsuario(usuario);
 
-        usuarioEventoService.guardarUsuarioEvento(usuarioEvento);
+        UsuarioEventoService.guardarUsuarioEvento(usuarioEvento);
 
         return "redirect:/paginalistarSalidas";
     }*/
