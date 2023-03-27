@@ -26,28 +26,28 @@
                     <label for="nombreEvento">Nombre:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
                     <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut nom de l'objecte
                         gos assignat a th:objecte-->
-                    <input type="text" name="nombreEvento" th:field="*{nombreEvento}"/>
+                    <input type="text" name="nombreEvento" th:field="*{nombreEvento}" th:disabled="${true}"/>
 
                 </p>
 
                 <p>
                     <label for="fechaEvento">Fecha:</label> <!--Etiqueta per l'edat del gos-->            
-                    <input type="text" name="fechaEvento" th:field="*{fechaEvento}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                    <input type="text" name="fechaEvento" th:field="*{fechaEvento}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
                 </p>
                 
                 <p>
                     <label for="horario">Horario:</label> <!--Etiqueta per l'edat del gos-->            
-                    <input type="text" name="horario" th:field="*{horario}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                    <input type="text" name="horario" th:field="*{horario}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
                 </p>
 
                 <p>
                     <label for="ubicacionEvento">Ubicacion</label> <!--Etiqueta pel sexe del gos-->            
-                    <input type="text" name="ubicacionEvento" th:field="*{ubicacionEvento}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                    <input type="text" name="ubicacionEvento" th:field="*{ubicacionEvento}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                 </p>
 
                 <p>
                     <label for="duracion">Duracion:</label> <!--Etiqueta pel sexe del gos-->            
-                    <input type="text" name="duracion" th:field="*{duracion}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                    <input type="text" name="duracion" th:field="*{duracion}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                 </p>    
             </form>
         </p>

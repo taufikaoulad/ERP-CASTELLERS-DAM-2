@@ -1,24 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Listar Ensayos</title>
-        <meta charset="UTF-8">
-        
+    <head th:replace = "~{layout/plantilla :: head}">
     </head>
     <body>
-        
-        <nav>
-            <ul>
-                <li><a href="/menuPrincipal">Menu</a></li>
-                <li><a href="/listarEnsayos">Ensayo</a></li>
-                <li><a href="/paginalistarSalidas">Salidas</a></li>
-                <li><a href="/vistaCastillos">Castillos</a></li>
-                <li><a href="/gestionEconomica">Administracion</a></li>
-                <li><a href="/vistaModulos">Modulos</a></li>
-                <li><a href="/paginalistarUsuarios"><img th:src="@{'/ajustes.png'}" width='22' height='22'/></a></li>
-            </ul>
-        </nav>
-        
+        <header th:replace="~{layout/plantilla :: menu}" />
+
         <h1>Listar Ensayos</h1>
 
         <div th:if="${Evento!=null && !Evento.empty}">
