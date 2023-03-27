@@ -13,6 +13,7 @@ import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
@@ -38,7 +39,7 @@ public abstract class Evento implements Serializable {
     @Column(name = "fecha")
     @NotNull
     @Future
-    private Date fechaEvento;
+    private LocalDate fechaEvento;
     
     @Column(name = "horario")
     @NotNull
