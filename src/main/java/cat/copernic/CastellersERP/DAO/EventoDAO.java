@@ -15,4 +15,6 @@ import org.springframework.data.repository.CrudRepository;
 
 
 //EventoDAO tiene un parametro que extiende de Evento, esto lo necesitamos para hacer el extends en el EnsayoDAO.
-public interface EventoDAO<T extends Evento> extends CrudRepository<T, Integer>{}
+public interface EventoDAO<T extends Evento> extends CrudRepository<T, Integer>{
+
+}
