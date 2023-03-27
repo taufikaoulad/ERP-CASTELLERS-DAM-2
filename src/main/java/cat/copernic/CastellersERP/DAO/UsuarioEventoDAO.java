@@ -5,16 +5,16 @@
 package cat.copernic.CastellersERP.DAO;
 
 import cat.copernic.CastellersERP.model.Evento;
+import cat.copernic.CastellersERP.model.Usuario;
+import cat.copernic.CastellersERP.model.UsuarioEvento;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
- * @author capy
- * @param <T>
+ * @author Taufik
  */
+public interface UsuarioEventoDAO extends CrudRepository<UsuarioEvento, Integer>{
 
-
-//EventoDAO tiene un parametro que extiende de Evento, esto lo necesitamos para hacer el extends en el EnsayoDAO.
-public interface EventoDAO<T extends Evento> extends CrudRepository<T, Integer>{
-
+    //public UsuarioEvento findByUsuarioAndEvento(Usuario usuario, Evento evento);
+    
 }
