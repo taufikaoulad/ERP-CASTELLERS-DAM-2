@@ -17,19 +17,22 @@
                     <tr>
                         <th th:text="Nombre"></th>
                         <th th:text="Fecha"></th>
+                        <th th:text="Horario"></th>
                         <th th:text="Ubicacion"></th>
                         <th th:text="Paradita"></th>
                         <th th:text="Castillo"></th>
                         <th th:text="Acciones"></th>
-                        <th th:text="Inscribirseasalida"></th>
-                        <th th:text="Inscribirseatransporte"></th>
-                        <th>Inscribirse Asistencia/Transporte Salida</th>
+                        <!--<th th:text="Inscribirseasalida"></th>-->
+                        <th>Inscribirse A Salida</th>
+                        <th>Inscribirse A Transporte Salida</th>
+                        <th>Pasar lista Salida</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="salida : ${salidas}">
                         <td th:text="${salida.nombreEvento}"></td>
                         <td th:text="${salida.fechaEvento}"></td>
+                        <td th:text="${salida.horario}"></td>
                         <td th:text="${salida.ubicacionEvento}"></td>
                         <td> <input type="checkbox" th:checked="${salida.paradita}" disabled="disabled"/> </td>
                         <td>
@@ -43,7 +46,11 @@
                             </a>
 
                             <a href="/paginaassistenciaYTransporteSalida">
-                                <button th:text="Nparticipantes"></button>
+                                <button th:text="NumParticipantes"></button>
+                            </a>
+                            
+                            <a th:href="@{/pasarIDaCastillo/}+${salida.idevento}">
+                                <button th:text="Inscribirse Transporte"></button>
                             </a>
 
                             <a th:href="@{/editarSalida/}+${salida.idevento}">
@@ -53,19 +60,21 @@
                                 <button ><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
                             </a>
                         </td>
-                        <td> 
+                        <!--<td> 
                           <input type="checkbox" th:checked="${salida.asistenciaSalida}" disabled="disabled"/>
                         </td>
                         <td>
                             <input type="checkbox" th:checked="${salida.asistenciaTransporte}" disabled="disabled"/>
+                        </td>-->
+                        <td> 
+                            <a th:href="@{/inscribirseSalidaITransporte/}+${salida.idevento}">
+                                <button th:disabled="${inscrito}" th:onclick="this.disabled=true;" >Inscribirse a Salida</button>
+                            </a>
                         </td>
                         
-                        
-                        
                         <td> 
-                            <!-- <input type="checkbox" th:checked="${salida.idevento}"/> --> 
                             <a th:href="@{/editarAsistencia/}+${salida.idevento}">
-                                <button>Inscribirse</button>
+                                <button>Pasar Lista</button>
                             </a>
                         </td>
                         

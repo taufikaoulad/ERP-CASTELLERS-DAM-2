@@ -6,6 +6,7 @@ package cat.copernic.CastellersERP.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import lombok.Data;
