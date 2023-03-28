@@ -7,6 +7,7 @@ package cat.copernic.CastellersERP.general.config;
 import cat.copernic.CastellersERP.DAO.UsuarioDAO;
 import cat.copernic.CastellersERP.model.Usuario;
 import java.util.ArrayList;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author pablogomez
  */
+
 @Service ("userDetailsService")
 public class AutentificacionService implements UserDetailsService{
     
