@@ -68,7 +68,6 @@ public class ConfiguracionAutentificacion {
                 )
                 .build();*/
         return http.csrf().disable().authorizeHttpRequests((requests) -> requests
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .requestMatchers("/menuPrincipal").authenticated()
                 .requestMatchers("/gestionEconomica").hasAnyAuthority("Tresorer")
                 .anyRequest().authenticated()
