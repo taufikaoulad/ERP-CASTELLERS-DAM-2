@@ -15,8 +15,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
         <main>
             <p>
-                <form th:action="@{/inscribirseTransporte}" method="post" th:object="${}">
+                <form th:action="@{/inscribirseTransporte}" method="get" th:object="${UsuarioEvento}" th:object="${Evento}">
 
+                    <input type="hidden" name="idusuarioevento" th:field="*{idusuarioevento}"/>
+                    <input type="hidden" name="idevento" th:field="*{idevento}"/>
+                    
                     <p>
                         <label for="asistenciaTransporte">Inscribirse A Transporte :</label><br><br>
                         <input type="checkbox" name="asistenciaTransporte" th:field="*{asistenciaTransporte}"><br><br>

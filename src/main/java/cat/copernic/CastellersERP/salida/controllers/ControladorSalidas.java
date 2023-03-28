@@ -49,6 +49,9 @@ public class ControladorSalidas {
     
     @Autowired
     private UsuarioService usuarioService;
+    
+    @Autowired
+    private UsuarioEventoService usuarioEventoService;
 
     @Autowired
     private UsuarioDAO UsuarioDAO;
@@ -148,8 +151,8 @@ public class ControladorSalidas {
         return new RedirectView("/editarAsistencia/" + salida.getIdevento());
     }
     
-    @PostMapping("/eliminarAsistentes")
-    public RedirectView eliminarAsistentes(@RequestParam List<Integer> usuariosId, Salida salida, Model model) {
+    /*@PostMapping("/eliminarAsistentes")
+    public RedirectView eliminarAsistentes(@RequestParam List<Integer> usuariosId, Salida salida, Model model, Usuario U) {
 
         //Guardamos el objeto que tiene la misma id de la base de datos en el objeto pasado por parámetro "ensayo".
         salida = salidaService.cercarSalida(salida);
@@ -176,9 +179,125 @@ public class ControladorSalidas {
 
         //return detalleEnsayo(model, ensayo);
         return new RedirectView("/editarAsistencia/" + salida.getIdevento());
+    }*/
+    
+    /*@PostMapping("/eliminarAsistentes")
+    public RedirectView eliminarAsistentes(@RequestParam List<Integer> usuariosId, Salida salida, Model model) {
+
+        // Obtenemos la salida desde la base de datos
+        Salida salidaActualizada = salidaService.cercarSalida(salida);
+
+        // Obtenemos la lista de usuarios asignados de la salida actualizada
+        List<Usuario> usuariosAsignados = salidaActualizada.getUsuariosAsignados();
+
+        // Creamos una lista temporal para almacenar los usuarios que no se eliminarán
+        List<Usuario> usuariosPermanentes = new ArrayList<>();
+
+        // Recorremos la lista de usuarios asignados y añadimos a la lista temporal aquellos que no se eliminarán
+        for (Usuario usuario : usuariosAsignados) {
+            if (!usuariosId.contains(usuario.getIdusuario())) {
+                usuariosPermanentes.add(usuario);
+            }
+            
+        }
+
+        // Actualizamos la lista de usuarios asignados de la salida actualizada
+        salidaActualizada.setUsuariosAsignados(usuariosPermanentes);
+
+        // Guardamos los cambios en la base de datos
+        salidaService.afegirSalida(salidaActualizada);
+
+        // Redireccionamos al detalle de la salida
+        return new RedirectView("/editarAsistencia/" + salidaActualizada.getIdevento());
+    }*/
+    
+    /*@PostMapping("/eliminarAsistentes")
+    public RedirectView eliminarAsistentes(int a, @RequestParam List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
+
+        // Obtenemos la salida desde la base de datos
+        Salida salidaActualizada = salidaService.cercarSalida(salida);
+        int salidaId = salidaActualizada.getIdevento();
+
+        // Obtenemos la lista de usuarios asignados de la salida actualizada
+        List<Usuario> usuariosAsignados = salidaActualizada.getUsuariosAsignados();
+
+        // Creamos una lista temporal para almacenar los usuarios que no se eliminarán
+        List<Usuario> usuariosPermanentes = new ArrayList<>();
+        
+        UsuarioEvento usuarioEvento1 = new UsuarioEvento();
+        
+        
+        // Recorremos la lista de usuarios asignados y añadimos a la lista temporal aquellos que no se eliminarán
+        for (Usuario usuario : usuariosAsignados) {
+            if (!usuariosId.contains(usuario.getIdusuario())) {
+                usuariosPermanentes.add(usuario);
+            } else {
+                int idusuarioEvento = usuarioEventoService.obtenerIdUsuarioEvento(usuario.getIdusuario(), salidaId);
+                usuarioEvento1.setIdusuarioevento(idusuarioEvento);
+                usuarioEvento = usuarioEventoService.cercarUsuarioEvento(usuarioEvento1);
+                // Si el usuario está siendo eliminado, verificamos si tiene asistencia al transporte
+                Boolean asistenciaTransporte = null;
+                for (Usuario usuario1 : salidaActualizada.getUsuariosAsignados()) {
+                    if (usuarioEvento.getUsuario().getIdusuario() == usuario1.getIdusuario()) {
+                        asistenciaTransporte = usuarioEvento.getAsistenciaTransporte();
+                        break;
+                    }
+                }
+                if (asistenciaTransporte != null) {
+                    // Si tiene asistencia al transporte, marcamos la asistencia como falsa
+                    for (Usuario usuario2 : salidaActualizada.getUsuariosAsignados()) {
+                        if (usuarioEvento.getUsuario().getIdusuario() == usuario2.getIdusuario()) {
+                            usuarioEvento.setAsistenciaTransporte(false);
+                            break;
+                        }
+                    }
+                }
+                
+                // Eliminamos el usuario del evento
+                usuarioEventoService.eliminarUsuarioEvento(usuarioEvento);
+            }
+
+        }
+
+        // Actualizamos la lista de usuarios asignados de la salida actualizada
+        salidaActualizada.setUsuariosAsignados(usuariosPermanentes);
+
+        // Guardamos los cambios en la base de datos
+        salidaService.afegirSalida(salidaActualizada);
+
+        // Redireccionamos al detalle de la salida
+        return new RedirectView("/editarAsistencia/" + salidaActualizada.getIdevento());
+    }*/
+    
+    @PostMapping("/eliminarAsistentes")
+    public RedirectView eliminarAsistentes(@RequestParam List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
+        // Obtenemos la salida desde la base de datos
+        Salida salidaActualizada = salidaService.cercarSalida(salida);
+        int salidaId = salidaActualizada.getIdevento();
+
+        // Obtenemos el usuario que se eliminará
+        List<Usuario> usuariosAsignados = salidaActualizada.getUsuariosAsignados();
+        
+        UsuarioEvento usuarioEvento1 = new UsuarioEvento();
+        
+        for (Usuario usuario : usuariosAsignados) {
+            if (usuariosId.contains(usuario.getIdusuario())) {
+                Usuario usuarioAEliminar = usuarioService.cercarUsuario(usuario);
+                int usuarioId = usuarioAEliminar.getIdusuario();
+                int idusuarioEvento = usuarioEventoService.obtenerIdUsuarioEvento(usuarioId, salidaId);
+                usuarioEvento1.setIdusuarioevento(idusuarioEvento);
+                usuarioEvento = usuarioEventoService.cercarUsuarioEvento(usuarioEvento1);
+                // Eliminamos el usuario de la salida
+                if (usuarioEvento != null) {
+                    usuarioEventoService.eliminarUsuarioEvento(usuarioEvento); 
+                }
+            }
+        }
+
+        // Redireccionamos al detalle de la salida
+        return new RedirectView("/editarAsistencia/" + salidaActualizada.getIdevento());
     }
-    
-    
+
     @GetMapping("/pasarIDaCastillo/{idevento}")
     public String pasarIDaCastillo(Salida salida, Model model) {
 
@@ -229,6 +348,54 @@ public class ControladorSalidas {
         return "redirect:/paginalistarSalidas";
     }
     
+    @GetMapping("/inscribirseTransporte/{idevento}")
+    public String inscribirseTransporte(Model model, Salida salida, UsuarioEvento usuarioEvento) {
+
+        //Salida salida = salidaService.carcarSalidaPorId(idSalida);
+        salida = salidaService.cercarSalida(salida);
+        //Obtenemos el id del evento
+        int salidaId = salida.getIdevento();
+        
+        // Obtener el usuario autenticado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario = usuarioService.buscarUsuarioPorMail(auth.getName());
+        //Obtenemos el id del usuario
+        int usuarioId = usuario.getIdusuario();
+        
+        boolean inscrito = false;
+        
+        // Comprobar si el usuario ya está inscrito en el evento
+        for (Usuario u : salida.getUsuariosAsignados()) {
+            if (u.getIdusuario() == usuario.getIdusuario()) {
+                inscrito = true;
+                break;
+            }
+        }
+        
+        UsuarioEvento usuarioEvento1 = null;
+        
+        if (inscrito) {
+            int idusuarioEvento = usuarioEventoService.obtenerIdUsuarioEvento(usuarioId, salidaId);
+            
+            usuarioEvento1 = new UsuarioEvento();
+            usuarioEvento1.setIdusuarioevento(idusuarioEvento);
+            
+            usuarioEvento = usuarioEventoService.cercarUsuarioEvento(usuarioEvento1);
+            
+            // Marcar la asistencia al transporte como true
+            usuarioEvento.setAsistenciaTransporte(true);
+           
+  
+            // Guardar el objeto UsuarioEvento
+            usuarioEventoService.afegirUsuarioEvento(usuarioEvento); 
+            inscrito = true;
+        }
+
+        model.addAttribute("inscrito", inscrito);
+
+        return "redirect:/paginalistarSalidas";
+    }
+    
     /*@GetMapping("/inscribirseTransporte/{idevento}")
     public String inscribirseTransporte(Model model, Salida salida) {
 
@@ -263,7 +430,7 @@ public class ControladorSalidas {
         usuarioEvento.setEvento(salida);
         usuarioEvento.setUsuario(usuario);
 
-        usuarioEventoService.guardarUsuarioEvento(usuarioEvento);
+        UsuarioEventoService.guardarUsuarioEvento(usuarioEvento);
 
         return "redirect:/paginalistarSalidas";
     }*/
@@ -283,5 +450,41 @@ public class ControladorSalidas {
 
         return "salida/detalleCastilloSalida";
     }
+    
+    @GetMapping("/detalleAsistentesSalida/{idevento}")
+    public String detalleAsistentesSalida(Model model, Salida salida, UsuarioEvento usuarioEvento) {
+        
+        //Salida salida = salidaService.carcarSalidaPorId(idSalida);
+        salida = salidaService.cercarSalida(salida);
+        //Obtenemos el id del evento
+        int salidaId = salida.getIdevento();
+        
+        List<Usuario> usuarios = new ArrayList<>(salida.getUsuariosAsignados());
+    
+        List<Usuario> usuariosTransporte = new ArrayList<>();
+        
+        UsuarioEvento usuarioEvento1 = new UsuarioEvento();
 
+        for (Usuario u : salida.getUsuariosAsignados()) {
+            
+            int idusuarioEvento = usuarioEventoService.obtenerIdUsuarioEvento(u.getIdusuario(), salidaId);
+            usuarioEvento1.setIdusuarioevento(idusuarioEvento);
+            
+            usuarioEvento = usuarioEventoService.cercarUsuarioEvento(usuarioEvento1);
+            
+            Boolean asistenciaTransporte = usuarioEvento.getAsistenciaTransporte();
+            if (asistenciaTransporte != null && asistenciaTransporte.booleanValue()) {
+                usuariosTransporte.add(u);
+            }
+            
+        }
+
+        model.addAttribute("numeroDeAsistentesTransporte", usuariosTransporte.size());
+        model.addAttribute("usuariosTransporte", usuariosTransporte);
+        
+        model.addAttribute("numeroDeAsistentes", usuarios.size());
+        model.addAttribute("usuarios", usuarios);
+        
+        return "salida/assistenciaYTransporteSalida";
+    }
 }

@@ -47,8 +47,5 @@ public class UsuarioEvento implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "usuario_idusuario")
-    private Usuario usuario;
-    
-    
-    
+    private Usuario usuario;   
 }
