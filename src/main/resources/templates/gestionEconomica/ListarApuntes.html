@@ -14,12 +14,12 @@
 
                 <table class="table">
 
-                    <thead class="table-dark">
+                    <thead class="table-warning">
                         <tr>
                             <th th:text = "Concepto"></th>
                             <th th:text = "Precio"></th>
                             <th th:text = "Tipo"></th>
-                            <th th:text = "Acciones"></th>
+                            <th th:text = "Acciones" colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,8 +28,15 @@
                             <td th:text="${apunte.precio}"></td>
                             <td th:text="${apunte.tipo}"></td>
                             <td>
-                                <a th:href="@{/editarApunte/}+${apunte.idapuntecontable}" th:text = "Editar"></a>
-                                <a th:href="@{/eliminarApunte/}+${apunte.idapuntecontable}" th:text = "Eliminar"></a>
+                                <a th:href="@{/editarApunte/}+${apunte.idapuntecontable}">
+                                    <button type="button" class="btn btn-warning"><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/eliminarApunte/}+${apunte.idapuntecontable}">
+                                    <button type="button" class="btn btn-danger"><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+                                </a>
+                            </td>
                             </td>
                         </tr>
                     </tbody>
@@ -43,8 +50,10 @@
                 No hay apuntes en la lista
             </div>
             <br/>
-            <div><a th:href ="@{/formularioApunte}" th:text = "Añadir"></a></div>
+            <div><a type="button" class="btn btn-outline-warning" th:href ="@{/formularioApunte}" th:text = "Añadir"></a></div>
+            <!--<button th:disabled="${#authorization != null and not #authorization.expression('hasAnyAuthority(''Tresorer'')')}">Mi boton</button>-->
         </div>
+
     </body>
 </html>
 

@@ -5,31 +5,33 @@
         <meta charset="UTF-8"/>
     </head>
     <body>
-        <h1>Añadir</h1>
+        <div class="container">
+            <h1>Añadir</h1>
 
-        <a th:href = "@{/gestionEconomica}" th:text = "Inicio"></a>
-
-        <p>
-        <form th:action = "@{/guardarCircular}" method="post" th:object = "${circular}">
-
-            <input type="hidden" name="idcircular" th:field="*{idcircular}"/>
+            <a th:href = "@{/gestionEconomica}" th:text = "Inicio"></a>
 
             <p>
-                <label for="titulo">Titulo:</label>
-                <input type="text" id="titulo" th:field = "*{titulo}">
-                
-                <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"/>
-            </p>
-            <p>
-                <label for="mensaje">Mensaje</label>
-                <input type="text" id="mensaje" th:field = "*{mensaje}">
-                
-                <span th:if="${#fields.hasErrors('mensaje')}" th:errors="*{mensaje}"/>
+            <form th:action = "@{/guardarCircular}" method="post" th:object = "${circular}">
 
-            </p>
-            <input type="submit" name="enviar" values="Enviar Dades"/>
-        </form>
-    </p>
+                <input type="hidden" name="idcircular" th:field="*{idcircular}"/>
+
+                <p>
+                    <label for="titulo">Titulo:</label>
+                    <input type="text" id="titulo" th:field = "*{titulo}">
+
+                    <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"/>
+                </p>
+                <p>
+                    <label for="mensaje">Mensaje</label>
+                    <input type="text" id="mensaje" th:field = "*{mensaje}">
+
+                    <span th:if="${#fields.hasErrors('mensaje')}" th:errors="*{mensaje}"/>
+
+                </p>
+                <input type="submit" name="enviar" values="Enviar Dades"/>
+            </form>
+        </p>
+    </div>
 </body>
 </html>
 

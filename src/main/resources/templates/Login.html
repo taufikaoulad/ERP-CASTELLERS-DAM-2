@@ -1,33 +1,105 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace = "~{layout/plantilla :: head}">
+    <head >
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+            }
+
+            .container {
+                max-width: 500px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            }
+
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+
+            img {
+                text-align: center;
+                display: block; /* Convierte la imagen en un bloque */
+                margin: auto; /* Centra verticalmente */
+            }
+
+            label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
+
+            /*button[type="submit"] {
+                background-color: #333;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 20px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            button[type="submit"]:hover {
+                background-color: #555;
+            }*/
+
+            .error {
+                color: red;
+                margin-bottom: 10px;
+            }
+        </style>
+        <title>CastellersERP</title>
+        <meta charset="UTF-8"/>
+
+        <!--Enllaç als estils de Bootstrap-->
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <!--Enllaç als estils de Font Awesome-->
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+        <!--Llibreries jquery, popper i Java Script de Bootstrap pels elements dinàmics que podem utilitzar amb Bootstrap-->
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
+        <div class="container">
+            <h1>Login</h1>
 
-        <h1>Login</h1>
+            <div>
+                <img th:src="@{'/LogoERPCastellers.png'}" width='150' height='150'/><br>
 
-        <div>
-            <img th:src="@{'/LogoERPCastellers.png'}" width='150' height='150'/><br>
+            </div>
 
+            <form method ="POST" th:action = "@{/Login}">
+                <p>
+                    <label for="username">Usuario:</label>
+                    <input type="text" name ="username" id="username"/>
+                </p>
+
+                <p>
+                    <label for="password">Contraseña:</label>
+                    <input type="password" name = "password" id="password"><br>
+                </p>
+
+                <p><input class="btn btn-outline-warning" type="submit" id="Login"></p>
+
+            </form>
+
+            <!--<a href="/menuPrincipal">
+                <button th:text="${login}">Login</button>
+            </a>-->
         </div>
-
-        <form method ="POST" th:action = "@{/Login}">
-            <p>
-                <label for="username">Usuario:</label>
-                <input type="text" name ="username" id="username"/>
-            </p>
-
-            <p>
-                <label for="password">Contraseña:</label>
-                <input type="password" name = "password" id="password"><br>
-            </p>
-
-            <input type="submit" id="Login">
-
-        </form>
-        
-        <!--<a href="/menuPrincipal">
-            <button th:text="${login}">Login</button>
-        </a>-->
     </body>
 </html>
