@@ -19,6 +19,7 @@ import cat.copernic.CastellersERP.model.TipoUsuario;
 import cat.copernic.CastellersERP.model.Usuario;
 import cat.copernic.CastellersERP.model.UsuarioEvento;
 import cat.copernic.CastellersERP.salida.serveis.SalidaService;
+import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.Errors;
 
 /**
  *
@@ -74,10 +76,12 @@ public class ControladorSalidas {
     }
     
     @PostMapping("/guardarSalida") //action=guardarGos
-    public String guardarSalida(Salida salida) {
-
-        salidaService.afegirSalida(salida); //Afegim la salida passat per paràmetre a la base de dades
-
+    public String guardarSalida(@Valid Salida salida, Errors errors) {
+        if (errors.hasErrors()) {
+            return "salida/anadirSalida"; //Afegim la salida passat per paràmetre a la base de dades
+        }
+        salidaService.afegirSalida(salida);
+        
         return "redirect:/paginalistarSalidas"; //Retornem a la pàgina inicial de les sortides mitjançant redirect
     }
     
@@ -487,4 +491,46 @@ public class ControladorSalidas {
         
         return "salida/assistenciaYTransporteSalida";
     }
+    
+    /*@GetMapping("/inscribirseTransporte/{idevento}")
+    public String inscribirsesTransporte(Model model, Salida salida, UsuarioEvento usuarioEvento, Usuario usuario) {
+
+        // Obtener el usuario autenticado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        usuario = usuarioService.buscarUsuarioPorMail(auth.getName());
+        //Obtenemos el id del usuario
+        Usuario usuario1 = new Usuario();
+        boolean inscrito = false;
+        
+        // Comprobar si el usuario ya está inscrito en el evento
+        for (Usuario u : salida.getUsuariosAsignados()) {
+            if (u.getIdusuario() == usuario.getIdusuario()) {
+                inscrito = true;
+                break;
+            }
+        }
+        
+        UsuarioEvento usuarioEvento1 = new UsuarioEvento();
+        
+        if (inscrito) {
+            int idusuarioEvento = usuarioEventoService.obtenerIdUsuarioEvento(usuarioId, salidaId);
+            
+            
+            usuarioEvento1.setIdusuarioevento(idusuarioEvento);
+            
+            usuarioEvento = usuarioEventoService.cercarUsuarioEvento(usuarioEvento1);
+            
+            // Marcar la asistencia al transporte como true
+            usuarioEvento.setAsistenciaTransporte(true);
+           
+  
+            // Guardar el objeto UsuarioEvento
+            usuarioEventoService.afegirUsuarioEvento(usuarioEvento); 
+            inscrito = true;
+        }
+
+        model.addAttribute("inscrito", inscrito);
+
+        return "redirect:/paginalistarSalidas";
+    }*/
 }

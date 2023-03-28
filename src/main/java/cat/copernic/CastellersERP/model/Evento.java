@@ -39,7 +39,7 @@ public abstract class Evento implements Serializable {
     @Column(name = "fecha")
     @NotNull
     @Future
-    private LocalDate fechaEvento;
+    private Date fechaEvento;
     
     @Column(name = "horario")
     @NotNull

@@ -12,6 +12,7 @@ import cat.copernic.CastellersERP.model.Evento;
 import jakarta.validation.Valid;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +80,7 @@ public class ControladorMenuPrincipal {
                         if(diaDeLaFechaQueNosPasan.substring(0,1).equals("0")){
                             diaDeLaFechaQueNosPasan = diaDeLaFechaQueNosPasan.substring(1);
                         }
-                        if(Integer.parseInt(diaDeLaFechaQueNosPasan) == evento.getFechaEvento().getDayOfMonth())
+                        if(Integer.parseInt(diaDeLaFechaQueNosPasan) == evento.getFechaEvento().toLocalDate().getDayOfMonth()) 
                         {
                             calendario[i][j].add(evento.getNombreEvento());
                         }
