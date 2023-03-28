@@ -3,16 +3,12 @@
     <head th:replace = "~{layout/plantilla :: head}"/>
     <body>
 
-        <header th:replace="~{layout/plantilla :: menu}" />
+        <div th:replace="~{layout/plantilla :: menu}" />
 
-        <section>
-            <h1>Modulos</h1>
-        </section>
-
-        <div th:if="${modulos!=null && !modulos.empty}">
-            <table border="1" th:each="modulo : ${modulos}">
-                <thead>
-                    <tr>
+        <div class= "container" th:if="${modulos!=null && !modulos.empty}">
+            <table border="1" th:each="modulo : ${modulos}" class = "table">
+                <thead class="table-dark">
+                    <tr align="center">
                         <th th:text="${modulo.nombre}" colspan="3"></th>
                     </tr>
                     <tr>
