@@ -50,12 +50,38 @@ public class ConfiguracionAutentificacion {
 //        .exceptionHandling((exception) -> exception
 //        .accessDeniedPage("/errors/error403"))
 //        .build();
-
+        /* SecurityFilterChain securityFilterChain = http.csrf().disable()
+                .authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/menuPrincipal").authenticated()
+                .requestMatchers("/gestionEconomica").hasAuthority("Tresorer")
+                .anyRequest().authenticated()
+                .and()
+                .authorizeRequests()
+                .mvcMatchers("/ListarEnsayos").authenticated() // Verificación de autenticación para ListarEnsayos
+                .mvcMatchers("/ListarEnsayos/ocultarColumnaX").hasAuthority("TipoUsuarioX") // Verificación de autorización para ocultar la columna X
+                .and()
+                .formLogin(formLogin -> formLogin
+                .loginPage("/Login")
+                .defaultSuccessUrl("/menuPrincipal", true)
+                .permitAll()
+                )
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                .accessDeniedPage("/errors/error403")
+                )
+                .build();*/
         return http.csrf().disable().authorizeHttpRequests((requests) -> requests
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .requestMatchers("/menuPrincipal").authenticated()
                 .requestMatchers("/gestionEconomica").hasAnyAuthority("Tresorer")
                 .anyRequest().authenticated()
-                )
+                /*
+                .and()
+                .authorizeHttpRequests().
+                .antMatchers("/ListarEnsayos").authenticated() // Verificación de autenticación para ListarEnsayos
+                .antMatchers("/ListarEnsayos/ocultarColumnaX").hasAuthority("TipoUsuarioX") // Verificación de autorización para ocultar la columna X
+                .and()
+                */
+        )
                 .formLogin((form) -> form
                 .loginPage("/Login")
                 .defaultSuccessUrl("/menuPrincipal", true)
@@ -64,6 +90,7 @@ public class ConfiguracionAutentificacion {
                 .exceptionHandling((exception) -> exception
                 .accessDeniedPage("/errors/error403"))
                 .build();
-       
+
+
     }
 }

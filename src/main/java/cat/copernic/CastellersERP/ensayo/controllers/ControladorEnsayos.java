@@ -6,6 +6,7 @@ package cat.copernic.CastellersERP.ensayo.controllers;
 
 import cat.copernic.CastellersERP.castillo.serveis.CastilloService;
 import cat.copernic.CastellersERP.ensayo.services.EnsayoService;
+import cat.copernic.CastellersERP.general.config.AutentificacionService;
 import cat.copernic.CastellersERP.general.serveis.UsuarioService;
 import cat.copernic.CastellersERP.model.Castillo;
 import cat.copernic.CastellersERP.model.Ensayo;
@@ -15,6 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.String;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -43,6 +48,16 @@ public class ControladorEnsayos {
 
     @GetMapping("/ensayos")
     public String inicio(Model model) {
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+            boolean esTipoX = auth.getAuthorities().contains(new SimpleGrantedAuthority("CapDeColla"));
+            if (esTipoX) {
+                // Agregar un atributo al modelo para indicar que se debe mostrar la columna X
+                model.addAttribute("ocultar", true);
+            }else{
+                model.addAttribute("ocultar", false);
+            }
 
         model.addAttribute("Evento", ensayoService.listarEnsayos());
 
@@ -57,7 +72,7 @@ public class ControladorEnsayos {
 
     @PostMapping("/guardarEnsayo") //action=guardarGos
     public String guardarEnsayo(@Valid Ensayo ensayo, Errors errors) {
-        
+
         if (errors.hasErrors()) {
             return "ensayo/FormularioEnsayo";
         }
