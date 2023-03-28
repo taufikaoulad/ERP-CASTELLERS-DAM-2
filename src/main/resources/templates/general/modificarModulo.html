@@ -1,12 +1,12 @@
 <html>
-    <head>
+    <head th:replace = "~{layout/plantilla :: head}">
         <meta charset="UTF-8">
         <title>Modificar Modulo</title>
     </head>
     <body>
         <div>
             <h1>Formulario Modulo</h1>
-            <a th:href = "@{/vistaModulos}" th:text = "Inicio"></a>
+            <div th:replace="~{layout/plantilla :: menu}" />
             <p>
             <form th:action = "@{/guardarModulo}" method="post" th:object = "${modulotipousuario}">
 
@@ -18,7 +18,7 @@
                     <input type="checkbox" name="activo" th:field="*{activo}">
                 </p>
                 
-                <input type="submit" name="enviar" values="Enviar Dades"/>
+                <input type="submit"  class="btn btn-outline-warning" name="enviar" values="Enviar Dades"/>
             </form>
             </p>
         </div>

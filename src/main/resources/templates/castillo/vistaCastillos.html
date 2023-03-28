@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
 <html>
-        <head th:replace = "~{layout/plantilla :: head}"/>
+    <head th:replace = "~{layout/plantilla :: head}"/>
     <body>
 
         <div th:replace="~{layout/plantilla :: menu}" />
         <div class="container">
-        
-        <section>
-            <h1>Castillos</h1>
-        </section>
-         
+
+            <section>
+                <h1>Castillos</h1>
+            </section>
+
             <table border="1" class = "table">
-                <thead class="table-dark">
+                <thead class="table-warning">
                     <tr>
                         <th th:text = "id"></th>
                         <th th:text = "nombre"></th>
@@ -38,33 +38,37 @@
 
                         <td>
                             <div>
-                                <a th:href="@{/editarCastillo/}+${castillo.idCastillo}" th:text="Editar"/>
+                                <a th:href="@{/editarCastillo/}+${castillo.idCastillo}">
+                                    <button type="button" class="btn btn-warning"><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+                                </a>
                             </div>
                         </td>
                         <td>
                             <div>
-                                <a th:href="@{/eliminarCastillo/}+${castillo.idCastillo}" th:text="Eliminar"/>
+                                <a th:href="@{/eliminarCastillo/}+${castillo.idCastillo}">
+                                    <button type="button" class="btn btn-danger"><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+                                </a>
                             </div>
                         </td>
                         <td th:if="${salida!=null}">
                             <form th:action="@{/pasarCastilloASalida}" method="post">
                                 <input type="hidden" name="idSalida" th:value="${salida.idevento}">
                                 <input type="hidden" name="idCastilloToSalida" th:value="${castillo.idCastillo}">
-                                <button type="submit" name="submit">Agregar Castillo a Salida</button>
+                                <button type="submit" class="btn btn-outline-warning" name="submit">Agregar Castillo a Salida</button>
                             </form>
                         </td>
                         <td th:if="${ensayo!=null}">
                             <form th:action="@{/pasarCastilloAEnsayo}" method="post">
                                 <input type="hidden" name="idEnsayo" th:value="${ensayo.idevento}">
                                 <input type="hidden" name="idCastilloToEnsayo" th:value="${castillo.idCastillo}">
-                                <button type="submit" name="submit">Agregar Castillo al Ensayo</button>
+                                <button type="submit" class="btn btn-outline-warning" name="submit">Agregar Castillo al Ensayo</button>
                             </form>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div>
-                <a th:href="@{/formularioCastillo}" th:text="añadir"/>
+                <a th:href="@{/formularioCastillo}" type="button" class="btn btn-outline-warning" th:text="Añadir"/>
             </div>
         </div>
     </body>
