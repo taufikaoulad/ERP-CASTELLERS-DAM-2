@@ -37,21 +37,18 @@
                         <td> <input type="checkbox" th:checked="${salida.paradita}" disabled="disabled"/> </td>
                         <td>
                             <a th:href="@{/detalleSalida/}+${salida.idevento}">
-                                <button th:text="Detalle"></button>
+                                <button >Detalle Castillo</button>
                             </a>
                         </td>                
                         <td>
                             <a th:href="@{/pasarIDaCastillo/}+${salida.idevento}">
-                                <button th:text="ConsultarCastillo"></button>
-                            </a>
-
-                            <a href="/paginaassistenciaYTransporteSalida">
-                                <button th:text="NumParticipantes"></button>
+                                <button >Consultar Castillo</button>
                             </a>
                             
-                            <a th:href="@{/pasarIDaCastillo/}+${salida.idevento}">
-                                <button th:text="Inscribirse Transporte"></button>
+                            <a th:href="@{/detalleAsistentesSalida/}+${salida.idevento}">
+                                <button >Detalle Asistentes</button>
                             </a>
+                            
 
                             <a th:href="@{/editarSalida/}+${salida.idevento}">
                                 <button ><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
@@ -60,15 +57,16 @@
                                 <button ><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
                             </a>
                         </td>
-                        <!--<td> 
-                          <input type="checkbox" th:checked="${salida.asistenciaSalida}" disabled="disabled"/>
-                        </td>
-                        <td>
-                            <input type="checkbox" th:checked="${salida.asistenciaTransporte}" disabled="disabled"/>
-                        </td>-->
+                        
                         <td> 
                             <a th:href="@{/inscribirseSalidaITransporte/}+${salida.idevento}">
                                 <button th:disabled="${inscrito}" th:onclick="this.disabled=true;" >Inscribirse a Salida</button>
+                            </a>
+                        </td>
+                        
+                        <td> 
+                            <a th:href="@{/inscribirseTransporte/}+${salida.idevento}">
+                                <button>Inscribirse Transporte</button>
                             </a>
                         </td>
                         

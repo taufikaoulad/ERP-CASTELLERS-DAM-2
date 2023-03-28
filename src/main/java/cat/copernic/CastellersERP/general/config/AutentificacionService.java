@@ -42,11 +42,7 @@ public class AutentificacionService implements UserDetailsService{
         
         User user = new User(usuario.getUsername(), usuario.getPassword(), roles);
         
-        System.out.println(user.getPassword() + " " + user.getUsername());
-        
         return user;
-        
-        
     }
     
 }
