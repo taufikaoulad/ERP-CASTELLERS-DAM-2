@@ -7,9 +7,13 @@ package cat.copernic.CastellersERP.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
@@ -29,16 +33,20 @@ public abstract class Evento implements Serializable {
     private int idevento;
 
     @Column(name = "nombre")
+    @NotEmpty
     private String nombreEvento;
 
     @Column(name = "fecha")
+    @NotNull
     @Future
-    private Date fechaEvento;
+    private LocalDate fechaEvento;
     
     @Column(name = "horario")
+    @NotNull
     private Time horario;
 
     @Column(name = "ubicacion")
+    @NotEmpty
     private String ubicacionEvento;
     
     
@@ -48,7 +56,6 @@ public abstract class Evento implements Serializable {
         joinColumns = @JoinColumn(name = "evento_idevento"),
         inverseJoinColumns = @JoinColumn(name = "usuario_idusuario")
     )
-    //@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "usuario_idusuario")
     private List<Usuario> usuariosAsignados = new ArrayList();
     
     
