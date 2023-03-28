@@ -3,8 +3,9 @@
     <head th:replace = "~{layout/plantilla :: head}">
     </head>
     <body>
+
+        <header th:replace="~{layout/plantilla :: menu}" />
         <div class="container">
-            <header th:replace="~{layout/plantilla :: menu}" />
             <div>
                 <h1>Menu</h1>
                 <h2>Calendario</h2>
@@ -45,7 +46,7 @@
                 <div th:if = "${circulares != null && !circulares.empty}">
 
                     <table class="table">
-                        <thead class="table-dark">
+                        <thead class="table-warning">
                             <tr>
                                 <th th:text = "Título"></th>
                                 <th th:text = "Mensaje"></th>
@@ -57,9 +58,12 @@
                                 <td th:text = ${circular.titulo}></td>
                                 <td th:text = ${circular.mensaje}></td>
                                 <td>
-                                    <a th:href = "@{/editarCircular/}+${circular.idcircular}" th:text = "Modificar"></a>
-                                    <i class="bi bi-pencil"></i>
-                                    <a th:href="@{/eliminarCircular/}+${circular.idcircular}" th:text = "Eliminar"></a>
+                                    <a th:href = "@{/editarCircular/}+${circular.idcircular}">
+                                        <button type="button" class="btn btn-warning"><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+                                    </a>
+                                    <a th:href="@{/eliminarCircular/}+${circular.idcircular}">
+                                        <button type="button" class="btn btn-danger"><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
