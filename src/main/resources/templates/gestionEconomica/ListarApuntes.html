@@ -43,8 +43,10 @@
                 No hay apuntes en la lista
             </div>
             <br/>
-            <div><a th:href ="@{/formularioApunte}" th:text = "Añadir"></a></div>
+            <div><a type="button" class="btn btn-outline-warning" th:href ="@{/formularioApunte}" th:text = "Añadir"></a></div>
+            <!--<button th:disabled="${#authorization != null and not #authorization.expression('hasAnyAuthority(''Tresorer'')')}">Mi boton</button>-->
         </div>
+        
     </body>
 </html>
 
