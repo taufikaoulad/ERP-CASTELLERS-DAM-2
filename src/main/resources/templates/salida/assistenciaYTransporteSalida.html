@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title th:text="${AsistentesyTransportedelasalida}"></title>
-  </head>
+  <head th:replace = "~{layout/plantilla :: head}">
+    </head>
+  <body>
   <body>
     
     <section>
-      <h2 th:text="${AsistentesyTransportedelasalida}"></h2><br>
+      <h2>Asistentes y Transporte de la salida</h2><br>
     </section>
       
     <main th:if="${usuarios!=null && !usuarios.empty}">
-      <label th:text="${AsistenciaASalida}"></label>
+      <label>Numero de asistentes a la Salida: </label>
       <label th:text="${numeroDeAsistentes}"></label><br><br>
 
       
@@ -18,10 +18,10 @@
       <table border="1">
         <thead>
           <tr>
-            <th th:text="${Nombre}"></th>
-            <th th:text="${Edat}"></th>
-            <th th:text="${Peso}"></th>
-            <th th:text="${Altura}"></th>
+            <th >Nombre</th>
+            <th >Edat</th>
+            <th >Peso</th>
+            <th >Altura</th>
           </tr>
         </thead>
         <tbody>
@@ -36,22 +36,22 @@
 
       
 
-      <label th:text="${AsistenciaATransporteGrupal}"></label>
-      <label th:text="${numeroDeAsistentes2}"></label><br><br>
+      <label>Numero de asistentes al Transporte Grupal: </label>
+      <label th:text="${numeroDeAsistentesTransporte}" ></label><br><br>
 
       
 
       <table border="1">
         <thead>
           <tr>
-            <th th:text="${Nombre}"></th>
-            <th th:text="${Edat}"></th>
-            <th th:text="${Peso}"></th>
-            <th th:text="${Altura}"></th>
+            <th >Nombre</th>
+            <th >Edat</th>
+            <th >Peso</th>
+            <th >Altura</th>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="usuario : ${usuarios}">
+          <tr th:each="usuario : ${usuariosTransporte}">
             <td th:text="${usuario.username}"></td>
             <td th:text="${usuario.edat}"></td>
             <td th:text="${usuario.peso}"></td>

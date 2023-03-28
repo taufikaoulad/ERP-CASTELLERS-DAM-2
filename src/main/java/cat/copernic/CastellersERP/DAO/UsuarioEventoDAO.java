@@ -19,7 +19,7 @@ import org.springframework.data.repository.query.Param;
 public interface UsuarioEventoDAO extends JpaRepository<UsuarioEvento, Integer>{
 
     //public UsuarioEvento findByUsuarioAndEvento(Usuario usuario, Evento evento);
-    @Query("SELECT ue.idusuarioevento FROM UsuarioEvento ue WHERE ue.usuario = :idUsuario AND ue.evento = :idEvento")
+    @Query("SELECT ue.idusuarioevento FROM UsuarioEvento ue WHERE ue.usuario.idusuario = :idUsuario AND ue.evento.idevento = :idEvento")
     int findIdUsuarioEvento(@Param("idUsuario") int idUsuario, @Param("idEvento") int idEvento);
     
 }

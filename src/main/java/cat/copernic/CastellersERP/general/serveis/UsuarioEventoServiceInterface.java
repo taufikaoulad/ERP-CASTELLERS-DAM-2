@@ -26,4 +26,6 @@ public interface UsuarioEventoServiceInterface {
     //public UsuarioEvento buscarUsuarioEventoPorUsuarioYEvento(Usuario usuario, Evento evento);
 
     public Integer obtenerIdUsuarioEvento(int idUsuario, int idEvento);
+    
+    
 }

@@ -42,7 +42,7 @@ public abstract class Evento implements Serializable {
     private String ubicacionEvento;
     
     
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
     @JoinTable(
         name = "usuarioevento",
         joinColumns = @JoinColumn(name = "evento_idevento"),
@@ -53,7 +53,7 @@ public abstract class Evento implements Serializable {
     
     
     
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
     @JoinTable(
         name = "eventocastillo",
         joinColumns = @JoinColumn(name = "evento_idevento"),

@@ -73,8 +73,6 @@ public class UsuarioEventoService implements UsuarioEventoServiceInterface{
     @Transactional(readOnly = true)
     public Integer obtenerIdUsuarioEvento(int idUsuario, int idEvento) {
         return usuarioeventoDAO.findIdUsuarioEvento(idUsuario, idEvento);
-    }
-    
-    
+    } 
  
 }
