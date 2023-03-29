@@ -6,63 +6,73 @@
                 var pisos = document.getElementById("pisos").value;
                 var personasPisos = document.getElementById("personasPisos").value;
                 var nombre = pisos + " x " + personasPisos;
-                
+
                 var aixecat = document.getElementById("aixecat").checked;
                 var agulla = document.getElementById("agulla").checked;
-                if (agulla){
-                    nombre +=  ", amb agulla";
+                if (agulla) {
+                    nombre += ", amb agulla";
                 }
-                if (aixecat){
+                if (aixecat) {
                     nombre += ", aixecat per sota";
                 }
-                
+
                 document.getElementById("nombre").value = nombre;
             }
         </script>
+        <meta charset="UTF-8"/>
+
+        <!--Enllaç als estils de Bootstrap-->
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <!--Enllaç als estils de Font Awesome-->
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+        <!--Llibreries jquery, popper i Java Script de Bootstrap pels elements dinàmics que podem utilitzar amb Bootstrap-->
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
         <h1>Formulario Apunte</h1>
-        <a th:href = "@{/vistaCastillos}" th:text = "Inicio"></a>
+        <div th:replace="~{layout/plantilla :: menu}" />
         <p>
         <form th:action = "@{/guardarCastillo}" method="post" th:object = "${castillo}">
 
             <input type="hidden" name="idCastillo" th:field="*{idCastillo}"/>
-                <p>
-                    <label>pisos</label>
-                    <input type="number" id="pisos" name="pisos" th:field="*{pisos}" onchange="actualizarNombre()"/><!-- required -->
-                    <span th:if="${#fields.hasErrors('pisos')}" th:errors="*{pisos}"/>
-                </p>
-                <p>
-                    <label>personas por pisos</label>
-                    <input type="number" id="personasPisos" name="personasPisos" th:field="*{personasPisos}" onchange="actualizarNombre()"/><!-- required -->
-                    <span th:if="${#fields.hasErrors('personasPisos')}" th:errors="*{personasPisos}"/>
-                </p>
-                <p>
-                    <label>NC pina</label>
-                    <input type="number" name="ncTronc" th:field="*{ncPina}"/><!-- required -->
-                    <span th:if="${#fields.hasErrors('ncPina')}" th:errors="*{ncPina}"/>
-                </p>
-                <p>
-                    <label>NC Tronc</label>
-                    <input type="number" name="ncPiña" th:field="*{ncTronc}"/><!-- required -->
-                    <span th:if="${#fields.hasErrors('ncTronc')}" th:errors="*{ncTronc}"/>
-                </p>
-                <p>
-                    <label>Aixecat per sota</label>
-                    <input type="checkbox" id="aixecat" name="aixecatSota" th:field="*{aixecat}" onchange="actualizarNombre()"/>
-                </p>
-                <p>
-                    <label>Agulla</label>
-                    <input type="checkbox" id="agulla" name="agulla" th:field="*{agulla}" onchange="actualizarNombre()"/>
-                </p>
-                <p>
-                    <label>Nombre</label>
-                    <input type="text" id="nombre" name="nombre" th:field="*{nombre}" onchange="actualizarNombre()" readonly/>
-                    <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"/>
-                </p>
-                
-                <input type="submit" name="enviar" values="Enviar Dades"/>
+            <p>
+                <label>pisos</label>
+                <input type="number" id="pisos" name="pisos" th:field="*{pisos}" onchange="actualizarNombre()"/><!-- required -->
+                <span th:if="${#fields.hasErrors('pisos')}" th:errors="*{pisos}"/>
+            </p>
+            <p>
+                <label>personas por pisos</label>
+                <input type="number" id="personasPisos" name="personasPisos" th:field="*{personasPisos}" onchange="actualizarNombre()"/><!-- required -->
+                <span th:if="${#fields.hasErrors('personasPisos')}" th:errors="*{personasPisos}"/>
+            </p>
+            <p>
+                <label>NC pina</label>
+                <input type="number" name="ncTronc" th:field="*{ncPina}"/><!-- required -->
+                <span th:if="${#fields.hasErrors('ncPina')}" th:errors="*{ncPina}"/>
+            </p>
+            <p>
+                <label>NC Tronc</label>
+                <input type="number" name="ncPiña" th:field="*{ncTronc}"/><!-- required -->
+                <span th:if="${#fields.hasErrors('ncTronc')}" th:errors="*{ncTronc}"/>
+            </p>
+            <p>
+                <label>Aixecat per sota</label>
+                <input type="checkbox" id="aixecat" name="aixecatSota" th:field="*{aixecat}" onchange="actualizarNombre()"/>
+            </p>
+            <p>
+                <label>Agulla</label>
+                <input type="checkbox" id="agulla" name="agulla" th:field="*{agulla}" onchange="actualizarNombre()"/>
+            </p>
+            <p>
+                <label>Nombre</label>
+                <input type="text" id="nombre" name="nombre" th:field="*{nombre}" onchange="actualizarNombre()" readonly/>
+                <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"/>
+            </p>
+
+            <input type="submit" class="btn btn-outline-warning"  name="enviar" values="Enviar Dades"/>
         </form>
     </p>
-    </body>
+</body>
 </html>
