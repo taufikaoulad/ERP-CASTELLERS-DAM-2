@@ -14,18 +14,18 @@
                     <tr>
                         <th th:text = "usuario"></th>
                         <th th:text = "activo"></th>
-                        <th th:text = "acciones"></th>
+                        <th th:if="${ocultar}" th:text = "acciones"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="modulotipousuario : ${modulo.modulosTiposUsuario}">
                         <td th:text="${modulotipousuario.rol.nombretipousuario}"></td>
                         <td th:text="${modulotipousuario.activo}"></td>
-                        <td>
+                        <td th:if="${ocultar}">
                             <div>
                                 <a href="/modificarModulo">
                                     <a th:href="@{/editarModulo/}+${modulotipousuario.idmtu}">
-                                        <button type="button" class="btn btn-warning"><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+                                        <button type="button" class="btn btn-warning"><i class="fa-solid fa-pencil"></i></button>
                                     </a>
                                 </a>
                             </div>

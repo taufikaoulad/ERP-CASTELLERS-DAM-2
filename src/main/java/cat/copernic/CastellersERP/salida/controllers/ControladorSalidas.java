@@ -4,7 +4,6 @@
  */
 package cat.copernic.CastellersERP.salida.controllers;
 
-
 import cat.copernic.CastellersERP.DAO.EventoDAO;
 import cat.copernic.CastellersERP.DAO.SalidaDAO;
 import cat.copernic.CastellersERP.DAO.UsuarioDAO;
@@ -19,6 +18,7 @@ import cat.copernic.CastellersERP.model.TipoUsuario;
 import cat.copernic.CastellersERP.model.Usuario;
 import cat.copernic.CastellersERP.model.UsuarioEvento;
 import cat.copernic.CastellersERP.salida.serveis.SalidaService;
+import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
@@ -31,56 +31,75 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.Errors;
 
 /**
  *
  * @author Taufik
  */
-
 @Controller
 public class ControladorSalidas {
-    
+
     @Autowired //Anotació que injecta tots els mètodes i possibles dependències de SalidaDAO al controlador
     private SalidaService salidaService; //Atribut per poder utilitzar les funcions CRUD de la interfície SalidaDAO
-    
-    @Autowired 
-    private CastilloService castilloService; 
-    
+
+    @Autowired
+    private CastilloService castilloService;
+
     @Autowired
     private UsuarioService usuarioService;
-    
+
     @Autowired
     private UsuarioEventoService usuarioEventoService;
 
     @Autowired
     private UsuarioDAO UsuarioDAO;
-    
-    
-    
+
     //(localhost:8080/paginalistarSalidas)
     @GetMapping("/paginalistarSalidas")
-    public String inici(Model model){
-        
+    public String inici(Model model) {
+
+        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean esTipoX = false;
+        boolean esTipoY = false;
+
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority("CapDeColla"))) {
+            esTipoX = true;
+            model.addAttribute("ocultar", false);
+            model.addAttribute("ocultar2", true);
+        } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority("Casteller"))) {
+            esTipoY = true;
+            model.addAttribute("ocultar", true);
+            model.addAttribute("ocultar2", false);
+        } else { // si esTipoZ (Tresorer)
+            model.addAttribute("ocultar", true);
+            model.addAttribute("ocultar2", true);
+        }
+
         model.addAttribute("salidas", salidaService.llistarSalidas());
-        
+
         return "salida/listarSalidas"; //Retorna la pàgina iniciDinamic
     }
-    
+
     @GetMapping("/formularioSalida")
     public String crearFormulariSalida(Salida salida) {
-        
+
         return "salida/anadirSalida"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
     }
-    
-    @PostMapping("/guardarSalida") //action=guardarGos
-    public String guardarSalida(Salida salida) {
 
-        salidaService.afegirSalida(salida); //Afegim la salida passat per paràmetre a la base de dades
+    @PostMapping("/guardarSalida") //action=guardarGos
+    public String guardarSalida(@Valid Salida salida, Errors errors) {
+        if (errors.hasErrors()) {
+            return "salida/anadirSalida"; //Afegim la salida passat per paràmetre a la base de dades
+        }
+        salidaService.afegirSalida(salida);
 
         return "redirect:/paginalistarSalidas"; //Retornem a la pàgina inicial de les sortides mitjançant redirect
     }
-    
+
     @GetMapping("/editarSalida/{idevento}")
     public String editar(Salida salida, Model model) {
 
@@ -90,30 +109,31 @@ public class ControladorSalidas {
 
         return "salida/anadirSalida"; //Retorna la pàgina amb el formulari de les dades del gos
     }
-    
-    @GetMapping("/eliminarSalida/{idevento}") 
+
+    @GetMapping("/eliminarSalida/{idevento}")
     public String eliminar(Salida salida) {
 
         /*Eliminem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
          *el mètode eliminarGos de la capa de servei.*/
         salidaService.eliminarSalida(salida);
-        
+
         return "redirect:/paginalistarSalidas"; //Retornem a la pàgina inicial dels gossos mitjançant redirect
     }
-    
+
     @GetMapping("/editarAsistencia/{idevento}")
     public String editarAsistencia(Salida salida, Model model) {
 
         salida = salidaService.cercarSalida(salida);
-        
+
         model.addAttribute("ensayo", salida);
-        
+
         List<Usuario> usuarios = usuarioService.llistarUsuarios();
 
         List<Usuario> usuariosAsignados = salida.getUsuariosAsignados();
 
         for (int i = 0; i < usuarios.size(); ++i) {
-            Usuario usuario = usuarios.get(i);for (int j = 0; j < usuariosAsignados.size(); j++) {
+            Usuario usuario = usuarios.get(i);
+            for (int j = 0; j < usuariosAsignados.size(); j++) {
                 Usuario usuarioAsignado = usuariosAsignados.get(j);
 
                 if (usuario.equals(usuarioAsignado)) {
@@ -123,17 +143,17 @@ public class ControladorSalidas {
                 }
             }
         }
-        
+
         model.addAttribute("usuarios", usuarios);
         model.addAttribute("usuariosAsignados", usuariosAsignados);
-        
+
         return "salida/anadirAsistencia"; //Retorna la pàgina amb el formulari de les dades del gos
     }
-    
-    @PostMapping("anadirUsarioSalida")
-    public RedirectView anadirUsarioSalida(@RequestParam List<Integer> usuariosId, Salida salida, Model model){
+
+    /*@PostMapping("anadirUsarioSalida")
+    public RedirectView anadirUsarioSalida(@RequestParam List<Integer> usuariosId, Salida salida) {
         salida = salidaService.cercarSalida(salida);
-        
+
         List<Usuario> asignarUsuarios = usuarioService.llistarUsuarios();
 
         for (Integer usuarioId : usuariosId) {
@@ -145,12 +165,39 @@ public class ControladorSalidas {
                 }
             }
         }
-        
+
         salidaService.afegirSalida(salida);
-        
+
+        // Redireccionamos al detalle de la salida
+        return new RedirectView("/editarAsistencia/" + salida.getIdevento());
+    }*/
+    @PostMapping("anadirUsarioSalida")
+    public RedirectView anadirUsarioSalida(@RequestParam List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
+        Salida salidaActualizada = salidaService.cercarSalida(salida);
+        int salidaId = salidaActualizada.getIdevento();
+
+        // Obtenemos la lista de usuarios asignados
+        List<Usuario> usuariosAsignados = salidaActualizada.getUsuariosAsignados();
+
+        for (Integer idUsuario : usuariosId) {
+            Usuario usuarioAAgregar = usuarioService.cercarUsuarioPorId(idUsuario);
+            Salida salida1 = salidaService.cercarSalidaPorId(salidaId);
+            // Verificamos si el usuario ya está asignado a la salida
+            if (!usuariosAsignados.contains(usuarioAAgregar)) {
+                // Creamos una nueva instancia de UsuarioEvento
+                UsuarioEvento nuevoUsuarioEvento = new UsuarioEvento();
+                nuevoUsuarioEvento.setUsuario(usuarioAAgregar);
+                nuevoUsuarioEvento.setEvento(salida1);
+
+                // Agregamos el nuevo usuario evento
+                usuarioEventoService.afegirUsuarioEvento(nuevoUsuarioEvento);
+            }
+        }
+
+        // Redireccionamos al detalle de la salida
         return new RedirectView("/editarAsistencia/" + salida.getIdevento());
     }
-    
+
     /*@PostMapping("/eliminarAsistentes")
     public RedirectView eliminarAsistentes(@RequestParam List<Integer> usuariosId, Salida salida, Model model, Usuario U) {
 
@@ -180,8 +227,7 @@ public class ControladorSalidas {
         //return detalleEnsayo(model, ensayo);
         return new RedirectView("/editarAsistencia/" + salida.getIdevento());
     }*/
-    
-    /*@PostMapping("/eliminarAsistentes")
+ /*@PostMapping("/eliminarAsistentes")
     public RedirectView eliminarAsistentes(@RequestParam List<Integer> usuariosId, Salida salida, Model model) {
 
         // Obtenemos la salida desde la base de datos
@@ -210,8 +256,7 @@ public class ControladorSalidas {
         // Redireccionamos al detalle de la salida
         return new RedirectView("/editarAsistencia/" + salidaActualizada.getIdevento());
     }*/
-    
-    /*@PostMapping("/eliminarAsistentes")
+ /*@PostMapping("/eliminarAsistentes")
     public RedirectView eliminarAsistentes(int a, @RequestParam List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
 
         // Obtenemos la salida desde la base de datos
@@ -268,18 +313,17 @@ public class ControladorSalidas {
         // Redireccionamos al detalle de la salida
         return new RedirectView("/editarAsistencia/" + salidaActualizada.getIdevento());
     }*/
-    
     @PostMapping("/eliminarAsistentes")
     public RedirectView eliminarAsistentes(@RequestParam List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
         // Obtenemos la salida desde la base de datos
         Salida salidaActualizada = salidaService.cercarSalida(salida);
         int salidaId = salidaActualizada.getIdevento();
 
-        // Obtenemos el usuario que se eliminará
+        // Obtenemos la lista de usuarios asignados
         List<Usuario> usuariosAsignados = salidaActualizada.getUsuariosAsignados();
-        
+
         UsuarioEvento usuarioEvento1 = new UsuarioEvento();
-        
+
         for (Usuario usuario : usuariosAsignados) {
             if (usuariosId.contains(usuario.getIdusuario())) {
                 Usuario usuarioAEliminar = usuarioService.cercarUsuario(usuario);
@@ -289,7 +333,7 @@ public class ControladorSalidas {
                 usuarioEvento = usuarioEventoService.cercarUsuarioEvento(usuarioEvento1);
                 // Eliminamos el usuario de la salida
                 if (usuarioEvento != null) {
-                    usuarioEventoService.eliminarUsuarioEvento(usuarioEvento); 
+                    usuarioEventoService.eliminarUsuarioEvento(usuarioEvento);
                 }
             }
         }
@@ -301,27 +345,25 @@ public class ControladorSalidas {
     @GetMapping("/pasarIDaCastillo/{idevento}")
     public String pasarIDaCastillo(Salida salida, Model model) {
 
-        /*Cerquem el gos passat per paràmetre, al qual li correspón l'idgos de @GetMapping mitjançant 
-         *el mètode cercarGos de la capa de servei.*/
         model.addAttribute("salida", salidaService.cercarSalida(salida));
         model.addAttribute("castillos", castilloService.listarCastillos());
+
         return "castillo/vistaCastillos"; //Retorna la pàgina amb el formulari de les dades del gos
     }
-    
+
     @GetMapping("/inscribirseSalidaITransporte/{idevento}")
     public String inscribirseSalidaITransporte(Model model, Salida salida) {
 
         //Salida salida = salidaService.carcarSalidaPorId(idSalida);
         salida = salidaService.cercarSalida(salida);
-        
+
         // Obtener el usuario autenticado
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usuario = usuarioService.buscarUsuarioPorMail(auth.getName());
-        
+
         //Usuario usuario = new Usuario();
-        
         boolean inscrito = salida.getUsuariosAsignados().contains(usuario);
-        
+
         /*Date date = new Date(2023-12-12);
         TipoUsuario tipoUsuario = new TipoUsuario(); // create a new instance of TipoUsuario
         tipoUsuario.setIdtipousuario(1);
@@ -336,18 +378,20 @@ public class ControladorSalidas {
         usuario.setActivo(true);
         usuario.setPosicio("tierra");
         usuario.setTipousuario_idtipousuario(tipoUsuario);*/
-        
         if (!inscrito) {
             salida.getUsuariosAsignados().add(usuario);
             salidaService.afegirSalida(salida);
             inscrito = true; // Asignar valor true al booleano
+            model.addAttribute("mensaje", "Te has inscrito satisfactoriamente en esta salida.");
+        }else {
+            model.addAttribute("mensaje", "Ya estás inscrito en esta salida.");
         }
-        
+
         model.addAttribute("inscrito", inscrito); // Añadir el booleano al modelo
 
         return "redirect:/paginalistarSalidas";
     }
-    
+
     @GetMapping("/inscribirseTransporte/{idevento}")
     public String inscribirseTransporte(Model model, Salida salida, UsuarioEvento usuarioEvento) {
 
@@ -355,15 +399,15 @@ public class ControladorSalidas {
         salida = salidaService.cercarSalida(salida);
         //Obtenemos el id del evento
         int salidaId = salida.getIdevento();
-        
+
         // Obtener el usuario autenticado
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usuario = usuarioService.buscarUsuarioPorMail(auth.getName());
         //Obtenemos el id del usuario
         int usuarioId = usuario.getIdusuario();
-        
+
         boolean inscrito = false;
-        
+
         // Comprobar si el usuario ya está inscrito en el evento
         for (Usuario u : salida.getUsuariosAsignados()) {
             if (u.getIdusuario() == usuario.getIdusuario()) {
@@ -371,23 +415,22 @@ public class ControladorSalidas {
                 break;
             }
         }
-        
+
         UsuarioEvento usuarioEvento1 = null;
-        
+
         if (inscrito) {
             int idusuarioEvento = usuarioEventoService.obtenerIdUsuarioEvento(usuarioId, salidaId);
-            
+
             usuarioEvento1 = new UsuarioEvento();
             usuarioEvento1.setIdusuarioevento(idusuarioEvento);
-            
+
             usuarioEvento = usuarioEventoService.cercarUsuarioEvento(usuarioEvento1);
-            
+
             // Marcar la asistencia al transporte como true
             usuarioEvento.setAsistenciaTransporte(true);
-           
-  
+
             // Guardar el objeto UsuarioEvento
-            usuarioEventoService.afegirUsuarioEvento(usuarioEvento); 
+            usuarioEventoService.afegirUsuarioEvento(usuarioEvento);
             inscrito = true;
         }
 
@@ -395,7 +438,7 @@ public class ControladorSalidas {
 
         return "redirect:/paginalistarSalidas";
     }
-    
+
     /*@GetMapping("/inscribirseTransporte/{idevento}")
     public String inscribirseTransporte(Model model, Salida salida) {
 
@@ -418,8 +461,7 @@ public class ControladorSalidas {
 
         return "redirect:/paginalistarSalidas";
     }*/
-    
-    /*@PostMapping("/inscribirseTransporte/{idevento}")
+ /*@PostMapping("/inscribirseTransporte/{idevento}")
     public String inscribirseTransporte(Model model, Salida salida, @RequestParam boolean asistenciaTransporte) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usuario = usuarioService.buscarUsuarioPorMail(auth.getName());
@@ -434,8 +476,6 @@ public class ControladorSalidas {
 
         return "redirect:/paginalistarSalidas";
     }*/
-    
-    
     @GetMapping("/detalleSalida/{idevento}")
     public String detalleSalida(Model model, Salida salida) {
 
@@ -450,41 +490,41 @@ public class ControladorSalidas {
 
         return "salida/detalleCastilloSalida";
     }
-    
+
     @GetMapping("/detalleAsistentesSalida/{idevento}")
     public String detalleAsistentesSalida(Model model, Salida salida, UsuarioEvento usuarioEvento) {
-        
+
         //Salida salida = salidaService.carcarSalidaPorId(idSalida);
         salida = salidaService.cercarSalida(salida);
         //Obtenemos el id del evento
         int salidaId = salida.getIdevento();
-        
+
         List<Usuario> usuarios = new ArrayList<>(salida.getUsuariosAsignados());
-    
+
         List<Usuario> usuariosTransporte = new ArrayList<>();
-        
+
         UsuarioEvento usuarioEvento1 = new UsuarioEvento();
 
         for (Usuario u : salida.getUsuariosAsignados()) {
-            
+
             int idusuarioEvento = usuarioEventoService.obtenerIdUsuarioEvento(u.getIdusuario(), salidaId);
             usuarioEvento1.setIdusuarioevento(idusuarioEvento);
-            
+
             usuarioEvento = usuarioEventoService.cercarUsuarioEvento(usuarioEvento1);
-            
+
             Boolean asistenciaTransporte = usuarioEvento.getAsistenciaTransporte();
             if (asistenciaTransporte != null && asistenciaTransporte.booleanValue()) {
                 usuariosTransporte.add(u);
             }
-            
+
         }
 
         model.addAttribute("numeroDeAsistentesTransporte", usuariosTransporte.size());
         model.addAttribute("usuariosTransporte", usuariosTransporte);
-        
+
         model.addAttribute("numeroDeAsistentes", usuarios.size());
         model.addAttribute("usuarios", usuarios);
-        
+
         return "salida/assistenciaYTransporteSalida";
     }
 }

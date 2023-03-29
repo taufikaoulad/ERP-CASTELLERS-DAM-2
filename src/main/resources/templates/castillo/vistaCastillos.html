@@ -14,39 +14,34 @@
             <table border="1" class = "table">
                 <thead class="table-warning">
                     <tr>
-                        <th th:text = "id"></th>
                         <th th:text = "nombre"></th>
                         <th th:text = "pisos"></th>
                         <th th:text = "perosnaspisos"></th>
                         <th th:text = "ncpinya"></th>
                         <th th:text = "nctronc"></th>
-                        <th th:text = "aixecat"></th>
-                        <th th:text = "agulla"></th>
-                        <th th:text = "acciones" colspan="100"></th>
+                        <th th:if="${ocultar}" th:text = "acciones" colspan="100"></th>
+                        <th th:if="${salida!=null}" th:text = "acciones" colspan="100"></th>
+                        <th th:if="${ensayo!=null}" th:text = "acciones" colspan="100"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="castillo : ${castillos}">
-                        <td th:text="${castillo.idCastillo}"></td>
                         <td th:text="${castillo.nombre}"></td>
                         <td th:text="${castillo.pisos}"></td>
                         <td th:text="${castillo.personasPisos}"></td>
                         <td th:text="${castillo.ncPina}"></td>
                         <td th:text="${castillo.ncTronc}"></td>
-                        <td th:text="${castillo.aixecat}"></td>
-                        <td th:text="${castillo.agulla}"></td>
-
-                        <td>
+                        <td th:if="${ocultar}">
                             <div>
                                 <a th:href="@{/editarCastillo/}+${castillo.idCastillo}">
-                                    <button type="button" class="btn btn-warning"><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+                                    <button type="button" class="btn btn-warning" > <i class="fa-solid fa-pencil"></i></button>
                                 </a>
                             </div>
                         </td>
-                        <td>
+                        <td th:if="${ocultar}">
                             <div>
                                 <a th:href="@{/eliminarCastillo/}+${castillo.idCastillo}">
-                                    <button type="button" class="btn btn-danger"><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+                                    <button type="button" class="btn btn-danger"><i class="fa-solid fa-trash-can" style="color: #ffffff;"/></button>
                                 </a>
                             </div>
                         </td>
@@ -68,7 +63,7 @@
                 </tbody>
             </table>
             <div>
-                <a th:href="@{/formularioCastillo}" type="button" class="btn btn-outline-warning" th:text="Añadir"/>
+                <a th:href="@{/formularioCastillo}" th:if="${ocultar}" type="button" class="btn btn-outline-warning" th:text="Añadir"/>
             </div>
         </div>
     </body>

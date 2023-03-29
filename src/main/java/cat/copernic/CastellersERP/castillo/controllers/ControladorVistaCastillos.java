@@ -44,7 +44,17 @@ public class ControladorVistaCastillos {
 
     @GetMapping("/vistaCastillos")
     public String inici(Model model) {
+        
+        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+            boolean esTipoX = auth.getAuthorities().contains(new SimpleGrantedAuthority("CapDeColla"));
+            if (esTipoX) {
+                // Agregar un atributo al modelo para indicar que se debe mostrar la columna X
+                model.addAttribute("ocultar", true);
+            }else{
+                model.addAttribute("ocultar", false);
+            }
+       
         model.addAttribute("castillos", castilloService.listarCastillos());
         
         return "castillo/vistaCastillos";
@@ -98,7 +108,7 @@ public class ControladorVistaCastillos {
         
         model.addAttribute("salidas", salidaService.llistarSalidas());
 
-        return "salida/listarSalidas"; //Retorna la pàgina amb el formulari de les dades del gos
+        return "castillo/vistaCastillos"; //Retorna la pàgina amb el formulari de les dades del gos
     }
     
     
