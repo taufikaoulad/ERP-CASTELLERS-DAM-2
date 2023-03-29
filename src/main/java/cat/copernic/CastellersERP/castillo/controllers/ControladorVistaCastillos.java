@@ -13,6 +13,8 @@ import cat.copernic.CastellersERP.model.Salida;
 import cat.copernic.CastellersERP.salida.serveis.SalidaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -42,7 +44,17 @@ public class ControladorVistaCastillos {
 
     @GetMapping("/vistaCastillos")
     public String inici(Model model) {
+        
+        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+            boolean esTipoX = auth.getAuthorities().contains(new SimpleGrantedAuthority("CapDeColla"));
+            if (esTipoX) {
+                // Agregar un atributo al modelo para indicar que se debe mostrar la columna X
+                model.addAttribute("ocultar", true);
+            }else{
+                model.addAttribute("ocultar", false);
+            }
+       
         model.addAttribute("castillos", castilloService.listarCastillos());
         
         return "castillo/vistaCastillos";
