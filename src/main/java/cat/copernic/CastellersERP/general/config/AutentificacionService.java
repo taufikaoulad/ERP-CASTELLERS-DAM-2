@@ -32,10 +32,19 @@ public class AutentificacionService implements UserDetailsService{
     
     @Override
     @Transactional(readOnly = true)
+    
+    /*
+    Este método carga los detalles de un usuario específico basado 
+    en su nombre de usuario y devuelve un objeto UserDetails. El sistema de autenticación de Spring Security 
+    utiliza este objeto UserDetails para realizar la autenticación y la autorización de este usuario en 
+    particular.
+    */
+    
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
         Usuario usuario = usuarioDAO.findByUsername(username);
         
+        //GrantedAuthority representa un rol o permiso que se le ha concedido a un usuario. 
         var roles = new ArrayList<GrantedAuthority>();
         
         roles.add(new SimpleGrantedAuthority(usuario.getTipousuario_idtipousuario().getNombretipousuario()));
