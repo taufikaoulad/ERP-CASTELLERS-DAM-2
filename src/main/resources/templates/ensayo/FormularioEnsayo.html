@@ -31,7 +31,7 @@
 
                 <p>
                     <label for="fechaEvento">Fecha:</label> <!--Etiqueta per l'edat del gos-->            
-                    <input type="text" name="fechaEvento" th:field="*{fechaEvento}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                    <input type="date" name="fechaEvento" th:field="*{fechaEvento}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
                     <span th:if="${#fields.hasErrors('fechaEvento')}" th:errors="*{fechaEvento}"/>
                 </p>
 

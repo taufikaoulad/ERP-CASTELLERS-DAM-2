@@ -11,6 +11,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
+import java.lang.String;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -42,8 +43,8 @@ public abstract class Evento implements Serializable {
     private LocalDate fechaEvento;
     
     @Column(name = "horario")
-    @NotNull
-    private Time horario;
+    @NotEmpty
+    private String horario;
 
     @Column(name = "ubicacion")
     @NotEmpty
