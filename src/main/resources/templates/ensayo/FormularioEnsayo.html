@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Crear Ensayo</title>
-        <meta charset="UTF-8">
+    <head th:replace = "~{layout/plantilla :: head}">
     </head>
     <body>
-
-        <div>
+        <div th:replace="~{layout/plantilla :: menu}" />
+        <div class="container">
             <h1>Crear Ensayo</h1>
             <p>
             <form th:action="@{/guardarEnsayo}" method="post" th:object="${ensayo}">
