@@ -22,9 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ApunteService implements ApunteServiceInterface {
 
-    /*Atribut que defineix un apunteDAO. Mitjançant aquest atribut el control ja no 
-     *accedirà directament a la capa de dades, si no que accedirà mitjançant la capa de servei.
-    */
+    /*Atribut que defineix un apunteDAO. */
     @Autowired
     private ApunteDAO apunte;
     
@@ -53,14 +51,12 @@ public class ApunteService implements ApunteServiceInterface {
         
         this.apunte.save(apunte);
     }
-
     @Override
     @Transactional
     public void eliminarApunte(Apunte apunte) {
         
         this.apunte.delete(apunte);
     }
-
     @Override
     @Transactional(readOnly=true)
     public Apunte cercarApunte(Apunte apunte) {
