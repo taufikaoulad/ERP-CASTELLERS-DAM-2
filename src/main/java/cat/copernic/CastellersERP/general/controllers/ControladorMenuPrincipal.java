@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -87,6 +89,16 @@ public class ControladorMenuPrincipal {
                 }
             }
         }
+        
+        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean esTipoX = auth.getAuthorities().contains(new SimpleGrantedAuthority("Casteller"));
+            if (esTipoX) {
+                // Agregar un atributo al modelo para indicar que se debe mostrar la columna X
+                model.addAttribute("ocultar", false);
+            }else{
+                model.addAttribute("ocultar", true);
+            }
         
         model.addAttribute("calendario",calendario);
         

@@ -9,7 +9,9 @@ import cat.copernic.CastellersERP.model.Apunte;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -34,8 +36,19 @@ public class ControladorListarApunte {
     private ApunteService apunteService;
 
     @GetMapping("/gestionEconomica")
-    public String inicio(Model model, @AuthenticationPrincipal User username) {
+    public String inicio(Model model) {
+        
+        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+        boolean esTipoX = auth.getAuthorities().contains(new SimpleGrantedAuthority("Tresorer"));
+            if (esTipoX) {
+                // Agregar un atributo al modelo para indicar que se debe mostrar la columna X
+                model.addAttribute("ocultar", true);
+            }else{
+                model.addAttribute("ocultar", false);
+            }
+        
+        
         model.addAttribute("apuntes", apunteService.listarApuntes());
 
         model.addAttribute("Dinero", dinero);

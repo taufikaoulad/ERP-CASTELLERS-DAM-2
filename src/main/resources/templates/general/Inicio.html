@@ -50,14 +50,14 @@
                             <tr>
                                 <th th:text = "Título"></th>
                                 <th th:text = "Mensaje"></th>
-                                <th th:text = "Acciones"></th>
+                                <th th:if="${ocultar}" th:text = "Acciones"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each = "circular : ${circulares}">
                                 <td th:text = ${circular.titulo}></td>
                                 <td th:text = ${circular.mensaje}></td>
-                                <td>
+                                <td th:if="${ocultar}">
                                     <a th:href = "@{/editarCircular/}+${circular.idcircular}">
                                         <button type="button" class="btn btn-warning"><i class="fa-solid fa-pencil"></i></button>
                                     </a>
@@ -72,7 +72,7 @@
                 <div th:if = "${circulares == null || circulares.empty}">
                     No hay apuntes en la lista
                 </div>
-                <div><a type="button" class="btn btn-outline-warning" th:href ="@{/formularioCircular}" th:text = "Añadir"></a></div>
+                <div><a th:if="${ocultar}" type="button" class="btn btn-outline-warning" th:href ="@{/formularioCircular}" th:text = "Añadir"></a></div>
             </div>
 
             <br>
