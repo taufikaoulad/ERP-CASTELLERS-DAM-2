@@ -1,103 +1,112 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title th:text="${CrearSalida}"></title>
+    <head th:replace = "~{layout/plantilla :: head}">
     </head>
     <body>
-
-        <section>
-            <h1 th:text="${CrearSalida}"></h1>  
-        </section>
-
-        <main>
-
-            <h3>PASAR LISTA</h3>
-
-            <p>
-                <form th:action="@{/anadirUsarioSalida}" method="POST" th:object="${salida}">
-
-                    <input type="hidden" name="idevento" th:field="*{idevento}"/>
-
-                    <h4>LISTA USUARIOS</h4>
-
-                    <div th:if="${usuarios!=null && !usuarios.empty}">
-
-                        <table border="1">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Mail</th>
-                                <th>Telefono</th>
-                                <th>SI/NO</th>
-                            </tr>
-                            <tr th:each="usuario : ${usuarios}">
-                                <th th:text="${usuario.username}"></th>
-                                <th th:text="${usuario.mail}"></th>
-                                <th th:text="${usuario.telefono}"></th>
-                                <td>
-                                    <input type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosId"> 
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-
-                    <div th:if="${usuarios==null || usuarios.empty}">
-                        <p>No existen más usuarios registrados!</p>
-                    </div>
-                    <br>
-                    <input type="submit" value="Añadir Asistente/s" th:disabled="${#lists.isEmpty(usuarios)}">
-                </form>
-            </p>
+        <header th:replace="~{layout/plantilla :: menu}" />
+        <div class="container"></br>
             
-            <h4>LISTA ASISTENTES</h4>
+            <section>
+                <h1 th:text="${CrearSalida}"></h1>  
+            </section></br>
 
-            <p>
-                <form th:action="@{/eliminarAsistentes}" method="POST" th:object="${salida}">
+            <main>
 
-                    <input type="hidden" name="idevento" th:field="*{idevento}"/>
+                <h3>PASAR LISTA</h3></br>
 
-                    <div th:if="${usuariosAsignados!=null && !usuariosAsignados.empty}">
+                <p>
+                    <form th:action="@{/anadirUsarioSalida}" method="POST" th:object="${salida}">
 
-                        <table border="1">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Mail</th>
-                                <th>Telefono</th>
-                                <th>SI/NO</th>
-                            </tr>
-                            <tr th:each="usuario : ${usuariosAsignados}">
-                                <th th:text="${usuario.username}"></th>
-                                <th th:text="${usuario.mail}"></th>
-                                <th th:text="${usuario.telefono}"></th>
-                                <td>
-                                    <input type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosId" />
-                                </td>
-                            </tr>
-                        </table>
+                        <input type="hidden" name="idevento" th:field="*{idevento}"/>
 
-                    </div>
+                        <h5>LISTA USUARIOS</h5>
 
-                    <div th:if="${usuariosAsignados==null || usuariosAsignados.empty}">
+                        <div th:if="${usuarios!=null && !usuarios.empty}">
 
-                        <p>No hay usuarios asignados!</p>
+                            <table border="1" class="table">
+                                <thead class="table-warning" >
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Mail</th>
+                                        <th>Telefono</th>
+                                        <th>SI/NO</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="usuario : ${usuarios}">
+                                        <th th:text="${usuario.username}"></th>
+                                        <th th:text="${usuario.mail}"></th>
+                                        <th th:text="${usuario.telefono}"></th>
+                                        <td>
+                                            <input type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosId"> 
+                                        </td>
+                                    </tr>
+                                <tbody>
+                            </table>
 
-                    </div>
-                    
-                    <br>
-                    <input type="submit" value="Quitar Asistente/s" th:disabled="${#lists.isEmpty(usuariosAsignados)}">
+                        </div>
 
-                </form>
+                        <div th:if="${usuarios==null || usuarios.empty}">
+                            <p>No existen más usuarios registrados!</p>
+                        </div>
+                        <br>
+                        <input type="submit" value="Añadir Asistente/s" th:disabled="${#lists.isEmpty(usuarios)}" class="btn btn-outline-warning">
+                    </form>
+                </p></br>
 
-            </p>
+                <h5>LISTA ASISTENTES</h5>
+
+                <p>
+                    <form th:action="@{/eliminarAsistentes}" method="POST" th:object="${salida}">
+
+                        <input type="hidden" name="idevento" th:field="*{idevento}"/>
+
+                        <div th:if="${usuariosAsignados!=null && !usuariosAsignados.empty}">
+
+                            <table border="1" class="table">
+                                <thead class="table-warning" >
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Mail</th>
+                                        <th>Telefono</th>
+                                        <th>SI/NO</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="usuario : ${usuariosAsignados}">
+                                        <th th:text="${usuario.username}"></th>
+                                        <th th:text="${usuario.mail}"></th>
+                                        <th th:text="${usuario.telefono}"></th>
+                                        <td>
+                                            <input type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosId" />
+                                        </td>
+                                    </tr>
+                                <tbody>
+                            </table>
+
+                        </div>
+
+                        <div th:if="${usuariosAsignados==null || usuariosAsignados.empty}">
+
+                            <p>No hay usuarios asignados!</p>
+
+                        </div>
+
+                        <br>
+                        <input type="submit" value="Quitar Asistente/s" th:disabled="${#lists.isEmpty(usuariosAsignados)}" class="btn btn-outline-warning">
+
+                    </form></br>
+
+                </p>
 
 
-        </main>
+            </main>
 
-        <div>
-            <a th:href = "@{/paginalistarSalidas}">
-                <button>Volver</button>
-            </a>
+            <div>
+                <a th:href = "@{/paginalistarSalidas}">
+                    <button class="btn btn-outline-warning" >Volver</button>
+                </a>
+            </div> 
         </div>
-        
     </body>
 </html>

@@ -11,6 +11,7 @@ import cat.copernic.CastellersERP.model.Usuario;
 import java.util.ArrayList;
 import org.springframework.security.core.GrantedAuthority;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,6 +70,13 @@ public class UsuarioService implements UsuarioServiceInterface {
     }
     
     @Override
+    @Transactional(readOnly = true)
+    public Usuario cercarUsuarioPorId(int usuarioId) {
+        Optional<Usuario> usuarioOptional = usuarioDAO.findById(usuarioId);
+        return usuarioOptional.orElse(null);
+    }
+    
+    @Override
     public Usuario buscarUsuarioPorMail(String email) {
        return this.usuarioDAO.findByUsername(email);
     }
@@ -91,8 +99,4 @@ public class UsuarioService implements UsuarioServiceInterface {
         
         return new User(usuario.getNombre(), usuario.getContrasena(), rols);
     }*/
-
-    
-    
-   
 }

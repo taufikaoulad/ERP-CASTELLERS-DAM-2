@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title th:text="DetalleCastillo"></title>
+    <head th:replace = "~{layout/plantilla :: head}">
     </head>
     <body>
-
+        <header th:replace="~{layout/plantilla :: menu}" />
+        <div class="container"></br>
+            
         <section>
             <h1 th:text="DetalleCastillo"></h1>
-        </section>
+        </section></br>
 
         <main th:if="${castillosAsignados!=null && !castillosAsignados.empty}">
-            <table border="1">
-                <tr>
-                    <th>Castillos Asignados</th>
-                </tr>
-                <tr th:each="castillo : ${castillosAsignados}">
-                    <td th:text="${castillo.nombre}"></td>
-                </tr>
+            <table border="1" class="table">
+                <thead class="table-warning" >
+                    <tr>
+                        <th>Castillos Asignados</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="castillo : ${castillosAsignados}">
+                        <td th:text="${castillo.nombre}"></td>
+                    </tr>
+                </tbody>
             </table>
-        </main><br>
+        </main>
 
-        <div>
-            <a href="/paginalistarSalidas">
-                <button th:text="Volver"></button>
-            </a>
-        </div>
 
         <div th:if="${castillosAsignados==null || castillosAsignados.empty}">
             <!-- Mostrem missatge-->
             No hi ha castillos a la llista.
+        </div><br>
+        
+        <div>
+            <a href="/paginalistarSalidas">
+                <button class="btn btn-outline-warning" th:text="Volver"></button>
+            </a>
         </div>
 
     </body>

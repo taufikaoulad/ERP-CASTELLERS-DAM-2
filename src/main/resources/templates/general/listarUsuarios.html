@@ -1,67 +1,70 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Usuarios</title>
+    <head th:replace = "~{layout/plantilla :: head}">
     </head>
     <body>
-        
+
         <header th:replace="~{layout/plantilla :: menu}" />
-        
-        <section>
-            <h1>USUARIOS</h1>
-        </section>
-        
-        <main th:if="${usuarios!=null && !usuarios.empty}">
-            <table border="1">
-              <thead>
-                <tr>
-                  <th >Email</th>
-                  <th >Nombre</th>
-                  <th >Altura</th>
-                  <th >Peso</th>
-                  <th >Telefono</th>
-                  <th >Edat</th>
-                  <th >Posicion</th>
-                  <th >Tipo De Usuario</th>
-                  <th >Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="usuario : ${usuarios}">
 
-                  <td th:text="${usuario.mail}"></td>
-                  <!--<td hidden th:text="${usuario.contrasena}"></td>-->
-                  <td th:text="${usuario.username}"></td>
-                  <td th:text="${usuario.altura}"></td>
-                  <td th:text="${usuario.peso}"></td>
-                  <td th:text="${usuario.telefono}"></td>
-                  <td th:text="${usuario.edat}"></td>
-                  <td th:text="${usuario.posicio}"></td>
-                  <td th:text="${usuario.tipousuario_idtipousuario.nombretipousuario}"></td>
+        <div class="container"></br>
+            <section>
+                <h1>USUARIOS</h1>
+            </section>
 
-                  <td>
-                      <a th:href="@{/editarUsuario/}+${usuario.idusuario}">
-                        <button >modificar</button>
-                      </a>
-                      <a th:href="@{/eliminarUsuario/}+${usuario.idusuario}">
-                        <button >Eliminar</button>
-                      </a>
-                  </td>   
-                </tr>
-              </tbody>
-            </table>
-        </main><br>
-        
-        <div th:if="${usuarios==null || usuarios.empty}">
-            No hay usuarios en la lista. 
-        </div><br/>
+            <main th:if="${usuarios!=null && !usuarios.empty}">
+                <table  border="1" class="table">
+                    <thead class="table-warning">
+                        <tr>
+                            <th class="align-middle">Email</th>
+                            <th class="align-middle">Nombre</th>
+                            <th class="align-middle">Altura</th>
+                            <th class="align-middle">Peso</th>
+                            <th class="align-middle">Telefono</th>
+                            <th class="align-middle">Edat</th>
+                            <th class="align-middle">Posicion</th>
+                            <th class="align-middle">Tipo De Usuario</th>
+                            <th class="align-middle">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="usuario : ${usuarios}">
 
-        <div>
-            <a th:href ="@{/formularioUsuario}">
-                <button >CrearUsuario</button>
-            </a>
+                            <td class="align-middle" th:text="${usuario.mail}"></td>
+                            <!--<td hidden th:text="${usuario.contrasena}"></td>-->
+                            <td class="align-middle" th:text="${usuario.username}"></td>
+                            <td class="align-middle" th:text="${usuario.altura}"></td>
+                            <td class="align-middle" th:text="${usuario.peso}"></td>
+                            <td class="align-middle" th:text="${usuario.telefono}"></td>
+                            <td class="align-middle" th:text="${usuario.edat}"></td>
+                            <td class="align-middle" th:text="${usuario.posicio}"></td>
+                            <td class="align-middle" th:text="${usuario.tipousuario_idtipousuario.nombretipousuario}"></td>
+
+                            <td class="align-middle">
+                                <a th:href="@{/editarUsuario/}+${usuario.idusuario}">
+                                    <button class="btn btn-warning"><i class="fa-solid fa-pencil"></i></button>
+                                </a>
+                                <a th:href="@{/eliminarUsuario/}+${usuario.idusuario}">
+                                    <button class="btn btn-danger"><i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></button>
+                                </a>
+                            </td>   
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <a th:href ="@{/formularioUsuario}">
+                        <button class="btn btn-outline-warning">CrearUsuario</button>
+                    </a>
+                </div>
+            </main><br>
+
+            <div th:if="${usuarios==null || usuarios.empty}">
+                No hay usuarios en la lista. 
+                <div>
+                    <a th:href ="@{/formularioUsuario}">
+                        <button class="btn btn-outline-warning">CrearUsuario</button>
+                    </a>
+                </div>
+            </div><br/>
         </div>
-    
     </body>
 </html>
