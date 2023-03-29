@@ -108,7 +108,7 @@ public class ControladorVistaCastillos {
         
         model.addAttribute("salidas", salidaService.llistarSalidas());
 
-        return "salida/listarSalidas"; //Retorna la pàgina amb el formulari de les dades del gos
+        return "castillo/vistaCastillos"; //Retorna la pàgina amb el formulari de les dades del gos
     }
     
     
