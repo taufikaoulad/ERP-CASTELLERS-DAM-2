@@ -29,12 +29,12 @@
                             <td th:text="${apunte.tipo}"></td>
                             <td>
                                 <a th:href="@{/editarApunte/}+${apunte.idapuntecontable}">
-                                    <button type="button" class="btn btn-warning"><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+                                    <button type="button" class="btn btn-warning"><i class="fa-solid fa-pencil"></i></button>
                                 </a>
                             </td>
                             <td>
                                 <a th:href="@{/eliminarApunte/}+${apunte.idapuntecontable}">
-                                    <button type="button" class="btn btn-danger"><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+                                    <button type="button" class="btn btn-danger"><i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></button>
                                 </a>
                             </td>
                             </td>

@@ -59,10 +59,10 @@
                                 <td th:text = ${circular.mensaje}></td>
                                 <td>
                                     <a th:href = "@{/editarCircular/}+${circular.idcircular}">
-                                        <button type="button" class="btn btn-warning"><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+                                        <button type="button" class="btn btn-warning"><i class="fa-solid fa-pencil"></i></button>
                                     </a>
                                     <a th:href="@{/eliminarCircular/}+${circular.idcircular}">
-                                        <button type="button" class="btn btn-danger"><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+                                         <button type="button" class="btn btn-danger"><i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></button>
                                     </a>
                                 </td>
                             </tr>
