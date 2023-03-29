@@ -3,78 +3,85 @@
     <head th:replace = "~{layout/plantilla :: head}">
     </head>
     <body>
+
         <header th:replace="~{layout/plantilla :: menu}" />
-        <div>
-            <h1>Menu</h1>
-            <h2>Calendario</h2>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Lun</th>
-                        <th>Mar</th>
-                        <th>Mie</th>
-                        <th>Jue</th>
-                        <th>Vie</th>
-                        <th>Sab</th>
-                        <th>Dom</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <!-- Iterar sobre el arreglo calendario para mostrar las filas -->
-                    <tr th:each="fila : ${calendario}">
-                        <!-- Iterar sobre cada ArrayList dentro de la fila para mostrar las celdas -->
-                        <td th:each="celda : ${fila}">
-                            <!-- Mostrar el primer valor del ArrayList -->
-                            <span th:text="${celda[0]}"></span>
-                            <!-- Si el ArrayList tiene más de un valor, mostrar los demás -->
-                            <div th:if="${#lists.size(celda) > 1}">
-                                <span th:each="valor : ${celda}" th:unless="${#strings.equals(valor, celda[0])}">
-                                    <span th:text="${valor}"></span>
-                                    <br />
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </tr>
+        <div class="container">
+            <div>
+                <h1>Menu</h1>
+                <h2>Calendario</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Lun</th>
+                            <th>Mar</th>
+                            <th>Mie</th>
+                            <th>Jue</th>
+                            <th>Vie</th>
+                            <th>Sab</th>
+                            <th>Dom</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <!-- Iterar sobre el arreglo calendario para mostrar las filas -->
+                        <tr th:each="fila : ${calendario}">
+                            <!-- Iterar sobre cada ArrayList dentro de la fila para mostrar las celdas -->
+                            <td th:each="celda : ${fila}">
+                                <!-- Mostrar el primer valor del ArrayList -->
+                                <span th:text="${celda[0]}"></span>
+                                <!-- Si el ArrayList tiene más de un valor, mostrar los demás -->
+                                <div th:if="${#lists.size(celda) > 1}">
+                                    <span th:each="valor : ${celda}" th:unless="${#strings.equals(valor, celda[0])}">
+                                        <span th:text="${valor}"></span>
+                                        <br />
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-    </tbody>
-</table>
-<div>
-    <span class="ensayo">Ensayo</span>
-    <span class="salida">Salida</span>
-</div>
+                <h2>Tabla de circulares</h2>
 
-<h2>Tabla de circulares</h2>
+                <div th:if = "${circulares != null && !circulares.empty}">
 
-<div th:if = "${circulares != null && !circulares.empty}">
+                    <table class="table">
+                        <thead class="table-warning">
+                            <tr>
+                                <th th:text = "Título"></th>
+                                <th th:text = "Mensaje"></th>
+                                <th th:text = "Acciones"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each = "circular : ${circulares}">
+                                <td th:text = ${circular.titulo}></td>
+                                <td th:text = ${circular.mensaje}></td>
+                                <td>
+                                    <a th:href = "@{/editarCircular/}+${circular.idcircular}">
+                                        <button type="button" class="btn btn-warning"><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+                                    </a>
+                                    <a th:href="@{/eliminarCircular/}+${circular.idcircular}">
+                                        <button type="button" class="btn btn-danger"><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div th:if = "${circulares == null || circulares.empty}">
+                    No hay apuntes en la lista
+                </div>
+                <div><a type="button" class="btn btn-outline-warning" th:href ="@{/formularioCircular}" th:text = "Añadir"></a></div>
+            </div>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th th:text = "Título"></th>
-                <th th:text = "Mensaje"></th>
-                <th th:text = "Acciones"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each = "circular : ${circulares}">
-                <td th:text = ${circular.titulo}></td>
-                <td th:text = ${circular.mensaje}></td>
-                <td>
-                    <a th:href = "@{/editarCircular/}+${circular.idcircular}" th:text = "Modificar"></a>
-                    <a th:href="@{/eliminarCircular/}+${circular.idcircular}" th:text = "Eliminar"></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div th:if = "${circulares == null || circulares.empty}">
-    No hay apuntes en la lista
-</div>
-<div><a th:href ="@{/formularioCircular}" th:text = "Añadir"></a></div>
-</div>
-</body>
+            <br>
+            <br>
+
+            <form method="POST" th:action="@{/logout}">                
+                <!-- Botó per sortir de l'aplicació-->
+                <p><input class="btn btn-outline-danger" type="submit" name="logout" value="Sortir"/></p> 
+            </form>
+        </div>
+    </body>
 </html>

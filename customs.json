@@ -1,6 +1,9 @@
 {
     "elements": {},
     "attributes": {
+        "th:if": {
+            "context": "div"
+        },
         "th:src": {
             "context": "img"
         }

@@ -5,7 +5,6 @@
 package cat.copernic.CastellersERP.general.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.config.Customizer;
 
 /**
  *
@@ -50,12 +48,37 @@ public class ConfiguracionAutentificacion {
 //        .exceptionHandling((exception) -> exception
 //        .accessDeniedPage("/errors/error403"))
 //        .build();
-
+        /* SecurityFilterChain securityFilterChain = http.csrf().disable()
+                .authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/menuPrincipal").authenticated()
+                .requestMatchers("/gestionEconomica").hasAuthority("Tresorer")
+                .anyRequest().authenticated()
+                .and()
+                .authorizeRequests()
+                .mvcMatchers("/ListarEnsayos").authenticated() // Verificación de autenticación para ListarEnsayos
+                .mvcMatchers("/ListarEnsayos/ocultarColumnaX").hasAuthority("TipoUsuarioX") // Verificación de autorización para ocultar la columna X
+                .and()
+                .formLogin(formLogin -> formLogin
+                .loginPage("/Login")
+                .defaultSuccessUrl("/menuPrincipal", true)
+                .permitAll()
+                )
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                .accessDeniedPage("/errors/error403")
+                )
+                .build();*/
         return http.csrf().disable().authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/menuPrincipal").authenticated()
                 .requestMatchers("/gestionEconomica").hasAnyAuthority("Tresorer")
                 .anyRequest().authenticated()
-                )
+                /*
+                .and()
+                .authorizeHttpRequests().
+                .antMatchers("/ListarEnsayos").authenticated() // Verificación de autenticación para ListarEnsayos
+                .antMatchers("/ListarEnsayos/ocultarColumnaX").hasAuthority("TipoUsuarioX") // Verificación de autorización para ocultar la columna X
+                .and()
+                */
+        )
                 .formLogin((form) -> form
                 .loginPage("/Login")
                 .defaultSuccessUrl("/menuPrincipal", true)
@@ -64,6 +87,7 @@ public class ConfiguracionAutentificacion {
                 .exceptionHandling((exception) -> exception
                 .accessDeniedPage("/errors/error403"))
                 .build();
-       
+
+
     }
 }

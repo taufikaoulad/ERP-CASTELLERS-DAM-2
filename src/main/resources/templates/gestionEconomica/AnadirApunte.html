@@ -1,44 +1,47 @@
 <html html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Formulario Apunte</title>
-        <meta charset="UTF-8"/>
+    <head th:replace = "~{layout/plantilla :: head}">
     </head>
     <body>
-        <h1>Formulario Apunte</h1>
         
-        <a th:href = "@{/gestionEconomica}" th:text = "Inicio"></a>
+        <div th:replace="~{layout/plantilla :: menu}" />
+        <div class="container">
+            
 
-        <p>
+            <h1>Formulario Apunte</h1>
 
-        <form th:action = "@{/guardarApunte}" method="post" th:object = "${apunte}">
-
-            <input type="hidden" name="idapuntecontable" th:field="*{idapuntecontable}"/>
-
-            <p>
-                <label for="concepto">Concepto: </label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
-                <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut nom de l'objecte
-                    gos assignat a th:objecte-->
-                <input type="text" name="concepto" th:field="*{concepto}"/>
-                
-                <span th:if="${#fields.hasErrors('concepto')}" th:errors="*{concepto}"/>
-            </p>
 
             <p>
-                <label for="precio">Precio: </label> <!--Etiqueta per l'edat del gos-->            
-                <input type="text" name="precio" th:field="*{precio}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
-                
-                <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"/>
-            </p>
 
-            <p>
-                <label for="tipo">Tipo: </label> <!--Etiqueta pel sexe del gos-->            
-                <input type="text" name="tipo" th:field="*{tipo}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
-                
-                <span th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"/>
-            </p>
+            <form th:action = "@{/guardarApunte}" method="post" th:object = "${apunte}">
 
-            <input type="submit" name="enviar" values="Enviar Dades"/>
-        </form>
-    </p>
+                <input type="hidden" name="idapuntecontable" th:field="*{idapuntecontable}"/>
+
+                <p>
+                    <label for="concepto">Concepto: </label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
+                    <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut nom de l'objecte
+                        gos assignat a th:objecte-->
+                    <input type="text" name="concepto" th:field="*{concepto}"/>
+
+                    <span th:if="${#fields.hasErrors('concepto')}" th:errors="*{concepto}"/>
+                </p>
+
+                <p>
+                    <label for="precio">Precio: </label> <!--Etiqueta per l'edat del gos-->            
+                    <input type="text" name="precio" th:field="*{precio}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+
+                    <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"/>
+                </p>
+
+                <p>
+                    <label for="tipo">Tipo: </label> <!--Etiqueta pel sexe del gos-->            
+                    <input type="text" name="tipo" th:field="*{tipo}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+
+                    <span th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"/>
+                </p>
+
+                <input class="btn btn-outline-warning" type="submit" name="enviar" values="Enviar Dades"/>
+            </form>
+        </p>
+    </div>
 </body>
 </html>
