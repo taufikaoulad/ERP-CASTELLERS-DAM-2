@@ -36,27 +36,27 @@
 
                             <th th:if="${ocultar}">
                             <td>
-                                <div>
+                                <div th:if="${ocultar}">
                                     <a th:href="@{/detalleEnsayo/}+${ensayo.idevento}">
                                         <button type="submit" class="btn btn-outline-warning" name="submit">Consultar Detalle</button>
                                     </a>
                                 </div>
                             </td>
                             <td>
-                                <div>
+                                <div th:if="${ocultar}">
                                     <a th:href="@{/consultar-castillos-ensayo/}+${ensayo.idevento}">
                                         <button type="submit" class="btn btn-outline-warning" name="submit">Consultar Castillos</button>
                                     </a>
                                 </div>
                             </td>
-                            <td><div>
+                            <td><div th:if="${ocultar}">
                                     <a th:href="@{/editarEnsayo/}+${ensayo.idevento}">
                                         <button type="button" class="btn btn-warning"><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
                                     </a>
                                 </div>
                             </td>
                             <td>
-                                <div>
+                                <div th:if="${ocultar}">
                                     <a th:href="@{/eliminarEnsayo/}+${ensayo.idevento}">
                                         <button type="button" class="btn btn-danger"><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
                                     </a>

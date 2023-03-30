@@ -85,7 +85,7 @@
                 margin: 20px auto;
                 width: 80%;
             }
-            
+
             button {
                 margin: 20px;
             }
@@ -136,10 +136,10 @@
                         <label for="ubicacionEvento">Ubicacion</label> <!--Etiqueta pel sexe del gos-->            
                         <input type="text" name="ubicacionEvento" th:field="*{ubicacionEvento}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                     </p>
-                <p>
-                    <label for="duracion">Duracion:</label> <!--Etiqueta pel sexe del gos-->            
-                    <input type="text" name="duracion" th:field="*{duracion}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
-                </p>
+                    <p>
+                        <label for="duracion">Duracion:</label> <!--Etiqueta pel sexe del gos-->            
+                        <input type="text" name="duracion" th:field="*{duracion}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                    </p>
                 </div>
             </form>
         </p>
@@ -156,30 +156,30 @@
                 <form th:action="@{/eliminar-asistentes}" method="POST" th:object="${ensayo}">
 
                     <input type="hidden" name="idevento" th:field="*{idevento}"/>
+                    <div class="container">
+                        <div th:if="${usuariosAsignados!=null && !usuariosAsignados.empty}">
 
-                    <div th:if="${usuariosAsignados!=null && !usuariosAsignados.empty}">
+                            <table  border="1" class="table">
+                                <tr class="table-warning">
+                                    <th>Nombre</th>
+                                    <th>Mail</th>
+                                    <th>Telefono</th>
+                                    <th>SI/NO</th>
+                                </tr>
+                                <tr th:each="usuario : ${usuariosAsignados}">
+                                    <th th:text="${usuario.username}"></th>
+                                    <th th:text="${usuario.mail}"></th>
+                                    <th th:text="${usuario.telefono}"></th>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosAsignadosId" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
 
-                        <table  border="1" class="table">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Mail</th>
-                                <th>Telefono</th>
-                                <th>SI/NO</th>
-                            </tr>
-                            <tr th:each="usuario : ${usuariosAsignados}">
-                                <th th:text="${usuario.username}"></th>
-                                <th th:text="${usuario.mail}"></th>
-                                <th th:text="${usuario.telefono}"></th>
-                                <td>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosAsignadosId" />
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-
+                        </div>
                     </div>
-
                     <div th:if="${usuariosAsignados==null || usuariosAsignados.empty}">
 
                         <p>No hay usuarios asignados!</p>
@@ -197,30 +197,30 @@
                 <form th:action="@{/anadir-usuarios}" method="POST" th:object="${ensayo}">
 
                     <input type="hidden" name="idevento" th:field="*{idevento}"/>
+                    <div class="container">
+                        <div th:if="${usuarios!=null && !usuarios.empty}">
 
-                    <div th:if="${usuarios!=null && !usuarios.empty}">
+                            <table  border="1" class="table">
+                                <tr class="table-warning">
+                                    <th>Nombre</th>
+                                    <th>Mail</th>
+                                    <th>Telefono</th>
+                                    <th>SI/NO</th>
+                                </tr>
+                                <tr th:each="usuario : ${usuarios}">
+                                    <th th:text="${usuario.username}"></th>
+                                    <th th:text="${usuario.mail}"></th>
+                                    <th th:text="${usuario.telefono}"></th>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosId"> 
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
 
-                        <table  border="1" class="table">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Mail</th>
-                                <th>Telefono</th>
-                                <th>SI/NO</th>
-                            </tr>
-                            <tr th:each="usuario : ${usuarios}">
-                                <th th:text="${usuario.username}"></th>
-                                <th th:text="${usuario.mail}"></th>
-                                <th th:text="${usuario.telefono}"></th>
-                                <td>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosId"> 
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-
+                        </div>
                     </div>
-
                     <div th:if="${usuarios==null || usuarios.empty}">
 
                         <p>No existen más usuarios registrados!</p>
@@ -245,7 +245,7 @@
 
                 <div th:if="${castillosAsignados!=null && !castillosAsignados.empty}">
                     <table  border="1" class = "table">
-                        <tr>
+                        <tr class="table-warning">
                             <th>Castillos Asignados</th>
                             <th>SI/NO</th>
                         </tr>
