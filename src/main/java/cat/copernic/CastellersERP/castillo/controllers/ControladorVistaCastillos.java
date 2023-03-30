@@ -124,6 +124,16 @@ public class ControladorVistaCastillos {
             ensayoService.añadirEnsayo(ensayo);
         }
         
+        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+            boolean esTipoX = auth.getAuthorities().contains(new SimpleGrantedAuthority("CapDeColla"));
+            if (esTipoX) {
+                // Agregar un atributo al modelo para indicar que se debe mostrar la columna X
+                model.addAttribute("ocultar", true);
+            }else{
+                model.addAttribute("ocultar", false);
+            }
+
         model.addAttribute("Evento", ensayoService.listarEnsayos());
 
         return "ensayo/ListarEnsayos";

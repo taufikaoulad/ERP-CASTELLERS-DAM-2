@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title th:text="${CrearSalida}"></title>
+  <head th:replace = "~{layout/plantilla :: head}">
+    </head>
+  <body>
     <script>
         var myBooleanValue = false; // Valor booleano por defecto
         document.getElementById("booleanParadita").addEventListener("change", function() {
             myBooleanValue = this.checked;
         });
     </script>
-  </head>
-  <body>
-    
+    <div th:replace="~{layout/plantilla :: menu}" />
     <section>
         <h1 th:text="${CrearSalida}"></h1>  
     </section>
     
-    <main>
+    <div class="container">
         
         <p>
             <form th:action="@{/guardarSalida}" method="post" th:object="${salida}">
@@ -55,17 +54,15 @@
                     
                     <input type="hidden" name="asistenciaTransporte" th:field="*{asistenciaTransporte}">-->
                     
-                <input type="submit" name="enviar" value="Enviar Dades"/> 
+                <input class="btn btn-warning" type="submit" name="enviar" value="Enviar Dades"/> 
                 
             </form>
         </p>
-     
-    </main>
-      
-    <div>
+        
         <a th:href = "@{/paginalistarSalidas}">
-            <button>Volver</button>
+            <button class="btn btn-warning">Volver</button>
         </a>
+     
     </div>
     
   </body>

@@ -1,14 +1,106 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Detalle Ensayo</title>
-        <meta charset="UTF-8">
+    <head th:replace = "~{layout/plantilla :: head}">
+
     </head>
     <body>
+        <style>
+            /* Estilos para el contenedor principal */
+            .containerpasarlista {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                height: 50vh;
+            }
 
+            .containerdetalle {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            .titulo {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            /* Estilos para el contenedor secundario */
+            .content {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .subcontent {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* Estilos para las tablas */
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                max-width: 400px;
+                margin: 10px;
+                border: 1px solid black;
+            }
+
+            th, td {
+                padding: 10px;
+                text-align: left;
+            }
+
+            h1 {
+                text-align: center;
+            }
+            .header {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                padding: 20px;
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            .subtitle {
+                align-self: flex-start;
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin: 10px;
+            }
+
+            hr {
+                border: none;
+                position: center;
+                border-top: 3px solid black;
+                margin: 20px auto;
+                width: 80%;
+            }
+
+            button {
+                margin: 20px;
+            }
+
+        </style>
+        <header th:replace="~{layout/plantilla :: menu}" />
         <div>
 
-            <h1>Detalle Ensayo</h1>
+            <div>
+                <a th:href="@{/ensayos}">
+                    <button type="submit" class="btn btn-outline-warning" name="submit">Volver</button>
+                </a>
+            </div>
+
+            <h1>Detalle Ensayo</h1><br>
 
             <p>
             <form th:object="${ensayo}">
@@ -21,140 +113,163 @@
 
                 <!-- Camp ocult on guardem el valor de l'atribut idgos de la classe gos per enviar-lo juntament amb les altres dades.-->                 
                 <input type="hidden" name="idevento" th:field="*{idevento}"/>
+                <div class="containerdetalle">
+                    <p>
+                        <label for="nombreEvento">Nombre:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
+                        <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut nom de l'objecte
+                            gos assignat a th:objecte-->
+                        <input type="text" name="nombreEvento" th:field="*{nombreEvento}" th:disabled="${true}"/>
 
-                <p>
-                    <label for="nombreEvento">Nombre:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
-                    <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut nom de l'objecte
-                        gos assignat a th:objecte-->
-                    <input type="text" name="nombreEvento" th:field="*{nombreEvento}" th:disabled="${true}"/>
+                    </p>
 
-                </p>
+                    <p>
+                        <label for="fechaEvento">Fecha:</label> <!--Etiqueta per l'edat del gos-->            
+                        <input type="text" name="fechaEvento" th:field="*{fechaEvento}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                    </p>
+                    <p>
+                        <label for="horario">Horario:</label> <!--Etiqueta per l'edat del gos-->            
+                        <input type="text" name="horario" th:field="*{horario}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                    </p>
 
-                <p>
-                    <label for="fechaEvento">Fecha:</label> <!--Etiqueta per l'edat del gos-->            
-                    <input type="text" name="fechaEvento" th:field="*{fechaEvento}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
-                </p>
-                
-                <p>
-                    <label for="horario">Horario:</label> <!--Etiqueta per l'edat del gos-->            
-                    <input type="text" name="horario" th:field="*{horario}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
-                </p>
 
-                <p>
-                    <label for="ubicacionEvento">Ubicacion</label> <!--Etiqueta pel sexe del gos-->            
-                    <input type="text" name="ubicacionEvento" th:field="*{ubicacionEvento}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
-                </p>
-
-                <p>
-                    <label for="duracion">Duracion:</label> <!--Etiqueta pel sexe del gos-->            
-                    <input type="text" name="duracion" th:field="*{duracion}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
-                </p>    
+                    <p>
+                        <label for="ubicacionEvento">Ubicacion</label> <!--Etiqueta pel sexe del gos-->            
+                        <input type="text" name="ubicacionEvento" th:field="*{ubicacionEvento}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                    </p>
+                    <p>
+                        <label for="duracion">Duracion:</label> <!--Etiqueta pel sexe del gos-->            
+                        <input type="text" name="duracion" th:field="*{duracion}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                    </p>
+                </div>
             </form>
         </p>
+
+        <br><hr><br>
+
+        <div class="titulo">
+            <h1>Pasar Lista</h1>
+        </div>
+
+        <div class="containerpasarlista">
+            <div class="content">
+                <h2 class="subtitle">Lista de Asistentes</h2>
+                <form th:action="@{/eliminar-asistentes}" method="POST" th:object="${ensayo}">
+
+                    <input type="hidden" name="idevento" th:field="*{idevento}"/>
+                    <div class="container">
+                        <div th:if="${usuariosAsignados!=null && !usuariosAsignados.empty}">
+
+                            <table  border="1" class="table">
+                                <tr class="table-warning">
+                                    <th>Nombre</th>
+                                    <th>Mail</th>
+                                    <th>Telefono</th>
+                                    <th>SI/NO</th>
+                                </tr>
+                                <tr th:each="usuario : ${usuariosAsignados}">
+                                    <th th:text="${usuario.username}"></th>
+                                    <th th:text="${usuario.mail}"></th>
+                                    <th th:text="${usuario.telefono}"></th>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosAsignadosId" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div th:if="${usuariosAsignados==null || usuariosAsignados.empty}">
+
+                        <p>No hay usuarios asignados!</p>
+
+                    </div>
+                    <div class="subcontent">
+                        <input type="submit" value="Quitar Asistente/s" class="btn btn-outline-warning" th:disabled="${#lists.isEmpty(usuariosAsignados)}">
+                    </div>
+                </form>
+            </div>    
+
+            <div class="content">
+                <h2 class="subtitle">Lista de Usuarios</h2>
+
+                <form th:action="@{/anadir-usuarios}" method="POST" th:object="${ensayo}">
+
+                    <input type="hidden" name="idevento" th:field="*{idevento}"/>
+                    <div class="container">
+                        <div th:if="${usuarios!=null && !usuarios.empty}">
+
+                            <table  border="1" class="table">
+                                <tr class="table-warning">
+                                    <th>Nombre</th>
+                                    <th>Mail</th>
+                                    <th>Telefono</th>
+                                    <th>SI/NO</th>
+                                </tr>
+                                <tr th:each="usuario : ${usuarios}">
+                                    <th th:text="${usuario.username}"></th>
+                                    <th th:text="${usuario.mail}"></th>
+                                    <th th:text="${usuario.telefono}"></th>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosId"> 
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div th:if="${usuarios==null || usuarios.empty}">
+
+                        <p>No existen más usuarios registrados!</p>
+
+                    </div>
+                    <div class="subcontent">
+                        <input type="submit" value="Añadir Asistente/s" class="btn btn-outline-warning" th:disabled="${#lists.isEmpty(usuarios)}">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <hr><br>
+
         <form th:action="@{/eliminar-castillos-asignados}" method="POST" th:object="${ensayo}">
 
             <input type="hidden" name="idevento" th:field="*{idevento}"/>
 
-            <h3>Castillos Asignados</h3>
+            <div class="content">
 
-            <table border="1">
-                <tr>
-                    <th>Castillos Asignados</th>
-                    <th>SI/NO</th>
-                </tr>
-                <tr th:each="castillo : ${castillosAsignados}">
-                    <td th:text="${castillo.nombre}"></td>
-                    <td>
-                        <input type="checkbox" th:value="${castillo.idCastillo}" th:name="castillosId" />
-                    </td>
-                </tr>
-            </table>
-            
-            <input type="submit" value="Quitar Castillos Asignados" th:disabled="${#lists.isEmpty(castillosAsignados)}">
+                <h3>Castillos Asignados</h3>
 
+                <div th:if="${castillosAsignados!=null && !castillosAsignados.empty}">
+                    <table  border="1" class = "table">
+                        <tr class="table-warning">
+                            <th>Castillos Asignados</th>
+                            <th>SI/NO</th>
+                        </tr>
+                        <tr th:each="castillo : ${castillosAsignados}">
+                            <td th:text="${castillo.nombre}"></td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" th:value="${castillo.idCastillo}" th:name="castillosId" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div th:if="${castillosAsignados==null || castillosAsignados.empty}">
+
+                    <p>No existen castillos asignados!</p>
+
+                </div>
+
+                <input type="submit" value="Quitar Castillos Asignados" class="btn btn-outline-warning" th:disabled="${#lists.isEmpty(castillosAsignados)}">
+            </div>
         </form>
-
-        <br>
-
-        <h3>PASAR LISTA</h3>
-
-        <h4>LISTA ASISTENTES</h4>
-
-        <form th:action="@{/eliminar-asistentes}" method="POST" th:object="${ensayo}">
-
-            <input type="hidden" name="idevento" th:field="*{idevento}"/>
-
-            <div th:if="${usuariosAsignados!=null && !usuariosAsignados.empty}">
-
-                <table border="1">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Mail</th>
-                        <th>Telefono</th>
-                        <th>SI/NO</th>
-                    </tr>
-                    <tr th:each="usuario : ${usuariosAsignados}">
-                        <th th:text="${usuario.username}"></th>
-                        <th th:text="${usuario.mail}"></th>
-                        <th th:text="${usuario.telefono}"></th>
-                        <td>
-                            <input type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosAsignadosId" />
-                        </td>
-                    </tr>
-                </table>
-
-            </div>
-
-            <div th:if="${usuariosAsignados==null || usuariosAsignados.empty}">
-
-                <p>No hay usuarios asignados!</p>
-
-            </div>
-
-            <input type="submit" value="Quitar Asistente/s" th:disabled="${#lists.isEmpty(usuariosAsignados)}">
-
-        </form>
-
-        <form th:action="@{/anadir-usuarios}" method="POST" th:object="${ensayo}">
-
-            <input type="hidden" name="idevento" th:field="*{idevento}"/>
-
-            <h4>LISTA USUARIOS</h4>
-
-            <div th:if="${usuarios!=null && !usuarios.empty}">
-
-                <table border="1">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Mail</th>
-                        <th>Telefono</th>
-                        <th>SI/NO</th>
-                    </tr>
-                    <tr th:each="usuario : ${usuarios}">
-                        <th th:text="${usuario.username}"></th>
-                        <th th:text="${usuario.mail}"></th>
-                        <th th:text="${usuario.telefono}"></th>
-                        <td>
-                            <input type="checkbox" th:value="${usuario.idusuario}" th:name="usuariosId"> 
-                        </td>
-                    </tr>
-                </table>
-
-            </div>
-
-            <div th:if="${usuarios==null || usuarios.empty}">
-
-                <p>No existen más usuarios registrados!</p>
-
-            </div>
-
-            <input type="submit" value="Añadir Asistente/s" th:disabled="${#lists.isEmpty(usuarios)}">
-
-        </form>
-
-        <a href="/ensayos"><button>VOLVER</button></a>
-
     </div>
-
+    <br><br><br>
 </body>
 </html>

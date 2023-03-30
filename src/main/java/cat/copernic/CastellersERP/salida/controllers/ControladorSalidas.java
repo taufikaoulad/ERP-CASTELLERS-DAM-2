@@ -172,10 +172,13 @@ public class ControladorSalidas {
         return new RedirectView("/editarAsistencia/" + salida.getIdevento());
     }*/
     @PostMapping("anadirUsarioSalida")
-    public RedirectView anadirUsarioSalida(@RequestParam List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
+    public RedirectView anadirUsarioSalida(@RequestParam(required = false) List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
         Salida salidaActualizada = salidaService.cercarSalida(salida);
         int salidaId = salidaActualizada.getIdevento();
-
+        
+        if (usuariosId == null) {
+            return new RedirectView("/editarAsistencia/" + salida.getIdevento());
+        } else {
         // Obtenemos la lista de usuarios asignados
         List<Usuario> usuariosAsignados = salidaActualizada.getUsuariosAsignados();
 
@@ -196,6 +199,8 @@ public class ControladorSalidas {
 
         // Redireccionamos al detalle de la salida
         return new RedirectView("/editarAsistencia/" + salida.getIdevento());
+        
+        }
     }
 
     /*@PostMapping("/eliminarAsistentes")
@@ -314,11 +319,14 @@ public class ControladorSalidas {
         return new RedirectView("/editarAsistencia/" + salidaActualizada.getIdevento());
     }*/
     @PostMapping("/eliminarAsistentes")
-    public RedirectView eliminarAsistentes(@RequestParam List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
+    public RedirectView eliminarAsistentes(@RequestParam(required = false) List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
         // Obtenemos la salida desde la base de datos
         Salida salidaActualizada = salidaService.cercarSalida(salida);
         int salidaId = salidaActualizada.getIdevento();
-
+        
+        if (usuariosId == null) {
+            return new RedirectView("/editarAsistencia/" + salidaActualizada.getIdevento());
+        } else {
         // Obtenemos la lista de usuarios asignados
         List<Usuario> usuariosAsignados = salidaActualizada.getUsuariosAsignados();
 
@@ -340,6 +348,7 @@ public class ControladorSalidas {
 
         // Redireccionamos al detalle de la salida
         return new RedirectView("/editarAsistencia/" + salidaActualizada.getIdevento());
+        }
     }
 
     @GetMapping("/pasarIDaCastillo/{idevento}")
