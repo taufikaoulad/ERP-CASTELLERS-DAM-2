@@ -1,11 +1,29 @@
 <html html xmlns:th="http://www.thymeleaf.org">
     <head th:replace = "~{layout/plantilla :: head}">
+        <script>
+            function mostrarNombre() {
+                
+                var opciones = document.getElementById("tipo").value;
+                
+                var nombre = document.getElementById("nombre").value;
+                
+                
+                if (opciones === "Gasto") {
+                    nombre += "Gasto";
+                }
+                else if (opciones === "Ingreso") {
+                    nombre += "Ingreso";
+                }
+
+                document.getElementById("nombre").value = nombre;
+            }
+        </script>
     </head>
     <body>
-        
+
         <div th:replace="~{layout/plantilla :: menu}" />
         <div class="container">
-            
+
 
             <h1>Formulario Apunte</h1>
 
@@ -33,8 +51,12 @@
                 </p>
 
                 <p>
-                    <label for="tipo">Tipo: </label> <!--Etiqueta pel sexe del gos-->            
-                    <input type="text" name="tipo" th:field="*{tipo}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                    <label for="tipo">Tipo: </label>
+                    <select id="tipo" onchange="mostrarNombre()" name="tipo" th:field="*{tipo}">
+                        <option onchange="mostrarNombre()" value="Ingreso">Ingreso</option>
+                        <option onchange="mostrarNombre()" value="Gasto">Gasto</option>
+                    </select>
+                    <input type="text" id="nombre" name="nombre" onchange="mostrarNombre()" readonly/> <!--Associem les dades introduïdes amb l'atribut sexe-->
 
                     <span th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"/>
                 </p>

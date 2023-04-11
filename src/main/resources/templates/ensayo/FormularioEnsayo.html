@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Crear Ensayo</title>
-        <meta charset="UTF-8">
+    <head th:replace = "~{layout/plantilla :: head}">
     </head>
     <body>
-
-        <div>
+        <div th:replace="~{layout/plantilla :: menu}" />
+        <div class="container">
             <h1>Crear Ensayo</h1>
             <p>
             <form th:action="@{/guardarEnsayo}" method="post" th:object="${ensayo}">
@@ -31,7 +29,7 @@
 
                 <p>
                     <label for="fechaEvento">Fecha:</label> <!--Etiqueta per l'edat del gos-->            
-                    <input type="text" name="fechaEvento" th:field="*{fechaEvento}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                    <input type="date" name="fechaEvento" th:field="*{fechaEvento}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
                     <span th:if="${#fields.hasErrors('fechaEvento')}" th:errors="*{fechaEvento}"/>
                 </p>
 
@@ -55,7 +53,7 @@
                 </p>
 
                 <!-- Botó per enviar les dades-->
-                <input type="submit" name="enviar" value="Enviar Datos"/>        
+                <input class="btn btn-warning" type="submit" name="enviar" value="Enviar Datos"/>        
             </form>
         </p>
     </div>
