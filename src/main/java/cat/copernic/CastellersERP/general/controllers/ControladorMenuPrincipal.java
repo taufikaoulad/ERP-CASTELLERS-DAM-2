@@ -53,10 +53,16 @@ public class ControladorMenuPrincipal {
         
         LocalDate fecha = LocalDate.now().withDayOfMonth(1);
         
+        /*
+        establece la fecha actual al primer día del mes actual, y determina en qué día de la semana cae 
+        ese primer día. Luego, agrega días adicionales (como días de la semana anteriores al primer día 
+        del mes) a la fecha actual para asegurarse de que el primer día del mes aparezca en el día de la 
+        semana correcto en el calendario.
+        */
         DayOfWeek diaInicio = fecha.getDayOfWeek();
         int desplazamiento = diaInicio.getValue() - DayOfWeek.MONDAY.getValue();
         fecha = fecha.minusDays(desplazamiento);
-
+        
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
                 if (fecha.getMonthValue() == LocalDate.now().getMonthValue()) {
@@ -72,6 +78,11 @@ public class ControladorMenuPrincipal {
             }
         }
        
+        /*
+         recorre la matriz bidimensional de ArrayLists "calendario" y agrega fechas al ArrayList 
+        correspondiente a cada día en el mes actual. Si el día no está en el mes actual, 
+        se agrega el valor 0 en su lugar.
+        */
         for (Evento evento : eventos) {
             for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < 7; j++) {
