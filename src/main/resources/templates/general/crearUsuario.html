@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Crear usuario</title>
+    <head th:replace = "~{layout/plantilla :: head}">
     </head>
     <body>
-        <div>
+        <div th:replace="~{layout/plantilla :: menu}" />
+        <div class="container">
             <h1>Crear usuario</h1>
             
             <p>
@@ -67,13 +66,13 @@
                         <span th:if="${#fields.hasErrors('tipousuario_idtipousuario.idtipousuario')}" th:errors="*{tipousuario_idtipousuario}"/>
                     </p>
 
-                    <input type="submit" name="enviar" value="Enviar Dades"/> 
+                    <input class="btn btn-outline-warning" type="submit" name="enviar" value="Enviar Dades"/> 
                 </form>
             </p>
 
             <div>
                 <a th:href = "@{/paginalistarUsuarios}">
-                    <button>Volver</button>
+                    <button class="btn btn-outline-warning">Volver</button>
                 </a>
             </div>
         </div>

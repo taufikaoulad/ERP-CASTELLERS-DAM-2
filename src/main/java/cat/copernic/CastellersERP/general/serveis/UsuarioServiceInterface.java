@@ -20,5 +20,7 @@ public interface UsuarioServiceInterface {
     
     public Usuario cercarUsuario(Usuario usuario); //Mètode que implementarem per cercar un usuario
     
+    public Usuario cercarUsuarioPorId(int usuarioId); //Mètode que implementarem per cercar un usuario
+    
     public Usuario buscarUsuarioPorMail(String email);
 }

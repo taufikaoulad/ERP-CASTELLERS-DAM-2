@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title th:text="${CrearSalida}"></title>
+  <head th:replace = "~{layout/plantilla :: head}">
+    </head>
+  <body>
     <script>
         var myBooleanValue = false; // Valor booleano por defecto
         document.getElementById("booleanParadita").addEventListener("change", function() {
             myBooleanValue = this.checked;
         });
     </script>
-  </head>
-  <body>
-      
+    <div th:replace="~{layout/plantilla :: menu}" />
     <section>
         <h1 th:text="${CrearSalida}"></h1>  
     </section>
     
-    <main>
+    <div class="container">
         
         <p>
             <form th:action="@{/guardarSalida}" method="post" th:object="${salida}">
                 <input type="hidden" name="idevento" th:field="*{idevento}"/>
                 
                     <p>
-                        <label for="nombreEvento">Nombre :</label><br><br>
+                        <label for="nombreEvento">Nombre :</label>
                         <input type="text" name="nombreEvento" th:field="*{nombreEvento}" ><br><br>
+                        <span th:if="${#fields.hasErrors('nombreEvento')}" th:errors="*{nombreEvento}"/>
                     </p>
                     
                     <p>
-                        <label for="fechaEvento">Fecha [AAAA-MM-DD] :</label><br><br>
+                        <label for="fechaEvento">Fecha [AAAA-MM-DD] :</label>
                         <input type="date" name="fechaEvento" th:field="*{fechaEvento}"><br><br>
+                        <span th:if="${#fields.hasErrors('fechaEvento')}" th:errors="*{fechaEvento}"/>
                     </p>
                     
                     <p>
                         <label for="horario">Horario :</label> <!--Etiqueta per l'edat del gos-->            
-                        <input type="text" name="horario" th:field="*{horario}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                        <input type="text" name="horario" th:field="*{horario}"/> <br><br> <!--Associem les dades introduïdes amb l'atribut edat-->
+                        <span th:if="${#fields.hasErrors('horario')}" th:errors="*{horario}"/>
                     </p>
 
                     
                     <p>
-                        <label for="ubicacionEvento">Ubicación :</label><br><br>
+                        <label for="ubicacionEvento">Ubicación :</label>
                         <input type="text" name="ubicacionEvento" th:field="*{ubicacionEvento}"><br><br>
+                        <span th:if="${#fields.hasErrors('ubicacionEvento')}" th:errors="*{ubicacionEvento}"/>
                     </p>
                     
                     <p>
-                        <label for="paradita">Paradita :</label><br><br>
+                        <label for="paradita">Paradita :</label>
                         <input type="checkbox" id="booleanParadita" name="paradita" th:field="*{paradita}"><br><br>
                     </p>
                     
@@ -51,17 +54,15 @@
                     
                     <input type="hidden" name="asistenciaTransporte" th:field="*{asistenciaTransporte}">-->
                     
-                <input type="submit" name="enviar" value="Enviar Dades"/> 
+                <input class="btn btn-warning" type="submit" name="enviar" value="Enviar Dades"/> 
                 
             </form>
         </p>
-     
-    </main>
-      
-    <div>
+        
         <a th:href = "@{/paginalistarSalidas}">
-            <button>Volver</button>
+            <button class="btn btn-warning">Volver</button>
         </a>
+     
     </div>
     
   </body>
