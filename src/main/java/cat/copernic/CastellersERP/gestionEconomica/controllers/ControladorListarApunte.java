@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cat.copernic.CastellersERP.gestionEconomica.controllers;
 
 import cat.copernic.CastellersERP.gestionEconomica.serveis.ApunteService;
@@ -22,33 +18,41 @@ import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 /**
  *
- * @author bhugo
+ * @author bhugo Controlador encargado de manejar las operaciones relacionadas
+ * con la gestión económica del sistema.
+ *
  */
 @Controller
 public class ControladorListarApunte {
 
     double dinero = 0;
-    /*
-    si una clase necesita una instancia de otro componente, simplemente se puede declarar un campo con la anotación 
-    "@Autowired" y Spring Boot se encargará de crear una instancia y asignarla al campo automáticamente.
+    /**
+     * si una clase necesita una instancia de otro componente, simplemente se
+     * puede declarar un campo con la anotación "@Autowired" y Spring Boot se
+     * encargará de crear una instancia y asignarla al campo automáticamente.
      */
     @Autowired
     private ApunteService apunteService;
 
+    /**
+     * Método encargado de mostrar la lista de apuntes contables del sistema.
+     *
+     * @param model Modelo utilizado para transmitir información a la vista.
+     * @return Devuelve la vista de la lista de apuntes contables.
+     */
     @GetMapping("/gestionEconomica")
     public String inicio(Model model) {
-        
+
         org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         boolean esTipoX = auth.getAuthorities().contains(new SimpleGrantedAuthority("Tresorer"));
-            if (esTipoX) {
-                // Agregar un atributo al modelo para indicar que se debe mostrar la columna X
-                model.addAttribute("ocultar", true);
-            }else{
-                model.addAttribute("ocultar", false);
-            }
-        
-        
+        if (esTipoX) {
+            // Agregar un atributo al modelo para indicar que se debe mostrar la columna X
+            model.addAttribute("ocultar", true);
+        } else {
+            model.addAttribute("ocultar", false);
+        }
+
         model.addAttribute("apuntes", apunteService.listarApuntes());
 
         model.addAttribute("Dinero", dinero);
@@ -56,12 +60,29 @@ public class ControladorListarApunte {
         return "gestionEconomica/ListarApuntes";
     }
 
+    /**
+     * Método encargado de mostrar el formulario para añadir un nuevo apunte
+     * contable.
+     *
+     * @param apunte Objeto apunte contable utilizado para recoger los datos del
+     * formulario.
+     * @return Devuelve la vista del formulario para añadir un nuevo apunte
+     * contable.
+     */
     @GetMapping("/formularioApunte")
     public String crearFormularioApunte(Apunte apunte) {
 
         return "gestionEconomica/AnadirApunte";
     }
 
+    /**
+     * Método encargado de guardar un nuevo apunte contable en el sistema.
+     *
+     * @param apunte Objeto apunte contable que contiene los datos a guardar.
+     * @param errors Errores que se han producido durante la validación del
+     * objeto apunte.
+     * @return Devuelve la vista de la lista de apuntes contables.
+     */
     @PostMapping("/guardarApunte")
     public String guardarApunte(@Valid Apunte apunte, Errors errors) {
 
@@ -78,6 +99,19 @@ public class ControladorListarApunte {
         return "redirect:/gestionEconomica";
     }
 
+    /**
+     * Método que se encarga de editar un Apunte existente en la lista de
+     * apuntes de la aplicación.
+     *
+     * Recibe un Apunte y un Model como parámetros para la vista.
+     *
+     * @param apunte El Apunte a editar.
+     *
+     * @param model El Model utilizado para enviar datos a la vista.
+     *
+     * @return Retorna la vista "gestionEconomica/AnadirApunte" que muestra el
+     * formulario para editar el Apunte.
+     */
     @GetMapping("/editarApunte/{idapuntecontable}")
     public String editar(Apunte apunte, Model model) {
 
@@ -98,6 +132,14 @@ public class ControladorListarApunte {
         return "redirect:/gestionEconomica"; //Retornem a la pàgina inicial dels gossos mitjançant redirect
     }
 
+    /**
+     *
+     * Método que devuelve una instancia del dialecto SpringSecurityDialect para
+     * ser utilizado en las vistas de Thymeleaf. Este dialecto proporciona
+     * herramientas para trabajar con seguridad en Spring Security.
+     *
+     * @return instancia de SpringSecurityDialect
+     */
     @ModelAttribute("SpringSecurity")
     public SpringSecurityDialect springSecurityDialect() {
         return new SpringSecurityDialect();
