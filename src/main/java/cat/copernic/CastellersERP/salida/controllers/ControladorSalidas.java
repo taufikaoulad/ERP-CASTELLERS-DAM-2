@@ -173,7 +173,7 @@ public class ControladorSalidas {
         return "salida/anadirAsistencia"; //Retorna la pàgina amb el formulari de les dades del gos
     }
 
-    @PostMapping("anadirUsarioSalida")
+    /*@PostMapping("anadirUsarioSalida")
     public RedirectView anadirUsarioSalida(@RequestParam List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
         // Cerca la sortida en la base de dades per obtenir-ne les dades
         Salida salidaActualizada = salidaService.cercarSalida(salida);
@@ -262,8 +262,8 @@ public class ControladorSalidas {
 
         // Redireccionamos al detalle de la salida
         return new RedirectView("/editarAsistencia/" + salidaActualizada.getIdevento());
-        }
     }
+    
 
     @GetMapping("/pasarIDaCastillo/{idevento}")
     public String pasarIDaCastillo(Salida salida, Model model) {
@@ -376,13 +376,13 @@ public class ControladorSalidas {
         salida = salidaService.cercarSalida(salida);
         //Obtenemos el id del evento
         int salidaId = salida.getIdevento();
-// Creamos una lista de usuarios a partir de los usuarios asignados a esta salida.
+        // Creamos una lista de usuarios a partir de los usuarios asignados a esta salida.
         List<Usuario> usuarios = new ArrayList<>(salida.getUsuariosAsignados());
         // Creamos una lista vacía para almacenar a los usuarios que han indicado que necesitan transporte.
         List<Usuario> usuariosTransporte = new ArrayList<>();
         // Creamos un objeto UsuarioEvento para buscar los detalles de asistencia y transporte de cada usuario.
         UsuarioEvento usuarioEvento1 = new UsuarioEvento();
-// Recorremos la lista de usuarios para buscar sus detalles de asistencia y transporte.
+        // Recorremos la lista de usuarios para buscar sus detalles de asistencia y transporte.
         for (Usuario u : salida.getUsuariosAsignados()) {
             // Obtenemos el id del UsuarioEvento correspondiente al usuario y a esta salida.
             int idusuarioEvento = usuarioEventoService.obtenerIdUsuarioEvento(u.getIdusuario(), salidaId);
