@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cat.copernic.CastellersERP.model;
 
 import jakarta.persistence.CascadeType;
@@ -19,24 +15,29 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 
-/**
- *
- * @author pablogomez
- */
 @Data
 @Entity
 @Table(name = "modulo")
-public class Modulo implements Serializable{
-    
-    @Id //Indica al sistema que l'atribut idgos és la clau primària de la BBDD
-    @GeneratedValue(strategy=GenerationType.IDENTITY) //Indica al sistema com generem l'id, en el nostre cas autoincremental, per això fem servir IDENTITY
-    @Column(name="idmodulo")
-    private int idModulo; 
-    @Column(name="nombre")
+public class Modulo implements Serializable {
+
+    /**
+     * Identificador único del módulo en la base de datos.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idmodulo")
+    private int idModulo;
+
+    /**
+     * Nombre del módulo.
+     */
+    @Column(name = "nombre")
     private String nombre;
-    
+
+    /**
+     * Lista de relaciones entre módulos y tipos de usuarios.
+     */
     @OneToMany(mappedBy = "modulo")
     private List<ModuloTipoUsuario> modulosTiposUsuario = new ArrayList<>();
-    
-    
+
 }
