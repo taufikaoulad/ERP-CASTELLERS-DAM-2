@@ -28,11 +28,11 @@ public class CastilloControlerTest {
     public void testLeerCastillos() {
         // Llama al método "leerCastillos" del servicio
         List<Castillo> castillos = castilloService.listarCastillos();
-
+        
         verify(castilloDAO, times(1)).findAll();
-
-        // Verifica que la lista de castillos es nula o está vacía
-        assertTrue(castillos == null || castillos.isEmpty());
+        
+        // Verifica que la lista de castillos no este
+        assertTrue(castillos.size() > 0);
     }
     
 }

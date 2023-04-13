@@ -1,16 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+/**
+ *
+ * Interfaz que extiende de JpaRepository para acceder a las operaciones CRUD sobre la entidad Castillo en la base de datos.
  */
 package cat.copernic.CastellersERP.DAO;
 
 import cat.copernic.CastellersERP.model.Castillo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- *
- * @author bhugo
- */
-public interface CastilloDAO extends JpaRepository<Castillo,Integer>{
-    
+public interface CastilloDAO extends JpaRepository<Castillo, Integer> {
+
 }

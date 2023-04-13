@@ -1,11 +1,11 @@
 <html>
     <head th:replace = "~{layout/plantilla :: head}">
         <meta charset="UTF-8">
-        <title>Modificar Modulo</title>
+        <title>Modificar Modul</title>
     </head>
     <body>
         <div>
-            <h1>Formulario Modulo</h1>
+            <h1>Formulari Modul</h1>
             <div th:replace="~{layout/plantilla :: menu}" />
             <p>
             <form th:action = "@{/guardarModulo}" method="post" th:object = "${modulotipousuario}">
@@ -14,7 +14,7 @@
             <input type="hidden" name="modulo" th:field="*{modulo.idModulo}"/>
             <input type="hidden" name="modulo" th:field="*{rol.idtipousuario}"/>
                 <p>
-                    <label>Activo</label>
+                    <label>Actiu</label>
                     <input type="checkbox" name="activo" th:field="*{activo}">
                 </p>
                 
