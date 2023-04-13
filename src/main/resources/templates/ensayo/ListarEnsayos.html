@@ -1,59 +1,78 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace = "~{layout/plantilla :: head}">
-<!--
-        <script>
-            function mostrarColumnaOpciones() {
-                document.getElementById("mostrarColumnaOpciones").classList.remove("oculto");
-            }
-        </script>
-        <style>
-		.oculto {
-			display: none;
-		}
-	</style>
--->
     </head>
     <body>
         <header th:replace="~{layout/plantilla :: menu}" />
+        <div class="container">
+            <h1>Listar Ensayos</h1>
 
-        <h1>Listar Ensayos</h1>
+            <br><div><a type="button" class="btn btn-outline-warning" th:href="@{/FormularioEnsayo}" th:if="${ocultar}" th:text="Añadir"/></div><br>
 
-        <div><a th:href="@{/FormularioEnsayo}" th:if="${ocultar}" th:text="Añadir"/></div>
+            <div th:if="${Evento!=null && !Evento.empty}">
 
-        <div th:if="${Evento!=null && !Evento.empty}">
+                <table border="1" class = "table">
+                    <thead class="table-warning">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Fecha</th>
+                            <th>Horario</th>
+                            <th>Ubicación</th>
+                            <th>Duración</th>
+                            <th></th>
+                            <th th:if="${ocultar}">Opciones</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="ensayo : ${Evento}">
+                            <td th:text="${ensayo.nombreEvento}"></td>
+                            <td th:text="${ensayo.fechaEvento}"></td>
+                            <td th:text="${ensayo.horario}"></td>
+                            <td th:text="${ensayo.ubicacionEvento}"></td>
+                            <td th:text="${ensayo.duracion}"></td>
 
-            <table border="1">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Fecha</th>
-                    <th>Horario</th>
-                    <th>Ubicación</th>
-                    <th>Duración</th>
-                    <th th:if="${ocultar}">Opciones</th>
-                </tr>
-                <tr th:each="ensayo : ${Evento}">
-                    <td th:text="${ensayo.nombreEvento}"></td>
-                    <td th:text="${ensayo.fechaEvento}"></td>
-                    <td th:text="${ensayo.horario}"></td>
-                    <td th:text="${ensayo.ubicacionEvento}"></td>
-                    <td th:text="${ensayo.duracion}"></td><!-- ? '' : 'oculto'"-->
+                            <th th:if="${ocultar}">
+                            <td>
+                                <div th:if="${ocultar}">
+                                    <a th:href="@{/detalleEnsayo/}+${ensayo.idevento}">
+                                        <button type="submit" class="btn btn-outline-warning" name="submit">Consultar Detalle</button>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div th:if="${ocultar}">
+                                    <a th:href="@{/consultar-castillos-ensayo/}+${ensayo.idevento}">
+                                        <button type="submit" class="btn btn-outline-warning" name="submit">Consultar Castillos</button>
+                                    </a>
+                                </div>
+                            </td>
+                            <td><div th:if="${ocultar}">
+                                    <a th:href="@{/editarEnsayo/}+${ensayo.idevento}">
+                                        <button type="button" class="btn btn-warning"><img th:src="@{'/pencil.png'}" width='20' height='20'/></button>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div th:if="${ocultar}">
+                                    <a th:href="@{/eliminarEnsayo/}+${ensayo.idevento}">
+                                        <button type="button" class="btn btn-danger"><img th:src="@{'/eliminar.png'}" width='20' height='20'/></button>
+                                    </a>
+                                </div>
+                            </td>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <th th:if="${ocultar}">
-                        <a th:href="@{/detalleEnsayo/}+${ensayo.idevento}" th:text="Detalle"></a>
-                        <a th:href="@{/consultar-castillos-ensayo/}+${ensayo.idevento}" th:text="Castillos"></a>
-                        <a th:href="@{/editarEnsayo/}+${ensayo.idevento}" th:text="Editar"></a>
-                        <a th:href="@{/eliminarEnsayo/}+${ensayo.idevento}" th:text="Eliminar"></a>
-                    </th>
-                </tr>
-            </table>
+            </div>
 
+            <div th:if="${Evento==null || Evento.empty}">
+                <!-- Mostrem missatge-->
+                No hay Ensayos en la lista.
+            </div>
         </div>
-
-        <div th:if="${Evento==null || Evento.empty}">
-            <!-- Mostrem missatge-->
-            No hay Ensayos en la lista.
-        </div>
-
     </body>
 </html>

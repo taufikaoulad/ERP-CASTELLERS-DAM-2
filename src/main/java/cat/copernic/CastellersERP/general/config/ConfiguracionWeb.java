@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cat.copernic.CastellersERP.general.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -10,12 +6,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  *
- * @author Taufik
+ * @author Taufik Esta clase configura la aplicación web, añadiendo
+ * controladores de vistas (View Controllers) para las páginas de login y
+ * error403. Implementa la interfaz WebMvcConfigurer para poder registrar los
+ * controladores de vistas en el registro de vistas (View Controller Registry).
  */
-
 @Configuration
 public class ConfiguracionWeb implements WebMvcConfigurer {
-    
+
+    /**
+     * Registra los controladores de vistas para la página de login y error403
+     * en el registro de vistas.
+     *
+     * @param registre objeto ViewControllerRegistry que permite registrar los
+     * controladores de vistas.
+     */
     @Override
     public void addViewControllers(ViewControllerRegistry registre) {
         //registre.addViewController("/").setViewName("index"); //Mostrem la pàgina incial que reanomenen com a index, quan encara no ens hem autenticat

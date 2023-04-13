@@ -6,6 +6,7 @@ package cat.copernic.CastellersERP.ensayo.services;
 
 import cat.copernic.CastellersERP.DAO.EnsayoDAO;
 import cat.copernic.CastellersERP.model.Ensayo;
+import cat.copernic.CastellersERP.model.Evento;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,10 @@ public class EnsayoService implements EnsayoServiceInterface{
     @Override
     public Ensayo buscarEnsayoPorId(int idevento) {
         return this.ensayoDAO.findById(idevento).orElse(null);
+    }
+
+    public List<Evento> getEventos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

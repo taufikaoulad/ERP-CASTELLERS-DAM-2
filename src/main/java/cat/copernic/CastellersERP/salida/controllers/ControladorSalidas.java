@@ -201,10 +201,41 @@ public class ControladorSalidas {
 
         // Redireccionamos al detalle de la salida
         return new RedirectView("/editarAsistencia/" + salida.getIdevento());
+    }*/
+    @PostMapping("anadirUsarioSalida")
+    public RedirectView anadirUsarioSalida(@RequestParam(required = false) List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
+        Salida salidaActualizada = salidaService.cercarSalida(salida);
+        int salidaId = salidaActualizada.getIdevento();
+        
+        if (usuariosId == null) {
+            return new RedirectView("/editarAsistencia/" + salida.getIdevento());
+        } else {
+        // Obtenemos la lista de usuarios asignados
+        List<Usuario> usuariosAsignados = salidaActualizada.getUsuariosAsignados();
+
+        for (Integer idUsuario : usuariosId) {
+            Usuario usuarioAAgregar = usuarioService.cercarUsuarioPorId(idUsuario);
+            Salida salida1 = salidaService.cercarSalidaPorId(salidaId);
+            // Verificamos si el usuario ya está asignado a la salida
+            if (!usuariosAsignados.contains(usuarioAAgregar)) {
+                // Creamos una nueva instancia de UsuarioEvento
+                UsuarioEvento nuevoUsuarioEvento = new UsuarioEvento();
+                nuevoUsuarioEvento.setUsuario(usuarioAAgregar);
+                nuevoUsuarioEvento.setEvento(salida1);
+
+                // Agregamos el nuevo usuario evento
+                usuarioEventoService.afegirUsuarioEvento(nuevoUsuarioEvento);
+            }
+        }
+
+        // Redireccionamos al detalle de la salida
+        return new RedirectView("/editarAsistencia/" + salida.getIdevento());
+        
+        }
     }
     
     @PostMapping("/eliminarAsistentes")
-    public RedirectView eliminarAsistentes(@RequestParam List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
+    public RedirectView eliminarAsistentes(@RequestParam(required = false) List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
         // Obtenemos la salida desde la base de datos
         Salida salidaActualizada = salidaService.cercarSalida(salida);
         int salidaId = salidaActualizada.getIdevento();
@@ -231,6 +262,7 @@ public class ControladorSalidas {
 
         // Redireccionamos al detalle de la salida
         return new RedirectView("/editarAsistencia/" + salidaActualizada.getIdevento());
+        }
     }
 
     @GetMapping("/pasarIDaCastillo/{idevento}")
