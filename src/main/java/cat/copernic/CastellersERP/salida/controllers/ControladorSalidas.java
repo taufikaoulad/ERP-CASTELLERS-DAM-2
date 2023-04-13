@@ -173,35 +173,7 @@ public class ControladorSalidas {
         return "salida/anadirAsistencia"; //Retorna la pàgina amb el formulari de les dades del gos
     }
 
-    /*@PostMapping("anadirUsarioSalida")
-    public RedirectView anadirUsarioSalida(@RequestParam List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
-        // Cerca la sortida en la base de dades per obtenir-ne les dades
-        Salida salidaActualizada = salidaService.cercarSalida(salida);
-        int salidaId = salidaActualizada.getIdevento(); //obtenemos el id de la salida
-
-        // Obtenemos la lista de usuarios asignados
-        List<Usuario> usuariosAsignados = salidaActualizada.getUsuariosAsignados();
-
-        //bucle for-each que recorre ids de usuarios
-        for (Integer idUsuario : usuariosId) {
-            Usuario usuarioAAgregar = usuarioService.cercarUsuarioPorId(idUsuario); //Cercem l'usuari per l'id
-            Salida salida1 = salidaService.cercarSalidaPorId(salidaId); 
-            // Verificamos si el usuario ya está asignado a la salida
-            if (!usuariosAsignados.contains(usuarioAAgregar)) {
-                // Creamos una nueva instancia de UsuarioEvento
-                UsuarioEvento nuevoUsuarioEvento = new UsuarioEvento(); //se crea una instancia de UsuarioEvento
-                // Realizamos el set de lo valores
-                nuevoUsuarioEvento.setUsuario(usuarioAAgregar);
-                nuevoUsuarioEvento.setEvento(salida1);
-
-                // Agregamos el nuevo usuario evento
-                usuarioEventoService.afegirUsuarioEvento(nuevoUsuarioEvento);
-            }
-        }
-
-        // Redireccionamos al detalle de la salida
-        return new RedirectView("/editarAsistencia/" + salida.getIdevento());
-    }*/
+    
     @PostMapping("anadirUsarioSalida")
     public RedirectView anadirUsarioSalida(@RequestParam(required = false) List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
         Salida salidaActualizada = salidaService.cercarSalida(salida);
