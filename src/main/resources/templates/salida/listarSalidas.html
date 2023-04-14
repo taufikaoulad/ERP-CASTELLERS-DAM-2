@@ -84,7 +84,7 @@
             <!-- <input type="checkbox" th:checked="${salida.asistenciaSalida}"/> <input type="checkbox" th:checked="${salida.asistenciaTransporte}" />-->
             <div>
                 <a href="/formularioSalida">
-                    <button th:text="CrearSalida" class="btn btn-outline-warning" ></button>
+                    <button th:if="${!ocultar && ocultar2}" th:text="CrearSalida" class="btn btn-outline-warning" ></button>
                 </a>
             </div>
 
@@ -93,7 +93,7 @@
                 No hi ha salidas a la llista.
                 <div>
                     <a href="/formularioSalida">
-                        <button th:text="CrearSalida" class="btn btn-outline-warning" ></button>
+                        <button th:if="${!ocultar && ocultar2}" th:text="CrearSalida" class="btn btn-outline-warning" ></button>
                     </a>
                 </div>
             </div>
