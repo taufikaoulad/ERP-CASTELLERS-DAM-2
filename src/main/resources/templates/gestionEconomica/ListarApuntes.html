@@ -8,7 +8,7 @@
         <div class="container">
 
 
-            <h1> Listar Apuntes</h1>
+            <h1> Llistar Apunts</h1>
 
             <div th:if = "${apuntes != null && !apuntes.empty}">
 
@@ -16,10 +16,10 @@
 
                     <thead class="table-warning">
                         <tr>
-                            <th th:text = "Concepto"></th>
-                            <th th:text = "Precio"></th>
-                            <th th:text = "Tipo"></th>
-                            <th th:if="${ocultar}" th:text = "Acciones" colspan="2" ></th>
+                            <th th:text = "Concepte"></th>
+                            <th th:text = "Preu"></th>
+                            <th th:text = "Tipus"></th>
+                            <th th:if="${ocultar}" th:text = "Accions" colspan="2" ></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,10 +47,10 @@
             </div>-->
 
             <div th:if = "${apuntes == null || apuntes.empty}">
-                No hay apuntes en la lista
+                No hi ha apunts en la llista
             </div>
             <br/>
-            <div><a th:if="${ocultar}" type="button" class="btn btn-outline-warning" th:href ="@{/formularioApunte}" th:text = "Añadir"></a></div>
+            <div><a th:if="${ocultar}" type="button" class="btn btn-outline-warning" th:href ="@{/formularioApunte}" th:text = "Afegir"></a></div>
             <!--<button th:disabled="${#authorization != null and not #authorization.expression('hasAnyAuthority(''Tresorer'')')}">Mi boton</button>-->
         </div>
 

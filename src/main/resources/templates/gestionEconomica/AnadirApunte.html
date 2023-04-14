@@ -8,11 +8,11 @@
                 var nombre = document.getElementById("nombre").value;
                 
                 
-                if (opciones === "Gasto") {
-                    nombre += "Gasto";
+                if (opciones === "Despesa") {
+                    nombre += "Despesa";
                 }
-                else if (opciones === "Ingreso") {
-                    nombre += "Ingreso";
+                else if (opciones === "Ingrés") {
+                    nombre += "Ingrés";
                 }
 
                 document.getElementById("nombre").value = nombre;
@@ -25,7 +25,7 @@
         <div class="container">
 
 
-            <h1>Formulario Apunte</h1>
+            <h1>Formulari Apunt</h1>
 
 
             <p>
@@ -35,7 +35,7 @@
                 <input type="hidden" name="idapuntecontable" th:field="*{idapuntecontable}"/>
 
                 <p>
-                    <label for="concepto">Concepto: </label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
+                    <label for="concepto">Concepte: </label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
                     <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut nom de l'objecte
                         gos assignat a th:objecte-->
                     <input type="text" name="concepto" th:field="*{concepto}"/>
@@ -44,7 +44,7 @@
                 </p>
 
                 <p>
-                    <label for="precio">Precio: </label> <!--Etiqueta per l'edat del gos-->            
+                    <label for="precio">Preu: </label> <!--Etiqueta per l'edat del gos-->            
                     <input type="text" name="precio" th:field="*{precio}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
 
                     <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"/>
@@ -53,8 +53,8 @@
                 <p>
                     <label for="tipo">Tipo: </label>
                     <select id="tipo" onchange="mostrarNombre()" name="tipo" th:field="*{tipo}">
-                        <option onchange="mostrarNombre()" value="Ingreso">Ingreso</option>
-                        <option onchange="mostrarNombre()" value="Gasto">Gasto</option>
+                        <option onchange="mostrarNombre()" value="Ingres">Ingrés</option>
+                        <option onchange="mostrarNombre()" value="Despesa">Despesa</option>
                     </select>
                     <input type="text" id="nombre" name="nombre" onchange="mostrarNombre()" readonly/> <!--Associem les dades introduïdes amb l'atribut sexe-->
 
