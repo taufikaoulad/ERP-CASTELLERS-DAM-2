@@ -49,21 +49,21 @@
                             <form th:action="@{/pasarCastilloASalida}" method="post">
                                 <input type="hidden" name="idSalida" th:value="${salida.idevento}">
                                 <input type="hidden" name="idCastilloToSalida" th:value="${castillo.idCastillo}">
-                                <button type="submit" class="btn btn-outline-warning" name="submit">Agregar Castillo a Salida</button>
+                                <button type="submit" class="btn btn-outline-warning" name="submit">Afegir Castell a Sortida</button>
                             </form>
                         </td>
                         <td th:if="${ensayo!=null}">
                             <form th:action="@{/pasarCastilloAEnsayo}" method="post">
                                 <input type="hidden" name="idEnsayo" th:value="${ensayo.idevento}">
                                 <input type="hidden" name="idCastilloToEnsayo" th:value="${castillo.idCastillo}">
-                                <button type="submit" class="btn btn-outline-warning" name="submit">Agregar Castillo al Ensayo</button>
+                                <button type="submit" class="btn btn-outline-warning" name="submit">Afegir Castell a Assaig</button>
                             </form>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div>
-                <a th:href="@{/formularioCastillo}" th:if="${ocultar}" type="button" class="btn btn-outline-warning" th:text="Añadir"/>
+                <a th:href="@{/formularioCastillo}" th:if="${ocultar}" type="button" class="btn btn-outline-warning" th:text="Afegir"/>
             </div>
         </div>
     </body>
