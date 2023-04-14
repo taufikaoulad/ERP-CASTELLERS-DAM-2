@@ -1,16 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
-package cat.copernic.CastellersERP.DAO;
+/**
 
+Interface DAO para acceder a los datos de la entidad Modulo en la base de datos.
+Extiende de CrudRepository para poder usar métodos CRUD básicos.
+*/
+package cat.copernic.CastellersERP.DAO;
 import cat.copernic.CastellersERP.model.Modulo;
 import org.springframework.data.repository.CrudRepository;
 
-/**
- *
- * @author bhugo
- */
 public interface ModuloDAO extends CrudRepository<Modulo,Integer>{
-    
+
 }
