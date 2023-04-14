@@ -16,8 +16,20 @@ import org.springframework.data.repository.query.Param;
  *
  * @author Taufik
  */
+
+/*
+ * Esta es una interfaz Java llamada UsuarioEventoDAO que extiende la interfaz JpaRepository.
+ * Define un método que utiliza la anotación @Query para definir una consulta personalizada que busca el identificador del objeto UsuarioEvento en función del ID del usuario y del ID del evento proporcionados como parámetros.
+ */
 public interface UsuarioEventoDAO extends JpaRepository<UsuarioEvento, Integer>{
 
+    /**
+     * Este método utiliza la anotación @Query para definir una consulta personalizada que busca el identificador del objeto UsuarioEvento
+     * en función del ID del usuario y del ID del evento proporcionados como parámetros.
+     * @param idUsuario el ID del usuario
+     * @param idEvento el ID del evento
+     * @return el identificador del objeto UsuarioEvento en función del ID del usuario y del ID del evento proporcionados como parámetros.
+     */
     //public UsuarioEvento findByUsuarioAndEvento(Usuario usuario, Evento evento);
     @Query("SELECT ue.idusuarioevento FROM UsuarioEvento ue WHERE ue.usuario.idusuario = :idUsuario AND ue.evento.idevento = :idEvento")
     int findIdUsuarioEvento(@Param("idUsuario") int idUsuario, @Param("idEvento") int idEvento);

@@ -2,78 +2,84 @@
 <html>
     <head th:replace = "~{layout/plantilla :: head}">
     </head>
-  <body>
-  <body>
-    <header th:replace="~{layout/plantilla :: menu}" />
-    <div class="container"></br></br>
-        
-        <section>
-          <h2>Asistentes y Transporte de la salida</h2><br>
-        </section>
+    <body>
+    <body>
+        <style>
+            .sizeforlabel {
+                font-size: 20px;
+            }.sizeforlabel2 {
+                font-size: 19px;
+                font-weight: bold;
+            }
+        </style>
+        <header th:replace="~{layout/plantilla :: menu}" />
+        <div class="container"></br></br>
 
-        <main th:if="${usuarios!=null && !usuarios.empty}">
-          <label style="font-size: 20px;">Numero de asistentes a la Salida: </label>
-          <label th:text="${numeroDeAsistentes}" style="font-size: 19px; font-weight: bold;"></label><br><br>
+            <section>
+                <h2>Asistentes y Transporte de la salida</h2><br>
+            </section>
+
+            <main th:if="${usuarios!=null && !usuarios.empty}">
+                <label class="sizeforlabel">Numero de asistentes a la Salida: </label>
+                <label th:text="${numeroDeAsistentes}" class="sizeforlabel2"></label><br><br>
+
+                <table border="1" class="table">
+                    <thead class="table-warning">
+                        <tr>
+                            <th >Nombre</th>
+                            <th >Edat</th>
+                            <th >Peso</th>
+                            <th >Altura</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="usuario : ${usuarios}">
+                            <td th:text="${usuario.username}"></td>
+                            <td th:text="${usuario.edat}"></td>
+                            <td th:text="${usuario.peso}"></td>
+                            <td th:text="${usuario.altura}"></td>
+                        </tr>
+                    </tbody>
+                </table><br>
 
 
 
-          <table border="1" class="table">
-            <thead class="table-warning">
-              <tr>
-                <th >Nombre</th>
-                <th >Edat</th>
-                <th >Peso</th>
-                <th >Altura</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="usuario : ${usuarios}">
-                <td th:text="${usuario.username}"></td>
-                <td th:text="${usuario.edat}"></td>
-                <td th:text="${usuario.peso}"></td>
-                <td th:text="${usuario.altura}"></td>
-              </tr>
-            </tbody>
-          </table><br>
+                <label class="sizeforlabel" >Numero de asistentes al Transporte Grupal: </label>
+                <label th:text="${numeroDeAsistentesTransporte}" class="sizeforlabel2" ></label><br><br>
 
 
 
-          <label style="font-size: 20px;" >Numero de asistentes al Transporte Grupal: </label>
-          <label th:text="${numeroDeAsistentesTransporte}" style="font-size: 19px; font-weight: bold;" ></label><br><br>
+                <table border="1" class="table">
+                    <thead class="table-warning">
+                        <tr>
+                            <th >Nombre</th>
+                            <th >Edat</th>
+                            <th >Peso</th>
+                            <th >Altura</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="usuario : ${usuariosTransporte}">
+                            <td th:text="${usuario.username}"></td>
+                            <td th:text="${usuario.edat}"></td>
+                            <td th:text="${usuario.peso}"></td>
+                            <td th:text="${usuario.altura}"></td>
+                        </tr>
+                    </tbody>
+                </table><br>
 
+            </main>    
 
+            <div th:if="${usuarios==null || usuarios.empty}">
+                <!-- Mostrem missatge-->
+                No hi ha usuarios a la llista.
+            </div>
 
-          <table border="1" class="table">
-            <thead class="table-warning">
-              <tr>
-                <th >Nombre</th>
-                <th >Edat</th>
-                <th >Peso</th>
-                <th >Altura</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="usuario : ${usuariosTransporte}">
-                <td th:text="${usuario.username}"></td>
-                <td th:text="${usuario.edat}"></td>
-                <td th:text="${usuario.peso}"></td>
-                <td th:text="${usuario.altura}"></td>
-              </tr>
-            </tbody>
-          </table><br>
-
-        </main>    
-
-        <div th:if="${usuarios==null || usuarios.empty}">
-           <!-- Mostrem missatge-->
-           No hi ha usuarios a la llista.
+            <div>
+                <a href="/paginalistarSalidas">
+                    <button class="btn btn-outline-warning" >Volver</button>
+                </a>
+            </div>
         </div>
-        
-        <div>
-            <a href="/paginalistarSalidas">
-                <button class="btn btn-outline-warning" >Volver</button>
-            </a>
-        </div>
-    </div>
-  </body>
+    </body>
 </html>
