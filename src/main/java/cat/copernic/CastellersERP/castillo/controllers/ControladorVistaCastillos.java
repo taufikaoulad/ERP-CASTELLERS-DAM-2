@@ -154,8 +154,6 @@ public class ControladorVistaCastillos {
      * la página de listado de salidas.
      *
      * @param model Modelo para enviar información a la vista.
-     * @param idSalida Identificador de la salida a la que se quiere asignar el
-     * castillo.
      * @param idCastillo Identificador del castillo que se quiere asignar a la
      * salida.
      * @return Retorna la página de listado de salidas.
