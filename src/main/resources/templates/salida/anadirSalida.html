@@ -22,32 +22,32 @@
                 <input type="hidden" name="idevento" th:field="*{idevento}"/>
                 
                     <p>
-                        <label for="nombreEvento">Nombre :</label>
+                        <label for="nombreEvento">Nom :</label>
                         <input type="text" name="nombreEvento" th:field="*{nombreEvento}" ><br><br>
                         <span th:if="${#fields.hasErrors('nombreEvento')}" th:errors="*{nombreEvento}"/>
                     </p>
                     
                     <p>
-                        <label for="fechaEvento">Fecha [AAAA-MM-DD] :</label>
+                        <label for="fechaEvento">Data [AAAA-MM-DD] :</label>
                         <input type="date" name="fechaEvento" th:field="*{fechaEvento}"><br><br>
                         <span th:if="${#fields.hasErrors('fechaEvento')}" th:errors="*{fechaEvento}"/>
                     </p>
                     
                     <p>
-                        <label for="horario">Horario :</label> <!--Etiqueta per l'edat del gos-->            
+                        <label for="horario">Horari :</label> <!--Etiqueta per l'edat del gos-->            
                         <input type="text" name="horario" th:field="*{horario}"/> <br><br> <!--Associem les dades introduïdes amb l'atribut edat-->
                         <span th:if="${#fields.hasErrors('horario')}" th:errors="*{horario}"/>
                     </p>
 
                     
                     <p>
-                        <label for="ubicacionEvento">Ubicación :</label>
+                        <label for="ubicacionEvento">Ubicació :</label>
                         <input type="text" name="ubicacionEvento" th:field="*{ubicacionEvento}"><br><br>
                         <span th:if="${#fields.hasErrors('ubicacionEvento')}" th:errors="*{ubicacionEvento}"/>
                     </p>
                     
                     <p>
-                        <label for="paradita">Paradita :</label>
+                        <label for="paradita">Paradeta :</label>
                         <input type="checkbox" id="booleanParadita" name="paradita" th:field="*{paradita}"><br><br>
                     </p>
                     
@@ -61,7 +61,7 @@
         </p>
         
         <a th:href = "@{/paginalistarSalidas}">
-            <button class="btn btn-warning">Volver</button>
+            <button class="btn btn-warning">Tornar</button>
         </a>
      
     </div>

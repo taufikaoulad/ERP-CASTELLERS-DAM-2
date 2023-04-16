@@ -96,7 +96,8 @@ public class ControladorSalidas {
 
         // Agregar al modelo la lista de salidas obtenida del servicio SalidaService
         model.addAttribute("salidas", salidaService.llistarSalidas());
-
+       
+        
         return "salida/listarSalidas"; //Retorna la pàgina iniciDinamic
     }
 
@@ -173,39 +174,38 @@ public class ControladorSalidas {
         return "salida/anadirAsistencia"; //Retorna la pàgina amb el formulari de les dades del gos
     }
 
-    
     @PostMapping("anadirUsarioSalida")
     public RedirectView anadirUsarioSalida(@RequestParam(required = false) List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
         Salida salidaActualizada = salidaService.cercarSalida(salida);
         int salidaId = salidaActualizada.getIdevento();
-        
+
         if (usuariosId == null) {
             return new RedirectView("/editarAsistencia/" + salida.getIdevento());
         } else {
-        // Obtenemos la lista de usuarios asignados
-        List<Usuario> usuariosAsignados = salidaActualizada.getUsuariosAsignados();
+            // Obtenemos la lista de usuarios asignados
+            List<Usuario> usuariosAsignados = salidaActualizada.getUsuariosAsignados();
 
-        for (Integer idUsuario : usuariosId) {
-            Usuario usuarioAAgregar = usuarioService.cercarUsuarioPorId(idUsuario);
-            Salida salida1 = salidaService.cercarSalidaPorId(salidaId);
-            // Verificamos si el usuario ya está asignado a la salida
-            if (!usuariosAsignados.contains(usuarioAAgregar)) {
-                // Creamos una nueva instancia de UsuarioEvento
-                UsuarioEvento nuevoUsuarioEvento = new UsuarioEvento();
-                nuevoUsuarioEvento.setUsuario(usuarioAAgregar);
-                nuevoUsuarioEvento.setEvento(salida1);
+            for (Integer idUsuario : usuariosId) {
+                Usuario usuarioAAgregar = usuarioService.cercarUsuarioPorId(idUsuario);
+                Salida salida1 = salidaService.cercarSalidaPorId(salidaId);
+                // Verificamos si el usuario ya está asignado a la salida
+                if (!usuariosAsignados.contains(usuarioAAgregar)) {
+                    // Creamos una nueva instancia de UsuarioEvento
+                    UsuarioEvento nuevoUsuarioEvento = new UsuarioEvento();
+                    nuevoUsuarioEvento.setUsuario(usuarioAAgregar);
+                    nuevoUsuarioEvento.setEvento(salida1);
 
-                // Agregamos el nuevo usuario evento
-                usuarioEventoService.afegirUsuarioEvento(nuevoUsuarioEvento);
+                    // Agregamos el nuevo usuario evento
+                    usuarioEventoService.afegirUsuarioEvento(nuevoUsuarioEvento);
+                }
             }
-        }
 
-        // Redireccionamos al detalle de la salida
-        return new RedirectView("/editarAsistencia/" + salida.getIdevento());
-        
+            // Redireccionamos al detalle de la salida
+            return new RedirectView("/editarAsistencia/" + salida.getIdevento());
+
         }
     }
-    
+
     @PostMapping("/eliminarAsistentes")
     public RedirectView eliminarAsistentes(@RequestParam(required = false) List<Integer> usuariosId, Salida salida, Model model, UsuarioEvento usuarioEvento) {
         // Obtenemos la salida desde la base de datos
@@ -235,7 +235,6 @@ public class ControladorSalidas {
         // Redireccionamos al detalle de la salida
         return new RedirectView("/editarAsistencia/" + salidaActualizada.getIdevento());
     }
-    
 
     @GetMapping("/pasarIDaCastillo/{idevento}")
     public String pasarIDaCastillo(Salida salida, Model model) {
@@ -257,18 +256,30 @@ public class ControladorSalidas {
         Usuario usuario = usuarioService.buscarUsuarioPorMail(auth.getName());
 
         //Usuario usuario = new Usuario();
-        boolean inscrito = salida.getUsuariosAsignados().contains(usuario);
+        boolean inscrito = false;
+       
+        if (salida.getUsuariosAsignados() != null && !salida.getUsuariosAsignados().isEmpty()) {
+            inscrito = salida.getUsuariosAsignados().contains(usuario);
+            System.out.println(inscrito);
+        }
         
         if (!inscrito) {
             salida.getUsuariosAsignados().add(usuario);
             salidaService.afegirSalida(salida);
             inscrito = true; // Asignar valor true al booleano
             model.addAttribute("mensaje", "Te has inscrito satisfactoriamente en esta salida.");
-        }else {
+        } else {
             model.addAttribute("mensaje", "Ya estás inscrito en esta salida.");
         }
-
-        model.addAttribute("inscrito", inscrito); // Añadir el booleano al modelo
+        
+        model.addAttribute("inscrito", inscrito);
+        
+        // Set the button text based on the value of 'inscrito'
+        /*if (inscrito) {
+            model.addAttribute("btnTexto", "Inscrito");
+        } else {
+            model.addAttribute("btnTexto", "Inscribirse");
+        }*/
 
         return "redirect:/paginalistarSalidas";
     }
@@ -320,7 +331,6 @@ public class ControladorSalidas {
         return "redirect:/paginalistarSalidas";
     }
 
-    
     @GetMapping("/detalleSalida/{idevento}")
     public String detalleSalida(Model model, Salida salida) {
 
@@ -332,7 +342,7 @@ public class ControladorSalidas {
 
         //Obtenemos una lista de castillos asignados a esta salida.
         List<Castillo> castillosAsignados = salida.getCastillosAsignados();
-        
+
         //Agregamos la lista de castillos asignados al modelo de datos para que esté disponible en la vista.
         model.addAttribute("castillosAsignados", castillosAsignados);
 
@@ -368,7 +378,7 @@ public class ControladorSalidas {
             }
 
         }
-        
+
         // Agregamos la cantidad de usuarios que necesitan transporte y la lista de usuarios que necesitan transporte al modelo de datos.
         model.addAttribute("numeroDeAsistentesTransporte", usuariosTransporte.size());
         model.addAttribute("usuariosTransporte", usuariosTransporte);
