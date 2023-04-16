@@ -10,7 +10,6 @@ import org.springframework.data.repository.CrudRepository;
 /**
  *
  * @author capy
- * @param <T>
  */
 
 
