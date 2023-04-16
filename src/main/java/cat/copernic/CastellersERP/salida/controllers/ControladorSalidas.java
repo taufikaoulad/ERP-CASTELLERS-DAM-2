@@ -235,6 +235,7 @@ public class ControladorSalidas {
         // Redireccionamos al detalle de la salida
         return new RedirectView("/editarAsistencia/" + salidaActualizada.getIdevento());
     }
+    
 
     @GetMapping("/pasarIDaCastillo/{idevento}")
     public String pasarIDaCastillo(Salida salida, Model model) {
