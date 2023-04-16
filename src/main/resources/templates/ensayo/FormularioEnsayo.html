@@ -5,7 +5,7 @@
     <body>
         <div th:replace="~{layout/plantilla :: menu}" />
         <div class="container">
-            <h1>Formulario Ensayo</h1>
+            <h1>Formulari Assaig</h1>
             <p>
             <form th:action="@{/guardarEnsayo}" method="post" th:object="${ensayo}">
 
@@ -19,7 +19,7 @@
                 <input type="hidden" name="idevento" th:field="*{idevento}"/>
 
                 <p>
-                    <label for="nombreEvento">Nombre:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
+                    <label for="nombreEvento">Nom:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
                     <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut nom de l'objecte
                         gos assignat a th:objecte-->
                     <input type="text" name="nombreEvento" th:field="*{nombreEvento}"/>
@@ -28,32 +28,32 @@
                 </p>
 
                 <p>
-                    <label for="fechaEvento">Fecha:</label> <!--Etiqueta per l'edat del gos-->            
+                    <label for="fechaEvento">Data:</label> <!--Etiqueta per l'edat del gos-->            
                     <input type="date" name="fechaEvento" th:field="*{fechaEvento}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
                     <span th:if="${#fields.hasErrors('fechaEvento')}" th:errors="*{fechaEvento}"/>
                 </p>
 
                 <p>
-                    <label for="horario">Horario:</label> <!--Etiqueta per l'edat del gos-->            
+                    <label for="horario">Horari:</label> <!--Etiqueta per l'edat del gos-->            
                     <input type="text" name="horario" th:field="*{horario}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
                     <span th:if="${#fields.hasErrors('horario')}" th:errors="*{horario}"/>
 
                 </p>
 
                 <p>
-                    <label for="ubicacionEvento">Ubicacion</label> <!--Etiqueta pel sexe del gos-->            
+                    <label for="ubicacionEvento">Ubicació:</label> <!--Etiqueta pel sexe del gos-->            
                     <input type="text" name="ubicacionEvento" th:field="*{ubicacionEvento}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                     <span th:if="${#fields.hasErrors('ubicacionEvento')}" th:errors="*{ubicacionEvento}"/>
                 </p>
 
                 <p>
-                    <label for="duracion">Duracion:</label> <!--Etiqueta pel sexe del gos-->            
+                    <label for="duracion">Durada:</label> <!--Etiqueta pel sexe del gos-->            
                     <input type="text" name="duracion" th:field="*{duracion}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                     <span th:if="${#fields.hasErrors('duracion')}" th:errors="*{duracion}"/>
                 </p>
 
                 <!-- Botó per enviar les dades-->
-                <input class="btn btn-warning" type="submit" name="enviar" value="Enviar Datos"/>        
+                <input class="btn btn-warning" type="submit" name="enviar" value="Enviar Dades"/>        
             </form>
         </p>
     </div>
