@@ -12,23 +12,23 @@
 
             <main>
 
-                <h3>PASAR LISTA</h3></br>
+                <h3>PASAR LLISTA</h3></br>
 
                 <p>
                     <form th:action="@{/anadirUsarioSalida}" method="POST" th:object="${salida}">
 
                         <input type="hidden" name="idevento" th:field="*{idevento}"/>
 
-                        <h5>LISTA USUARIOS</h5>
+                        <h5>LLISTA USUARIS</h5>
 
                         <div th:if="${usuarios!=null && !usuarios.empty}">
 
                             <table border="1" class="table">
                                 <thead class="table-warning" >
                                     <tr>
-                                        <th>Nombre</th>
+                                        <th>Nom</th>
                                         <th>Mail</th>
-                                        <th>Telefono</th>
+                                        <th>Telèfon</th>
                                         <th>SI/NO</th>
                                     </tr>
                                 </thead>
@@ -47,14 +47,14 @@
                         </div>
 
                         <div th:if="${usuarios==null || usuarios.empty}">
-                            <p>No existen más usuarios registrados!</p>
+                            <p>No hi ha més usuaris registrats!</p>
                         </div>
                         <br>
                         <input type="submit" value="Añadir Asistente/s" th:disabled="${#lists.isEmpty(usuarios)}" class="btn btn-outline-warning">
                     </form>
                 </p></br>
 
-                <h5>LISTA ASISTENTES</h5>
+                <h5>LLISTA ASSISTENTS</h5>
 
                 <p>
                     <form th:action="@{/eliminarAsistentes}" method="POST" th:object="${salida}">
@@ -66,9 +66,9 @@
                             <table border="1" class="table">
                                 <thead class="table-warning" >
                                     <tr>
-                                        <th>Nombre</th>
+                                        <th>Nom</th>
                                         <th>Mail</th>
-                                        <th>Telefono</th>
+                                        <th>Telèfon</th>
                                         <th>SI/NO</th>
                                     </tr>
                                 </thead>
@@ -88,7 +88,7 @@
 
                         <div th:if="${usuariosAsignados==null || usuariosAsignados.empty}">
 
-                            <p>No hay usuarios asignados!</p>
+                            <p>No hi ha usuaris assignats!</p>
 
                         </div>
 
@@ -99,12 +99,11 @@
 
                 </p>
 
-
             </main>
 
             <div>
                 <a th:href = "@{/paginalistarSalidas}">
-                    <button class="btn btn-outline-warning" >Volver</button>
+                    <button class="btn btn-outline-warning" >Tornar</button>
                 </a>
             </div> 
         </div>

@@ -18,14 +18,14 @@
                     </p>
                     
                     <p>
-                        <label for="password">Contraseña:</label>
+                        <label for="password">Contrasenya:</label>
                         <input type="password" name="password" th:field="*{password}"><br><br>
                         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
                     </p>
 
 
                     <p>
-                        <label for="username">Nombre:</label>
+                        <label for="username">Nom:</label>
                         <input type="text" name="username" th:field="*{username}"><br><br>
                         <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"/>
                     </p>
@@ -37,31 +37,31 @@
                     </p>
 
                     <p>
-                        <label for="peso">Peso (kg):</label>
+                        <label for="peso">Pes (kg):</label>
                         <input type="text" name="peso" th:field="*{peso}"><br><br>
                         <span th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}"/>
                     </p>
 
                     <p>
-                        <label for="telefono">Teléfono:</label>
+                        <label for="telefono">Telèfon:</label>
                         <input type="tel" name="telefono" th:field="*{telefono}"><br><br>
                         <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"/>
                     </p>
 
                     <p>
-                        <label for="edad">Edad: (AAAA-MM-DD)</label>
+                        <label for="edad">Edat: (AAAA-MM-DD)</label>
                         <input type="date" name="edat" th:field="*{edat}"><br><br>
                         <span th:if="${#fields.hasErrors('edat')}" th:errors="*{edat}"/>
                     </p>
                     
                     <p>
-                        <label for="posicio">Posicion:</label>
+                        <label for="posicio">Possió:</label>
                         <input type="text" name="posicio" th:field="*{posicio}"><br><br>
                         <span th:if="${#fields.hasErrors('posicio')}" th:errors="*{posicio}"/>
                     </p>
                     
                     <p>
-                        <label for="tipousuario_idtipousuario">Id tipo de usuario [1 = Casteller][2 = CapDeColla][3 = Tresorer]:</label>
+                        <label for="tipousuario_idtipousuario">Id  tipus d'usuari [1 = Casteller][2 = CapDeColla][3 = Tresorer]:</label>
                         <input type="text" name="tipousuario_idtipousuario" th:field="*{tipousuario_idtipousuario.idtipousuario}"><br><br>
                         <span th:if="${#fields.hasErrors('tipousuario_idtipousuario.idtipousuario')}" th:errors="*{tipousuario_idtipousuario}"/>
                     </p>
@@ -72,7 +72,7 @@
 
             <div>
                 <a th:href = "@{/paginalistarUsuarios}">
-                    <button class="btn btn-outline-warning">Volver</button>
+                    <button class="btn btn-outline-warning">Tornar</button>
                 </a>
             </div>
         </div>
