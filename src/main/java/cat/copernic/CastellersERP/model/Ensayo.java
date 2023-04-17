@@ -17,8 +17,11 @@ import lombok.Data;
  */
 @Data
 @Entity
-public class Ensayo extends Evento implements Serializable{
-    
+public class Ensayo extends Evento implements Serializable {
+
+    /**
+     * Duración del ensayo.
+     */
     @Column(name = "duracion")
     private String duracion;
 }
