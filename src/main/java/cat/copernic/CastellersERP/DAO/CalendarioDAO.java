@@ -17,8 +17,6 @@ import org.springframework.data.jpa.repository.Query;
  * @see org.springframework.data.jpa.repository.JpaRepository
  * @see org.springframework.data.jpa.repository.Query
  * @author pablogomez
- * @param <Evento> la clase que define la entidad con la que trabajaremos
- * @param <Integer> el tipo del atributo que define la clave primaria de esta
  * entidad
  */
 public interface CalendarioDAO extends JpaRepository<Evento, Integer> {

@@ -8,26 +8,26 @@
         <div class="container"></br>
 
             <section >
-                <h1 >SALIDAS</h1>
+                <h1 >SORTIDES</h1>
             </section></br>
-            
-            
-            
+
+
+
             <main th:if="${salidas!=null && !salidas.empty}">
 
                 <table border="1" class="table">
                     <thead class="table-warning" >
                         <tr>
-                            <th class="align-middle" th:text="Nombre"></th>
-                            <th class="align-middle" th:text="Fecha"></th>
-                            <th class="align-middle" th:text="Horario"></th>
-                            <th class="align-middle" th:text="Ubicacion"></th>
-                            <th class="align-middle" th:text="Paradita"></th>
-                            <th class="align-middle" th:text="Castillo"></th>
-                            <th class="align-middle" th:text="Acciones" th:if="${!ocultar && ocultar2}"></th>
+                            <th class="align-middle" th:text="Nom"></th>
+                            <th class="align-middle" th:text="Data"></th>
+                            <th class="align-middle" th:text="Horari"></th>
+                            <th class="align-middle" th:text="Ubicació"></th>
+                            <th class="align-middle" th:text="Paradeta"></th>
+                            <th class="align-middle" th:text="Castell"></th>
+                            <th class="align-middle" th:text="Accions" th:if="${!ocultar && ocultar2}"></th>
                             <!--<th th:text="Inscribirseasalida"></th>-->
-                            <th class="align-middle" th:if="${ocultar && !ocultar2}">Inscribirse Salida</th>
-                            <th class="align-middle" th:if="${ocultar && !ocultar2}">Inscribirse transporte Salida</th>
+                            <th class="align-middle" th:if="${ocultar && !ocultar2}">Inscriure's Sortida</th>
+                            <th class="align-middle" th:if="${ocultar && !ocultar2}">Inscriure's Transport Sortida</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,20 +39,20 @@
                             <td class="align-middle" > <input type="checkbox" th:checked="${salida.paradita}" disabled="disabled"/> </td>
                             <td class="align-middle" >
                                 <a th:href="@{/detalleSalida/}+${salida.idevento}">
-                                    <button class="btn btn-outline-warning" >Detalle</button>
+                                    <button class="btn btn-outline-warning" >Detall</button>
                                 </a>
                             </td>                
                             <td class="align-middle" th:if="${!ocultar && ocultar2}">
                                 <a th:href="@{/pasarIDaCastillo/}+${salida.idevento}">
-                                    <button class="btn btn-outline-warning">Consultar Castillo</button>
+                                    <button class="btn btn-outline-warning">Consultar Castells</button>
                                 </a>
 
                                 <a th:href="@{/detalleAsistentesSalida/}+${salida.idevento}">
-                                    <button class="btn btn-outline-warning">Detalle Asistentes</button>
+                                    <button class="btn btn-outline-warning">Detall Assistents</button>
                                 </a>
 
                                 <a th:href="@{/editarAsistencia/}+${salida.idevento}">
-                                    <button class="btn btn-outline-warning">Pasar Lista</button>
+                                    <button class="btn btn-outline-warning">Pasar Llista</button>
                                 </a>
 
                                 <a th:href="@{/editarSalida/}+${salida.idevento}">
@@ -62,38 +62,38 @@
                                     <button class="btn btn-danger"><i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></button>
                                 </a>
                             </td>
-
+                            <!--<p>Valor de inscrito: <span th:text="${btnTexto}"></span></p>-->
                             <td class="align-middle" th:if="${ocultar && !ocultar2}"> 
                                 <a th:href="@{/inscribirseSalidaITransporte/}+${salida.idevento}">
-                                    <button th:disabled="${inscrito}" th:onclick="this.disabled=true;" class="btn btn-outline-warning">Inscribirse</button>
+                                    <button class="btn btn-outline-warning" >Inscriure's</button>
                                 </a>
                             </td>
 
                             <td class="align-middle" th:if="${ocultar && !ocultar2}"> 
                                 <a th:href="@{/inscribirseTransporte/}+${salida.idevento}">
-                                    <button class="btn btn-outline-warning" >Inscribirse</button>
+                                    <button class="btn btn-outline-warning" >Inscriure's</button>
                                 </a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                
+
                 <div th:if="${mensaje}" th:text="${mensaje}"></div>
 
             </main><br>
             <!-- <input type="checkbox" th:checked="${salida.asistenciaSalida}"/> <input type="checkbox" th:checked="${salida.asistenciaTransporte}" />-->
             <div>
                 <a href="/formularioSalida">
-                    <button th:if="${!ocultar && ocultar2}" th:text="CrearSalida" class="btn btn-outline-warning" ></button>
+                    <button th:if="${!ocultar && ocultar2}" class="btn btn-outline-warning" >Crear Sortida</button>
                 </a>
             </div>
 
             <div th:if="${salidas==null || salidas.empty}">
                 <!-- Mostrem missatge-->
-                No hi ha salidas a la llista.
+                No hi ha sortides a la llista.
                 <div>
                     <a href="/formularioSalida">
-                        <button th:if="${!ocultar && ocultar2}" th:text="CrearSalida" class="btn btn-outline-warning" ></button>
+                        <button th:if="${!ocultar && ocultar2}" class="btn btn-outline-warning" >Crear Sortida</button>
                     </a>
                 </div>
             </div>

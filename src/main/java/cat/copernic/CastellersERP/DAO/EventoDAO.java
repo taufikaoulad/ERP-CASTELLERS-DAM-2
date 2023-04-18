@@ -10,11 +10,24 @@ import org.springframework.data.repository.CrudRepository;
 /**
  *
  * @author capy
- * @param <T>
  */
+/**
+ *
+ * Esta interfaz representa el Data Access Object (DAO) para la entidad Evento.
+ *
+ * Se utiliza un parámetro genérico T que extiende la clase Evento para permitir
+ *
+ * la implementación de diferentes subtipos de Evento.
+ *
+ * @param <T> el tipo de Evento que se maneja en este DAO
+ */
+public interface EventoDAO<T extends Evento> extends CrudRepository<T, Integer> {
 
-
-//EventoDAO tiene un parametro que extiende de Evento, esto lo necesitamos para hacer el extends en el EnsayoDAO.
-public interface EventoDAO<T extends Evento> extends CrudRepository<T, Integer>{
-
+    /**
+     *
+     * Esta interfaz extiende la interfaz CrudRepository, por lo que hereda
+     * todos sus métodos para realizar operaciones CRUD en la base de datos.
+     * Además, se pueden agregar métodos personalizados según las necesidades de
+     * la aplicación.
+     */
 }

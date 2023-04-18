@@ -15,8 +15,6 @@ import org.springframework.data.repository.CrudRepository;
  * sin necesidad de implementarlos manualmente.
  * @see org.springframework.data.repository.CrudRepository
  * @author pablogomez
- * @param <Circular> la clase que define la entidad con la que trabajaremos
- * @param <Integer> el tipo del atributo que define la clave primaria de esta
  * entidad
  */
 public interface CircularDAO extends CrudRepository<Circular, Integer> {
