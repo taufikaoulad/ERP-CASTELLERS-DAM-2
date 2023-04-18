@@ -12,8 +12,19 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 /**
  *
  * @author capy
+ * 
+ * Esta interfaz representa el Data Access Object (DAO) para la entidad Ensayo.
+ * Extiende la interfaz EventoDAO con el tipo de entidad Ensayo como parámetro genérico.
+ * 
+ * @param <T> el tipo de entidad que maneja este DAO (Ensayo en este caso)
  */
+public interface EnsayoDAO extends EventoDAO<Ensayo> {
+    
+    /**
+     * Esta interfaz no define nuevos métodos, pero hereda los métodos de
+     * EventoDAO y CrudRepository para realizar operaciones CRUD en la base de datos.
+     * Los métodos de EventoDAO son genéricos y se adaptan automáticamente al tipo
+     * de entidad Ensayo.
+     */
 
-//EnsayoDAO extenderá de EventoDAO, pasandole por parámetro la entidad ensayo que es a la que pertenece el EnsayoDAO.
-//A su vez, EventoDAO extenderá de CrudRepository.
-public interface EnsayoDAO  extends EventoDAO<Ensayo>{}
+} 

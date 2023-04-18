@@ -8,7 +8,7 @@
 
         <div class="container"></br>
             <section>
-                <h1>USUARIOS</h1>
+                <h1>USUARIS</h1>
             </section>
 
             <main th:if="${usuarios!=null && !usuarios.empty}">
@@ -16,14 +16,14 @@
                     <thead class="table-warning">
                         <tr>
                             <th class="align-middle">Email</th>
-                            <th class="align-middle">Nombre</th>
+                            <th class="align-middle">Nom</th>
                             <th class="align-middle">Altura</th>
-                            <th class="align-middle">Peso</th>
-                            <th class="align-middle">Telefono</th>
+                            <th class="align-middle">Pes</th>
+                            <th class="align-middle">Telèfon</th>
                             <th class="align-middle">Edat</th>
-                            <th class="align-middle">Posicion</th>
-                            <th class="align-middle">Tipo De Usuario</th>
-                            <th class="align-middle">Acciones</th>
+                            <th class="align-middle">Passió</th>
+                            <th class="align-middle">Tipus d'Usuari</th>
+                            <th class="align-middle">Accions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,16 +52,16 @@
                 </table>
                 <div>
                     <a th:href ="@{/formularioUsuario}">
-                        <button class="btn btn-outline-warning">CrearUsuario</button>
+                        <button class="btn btn-outline-warning">Crear Usuari</button>
                     </a>
                 </div>
             </main><br>
 
             <div th:if="${usuarios==null || usuarios.empty}">
-                No hay usuarios en la lista. 
+                No hi ha usuaris a la llista. 
                 <div>
                     <a th:href ="@{/formularioUsuario}">
-                        <button class="btn btn-outline-warning">CrearUsuario</button>
+                        <button class="btn btn-outline-warning">Crear Usuari</button>
                     </a>
                 </div>
             </div><br/>

@@ -54,14 +54,6 @@ public class EnsayoControllerTest {
 
         // Verificar que hay ensayos en la lista
         assertTrue(!ensayos.isEmpty());
-        /*
-        // Obtener el índice de un ensayo aleatorio
-        Random rand = new Random();
-        int randomIndex = rand.nextInt(ensayos.size());
-
-        // Obtener el id del ensayo aleatorio
-        int idEnsayoAEliminar = ensayos.get(randomIndex).getIdevento();
-         */
 
         // Obtener un ensayo aleatorio
         Ensayo ensayoAEliminar = ensayos.get(new Random().nextInt(ensayos.size()));

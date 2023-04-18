@@ -15,8 +15,6 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author pablogomez
  * @see org.springframework.data.repository.CrudRepository
- * @param <Apunte> la clase que define la entidad con la que trabajaremos
- * @param <Integer> el tipo del atributo que define la clave primaria de esta
  * entidad
  * @author pablogomez
  */

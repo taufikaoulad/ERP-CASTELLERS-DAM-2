@@ -5,22 +5,22 @@
     <body>
         <header th:replace="~{layout/plantilla :: menu}" />
         <div class="container">
-            <h1>Listar Ensayos</h1>
+            <h1>Llistar Assajos</h1>
 
-            <br><div><a type="button" class="btn btn-outline-warning" th:href="@{/FormularioEnsayo}" th:if="${ocultar}" th:text="Añadir"/></div><br>
+            <br><div><a type="button" class="btn btn-outline-warning" th:href="@{/FormularioEnsayo}" th:if="${ocultar}" th:text="Afegir"/></div><br>
 
             <div th:if="${Evento!=null && !Evento.empty}">
 
                 <table border="1" class = "table">
                     <thead class="table-warning">
                         <tr>
-                            <th>Nombre</th>
-                            <th>Fecha</th>
-                            <th>Horario</th>
-                            <th>Ubicación</th>
-                            <th>Duración</th>
+                            <th>Nom</th>
+                            <th>Data</th>
+                            <th>Horari</th>
+                            <th>Ubicació</th>
+                            <th>Durada</th>
                             <th></th>
-                            <th th:if="${ocultar}">Opciones</th>
+                            <th th:if="${ocultar}">Opcions</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -38,14 +38,14 @@
                             <td>
                                 <div th:if="${ocultar}">
                                     <a th:href="@{/detalleEnsayo/}+${ensayo.idevento}">
-                                        <button type="submit" class="btn btn-outline-warning" name="submit">Consultar Detalle</button>
+                                        <button type="submit" class="btn btn-outline-warning" name="submit">Consultar Detall</button>
                                     </a>
                                 </div>
                             </td>
                             <td>
                                 <div th:if="${ocultar}">
                                     <a th:href="@{/consultar-castillos-ensayo/}+${ensayo.idevento}">
-                                        <button type="submit" class="btn btn-outline-warning" name="submit">Consultar Castillos</button>
+                                        <button type="submit" class="btn btn-outline-warning" name="submit">Consultar Castells</button>
                                     </a>
                                 </div>
                             </td>
@@ -71,7 +71,7 @@
 
             <div th:if="${Evento==null || Evento.empty}">
                 <!-- Mostrem missatge-->
-                No hay Ensayos en la lista.
+                No hi ha assaigs a la llista.
             </div>
         </div>
     </body>

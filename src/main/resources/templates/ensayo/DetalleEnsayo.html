@@ -96,11 +96,11 @@
 
             <div>
                 <a th:href="@{/ensayos}">
-                    <button type="submit" class="btn btn-outline-warning" name="submit">Volver</button>
+                    <button type="submit" class="btn btn-outline-warning" name="submit">Tornar</button>
                 </a>
             </div>
 
-            <h1>Detalle Ensayo</h1><br>
+            <h1>Detall Assaig</h1><br>
 
             <p>
             <form th:object="${ensayo}">
@@ -115,7 +115,7 @@
                 <input type="hidden" name="idevento" th:field="*{idevento}"/>
                 <div class="containerdetalle">
                     <p>
-                        <label for="nombreEvento">Nombre:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
+                        <label for="nombreEvento">Nom:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
                         <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut nom de l'objecte
                             gos assignat a th:objecte-->
                         <input type="text" name="nombreEvento" th:field="*{nombreEvento}" th:disabled="${true}"/>
@@ -123,21 +123,21 @@
                     </p>
 
                     <p>
-                        <label for="fechaEvento">Fecha:</label> <!--Etiqueta per l'edat del gos-->            
+                        <label for="fechaEvento">Data:</label> <!--Etiqueta per l'edat del gos-->            
                         <input type="text" name="fechaEvento" th:field="*{fechaEvento}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
                     </p>
                     <p>
-                        <label for="horario">Horario:</label> <!--Etiqueta per l'edat del gos-->            
+                        <label for="horario">Horari:</label> <!--Etiqueta per l'edat del gos-->            
                         <input type="text" name="horario" th:field="*{horario}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
                     </p>
 
 
                     <p>
-                        <label for="ubicacionEvento">Ubicacion</label> <!--Etiqueta pel sexe del gos-->            
+                        <label for="ubicacionEvento">Ubicació</label> <!--Etiqueta pel sexe del gos-->            
                         <input type="text" name="ubicacionEvento" th:field="*{ubicacionEvento}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                     </p>
                     <p>
-                        <label for="duracion">Duracion:</label> <!--Etiqueta pel sexe del gos-->            
+                        <label for="duracion">Durada</label> <!--Etiqueta pel sexe del gos-->            
                         <input type="text" name="duracion" th:field="*{duracion}" th:disabled="${true}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                     </p>
                 </div>
@@ -147,12 +147,12 @@
         <br><hr><br>
 
         <div class="titulo">
-            <h1>Pasar Lista</h1>
+            <h1>Passar Llista</h1>
         </div>
 
         <div class="containerpasarlista">
             <div class="content">
-                <h2 class="subtitle">Lista de Asistentes</h2>
+                <h2 class="subtitle">Llista d'Asistents</h2>
                 <form th:action="@{/eliminar-asistentes}" method="POST" th:object="${ensayo}">
 
                     <input type="hidden" name="idevento" th:field="*{idevento}"/>
@@ -161,9 +161,9 @@
 
                             <table  border="1" class="table">
                                 <tr class="table-warning">
-                                    <th>Nombre</th>
-                                    <th>Mail</th>
-                                    <th>Telefono</th>
+                                    <th>Nom</th>
+                                    <th>Email</th>
+                                    <th>Telèfon</th>
                                     <th>SI/NO</th>
                                 </tr>
                                 <tr th:each="usuario : ${usuariosAsignados}">
@@ -182,17 +182,17 @@
                     </div>
                     <div th:if="${usuariosAsignados==null || usuariosAsignados.empty}">
 
-                        <p>No hay usuarios asignados!</p>
+                        <p>No hi ha usuaris assignats!</p>
 
                     </div>
                     <div class="subcontent">
-                        <input type="submit" value="Quitar Asistente/s" class="btn btn-outline-warning" th:disabled="${#lists.isEmpty(usuariosAsignados)}">
+                        <input type="submit" value="Treure Assistents" class="btn btn-outline-warning" th:disabled="${#lists.isEmpty(usuariosAsignados)}">
                     </div>
                 </form>
             </div>    
 
             <div class="content">
-                <h2 class="subtitle">Lista de Usuarios</h2>
+                <h2 class="subtitle">Llista d'Usuaris</h2>
 
                 <form th:action="@{/anadir-usuarios}" method="POST" th:object="${ensayo}">
 
@@ -202,9 +202,9 @@
 
                             <table  border="1" class="table">
                                 <tr class="table-warning">
-                                    <th>Nombre</th>
-                                    <th>Mail</th>
-                                    <th>Telefono</th>
+                                    <th>Nom</th>
+                                    <th>Email</th>
+                                    <th>Telèfon</th>
                                     <th>SI/NO</th>
                                 </tr>
                                 <tr th:each="usuario : ${usuarios}">
@@ -223,11 +223,11 @@
                     </div>
                     <div th:if="${usuarios==null || usuarios.empty}">
 
-                        <p>No existen más usuarios registrados!</p>
+                        <p>No hi ha més usuaris registrats!</p>
 
                     </div>
                     <div class="subcontent">
-                        <input type="submit" value="Añadir Asistente/s" class="btn btn-outline-warning" th:disabled="${#lists.isEmpty(usuarios)}">
+                        <input type="submit" value="Afegir Assistents" class="btn btn-outline-warning" th:disabled="${#lists.isEmpty(usuarios)}">
                     </div>
                 </form>
             </div>
@@ -241,12 +241,12 @@
 
             <div class="content">
 
-                <h3>Castillos Asignados</h3>
+                <h3>Castells Assignats</h3>
 
                 <div th:if="${castillosAsignados!=null && !castillosAsignados.empty}">
                     <table  border="1" class = "table">
                         <tr class="table-warning">
-                            <th>Castillos Asignados</th>
+                            <th>Castells Assignats</th>
                             <th>SI/NO</th>
                         </tr>
                         <tr th:each="castillo : ${castillosAsignados}">
@@ -262,11 +262,11 @@
 
                 <div th:if="${castillosAsignados==null || castillosAsignados.empty}">
 
-                    <p>No existen castillos asignados!</p>
+                    <p>No hi ha castells assignats!</p>
 
                 </div>
 
-                <input type="submit" value="Quitar Castillos Asignados" class="btn btn-outline-warning" th:disabled="${#lists.isEmpty(castillosAsignados)}">
+                <input type="submit" value="Treure Castells Assignats" class="btn btn-outline-warning" th:disabled="${#lists.isEmpty(castillosAsignados)}">
             </div>
         </form>
     </div>

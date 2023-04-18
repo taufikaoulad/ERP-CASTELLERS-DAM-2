@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
  * ApunteServiceInterface para la gestión de los apuntes contables. Se utiliza
  * la anotación @Service para que Spring reconozca la clase como un servicio y
  * permita la inyección de dependencias. Además, se utiliza la anotación
- * @Transactional para definir que algunos métodos son transacciones SQL.
  */
 @Service
 public class ApunteService implements ApunteServiceInterface {
@@ -27,7 +26,6 @@ public class ApunteService implements ApunteServiceInterface {
      * consulta a la BBDD, si aquesta ha estat un èxit, el sistema ha de fer un
      * COMMIT, en cas contrari un ROLLBACK. Així doncs, mitjançant la notació
      *
-     * @Transactional l'indiquem al sistema que el mètode és una transacció.
      * Això permet que no hi hagi problemes si estem fent més d'una transacció
      * al mateix temps.
      */
