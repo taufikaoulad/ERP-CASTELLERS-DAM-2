@@ -6,6 +6,17 @@
 
 Proyecto con SpringBoot en Java creado por un grupo de 4 integrantes. Trata de una ERP que gestiona un grupo de Castellers, nos han pedido ayuda para facilitar la gestion de Salidas, Ensayos, Castillos, Gestion Economica y Usuarios. El proyecto se ha ralizado como trabajo de clase en el Instituto Nicolau Copernic, en el curso DAM2 - ABP. Link Memoria: https://docs.google.com/document/d/1PQuhxXSdsHsMi8OAKjBudeDZp3Qs2tBlRkqrEIdJDJY/edit?pli=1#
 
+## Video Demo en Youtube
+
+<table style"width:100%">
+<tr>
+  <td>
+    <a href="[https://youtu.be/Kp4Mvapo5kc](https://rr3---sn-h5qzened.c.drive.google.com/videoplayback?expire=1681961862&ei=RntAZNfmGJWlpb0P58KNKA&ip=159.147.249.207&cp=QVRNU0pfUFhUQ1hPOm5zcmV2RWRHbW1yTm1zeUlBb1dLTHE1Tlp0V05vQ1lJSHlqdThCQzhTNks&id=8c18b41fe4c1ae4e&itag=22&source=webdrive&requiressl=yes&mh=lu&mm=32&mn=sn-h5qzened&ms=su&mv=u&mvi=3&pl=24&sc=yes&ttl=transient&susc=dr&driveid=1_lPAzezPHJwvaNvulnuPKwOUC01DNYYW&app=explorer&mime=video/mp4&vprv=1&prv=1&dur=211.255&lmt=1681930158430778&mt=1681946577&subapp=SLIDES&txp=0016224&sparams=expire,ei,ip,cp,id,itag,source,requiressl,ttl,susc,driveid,app,mime,vprv,prv,dur,lmt&sig=AOq0QJ8wRQIgPh1Rj4n7pTbOLG94hvB-BOY-f4ItttNHe3EzXUH-bQACIQDxetZr0gZr2fG4aJ-x2-844sgTvaJU33hX787Fz62gWQ==&lsparams=mh,mm,mn,ms,mv,mvi,pl,sc&lsig=AG3C_xAwRAIgbdrDUoqEI7p-UDE6vbKBSaTtVmMjXc4ZT0z9-GD28EICICumL3RnHaQRf2Ku9pEDajbcfATCL3Lp5_9Jv-o5igR-&cpn=aibTz4wgrH5FcFq3&c=WEB_EMBEDDED_PLAYER&cver=1.20230416.00.00)">
+    </a>
+  </td>
+</tr>
+
+
 ## Add your files
 
 - [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
@@ -89,13 +100,3 @@ For open source projects, say how it is licensed.
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
 
-## Video Demo en Youtube
-
-<table style"width:100%">
-<tr>
-  <td>
-    <a href="https://youtu.be/Kp4Mvapo5kc">
-      <img src="http://i3.ytimg.com/vi/Kp4Mvapo5kc/maxresdefault.jpg">
-    </a>
-  </td>
-</tr>
