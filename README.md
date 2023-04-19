@@ -4,9 +4,7 @@
 
 ## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Proyecto con SpringBoot en Java creado por un grupo de 4 integrantes. Trata de una ERP que gestiona un grupo de Castellers, nos han pedido ayuda para facilitar la gestion de Salidas, Ensayos, Castillos, Gestion Economica y Usuarios. El proyecto se ha ralizado como trabajo de clase en el Instituto Nicolau Copernic, en el curso DAM2 - ABP.
 
 ## Add your files
 
