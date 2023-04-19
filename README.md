@@ -4,7 +4,7 @@
 
 ## Getting started
 
-Proyecto con SpringBoot en Java creado por un grupo de 4 integrantes. Trata de una ERP que gestiona un grupo de Castellers, nos han pedido ayuda para facilitar la gestion de Salidas, Ensayos, Castillos, Gestion Economica y Usuarios. El proyecto se ha ralizado como trabajo de clase en el Instituto Nicolau Copernic, en el curso DAM2 - ABP.
+Proyecto con SpringBoot en Java creado por un grupo de 4 integrantes. Trata de una ERP que gestiona un grupo de Castellers, nos han pedido ayuda para facilitar la gestion de Salidas, Ensayos, Castillos, Gestion Economica y Usuarios. El proyecto se ha ralizado como trabajo de clase en el Instituto Nicolau Copernic, en el curso DAM2 - ABP. Link Memoria: https://docs.google.com/document/d/1PQuhxXSdsHsMi8OAKjBudeDZp3Qs2tBlRkqrEIdJDJY/edit?pli=1#
 
 ## Add your files
 
